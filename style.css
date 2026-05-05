@@ -268,6 +268,7 @@
     max-height: 85vh;
     display: flex; flex-direction: column;
     padding-bottom: env(safe-area-inset-bottom);
+    user-select: none; -webkit-user-select: none;
   }
   .sheet.open { transform: translateY(0); }
   .sheet-grabber {
