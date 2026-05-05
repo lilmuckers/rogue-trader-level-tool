@@ -1444,13 +1444,19 @@ function setFactionRep(factionName, rep) {
   all[factionName] = Math.max(0, rep);
   Store.set(KEY_TRADERS_REP, all);
 }
+const KEY_PROFIT_FACTOR = 'rt.profit-factor.v1';
+function getProfitFactor() { return Store.get(KEY_PROFIT_FACTOR) || 0; }
+function setProfitFactor(pf) { Store.set(KEY_PROFIT_FACTOR, Math.max(0, pf)); }
+
 function vendorItemAvailable(item, rep, act) {
   if (act < item.act) return false;
+  if (item.pf && getProfitFactor() < item.pf) return false;
   if (typeof item.rep === 'number') return rep >= item.rep;
   return true;
 }
 function vendorItemLockReason(item, rep, act) {
   if (act < item.act) return `Available in Act ${item.act}`;
+  if (item.pf && getProfitFactor() < item.pf) return `Requires PF ${item.pf}`;
   if (typeof item.rep === 'number' && rep < item.rep) return `Requires rep ${item.rep}`;
   return null;
 }
@@ -1462,7 +1468,9 @@ function setAlignRank(alignment, rank) {
   const all = getAlignRanks(); all[alignment] = Math.max(0, rank); Store.set(KEY_ALIGN_RANKS, all);
 }
 function alignItemAvailable(item, rank, act) {
-  return act >= item.act && rank >= (item.rank || 0);
+  if (act < item.act) return false;
+  if (item.pf && getProfitFactor() < item.pf) return false;
+  return rank >= (item.rank || 0);
 }
 function curiosityAvailCount(vendor, act) {
   const ranks = getAlignRanks();
@@ -1494,6 +1502,29 @@ function renderTradersSection() {
   });
   el.appendChild(actRow);
 
+  // Profit Factor stepper
+  const pfRow = document.createElement('div');
+  pfRow.className = 'traders-pf-row';
+  const pfLabel = document.createElement('span');
+  pfLabel.className = 'traders-pf-label';
+  pfLabel.textContent = 'Profit Factor';
+  const pfDown = document.createElement('button');
+  pfDown.className = 'traders-pf-btn'; pfDown.textContent = '−';
+  const pfVal = document.createElement('div');
+  pfVal.className = 'traders-pf-val'; pfVal.textContent = getProfitFactor();
+  const pfUp = document.createElement('button');
+  pfUp.className = 'traders-pf-btn'; pfUp.textContent = '+';
+  const updatePF = (delta) => {
+    setProfitFactor(getProfitFactor() + delta);
+    pfVal.textContent = getProfitFactor();
+    // Re-render faction list without blowing away the whole section
+    renderFactionList(factionListEl, act);
+  };
+  pfDown.addEventListener('click', () => updatePF(-1));
+  pfUp.addEventListener('click',   () => updatePF(+1));
+  pfRow.append(pfLabel, pfDown, pfVal, pfUp);
+  el.appendChild(pfRow);
+
   // Search bar
   const searchInput = document.createElement('input');
   searchInput.className = 'traders-search';
@@ -1508,6 +1539,9 @@ function renderTradersSection() {
       searchInput.setSelectionRange(searchInput.value.length, searchInput.value.length);
     });
   }
+
+  const factionListEl = document.createElement('div');
+  el.appendChild(factionListEl);
 
   const query = _traderSearchText.trim().toLowerCase();
   if (query.length >= 2) {
@@ -1549,13 +1583,17 @@ function renderTradersSection() {
           if (faction.alignment_vendor) openCuriositySheet(faction, act);
           else openFactionSheet(faction, act, item.name);
         });
-        el.appendChild(row);
+        factionListEl.appendChild(row);
       });
     }
     return;
   }
 
-  // Faction list
+  renderFactionList(factionListEl, act);
+}
+
+function renderFactionList(el, act) {
+  el.innerHTML = '';
   DATA.vendors.forEach(faction => {
     const card = document.createElement('div');
     if (faction.alignment_vendor) {
