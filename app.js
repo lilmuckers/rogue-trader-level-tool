@@ -1441,7 +1441,7 @@ function getFactionRep(factionName) {
 }
 function setFactionRep(factionName, rep) {
   const all = Store.get(KEY_TRADERS_REP) || {};
-  all[factionName] = Math.max(0, Math.min(10, rep));
+  all[factionName] = Math.max(0, rep);
   Store.set(KEY_TRADERS_REP, all);
 }
 function vendorItemAvailable(item, rep, act) {
@@ -1551,6 +1551,7 @@ function openFactionSheet(faction, act, scrollToItem) {
 function buildFactionContent(faction, act, scrollToItem) {
   const wrap = document.createElement('div');
   let rep = getFactionRep(faction.name);
+  const maxRep = faction.items.reduce((m, it) => typeof it.rep === 'number' ? Math.max(m, it.rep) : m, 0);
 
   // Rep stepper
   const repControls = document.createElement('div');
@@ -1566,7 +1567,7 @@ function buildFactionContent(faction, act, scrollToItem) {
   repUp.className = 'faction-rep-btn'; repUp.textContent = '+';
 
   const updateRep = (delta) => {
-    rep = Math.max(0, Math.min(10, rep + delta));
+    rep = Math.max(0, Math.min(maxRep, rep + delta));
     setFactionRep(faction.name, rep);
     repVal.textContent = rep;
     buildItems();
