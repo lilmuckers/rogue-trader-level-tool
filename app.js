@@ -1571,6 +1571,7 @@ function buildFactionContent(faction, act, scrollToItem) {
     setFactionRep(faction.name, rep);
     repVal.textContent = rep;
     buildItems();
+    renderTradersSection();
   };
   repDown.addEventListener('click', () => updateRep(-1));
   repUp.addEventListener('click',   () => updateRep(+1));
