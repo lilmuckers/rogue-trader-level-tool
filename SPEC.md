@@ -25,6 +25,8 @@ sheets (game patch 1.5, including DLC).
 - Work fully offline once installed (airplane mode, poor signal).
 - Persist user choices across sessions on the device.
 - Render legibly on a small phone screen with one-handed use.
+- Reflect party-availability state: only show picks for companions the
+  player has actually recruited at their current level.
 
 ### 1.3 Non-goals
 
@@ -32,8 +34,10 @@ sheets (game patch 1.5, including DLC).
 - Multi-device sync. Storage is per-device.
 - Coverage of older patch versions (1.2, 1.3, 1.4) or non-Revan619 build
   authors present in the source spreadsheet.
-- Gear / talent / ability *reference* lookup (the source sheet has dedicated
-  tabs for these; this app shows only level-up picks).
+- Gear / talent / ability *reference* lookup. The source sheet has dedicated
+  tabs for these; this app shows only level-up picks.
+- Bundling official character portrait artwork. Portraits are user-supplied
+  URLs (see §2.7).
 - Respec workflow. The source builds are explicitly designed for play
   without respec; the app reflects that linear progression.
 
@@ -60,11 +64,10 @@ The pick(s) the player should take when leveling up to the keyed level.
 | Field | Type | Notes |
 |---|---|---|
 | `m` | string \| null | "Main" pick — the primary ability, talent, stat, skill, or heroic action gained at this level. |
-| `e` | string \| null | "Extra" pick — a second pick taken at the same level (e.g. a common talent alongside an archetype talent). May be absent. |
+| `e` | string \| null | "Extra" pick — a second pick taken at the same level. May be absent. |
 
 A level entry may have only `m`, only `e`, or both. The level number itself
-is always present in the source sheet but the picks may be empty (e.g. some
-builds end before level 55, or skip cosmetic levels).
+is always present in the source sheet but the picks may be empty.
 
 The source sheet uses the following picks-per-level convention, encoded
 verbatim into `m` / `e` strings without further structuring:
@@ -87,23 +90,28 @@ implies a fixed archetype displayed in the UI.
 
 The 15 supported companions and archetypes are:
 
-| Companion | Archetype | Variants in 1.5 |
-|---|---|---|
-| Abelard | Warrior | 5 |
-| Idira | Operative | 3 |
-| Argenta | Soldier | 3 |
-| Cassia | Officer | 2 |
-| Pasqal | Operative | 7 |
-| Heinrix | Warrior | 6 |
-| Jae | Officer | 3 |
-| Yrliet | Operative | 3 |
-| Ulfar | Soldier | 3 |
-| Marazhai | Warrior | 2 |
-| Kibellah | Bladedancer | 3 |
-| Solomorne | Soldier | 1 |
-| Incendia Chorda (DLC) | Soldier | 1 |
-| Calligos Winterscale (DLC) | Warrior | 1 |
-| Uralon (DLC) | Officer | 1 |
+| Companion | Archetype | Variants in 1.5 | Default Join Level |
+|---|---|---|---|
+| Abelard | Warrior | 5 | 1 |
+| Idira | Operative | 3 | 1 |
+| Argenta | Soldier | 3 | 3 |
+| Pasqal | Operative | 7 | 6 |
+| Cassia | Officer | 2 | 10 |
+| Heinrix | Warrior | 6 | 12 |
+| Yrliet | Operative | 3 | 14 |
+| Jae | Officer | 3 | 16 |
+| Ulfar | Soldier | 3 | 22 |
+| Marazhai | Warrior | 2 | 31 |
+| Kibellah | Bladedancer | 3 | 33 |
+| Solomorne | Soldier | 1 | 37 |
+| Incendia Chorda (DLC) | Soldier | 1 | 40 |
+| Calligos Winterscale (DLC) | Warrior | 1 | 40 |
+| Uralon (DLC) | Officer | 1 | 40 |
+
+Default join levels reflect the typical chapter-level progression in the
+game (Ch 1: 1–15, Ch 2: 16–30, Ch 3: 31–36, Ch 4: 37–42). They are
+**user-configurable** per-companion in the Setup view, so they can be
+adjusted to match a specific playthrough's pacing.
 
 ### 2.4 MC Themes
 
@@ -120,18 +128,45 @@ The user's saved selection consists of:
 ```
 {
   mc: { theme: string, buildIndex: int },
-  companions: { [companionName: string]: int }
+  companions: { [companionName: string]: int },
+  joinLevels: { [companionName: string]: int }
 }
 ```
 
 Where `buildIndex` and the companion `int` values are zero-based indices
-into the variants array for that theme / companion.
+into the variants array for that theme / companion. `joinLevels` values
+are clamped to `[1, 55]`.
 
 ### 2.6 Level State
 
-A single integer in the closed range `[1, 55]`, persisted independently of
-the configuration so that selecting a different roster does not reset the
-player's current level.
+A single integer in the closed range `[1, 55]`, persisted independently
+of the configuration so that selecting a different roster does not reset
+the player's current level.
+
+### 2.7 Portraits
+
+Each character (MC and all 15 companions) has an optional portrait image
+URL. Portraits are **not bundled** with the app — they are configured at
+build time by editing a `PORTRAITS` constant in `index.html`:
+
+```js
+const PORTRAITS = {
+  'Rogue Trader': 'https://example.com/mc.jpg',
+  'Abelard': 'https://example.com/abelard.jpg',
+  // ...
+  'Uralon': null,   // null → fallback rendered
+};
+```
+
+The user is expected to source their own image URLs (typically from the
+Fextralife or Fandom Rogue Trader wikis). When a URL is `null` or fails to
+load, the app renders a **gothic initial fallback** — a circular badge
+with the character's two-letter initials in Cinzel display font, gold-on-
+dark, matching the app aesthetic.
+
+Image requests use `referrerPolicy: 'no-referrer'` to maximise the chance
+of success against hot-link blockers. Successfully loaded images are then
+cached by the service worker for offline use.
 
 ---
 
@@ -147,11 +182,11 @@ The app has exactly two views, swapped by toggling visibility (no routing):
 #### 3.1.1 Setup View
 
 Contains:
-- An MC section with two cascading dropdowns: **Theme** then **Build**.
+- An **MC section** with two cascading dropdowns: **Theme** then **Build**.
   Changing the theme repopulates the build dropdown.
-- A Companions section with one dropdown per companion. Companions with
-  only one variant render the dropdown disabled (greyed) for visual
-  consistency.
+- A **Companions section** with one row per companion containing:
+  - Variant dropdown (auto-disabled if there is only one variant).
+  - **Join Level** numeric input (1–55), defaulting from §2.3.
 - A primary **Confirm & Begin** button that saves the configuration and
   transitions to Tracker View.
 - A **Cancel** button that returns to Tracker View without saving (only
@@ -159,9 +194,10 @@ Contains:
 - A **Reset All Data** button that clears stored configuration and level
   (only shown if a saved configuration already exists).
 
-On first launch, the setup form is pre-populated with sensible defaults:
+On first launch the form is pre-populated:
 - MC: Commissar / "Commissar taking command"
-- Companions: variant index 0 for each.
+- Companions: variant index 0 for each
+- Join levels: §2.3 defaults
 
 #### 3.1.2 Tracker View
 
@@ -181,17 +217,24 @@ Contains, top to bottom:
 
 #### 3.1.3 Character Card
 
-Each card displays:
-- Character name (left).
-- Archetype, in monospace caps (right). For the MC, this is auto-detected
-  from the origin string by matching against a fixed list of archetype
-  keywords.
-- Build name (small italic, secondary).
-- The level entry for the current level:
-  - Main pick (`m`) in large gold text.
-  - Extra pick (`e`) below, prefixed with a gold `+`, in dimmer italic.
-  - If both are absent, an italic placeholder ("— no pick at this level —")
-    and the card is dimmed to ~55% opacity.
+Each card is a horizontal row with three regions:
+
+1. **Portrait** (left) — 56×56px circular image with a gold border (red
+   for the MC). Falls back to a gothic initial badge if no URL or load
+   fails. Greyed (`grayscale + brightness reduction`) when the character
+   is unavailable at the current level.
+
+2. **Body** (right) — contains:
+   - Character name (top-left) and archetype (top-right, monospace caps).
+   - Build name (small italic, secondary).
+   - One of three states for the bottom region:
+     - **Available + has pick**: main pick (`m`) in large gold, optional
+       extra pick (`e`) below in dim italic with `+` prefix.
+     - **Available + no pick**: italic placeholder ("— no pick at this
+       level —"), card dimmed to ~60% opacity.
+     - **Unavailable** (level < join level): a small Cinzel-caps tag
+       reading `⛓ Joins at level N`. Pick text is hidden. Card dimmed
+       to ~42% opacity, portrait greyscaled.
 
 ### 3.2 Navigation Rules
 
@@ -208,28 +251,20 @@ reserved for the MC and small ornamental diamonds.
 
 Typography:
 - **Cinzel** (display) — headings, button labels, level number, character
-  names, archetype labels.
+  names, archetype labels, fallback initials.
 - **EB Garamond** (body) — pick text, subtitles, italic flavour.
-- **JetBrains Mono** (monospace) — archetype tags only.
+- **JetBrains Mono** (monospace) — archetype tags, join-level inputs.
 
 All three are loaded from Google Fonts. The service worker caches the CSS
 and woff2 files after first load.
 
-Decorative elements: a gold double ring on the level pane corners
-(asymmetric L-brackets), gradient inserts on the MC card, small `◆`
-glyphs as section dividers, a faint multiply-blend grain overlay on the
-whole page.
-
 ### 3.4 Touch & Input
 
 - Minimum tap target for the `−` / `+` buttons is 56×56 px.
-- `touch-action: manipulation` is applied to all interactive elements to
-  suppress double-tap zoom on iOS.
-- `-webkit-tap-highlight-color: transparent` removes the iOS tap flash; the
-  CSS `:active` styles provide the only feedback.
-- Body uses `overscroll-behavior: none` to suppress rubber-band scroll on
-  iOS that would otherwise reveal a Safari background through the PWA
-  shell.
+- `touch-action: manipulation` is applied to all interactive elements.
+- `-webkit-tap-highlight-color: transparent` removes the iOS tap flash.
+- Body uses `overscroll-behavior: none` to suppress rubber-band scroll.
+- Numeric inputs hide native spinners (cleaner on mobile).
 
 ---
 
@@ -241,23 +276,28 @@ All persistence is local-only via `localStorage`.
 
 | Key | Value | Notes |
 |---|---|---|
-| `rt.config.v1` | JSON-encoded Configuration object | See §2.5 |
+| `rt.config.v2` | JSON-encoded Configuration object | Schema as in §2.5 |
 | `rt.level.v1` | JSON-encoded integer | See §2.6 |
 
-The `.v1` suffix is intentional. If the on-disk schema ever needs an
-incompatible change, future versions should write to `.v2` and migrate or
-discard older entries during a one-shot read.
+The schema version is bumped (`v1` → `v2`) when the Configuration shape
+changes incompatibly. The current bump added the `joinLevels` map.
 
-### 4.2 Storage Fallback
+### 4.2 Migration
+
+On startup, if `rt.config.v2` is absent but `rt.config.v1` exists, the app
+reads the v1 record, copies over `mc` and `companions`, fills `joinLevels`
+from the §2.3 defaults, writes `rt.config.v2`, and removes `rt.config.v1`.
+This is one-shot and silent.
+
+### 4.3 Storage Fallback
 
 The implementation wraps `localStorage` in a small abstraction (`Store`)
 that probes for storage availability on init. If `localStorage.setItem`
 throws (e.g. running inside Claude.ai's sandboxed iframe, Safari Private
-mode), it transparently falls back to an in-memory object. This keeps the
-app functional in restricted contexts but means selections will not survive
-a reload there. The PWA on a real origin always uses `localStorage`.
+mode), it transparently falls back to an in-memory object. The PWA on a
+real origin always uses `localStorage`.
 
-### 4.3 Reset Semantics
+### 4.4 Reset Semantics
 
 The "Reset All Data" button removes both keys, sets the in-memory level to
 1, clears `config`, and re-renders Setup. There is a `confirm()` prompt
@@ -297,20 +337,25 @@ Provided sizes: 16, 32, 180 (Apple touch icon), 192, 512, 512-maskable.
 - **Fetch**:
   - HTML / navigations → cache-first, then network, with `./index.html`
     as a final offline fallback.
-  - `fonts.googleapis.com` and `fonts.gstatic.com` → stale-while-revalidate
-    (return cached immediately, refresh in background).
-  - All other same-origin GETs → cache-first, fall through to network and
-    update the cache.
+  - `fonts.googleapis.com` and `fonts.gstatic.com` → stale-while-revalidate.
+  - All other GETs (same-origin assets, third-party portrait images) →
+    cache-first, fall through to network and update the cache. This means
+    portrait images are cached opportunistically on first successful load
+    and remain available offline thereafter.
 
 The SW is registered after `window.load` to avoid blocking first paint.
 
 ### 5.4 Update Strategy
 
 Cache invalidation is manual: bumping the `CACHE_VERSION` string in `sw.js`
-(e.g. `rt-tracker-v1` → `rt-tracker-v2`) will purge the old cache on the
-next activate cycle. A user must reload the page once online to pick up
-new SW code (standard PWA update behaviour). No update prompt UI is
-implemented; the app is small and silent updates are acceptable.
+purges the old cache on the next activate cycle. Bumping the version is
+required after:
+- Re-extracting build data (§6).
+- Updating the `PORTRAITS` URL map.
+- Any change to `index.html`, `manifest.json`, or the icons.
+
+A user must reload the page once online to pick up new SW code (standard
+PWA update behaviour). No update prompt UI is implemented.
 
 ---
 
@@ -371,7 +416,7 @@ The deployable bundle is a flat directory:
 
 ```
 /
-├── index.html              — App + embedded data + inline CSS & JS
+├── index.html              — App + embedded data + inline CSS & JS + PORTRAITS map
 ├── manifest.json           — PWA manifest
 ├── sw.js                   — Service worker
 ├── icon-16.png             — Favicon
@@ -380,7 +425,8 @@ The deployable bundle is a flat directory:
 ├── icon-192.png            — PWA icon (any)
 ├── icon-512.png            — PWA icon (any)
 ├── icon-512-maskable.png   — PWA icon (maskable, Android adaptive)
-└── README.md               — Deployment instructions
+├── README.md               — Deployment instructions
+└── SPEC.md                 — This document
 ```
 
 All paths in `manifest.json`, `sw.js`, and `index.html` are relative
@@ -404,7 +450,8 @@ to register on a real origin.
    Safari-exclusive).
 2. Share → **Add to Home Screen**.
 3. Open the home-screen icon at least once while online; the service
-   worker pre-caches the shell.
+   worker pre-caches the shell and progressively caches portrait images
+   as they load.
 4. The app then runs offline.
 
 ### 8.3 Installation on Android
@@ -425,6 +472,11 @@ used for the adaptive icon. Behaviour otherwise matches iOS.
   syntax and `localStorage` without polyfill.
 - Maximum supported character level is **55** (the in-game cap with
   current DLC).
+- Portrait URLs are user-supplied and may break over time (wiki revisions
+  re-hash filenames). The fallback initial badge ensures the UI degrades
+  gracefully.
+- Default join levels are approximations of typical playthrough pacing,
+  not authoritative game data. The Setup view exposes them for adjustment.
 - The source spreadsheet's ordering, naming, and structure conventions
   are treated as authoritative. If Revan619 reorganises the sheet, the
   extraction script will need adjusting.
