@@ -1520,8 +1520,26 @@ function renderTradersSection() {
     // Re-render faction list without blowing away the whole section
     renderFactionList(factionListEl, act);
   };
-  pfDown.addEventListener('click', () => updatePF(-1));
-  pfUp.addEventListener('click',   () => updatePF(+1));
+  function addHoldRepeat(btn, delta) {
+    let holdTimer = null, repeatInterval = null, wasHeld = false;
+    const stop = () => {
+      clearTimeout(holdTimer); clearInterval(repeatInterval);
+      holdTimer = null; repeatInterval = null;
+    };
+    btn.addEventListener('click', () => { if (!wasHeld) updatePF(delta); wasHeld = false; });
+    btn.addEventListener('pointerdown', () => {
+      wasHeld = false;
+      holdTimer = setTimeout(() => {
+        wasHeld = true;
+        repeatInterval = setInterval(() => updatePF(delta * 10), 100);
+      }, 1000);
+    });
+    btn.addEventListener('pointerup',     stop);
+    btn.addEventListener('pointercancel', stop);
+    btn.addEventListener('pointerleave',  stop);
+  }
+  addHoldRepeat(pfDown, -1);
+  addHoldRepeat(pfUp,   +1);
   pfRow.append(pfLabel, pfDown, pfVal, pfUp);
   el.appendChild(pfRow);
 
