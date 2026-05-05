@@ -315,6 +315,18 @@ function archetypeCalloutAtLevel(levelNum, buildName, isCompanion) {
   return { archetype: arch, tier };
 }
 
+// Returns the highest-tier archetype name that's been unlocked at `atLevel`.
+// Falls back through t3 → t2 → t1 → baseArch.
+function getActiveArchetype(buildName, isCompanion, atLevel, baseArch) {
+  const a = getBuildArchetypes(buildName, isCompanion);
+  if (a) {
+    if (atLevel >= 36 && a.t3) return a.t3;
+    if (atLevel >= 16 && a.t2) return a.t2;
+    if (a.t1) return a.t1;
+  }
+  return baseArch;
+}
+
 // ============= GEAR DATABASE LOOKUP =============
 function _normalizeGearName(s) {
   if (!s) return '';
@@ -508,7 +520,7 @@ function charCard({mc, key, displayName, buildName, arch, pick, available, joinL
   nameEl.textContent = displayName;
   const archEl = document.createElement('div');
   archEl.className = 'char-arch';
-  archEl.textContent = arch;
+  archEl.textContent = getActiveArchetype(buildName, !mc, level, arch);
   row.appendChild(nameEl);
   row.appendChild(archEl);
   body.appendChild(row);
