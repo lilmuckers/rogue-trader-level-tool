@@ -136,11 +136,11 @@ function renderChoiceSection(rawPick, charName, atLevel, targetEl, isExtra) {
     if (isTaken) {
       btn.className = 'choice-btn choice-btn-untake';
       btn.textContent = '✓ Taken — unmark';
-      btn.addEventListener('click', () => { unmarkChoice(charName, part); renderTracker(); _renderTopOfStack(); });
+      btn.addEventListener('click', () => { unmarkChoice(charName, part); renderTracker(); _renderTopOfStack(true); });
     } else {
       btn.className = 'choice-btn choice-btn-take';
       btn.textContent = 'Mark as taken';
-      btn.addEventListener('click', () => { markChoice(charName, part, atLevel); renderTracker(); _renderTopOfStack(); });
+      btn.addEventListener('click', () => { markChoice(charName, part, atLevel); renderTracker(); _renderTopOfStack(true); });
     }
     opt.appendChild(btn);
     section.appendChild(opt);
@@ -638,36 +638,48 @@ function attachCardInteractions(card, ctx) {
 // The back button shows when stack length > 1.
 let _sheetStack = [];
 
-function _renderTopOfStack() {
+// Each stack entry: { title, render, node, scrollTop }
+// `node` caches the rendered DOM so popping back restores exact state (tab
+// selection, scroll position) without a re-render.
+// Pass forceRender=true to bust the cache (e.g. after a choice is marked).
+function _renderTopOfStack(forceRender = false) {
   if (_sheetStack.length === 0) return;
   const top = _sheetStack[_sheetStack.length - 1];
   $('sheet-title').textContent = top.title;
   const body = $('sheet-body');
+
+  // Bust every entry's cache when state changes (e.g. pick choice marked)
+  if (forceRender) _sheetStack.forEach(e => { e.node = null; e.scrollTop = 0; });
+
+  if (!top.node) top.node = top.render();
   body.innerHTML = '';
-  body.appendChild(top.render());
-  body.scrollTop = 0;
-  // Show back button only if there's something below us
-  $('sheet-back').classList.toggle('hidden', _sheetStack.length <= 1);
+  body.appendChild(top.node);
+  body.scrollTop = top.scrollTop || 0;
+
+  // Back button always hidden — X handles going back at every depth
+  $('sheet-back').classList.add('hidden');
 }
 
 // Open a fresh sheet (resets the stack).
-// `render` is a function returning a DOM node — kept as a thunk so we can
-// re-render lazily when popping back to it.
 function openSheet(title, render) {
-  _sheetStack = [{ title, render }];
+  _sheetStack = [{ title, render, node: null, scrollTop: 0 }];
   _renderTopOfStack();
   $('sheet-overlay').classList.add('open');
   $('sheet').classList.add('open');
   document.body.style.overflow = 'hidden';
 }
 
-// Push a new view onto the stack (back arrow appears).
+// Push a new view. Saves the current scroll position so it's restored on pop.
 function pushSheet(title, render) {
-  _sheetStack.push({ title, render });
+  if (_sheetStack.length > 0) {
+    _sheetStack[_sheetStack.length - 1].scrollTop = $('sheet-body').scrollTop;
+  }
+  _sheetStack.push({ title, render, node: null, scrollTop: 0 });
   _renderTopOfStack();
 }
 
-// Pop the top view (back to previous). If at the bottom, closes the sheet.
+// Pop the top view. Restores the cached DOM + scroll of the view below.
+// At the bottom of the stack, closes the sheet entirely.
 function popSheet() {
   if (_sheetStack.length <= 1) { closeSheet(); return; }
   _sheetStack.pop();
@@ -681,7 +693,8 @@ function closeSheet() {
   $('sheet-back').classList.add('hidden');
   document.body.style.overflow = '';
 }
-$('sheet-close').addEventListener('click', closeSheet);
+// X always pops (closes sheet when at depth 1, goes back when deeper)
+$('sheet-close').addEventListener('click', popSheet);
 $('sheet-back').addEventListener('click', popSheet);
 $('sheet-overlay').addEventListener('click', closeSheet);
 // swipe-down to close
