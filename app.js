@@ -13,7 +13,99 @@ const Store = (() => {
 
 const KEY_CONFIG = 'rt.config.v2';
 const KEY_LEVEL = 'rt.level.v1';
+const KEY_CHOICES = 'rt.choices.v1';
 const MIN_LVL = 1, MAX_LVL = 55;
+
+// ============= PICK CHOICES =============
+function getChoices(charName) {
+  const all = Store.get(KEY_CHOICES) || {};
+  return new Set(all[charName] || []);
+}
+function markChoice(charName, pickName) {
+  const all = Store.get(KEY_CHOICES) || {};
+  if (!all[charName]) all[charName] = [];
+  const s = new Set(all[charName]);
+  s.add(normalize(pickName.trim()));
+  all[charName] = [...s];
+  Store.set(KEY_CHOICES, all);
+}
+function unmarkChoice(charName, pickName) {
+  const all = Store.get(KEY_CHOICES) || {};
+  if (!all[charName]) return;
+  const s = new Set(all[charName]);
+  s.delete(normalize(pickName.trim()));
+  all[charName] = [...s];
+  Store.set(KEY_CHOICES, all);
+}
+// Strips taken alternatives from a slash-separated pick string.
+// Returns the filtered string, or null if every alternative is taken.
+// Non-slash picks pass through unchanged.
+function filterPickString(rawPick, choices) {
+  if (!rawPick || !rawPick.includes('/') || !choices || choices.size === 0) return rawPick;
+  const parts = rawPick.split('/').map(p => p.trim()).filter(Boolean);
+  const remaining = parts.filter(p => !choices.has(normalize(p)));
+  if (remaining.length === 0) return null;
+  return remaining.join(' / ');
+}
+// Builds the choice-selection UI for a slash-separated pick into `targetEl`.
+// Each alternative gets a description block and a mark/unmark button.
+function renderChoiceSection(rawPick, charName, targetEl, isExtra) {
+  const choices = getChoices(charName);
+  const parts = rawPick.split('/').map(p => p.trim()).filter(Boolean);
+
+  const section = document.createElement('div');
+  section.className = 'choice-section';
+  const lbl = document.createElement('div');
+  lbl.className = 'choice-label';
+  lbl.textContent = (isExtra ? '+ ' : '') + 'Choose one';
+  section.appendChild(lbl);
+
+  parts.forEach(part => {
+    const isTaken = choices.has(normalize(part));
+    const opt = document.createElement('div');
+    opt.className = 'choice-option' + (isTaken ? ' is-taken' : '');
+
+    const nameEl = document.createElement('div');
+    nameEl.className = 'choice-option-name';
+    nameEl.textContent = part;
+    opt.appendChild(nameEl);
+
+    if (isSkillStatPick(part)) {
+      const src = document.createElement('div');
+      src.className = 'desc-source';
+      src.textContent = 'Skill / Stat allocation';
+      opt.appendChild(src);
+    } else {
+      const hits = lookupPick(part);
+      if (hits.length > 0) {
+        const hit = hits[0];
+        const src = document.createElement('div');
+        src.className = 'desc-source';
+        src.textContent = hit.kind;
+        opt.appendChild(src);
+        const txt = document.createElement('div');
+        txt.className = 'desc-text';
+        txt.textContent = hit.desc;
+        opt.appendChild(txt);
+      }
+    }
+
+    const btn = document.createElement('button');
+    if (isTaken) {
+      btn.className = 'choice-btn choice-btn-untake';
+      btn.textContent = '✓ Taken — unmark';
+      btn.addEventListener('click', () => { unmarkChoice(charName, part); renderTracker(); _renderTopOfStack(); });
+    } else {
+      btn.className = 'choice-btn choice-btn-take';
+      btn.textContent = 'Mark as taken';
+      btn.addEventListener('click', () => { markChoice(charName, part); renderTracker(); _renderTopOfStack(); });
+    }
+    opt.appendChild(btn);
+    section.appendChild(opt);
+  });
+
+  targetEl.appendChild(section);
+}
 
 (() => {
   if (Store.get(KEY_CONFIG)) return;
@@ -352,11 +444,18 @@ function makePortrait(key) {
 }
 
 function charCard({mc, key, displayName, buildName, arch, pick, available, joinLevel, build}) {
+  const choices = getChoices(displayName);
+  const displayPick = pick ? {
+    m: pick.m ? filterPickString(pick.m, choices) : null,
+    e: pick.e ? filterPickString(pick.e, choices) : null,
+  } : null;
+  const hasDisplay = displayPick && (displayPick.m || displayPick.e);
+
   const card = document.createElement('div');
   let cls = 'char-card';
   if (mc) cls += ' is-mc';
   if (!available) cls += ' unavailable';
-  else if (!pick || (!pick.m && !pick.e)) cls += ' no-pick';
+  else if (!hasDisplay) cls += ' no-pick';
   card.className = cls;
 
   card.appendChild(makePortrait(key));
@@ -388,18 +487,18 @@ function charCard({mc, key, displayName, buildName, arch, pick, available, joinL
     u.className = 'char-unavailable';
     u.textContent = `Joins at level ${joinLevel}`;
     body.appendChild(u);
-  } else if (pick && (pick.m || pick.e)) {
-    if (pick.m) {
+  } else if (hasDisplay) {
+    if (displayPick.m) {
       const p = document.createElement('div');
       p.className = 'char-pick';
-      if (pickHasInfo(pick.m)) p.classList.add('has-info');
-      p.textContent = pick.m;
+      if (pickHasInfo(displayPick.m)) p.classList.add('has-info');
+      p.textContent = displayPick.m;
       body.appendChild(p);
     }
-    if (pick.e) {
+    if (displayPick.e) {
       const e = document.createElement('div');
       e.className = 'char-extra';
-      e.textContent = pick.e;
+      e.textContent = displayPick.e;
       body.appendChild(e);
     }
     // Archetype callout at L16 / L36
@@ -594,6 +693,11 @@ function buildDescriptionContent(ctx) {
 
   const renderPickBlock = (rawPick, isExtra) => {
     if (!rawPick) return;
+    // Slash pick → choice selector
+    if (rawPick.includes('/')) {
+      renderChoiceSection(rawPick, displayName, wrap, isExtra);
+      return;
+    }
     if (isSkillStatPick(rawPick)) {
       const block = document.createElement('div');
       block.className = 'desc-block';
@@ -694,11 +798,48 @@ function buildCatchupContent(ctx) {
   }
   wrap.appendChild(meta);
 
-  // Build a sorted list of levels 1..MAX_LVL, with picks
+  // Decide whether to show tabs (only when there are extras to put in the second tab)
+  const extras = getExtrasForBuildName(buildName, isCompanion);
+  const hasExtras = extras && (extras.skills || (extras.gear && extras.gear.length));
+
+  let timelinePanel, gearPanel;
+  if (hasExtras) {
+    const tabBar = document.createElement('div');
+    tabBar.className = 'tab-bar';
+    const tabTimeline = document.createElement('button');
+    tabTimeline.className = 'tab-btn active';
+    tabTimeline.textContent = 'Timeline';
+    const tabGear = document.createElement('button');
+    tabGear.className = 'tab-btn';
+    tabGear.textContent = 'Gear & Skills';
+    tabBar.appendChild(tabTimeline);
+    tabBar.appendChild(tabGear);
+    wrap.appendChild(tabBar);
+
+    timelinePanel = document.createElement('div');
+    gearPanel = document.createElement('div');
+    gearPanel.classList.add('hidden');
+
+    tabTimeline.addEventListener('click', () => {
+      tabTimeline.classList.add('active'); tabGear.classList.remove('active');
+      timelinePanel.classList.remove('hidden'); gearPanel.classList.add('hidden');
+    });
+    tabGear.addEventListener('click', () => {
+      tabGear.classList.add('active'); tabTimeline.classList.remove('active');
+      gearPanel.classList.remove('hidden'); timelinePanel.classList.add('hidden');
+    });
+  } else {
+    timelinePanel = document.createElement('div');
+  }
+
+  // === Timeline panel ===
+  const choices = getChoices(displayName);
   for (let n = 1; n <= MAX_LVL; n++) {
     const entry = build.levels[n];
-    const hasContent = entry && (entry.m || entry.e);
-    if (!hasContent) continue;
+    if (!entry) continue;
+    const displayM = entry.m ? filterPickString(entry.m, choices) : null;
+    const displayE = entry.e ? filterPickString(entry.e, choices) : null;
+    if (!displayM && !displayE) continue;
 
     const item = document.createElement('div');
     item.className = 'timeline-item';
@@ -718,27 +859,26 @@ function buildCatchupContent(ctx) {
 
     const pickCol = document.createElement('div');
     pickCol.className = 'timeline-pick';
-    if (entry.m) {
+    if (displayM) {
       const m = document.createElement('div');
       m.className = 'timeline-main';
       if (pickHasInfo(entry.m)) {
         m.classList.add('has-info');
         m.addEventListener('click', () => pushSinglePickDescription(entry.m, displayName, n));
       }
-      m.textContent = entry.m;
+      m.textContent = displayM;
       pickCol.appendChild(m);
     }
-    if (entry.e) {
+    if (displayE) {
       const ex = document.createElement('div');
       ex.className = 'timeline-extra';
       if (pickHasInfo(entry.e)) {
         ex.classList.add('has-info');
         ex.addEventListener('click', () => pushSinglePickDescription(entry.e, displayName, n));
       }
-      ex.textContent = entry.e;
+      ex.textContent = displayE;
       pickCol.appendChild(ex);
     }
-    // Archetype callout for L16 / L36
     const callout = archetypeCalloutAtLevel(n, buildName, isCompanion);
     if (callout) {
       const ac = document.createElement('div');
@@ -748,12 +888,12 @@ function buildCatchupContent(ctx) {
       pickCol.appendChild(ac);
     }
     item.appendChild(pickCol);
-    wrap.appendChild(item);
+    timelinePanel.appendChild(item);
   }
+  wrap.appendChild(timelinePanel);
 
-  // === Skills + Gear panel ===
-  const extras = getExtrasForBuildName(buildName, isCompanion);
-  if (extras && (extras.skills || (extras.gear && extras.gear.length))) {
+  // === Gear & Skills panel ===
+  if (hasExtras) {
     if (extras.skills) {
       const panel = document.createElement('div');
       panel.className = 'extras-panel';
@@ -765,7 +905,7 @@ function buildCatchupContent(ctx) {
       s.className = 'skills-block';
       s.textContent = extras.skills;
       panel.appendChild(s);
-      wrap.appendChild(panel);
+      gearPanel.appendChild(panel);
     }
     if (extras.gear && extras.gear.length) {
       const panel = document.createElement('div');
@@ -785,16 +925,13 @@ function buildCatchupContent(ctx) {
         row.appendChild(slotLabel);
         const optsCol = document.createElement('div');
         optsCol.className = 'gear-options';
-        // Split options on '/' and render each as a pill
-        const options = slot.options.split('/').map(o => o.trim()).filter(Boolean);
-        options.forEach(opt => {
+        slot.options.split('/').map(o => o.trim()).filter(Boolean).forEach(opt => {
           const pill = document.createElement('span');
           pill.className = 'gear-pill';
           const cleaned = opt.replace(/\s*\(.*?\)\s*$/, '').trim();
           const found = lookupGear(cleaned);
           pill.textContent = opt;
           if (found && (found.l || found.a != null || found.d)) {
-            // Add small location hint inline
             if (found.a != null) {
               const loc = document.createElement('span');
               loc.className = 'gear-pill-loc';
@@ -811,8 +948,9 @@ function buildCatchupContent(ctx) {
         list.appendChild(row);
       });
       panel.appendChild(list);
-      wrap.appendChild(panel);
+      gearPanel.appendChild(panel);
     }
+    wrap.appendChild(gearPanel);
   }
 
   return wrap;
@@ -912,6 +1050,12 @@ function buildSinglePickContent(rawPick, displayName, atLevel) {
   meta.className = 'desc-context';
   meta.textContent = `${displayName} · level ${atLevel}`;
   wrap.appendChild(meta);
+
+  // Slash pick → show choice selector (same as description sheet)
+  if (rawPick.includes('/')) {
+    renderChoiceSection(rawPick, displayName, wrap, false);
+    return wrap;
+  }
 
   if (isSkillStatPick(rawPick)) {
     const block = document.createElement('div');

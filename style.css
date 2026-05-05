@@ -494,3 +494,75 @@
     border-top: 1px dashed var(--rule);
     border-bottom: 1px dashed var(--rule);
   }
+
+/* === TIMELINE TABS === */
+.tab-bar {
+  display: flex;
+  margin-bottom: 14px;
+  border-bottom: 1px solid var(--rule);
+}
+.tab-btn {
+  flex: 1;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  padding: 10px 8px;
+  font-family: 'Cinzel', serif;
+  font-size: 10px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--ink-dim);
+  cursor: pointer;
+  margin-bottom: -1px;
+  touch-action: manipulation;
+}
+.tab-btn.active { color: var(--gold); border-bottom-color: var(--gold); }
+.tab-btn:active { color: var(--ink); }
+
+/* === PICK CHOICE UI === */
+.choice-section {
+  border-left: 2px solid var(--gold-deep);
+  padding-left: 10px;
+  margin-bottom: 18px;
+}
+.choice-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin-bottom: 10px;
+}
+.choice-option {
+  margin-bottom: 10px;
+  padding: 10px 12px;
+  background: var(--bg-3);
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+}
+.choice-option.is-taken { opacity: 0.45; }
+.choice-option-name {
+  font-family: 'Cinzel', serif;
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--gold-bright);
+  letter-spacing: 0.05em;
+  margin-bottom: 4px;
+}
+.choice-option.is-taken .choice-option-name { color: var(--ink-dim); }
+.choice-btn {
+  display: inline-block;
+  margin-top: 8px;
+  padding: 4px 12px;
+  font-family: 'Cinzel', serif;
+  font-size: 9px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  border-radius: 2px;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+.choice-btn-take { background: transparent; color: var(--gold); border: 1px solid var(--gold-deep); }
+.choice-btn-take:active { background: var(--gold-deep); }
+.choice-btn-untake { background: transparent; color: var(--ink-faint); border: 1px solid var(--rule); }
+.choice-btn-untake:active { color: var(--ink); }
