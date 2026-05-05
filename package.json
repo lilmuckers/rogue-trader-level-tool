@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "extract": "node scripts/extract.js",
+    "extract-xlsx": "python3 scripts/extract-xlsx.py",
     "build": "node scripts/build.js"
   },
   "devDependencies": {

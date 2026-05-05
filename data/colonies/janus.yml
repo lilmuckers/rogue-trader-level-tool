@@ -1,0 +1,76 @@
+name: Janus
+levels:
+  1:
+    - name: Chem-princes
+      cost: None
+      benefit: 'Refillable item: Grenade "Apexalium Stimulant" Security +1 Chemicals +4 Provisions +2'
+    - name: The Ultraquisitors
+      cost: None
+      benefit: 'Refillable item: Grenade "Tears of Repentance" Profit Factor 2 Kasballica 2500 Complacency +1'
+    - name: Sophocracy
+      cost: None
+      benefit: Chemicals +2 Security +1 Efficiency +1 Provisions +4
+  2:
+    - name: The Reaping
+      cost: Project "Giants" (On the colony of Kieva Gamma - 2nd level) Plasteel 3 Promethium 1 Mechanisms 1
+      benefit: Profit factor +3 Provisions +6 Efficiency +2 Complacency +2
+    - name: The Secret of the Winterscales
+      cost: Profit factor ≥ 35 Provisions 3
+      benefit: 'Chemicals +6 Promethium +5 New Contract: Blood and Nephium Fellowship of the void 2500 Security -1 (global)'
+    - name: A Cure for sloth
+      cost: Chemicals 3 People 1
+      benefit: 'Feature: Neuro-suppressants Heretical +30 Efficiency +2 Complacency +2'
+    - name: Science of Virtue
+      cost: Drusian Reputation ≥ 28310 (Level 8)
+      benefit: Profit factor +3 Drusian Reputation +3500 Dogmatic 30 Provisions 6
+    - name: Rose of Zamarkand
+      cost: Reputation Mission Kasbalika ≥ 29390 (level 8) Chemicals 1 People 2 Xenotech 1
+      benefit: 'Refillable item: Pollen of the unreal Reputation Mission Kasballika +3500 Feature Poisonous nectar'
+    - name: The Execution of the Heretic Vistenza Wyatt
+      cost: Discover Wyatt is a heretic
+      benefit: Contentment +1 Efficiency -1
+    - name: Capella Biologis
+      cost: Reputation Explorators ≥ 11675 (level 8) Xenotech 1 Plastele 2 Mechanisms 1
+      benefit: 'Refillable item: Surgeon''s Medikit Effeciency +2 Chemicals +3'
+    - name: Dark Sages
+      cost: Reputation Mission Kasbalika ≥ 35880 (level 10) Chemicals 2 Provisions 2 Xenotech 2
+      benefit: 'Character Trait: Advice from the Dark Sages Profit factor +4 Complacency 1 Security +1 (global)'
+  3:
+    - name: Forest fortresses
+      cost: One of the projects "Capella Biologis"/"Dark Sages" Weapon 2 Plasteel 6 Adamantium 2
+      benefit: 'Weapon: Starblight Feature Punisher Profit Factor 5 Security 3'
+    - name: Monstrous servants
+      cost: The Capella Biologis Project Chemicals 3 Mechanisms 2 People 6
+      benefit: Refillable Scorcher Explorators 5000 Effciency 3
+    - name: Xenodefense
+      cost: Project "Dark Sages" Xenotech 3 Flogiston 2 Promethium 4
+      benefit: 'Item: Seeker of the Weak Complacency 2 Security 2 Weapons 6'
+  4:
+    - name: Payment In Organs
+      cost: Any level 3 project People 4
+      benefit: 'Item: Chant of Stagnation Profit factor 3 Xenotech 3 Complacency -2'
+    - name: Secret Lair
+      cost: Any level 3 project Xenotech 3 Provisions 3
+      benefit: Feature Aeldari Machine Taming Kasballica 5000 Efficiency +1 (Global) Security -3
+    - name: Xenos Intoxicant
+      cost: Any level 3 project Xenotech 1 Chemicals 3
+      benefit: 'Item: Falstow Vial Profit Factor 5 Complacency 1'
+    - name: The Lost
+      cost: Any level 3 project Provisions 4 Reputation Void Brotherhood ≥ 20250
+      benefit: 'Item: Fang of Perdition Profit factor +5 Reputation Fellowship of the void +5000'
+    - name: Death Cult of the reaper Emperor
+      cost: 'Completed Guilds, Adeptus Arbites or The Season Of Wars People: 3'
+      benefit: Dogmatic +40 Provisions +6 Effeciency 3
+    - name: The Great Fire
+      cost: Any level 3 project Promethium 3 Chemicals 3
+      benefit: 'Character Trait: Lord of Flame Provisions +9'
+  5:
+    - name: Shelter
+      cost: The Great Fire Project Charter of minimal Rights Promethium 3 Provisions 3 Plasteel 6 Plasteel 6
+      benefit: 'Character Trait: Merciful Savior Profit Factor 3 People 12 Complacency'
+    - name: Xenovivisectory
+      cost: The Great Fire Project Project "Captive Xenos" Chemicals 3 Mechanisms 3 Plasteel 6
+      benefit: 'Character Trait: Xenovivisectionist Item Wraithdancer Garments Kasballica 5000 Xenotech 3'
+    - name: Pleasure World
+      cost: The Great Fire Project
+      benefit: 'Weapon: Watchers from Above Profit Factor 5 Effeciency 3 Complacency 3 Security -2 (global)'

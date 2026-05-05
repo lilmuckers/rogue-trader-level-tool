@@ -105,6 +105,37 @@ if (fs.existsSync(compRoot)) {
   }
 }
 
+// ─── colonies ────────────────────────────────────────────────────────────────
+
+const colonies = [];
+const coloniesDir = path.join(dataDir, 'colonies');
+for (const filePath of globYaml(coloniesDir)) {
+  const c = readYaml(filePath);
+  if (c && c.name) colonies.push(c);
+}
+
+// ─── vendors ─────────────────────────────────────────────────────────────────
+
+const vendors = [];
+let questRewards = [];
+const vendorsDir = path.join(dataDir, 'vendors');
+for (const filePath of globYaml(vendorsDir)) {
+  const v = readYaml(filePath);
+  if (!v) continue;
+  if (path.basename(filePath) === 'quest-rewards.yml') {
+    questRewards = v.items || [];
+  } else if (v.name) {
+    vendors.push({ name: v.name, items: v.items || [] });
+  }
+}
+
+// ─── resources ───────────────────────────────────────────────────────────────
+
+const resourcesDir = path.join(dataDir, 'resources');
+const resourceSystems = fs.existsSync(path.join(resourcesDir, 'systems.yml'))
+  ? (readYaml(path.join(resourcesDir, 'systems.yml')) || {}).systems || []
+  : [];
+
 // ─── assemble DATA ────────────────────────────────────────────────────────────
 
 const DATA = {
@@ -114,6 +145,10 @@ const DATA = {
   gear_db,
   archetypes: { mc: archetypesMC, comp: archetypesCOMP },
   extras:     { mc_extras: extrasMC, comp_extras: extrasComp },
+  colonies,
+  vendors,
+  questRewards,
+  resourceSystems,
 };
 
 // ─── write data.js ────────────────────────────────────────────────────────────
@@ -135,3 +170,7 @@ console.log(`  gear_db:      ${gear_db.length} items`);
 console.log(`  talents:      ${Object.keys(definitions.talents).length}`);
 console.log(`  abilities:    ${Object.keys(definitions.abilities).length}`);
 console.log(`  heroic:       ${Object.keys(definitions.heroic).length}`);
+console.log(`  colonies:     ${colonies.length}`);
+console.log(`  vendors:      ${vendors.reduce((s, v) => s + v.items.length, 0)} items across ${vendors.length} factions`);
+console.log(`  questRewards: ${questRewards.length}`);
+console.log(`  resources:    ${resourceSystems.length} systems`);

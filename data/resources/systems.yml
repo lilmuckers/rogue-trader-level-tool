@@ -1,0 +1,140 @@
+systems:
+  - name: Adermatt II
+    resources:
+      plasteel: 2
+      promethium: 7
+      adamantine: 2
+    extractum: medium
+    event: medium
+  - name: Agathus Archides
+    resources:
+      provisions: 3
+    extractum: high
+    event: high
+  - name: Aviorus
+    resources:
+      provisions: 4
+      adamantine: 2
+  - name: Cradle of Khepri
+    resources:
+      promethium: 5
+      xenotech: 4
+      flogiston: 3
+  - name: Cranach
+    resources:
+      plasteel: 3
+      flogiston: 3
+  - name: Emperors's Palm
+    resources:
+      plasteel: [1, 2]
+  - name: Forgotten Twins
+    resources:
+      plasteel: 2
+  - name: Frozen Prince
+    resources:
+      plasteel: [2, 2]
+      promethium: 5
+  - name: Hundred Dreams Crossroads
+    resources:
+      promethium: 6
+      flogiston: 2
+  - name: Langrenn's Belt
+    resources:
+      provisions: 4
+      plasteel: 6
+  - name: Lapidus Mortus
+    resources:
+      plasteel: [8, 2]
+      xenotech: 3
+      adamantine: 2
+  - name: Last Chance of Cyrene
+    resources:
+      promethium: 4
+  - name: Latotian's Passage
+    resources:
+      adamantine: 2
+  - name: Litoribum Maledicta
+    resources:
+      provisions: 2
+      plasteel: [7, 2]
+  - name: Mu-Rho 79
+    resources:
+      plasteel: 5
+  - name: Mundus Nullius
+    resources:
+      plasteel: 2
+  - name: Mundus Valancius
+    resources:
+      flogiston: 4
+  - name: Nameless Star
+    resources:
+      plasteel: 2
+      adamantine: 2
+  - name: Narmer IV
+    resources:
+      provisions: 6
+      plasteel: 5
+      flogiston: 3
+  - name: Nolla Septum
+    resources:
+      promethium: 7
+      adamantine: 2
+  - name: Odaenathus XI
+    resources:
+      plasteel: [2, 2]
+  - name: Omicron
+    resources:
+      plasteel: 2
+  - name: Orsellio Prophecy
+    resources:
+      promethium: 5
+  - name: Palatium Stellos
+    resources:
+      plasteel: 2
+      xenotech: 2
+  - name: Pillars of Virdice
+    resources:
+      plasteel: [7, 3]
+  - name: Porta Septentum
+    resources:
+      plasteel: 2
+  - name: Pulvis Platinum
+    resources:
+      plasteel: 4
+  - name: Silence Of Mer-Segrit
+    resources:
+      plasteel: 2
+      promethium: 4
+      flogiston: 5
+  - name: Sotto's Tomb
+    resources:
+      plasteel: 5
+  - name: System Speculo
+    resources:
+      xenotech: 3
+      adamantine: 2
+  - name: Telikos Epsilon
+    resources:
+      plasteel: 3
+  - name: Tenebris Aquae
+    resources:
+      plasteel: 2
+  - name: Trinnitos
+    resources:
+      people: 1
+      plasteel: 7
+  - name: Atlas Reach
+    resources:
+      plasteel: 5
+      adamantine: 4
+  - name: Neos Charoitus
+    resources:
+      plasteel: 1
+      adamantine: 3
+      flogiston: 4
+  - name: Silbannacos
+    resources:
+      xenotech: 4
+  - name: Lavella's Heart
+    resources:
+      promethium: 3
