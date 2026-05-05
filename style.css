@@ -566,3 +566,9 @@
 .choice-btn-take:active { background: var(--gold-deep); }
 .choice-btn-untake { background: transparent; color: var(--ink-faint); border: 1px solid var(--rule); }
 .choice-btn-untake:active { color: var(--ink); }
+
+/* Pick choice visual states (cards, timeline, single-pick sheet) */
+.pick-sep { color: var(--ink-faint); }
+.pick-chosen { font-weight: 600; color: var(--gold-bright); }
+.pick-unavailable { text-decoration: line-through; color: var(--ink-faint); }
+.pick-unchosen { font-style: italic; color: var(--ink-dim); }

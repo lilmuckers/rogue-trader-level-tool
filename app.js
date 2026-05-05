@@ -17,39 +17,81 @@ const KEY_CHOICES = 'rt.choices.v1';
 const MIN_LVL = 1, MAX_LVL = 55;
 
 // ============= PICK CHOICES =============
+// Storage format: { charName: { normalizedPickName: levelNumber } }
+// levelNumber=0 means "taken, level unknown" (migrated from old array format)
+function _migrateChoicesObj(raw) {
+  if (!raw) return {};
+  if (Array.isArray(raw)) return Object.fromEntries(raw.map(k => [k, 0]));
+  return raw;
+}
 function getChoices(charName) {
   const all = Store.get(KEY_CHOICES) || {};
-  return new Set(all[charName] || []);
+  return _migrateChoicesObj(all[charName]);
 }
-function markChoice(charName, pickName) {
+function isChoiceTaken(choices, pickName) {
+  return normalize(pickName.trim()) in choices;
+}
+function getChoiceLevel(choices, pickName) {
+  const key = normalize(pickName.trim());
+  return key in choices ? choices[key] : null;
+}
+function markChoice(charName, pickName, atLevel) {
   const all = Store.get(KEY_CHOICES) || {};
-  if (!all[charName]) all[charName] = [];
-  const s = new Set(all[charName]);
-  s.add(normalize(pickName.trim()));
-  all[charName] = [...s];
+  all[charName] = _migrateChoicesObj(all[charName]);
+  all[charName][normalize(pickName.trim())] = atLevel != null ? atLevel : 0;
   Store.set(KEY_CHOICES, all);
 }
 function unmarkChoice(charName, pickName) {
   const all = Store.get(KEY_CHOICES) || {};
-  if (!all[charName]) return;
-  const s = new Set(all[charName]);
-  s.delete(normalize(pickName.trim()));
-  all[charName] = [...s];
+  all[charName] = _migrateChoicesObj(all[charName]);
+  delete all[charName][normalize(pickName.trim())];
   Store.set(KEY_CHOICES, all);
 }
-// Strips taken alternatives from a slash-separated pick string.
-// Returns the filtered string, or null if every alternative is taken.
-// Non-slash picks pass through unchanged.
-function filterPickString(rawPick, choices) {
-  if (!rawPick || !rawPick.includes('/') || !choices || choices.size === 0) return rawPick;
+// Appends styled span elements for a slash pick into containerEl.
+// Visual states (when atLevel is provided):
+//   .pick-chosen     — bold gold: chosen at this exact level
+//   .pick-unavailable — strikethrough grey: taken at a different level
+//   .pick-unchosen   — italic grey: sibling was chosen here, this one wasn't
+//   (none)           — plain: undecided
+// When atLevel is null (description popup) taken options are just greyed.
+function renderStyledPickText(rawPick, choices, atLevel, containerEl) {
+  if (!rawPick) return;
+  if (!rawPick.includes('/')) {
+    containerEl.textContent = rawPick;
+    return;
+  }
   const parts = rawPick.split('/').map(p => p.trim()).filter(Boolean);
-  const remaining = parts.filter(p => !choices.has(normalize(p)));
-  if (remaining.length === 0) return null;
-  return remaining.join(' / ');
+  const decidedAtLevel = atLevel != null && parts.some(p => getChoiceLevel(choices, p) === atLevel);
+
+  parts.forEach((part, i) => {
+    if (i > 0) {
+      const sep = document.createElement('span');
+      sep.textContent = ' / ';
+      sep.className = 'pick-sep';
+      containerEl.appendChild(sep);
+    }
+    const span = document.createElement('span');
+    const choiceLevel = getChoiceLevel(choices, part);
+
+    if (atLevel != null) {
+      if (choiceLevel === atLevel) {
+        span.className = 'pick-chosen';       // chosen here → bold
+      } else if (choiceLevel !== null) {
+        span.className = 'pick-unavailable';  // taken elsewhere → strikethrough
+      } else if (decidedAtLevel) {
+        span.className = 'pick-unchosen';     // sibling chosen here → italic
+      }
+      // else undecided → no class
+    } else {
+      if (choiceLevel !== null) span.className = 'pick-unavailable'; // popup: just grey taken
+    }
+    span.textContent = part;
+    containerEl.appendChild(span);
+  });
 }
-// Builds the choice-selection UI for a slash-separated pick into `targetEl`.
-// Each alternative gets a description block and a mark/unmark button.
-function renderChoiceSection(rawPick, charName, targetEl, isExtra) {
+// Builds the choice-selection UI for a slash pick into `targetEl`.
+// atLevel is recorded when the player marks a choice.
+function renderChoiceSection(rawPick, charName, atLevel, targetEl, isExtra) {
   const choices = getChoices(charName);
   const parts = rawPick.split('/').map(p => p.trim()).filter(Boolean);
 
@@ -61,7 +103,7 @@ function renderChoiceSection(rawPick, charName, targetEl, isExtra) {
   section.appendChild(lbl);
 
   parts.forEach(part => {
-    const isTaken = choices.has(normalize(part));
+    const isTaken = isChoiceTaken(choices, part);
     const opt = document.createElement('div');
     opt.className = 'choice-option' + (isTaken ? ' is-taken' : '');
 
@@ -98,7 +140,7 @@ function renderChoiceSection(rawPick, charName, targetEl, isExtra) {
     } else {
       btn.className = 'choice-btn choice-btn-take';
       btn.textContent = 'Mark as taken';
-      btn.addEventListener('click', () => { markChoice(charName, part); renderTracker(); _renderTopOfStack(); });
+      btn.addEventListener('click', () => { markChoice(charName, part, atLevel); renderTracker(); _renderTopOfStack(); });
     }
     opt.appendChild(btn);
     section.appendChild(opt);
@@ -445,11 +487,7 @@ function makePortrait(key) {
 
 function charCard({mc, key, displayName, buildName, arch, pick, available, joinLevel, build}) {
   const choices = getChoices(displayName);
-  const displayPick = pick ? {
-    m: pick.m ? filterPickString(pick.m, choices) : null,
-    e: pick.e ? filterPickString(pick.e, choices) : null,
-  } : null;
-  const hasDisplay = displayPick && (displayPick.m || displayPick.e);
+  const hasDisplay = pick && (pick.m || pick.e);
 
   const card = document.createElement('div');
   let cls = 'char-card';
@@ -488,17 +526,17 @@ function charCard({mc, key, displayName, buildName, arch, pick, available, joinL
     u.textContent = `Joins at level ${joinLevel}`;
     body.appendChild(u);
   } else if (hasDisplay) {
-    if (displayPick.m) {
+    if (pick.m) {
       const p = document.createElement('div');
       p.className = 'char-pick';
-      if (pickHasInfo(displayPick.m)) p.classList.add('has-info');
-      p.textContent = displayPick.m;
+      if (pick.m.includes('/') || pickHasInfo(pick.m)) p.classList.add('has-info');
+      renderStyledPickText(pick.m, choices, level, p);
       body.appendChild(p);
     }
-    if (displayPick.e) {
+    if (pick.e) {
       const e = document.createElement('div');
       e.className = 'char-extra';
-      e.textContent = displayPick.e;
+      renderStyledPickText(pick.e, choices, level, e);
       body.appendChild(e);
     }
     // Archetype callout at L16 / L36
@@ -695,7 +733,7 @@ function buildDescriptionContent(ctx) {
     if (!rawPick) return;
     // Slash pick → choice selector
     if (rawPick.includes('/')) {
-      renderChoiceSection(rawPick, displayName, wrap, isExtra);
+      renderChoiceSection(rawPick, displayName, level, wrap, isExtra);
       return;
     }
     if (isSkillStatPick(rawPick)) {
@@ -836,10 +874,7 @@ function buildCatchupContent(ctx) {
   const choices = getChoices(displayName);
   for (let n = 1; n <= MAX_LVL; n++) {
     const entry = build.levels[n];
-    if (!entry) continue;
-    const displayM = entry.m ? filterPickString(entry.m, choices) : null;
-    const displayE = entry.e ? filterPickString(entry.e, choices) : null;
-    if (!displayM && !displayE) continue;
+    if (!entry || (!entry.m && !entry.e)) continue;
 
     const item = document.createElement('div');
     item.className = 'timeline-item';
@@ -859,24 +894,24 @@ function buildCatchupContent(ctx) {
 
     const pickCol = document.createElement('div');
     pickCol.className = 'timeline-pick';
-    if (displayM) {
+    if (entry.m) {
       const m = document.createElement('div');
       m.className = 'timeline-main';
-      if (pickHasInfo(entry.m)) {
+      if (entry.m.includes('/') || pickHasInfo(entry.m)) {
         m.classList.add('has-info');
         m.addEventListener('click', () => pushSinglePickDescription(entry.m, displayName, n));
       }
-      m.textContent = displayM;
+      renderStyledPickText(entry.m, choices, n, m);
       pickCol.appendChild(m);
     }
-    if (displayE) {
+    if (entry.e) {
       const ex = document.createElement('div');
       ex.className = 'timeline-extra';
-      if (pickHasInfo(entry.e)) {
+      if (entry.e.includes('/') || pickHasInfo(entry.e)) {
         ex.classList.add('has-info');
         ex.addEventListener('click', () => pushSinglePickDescription(entry.e, displayName, n));
       }
-      ex.textContent = displayE;
+      renderStyledPickText(entry.e, choices, n, ex);
       pickCol.appendChild(ex);
     }
     const callout = archetypeCalloutAtLevel(n, buildName, isCompanion);
@@ -1053,7 +1088,7 @@ function buildSinglePickContent(rawPick, displayName, atLevel) {
 
   // Slash pick → show choice selector (same as description sheet)
   if (rawPick.includes('/')) {
-    renderChoiceSection(rawPick, displayName, wrap, false);
+    renderChoiceSection(rawPick, displayName, atLevel, wrap, false);
     return wrap;
   }
 
