@@ -1528,15 +1528,16 @@ function renderTradersSection() {
       clearTimeout(holdTimer); clearInterval(repeatInterval);
       holdTimer = null; repeatInterval = null;
     };
-    // Touch path — preventDefault blocks iOS callout/selection/synthetic-click
+    // Touch path — preventDefault+stopPropagation blocks iOS callout/selection/synthetic-click
     btn.addEventListener('touchstart', (e) => {
       e.preventDefault();
+      e.stopPropagation();
       wasHeld = false;
       holdTimer = setTimeout(() => {
         wasHeld = true;
         updatePF(delta);
         repeatInterval = setInterval(() => updatePF(delta), 100);
-      }, 1000);
+      }, 800);
     }, { passive: false });
     btn.addEventListener('touchend', (e) => {
       e.preventDefault();
@@ -1544,7 +1545,8 @@ function renderTradersSection() {
       wasHeld = false;
       stop();
     });
-    btn.addEventListener('touchcancel', stop);
+    // touchcancel intentionally NOT calling stop() — iOS fires it on long-press selection
+    // touch-action:none + preventDefault should prevent selection from starting
     // Mouse path (desktop / preview)
     btn.addEventListener('mousedown', () => {
       wasHeld = false;
