@@ -781,7 +781,8 @@
 }
 .vendor-item.available { border-left-color: var(--gold-deep); cursor: pointer; }
 .vendor-item.available:active { background: var(--bg-3); }
-.vendor-item.locked { opacity: 0.4; }
+.vendor-item.locked { opacity: 0.4; cursor: pointer; }
+.vendor-item.locked:active { opacity: 0.6; }
 .vendor-item-header { display: flex; align-items: baseline; gap: 8px; margin-bottom: 3px; }
 .vendor-item-name {
   font-family: 'Cinzel', serif; font-size: 13px; font-weight: 600;

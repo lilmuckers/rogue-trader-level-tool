@@ -1780,12 +1780,10 @@ function buildAlignVendorItemEl(item, available, act) {
     lock.textContent = `Available in Act ${item.act}`;
     el.appendChild(lock);
   }
-  if (available) {
-    el.addEventListener('click', () => {
-      const found = lookupGear(item.name.replace(/\s*\(.*?\)\s*$/, '').trim());
-      if (found) pushGearDetail(found, item.name);
-    });
-  }
+  el.addEventListener('click', () => {
+    const found = lookupGear(item.name.replace(/\s*\(.*?\)\s*$/, '').trim());
+    if (found) pushGearDetail(found, item.name);
+  });
   return el;
 }
 
@@ -1872,12 +1870,10 @@ function buildVendorItemEl(item, available, factionName) {
     lock.textContent = vendorItemLockReason(item, getFactionRep(factionName), getTradersAct()) || '';
     el.appendChild(lock);
   }
-  if (available) {
-    el.addEventListener('click', () => {
-      const found = lookupGear(item.name.replace(/\s*\(.*?\)\s*$/, '').trim());
-      if (found) pushGearDetail(found, item.name);
-    });
-  }
+  el.addEventListener('click', () => {
+    const found = lookupGear(item.name.replace(/\s*\(.*?\)\s*$/, '').trim());
+    if (found) pushGearDetail(found, item.name);
+  });
   return el;
 }
 
