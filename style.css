@@ -723,7 +723,12 @@
 .search-result-item:active { background: var(--bg-2); }
 .search-result-name {
   font-family: 'Cinzel', serif; font-size: 13px; color: var(--gold-bright);
-  font-weight: 600; margin-bottom: 3px;
+  font-weight: 600; margin-bottom: 3px; display: flex; align-items: baseline; gap: 8px;
+}
+.search-result-pf {
+  font-family: 'JetBrains Mono', monospace; font-size: 12px;
+  color: var(--gold); background: rgba(201,164,76,0.12);
+  border: 1px solid var(--gold-deep); border-radius: 3px; padding: 1px 6px; margin-left: auto;
 }
 .search-result-meta { font-size: 13px; color: var(--ink-dim); }
 .search-result-meta span { color: var(--gold); }
@@ -757,13 +762,34 @@
 .vendor-item.available { border-left-color: var(--gold-deep); cursor: pointer; }
 .vendor-item.available:active { background: var(--bg-3); }
 .vendor-item.locked { opacity: 0.4; }
+.vendor-item-header { display: flex; align-items: baseline; gap: 8px; margin-bottom: 3px; }
 .vendor-item-name {
   font-family: 'Cinzel', serif; font-size: 13px; font-weight: 600;
-  color: var(--gold-bright); margin-bottom: 3px;
+  color: var(--gold-bright); flex: 1;
 }
 .vendor-item.locked .vendor-item-name { color: var(--ink-dim); }
+.vendor-item-pf {
+  font-family: 'JetBrains Mono', monospace; font-size: 12px;
+  color: var(--gold); background: rgba(201,164,76,0.12);
+  border: 1px solid var(--gold-deep); border-radius: 3px; padding: 1px 6px;
+  white-space: nowrap;
+}
+.vendor-item.locked .vendor-item-pf { border-color: var(--rule); background: none; color: var(--ink-dim); }
 .vendor-item-meta { font-size: 13px; color: var(--ink-dim); }
 .vendor-item-lock-reason { font-size: 12px; color: var(--ink-faint); margin-top: 2px; font-style: italic; }
+/* Curiosity vendor card */
+.curiosity-vendor-card .faction-card-header { margin-bottom: 10px; }
+.curiosity-align-row { display: flex; gap: 6px; }
+.curiosity-align-pill {
+  flex: 1; background: var(--bg-3); border: 1px solid var(--rule);
+  border-radius: 3px; padding: 6px 8px; display: flex; flex-direction: column; gap: 2px;
+}
+.curiosity-align-name {
+  font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 0.15em;
+  text-transform: uppercase; color: var(--gold); font-weight: 600;
+}
+.curiosity-align-rank { font-size: 11px; color: var(--ink-dim); }
+.curiosity-align-avail { font-size: 11px; color: var(--ink-dim); }
 .vendor-section-heading {
   font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 0.3em;
   text-transform: uppercase; color: var(--ink-faint);

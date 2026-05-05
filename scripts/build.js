@@ -125,7 +125,18 @@ for (const filePath of globYaml(vendorsDir)) {
   if (path.basename(filePath) === 'quest-rewards.yml') {
     questRewards = v.items || [];
   } else if (v.name) {
-    vendors.push({ name: v.name, items: v.items || [] });
+    if (v.alignment_vendor) {
+      vendors.push({
+        name: v.name,
+        alignment_vendor: true,
+        neutral_items:    v.neutral_items    || [],
+        dogmatic_items:   v.dogmatic_items   || [],
+        iconoclast_items: v.iconoclast_items || [],
+        heretic_items:    v.heretic_items    || [],
+      });
+    } else {
+      vendors.push({ name: v.name, items: v.items || [] });
+    }
   }
 }
 
@@ -171,6 +182,6 @@ console.log(`  talents:      ${Object.keys(definitions.talents).length}`);
 console.log(`  abilities:    ${Object.keys(definitions.abilities).length}`);
 console.log(`  heroic:       ${Object.keys(definitions.heroic).length}`);
 console.log(`  colonies:     ${colonies.length}`);
-console.log(`  vendors:      ${vendors.reduce((s, v) => s + v.items.length, 0)} items across ${vendors.length} factions`);
+console.log(`  vendors:      ${vendors.reduce((s, v) => s + (v.items ? v.items.length : (v.neutral_items||[]).length + (v.dogmatic_items||[]).length + (v.iconoclast_items||[]).length + (v.heretic_items||[]).length), 0)} items across ${vendors.length} factions`);
 console.log(`  questRewards: ${questRewards.length}`);
 console.log(`  resources:    ${resourceSystems.length} systems`);

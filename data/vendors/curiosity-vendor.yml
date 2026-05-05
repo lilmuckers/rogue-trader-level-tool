@@ -1,110 +1,99 @@
 name: Curiosity Vendor
-items:
+alignment_vendor: true
+neutral_items:
   - name: Domination and Elimination
-    rep: 0
     act: 2
     pf: 15
   - name: Inanimate Shield
-    rep: 0
     act: 2
     pf: 35
   - name: Death Grip
-    rep: 0
     act: 2
     pf: 35
   - name: Synergy
-    rep: 0
     act: 2
     pf: 45
   - name: Winged Delusion
-    rep: 0
     act: 2
     pf: 35
   - name: Familiar Maintenance Station Upgrade Kit I
-    rep: 0
     act: 2
     pf: 50
-  - name: Grave CHill
-    rep: 0
+  - name: Grave Chill
     act: 2
     pf: 55
   - name: Air Support
-    rep: 0
     act: 2
     pf: 65
   - name: Familiar Maintenance Station Upgrade Kit II
-    rep: 0
     act: 2
     pf: 70
-  - name: Analystics Module
-    rep: 0
+  - name: Analytics Module
     act: 2
     pf: 15
   - name: Familiar Maintenance Station Upgrade Kit III
-    rep: 0
     act: 4
     pf: 90
   - name: Step into the Abyss
-    rep: 0
     act: 4
     pf: 100
   - name: Phasing Radiation
-    rep: 0
     act: 4
     pf: 103
   - name: Blood Feast
-    rep: 0
     act: 4
     pf: 106
   - name: Pack Hunting
-    rep: 0
     act: 4
     pf: 110
+dogmatic_items:
   - name: Undefiled Aquila
-    rep: Dogmatic 3
+    rank: 3
     act: 4
     pf: 130
   - name: Consecrated Fangs
-    rep: Dogmatic 3
+    rank: 3
     act: 4
     pf: 130
   - name: His Light Bearer
-    rep: Dogmatic 3
+    rank: 3
     act: 4
     pf: 130
   - name: No Mercy for the Unclean
-    rep: Dogmatic 3
+    rank: 3
     act: 4
     pf: 130
+iconoclast_items:
   - name: Model of Loyalty
-    rep: Iconoclast 3
+    rank: 3
     act: 4
     pf: 130
   - name: Immaterium Catalyst
-    rep: Iconoclast 3
+    rank: 3
     act: 4
     pf: 130
   - name: Devotion of the Aquila
-    rep: Iconoclast 3
+    rank: 3
     act: 4
     pf: 130
   - name: Vigil Unending
-    rep: Iconoclast 3
+    rank: 3
     act: 4
     pf: 130
+heretic_items:
   - name: Unholy Idol
-    rep: Heretic 3
+    rank: 3
     act: 4
     pf: 130
   - name: Maddening Winds
-    rep: Heretic 3
+    rank: 3
     act: 4
     pf: 130
   - name: Feast of Suffering
-    rep: Heretic 3
+    rank: 3
     act: 4
     pf: 130
   - name: Dog of War
-    rep: Heretic 3
+    rank: 3
     act: 4
     pf: 130

@@ -1447,13 +1447,30 @@ function setFactionRep(factionName, rep) {
 function vendorItemAvailable(item, rep, act) {
   if (act < item.act) return false;
   if (typeof item.rep === 'number') return rep >= item.rep;
-  return true;  // text rep (alignment-based) — always show
+  return true;
 }
 function vendorItemLockReason(item, rep, act) {
   if (act < item.act) return `Available in Act ${item.act}`;
   if (typeof item.rep === 'number' && rep < item.rep) return `Requires rep ${item.rep}`;
-  if (typeof item.rep === 'string') return `Requires: ${item.rep}`;
   return null;
+}
+// Alignment vendor helpers
+const KEY_ALIGN_RANKS = 'rt.align-ranks.v1';
+const ALIGNMENTS = ['Dogmatic', 'Iconoclast', 'Heretic'];
+function getAlignRanks() { return Store.get(KEY_ALIGN_RANKS) || { Dogmatic: 0, Iconoclast: 0, Heretic: 0 }; }
+function setAlignRank(alignment, rank) {
+  const all = getAlignRanks(); all[alignment] = Math.max(0, rank); Store.set(KEY_ALIGN_RANKS, all);
+}
+function alignItemAvailable(item, rank, act) {
+  return act >= item.act && rank >= (item.rank || 0);
+}
+function curiosityAvailCount(vendor, act) {
+  const ranks = getAlignRanks();
+  const neutral = vendor.neutral_items.filter(it => act >= it.act).length;
+  return neutral + ALIGNMENTS.reduce((sum, a) => {
+    const items = vendor[a.toLowerCase() + '_items'] || [];
+    return sum + items.filter(it => alignItemAvailable(it, ranks[a], act)).length;
+  }, 0);
 }
 
 let _traderSearchText = '';
@@ -1494,12 +1511,21 @@ function renderTradersSection() {
 
   const query = _traderSearchText.trim().toLowerCase();
   if (query.length >= 2) {
-    // Search results mode
     const matches = [];
     DATA.vendors.forEach(faction => {
-      faction.items.forEach(item => {
-        if (item.name.toLowerCase().includes(query)) matches.push({ item, factionName: faction.name });
-      });
+      if (faction.alignment_vendor) {
+        const allItems = [
+          ...faction.neutral_items.map(it => ({ ...it, alignment: null })),
+          ...ALIGNMENTS.flatMap(a => (faction[a.toLowerCase() + '_items'] || []).map(it => ({ ...it, alignment: a }))),
+        ];
+        allItems.forEach(item => {
+          if (item.name.toLowerCase().includes(query)) matches.push({ item, factionName: faction.name, faction });
+        });
+      } else {
+        faction.items.forEach(item => {
+          if (item.name.toLowerCase().includes(query)) matches.push({ item, factionName: faction.name, faction });
+        });
+      }
     });
     if (!matches.length) {
       const empty = document.createElement('div');
@@ -1507,20 +1533,21 @@ function renderTradersSection() {
       empty.textContent = 'No items found.';
       el.appendChild(empty);
     } else {
-      matches.forEach(({ item, factionName }) => {
+      matches.forEach(({ item, factionName, faction }) => {
         const rep = getFactionRep(factionName);
-        const available = vendorItemAvailable(item, rep, act);
+        const available = faction.alignment_vendor
+          ? alignItemAvailable(item, item.alignment ? getAlignRanks()[item.alignment] : 99, act)
+          : vendorItemAvailable(item, rep, act);
         const row = document.createElement('div');
         row.className = 'search-result-item';
-        row.innerHTML = `<div class="search-result-name">${item.name}</div>
-          <div class="search-result-meta">
-            <span>${factionName}</span> · Rep <span>${item.rep}</span> · Act <span>${item.act}</span>
-            ${!available ? '<em style="color:var(--ink-faint)"> (locked)</em>' : ''}
-          </div>`;
+        const pfStr = item.pf ? `<span class="search-result-pf">PF ${item.pf}</span>` : '';
+        const metaParts = [factionName, item.alignment ? `${item.alignment} rank ${item.rank||0}+` : null, `Act ${item.act}`].filter(Boolean);
+        row.innerHTML = `<div class="search-result-name">${item.name}${pfStr}</div>
+          <div class="search-result-meta">${metaParts.join(' · ')}${!available ? ' <em style="color:var(--ink-faint)">(locked)</em>' : ''}</div>`;
         row.addEventListener('click', () => {
           _traderSearchText = '';
-          const faction = DATA.vendors.find(f => f.name === factionName);
-          openFactionSheet(faction, act, item.name);
+          if (faction.alignment_vendor) openCuriositySheet(faction, act);
+          else openFactionSheet(faction, act, item.name);
         });
         el.appendChild(row);
       });
@@ -1530,22 +1557,161 @@ function renderTradersSection() {
 
   // Faction list
   DATA.vendors.forEach(faction => {
-    const rep = getFactionRep(faction.name);
-    const availCount = faction.items.filter(it => vendorItemAvailable(it, rep, act)).length;
     const card = document.createElement('div');
-    card.className = 'faction-card';
-    card.innerHTML = `<div class="faction-card-header">
-      <div class="faction-name">${faction.name}</div>
-      <div class="faction-rep-badge">Rep ${rep}</div>
-      <div class="faction-available-count">${availCount} available</div>
-    </div>`;
-    card.addEventListener('click', () => openFactionSheet(faction, act, null));
+    if (faction.alignment_vendor) {
+      const availCount = curiosityAvailCount(faction, act);
+      card.className = 'faction-card curiosity-vendor-card';
+      const header = document.createElement('div');
+      header.className = 'faction-card-header';
+      header.innerHTML = `<div class="faction-name">${faction.name}</div>
+        <div class="faction-available-count">${availCount} available</div>`;
+      card.appendChild(header);
+      const alignRow = document.createElement('div');
+      alignRow.className = 'curiosity-align-row';
+      ALIGNMENTS.forEach(a => {
+        const ranks = getAlignRanks();
+        const items = faction[a.toLowerCase() + '_items'] || [];
+        const avail = items.filter(it => alignItemAvailable(it, ranks[a], act)).length;
+        const pill = document.createElement('div');
+        pill.className = 'curiosity-align-pill';
+        pill.innerHTML = `<span class="curiosity-align-name">${a}</span><span class="curiosity-align-rank">Rank ${ranks[a]}</span><span class="curiosity-align-avail">${avail} avail</span>`;
+        alignRow.appendChild(pill);
+      });
+      card.appendChild(alignRow);
+      card.addEventListener('click', () => openCuriositySheet(faction, act));
+    } else {
+      const rep = getFactionRep(faction.name);
+      const availCount = faction.items.filter(it => vendorItemAvailable(it, rep, act)).length;
+      card.className = 'faction-card';
+      card.innerHTML = `<div class="faction-card-header">
+        <div class="faction-name">${faction.name}</div>
+        <div class="faction-rep-badge">Rep ${rep}</div>
+        <div class="faction-available-count">${availCount} available</div>
+      </div>`;
+      card.addEventListener('click', () => openFactionSheet(faction, act, null));
+    }
     el.appendChild(card);
   });
 }
 
 function openFactionSheet(faction, act, scrollToItem) {
   openSheet(faction.name, () => buildFactionContent(faction, act, scrollToItem));
+}
+
+let _curiosityActiveAlignment = 'Dogmatic';
+function openCuriositySheet(vendor, act) {
+  openSheet(vendor.name, () => buildCuriosityContent(vendor, act));
+}
+
+function buildCuriosityContent(vendor, act) {
+  const wrap = document.createElement('div');
+  let activeAlign = _curiosityActiveAlignment;
+
+  // Alignment tab bar
+  const tabBar = document.createElement('div');
+  tabBar.className = 'tab-bar';
+  const contentEl = document.createElement('div');
+
+  function buildAlignContent() {
+    contentEl.innerHTML = '';
+    const ranks = getAlignRanks();
+    let rank = ranks[activeAlign];
+    const items = vendor[activeAlign.toLowerCase() + '_items'] || [];
+    const maxRank = items.reduce((m, it) => Math.max(m, it.rank || 0), 0);
+
+    // Rank stepper
+    const rankControls = document.createElement('div');
+    rankControls.className = 'faction-rep-controls';
+    const rankLabel = document.createElement('div');
+    rankLabel.className = 'faction-rep-label';
+    rankLabel.textContent = `${activeAlign} rank`;
+    const rankDown = document.createElement('button');
+    rankDown.className = 'faction-rep-btn'; rankDown.textContent = '−';
+    const rankVal = document.createElement('div');
+    rankVal.className = 'faction-rep-val'; rankVal.textContent = rank;
+    const rankUp = document.createElement('button');
+    rankUp.className = 'faction-rep-btn'; rankUp.textContent = '+';
+    const updateRank = (delta) => {
+      rank = Math.max(0, Math.min(maxRank, rank + delta));
+      setAlignRank(activeAlign, rank);
+      rankVal.textContent = rank;
+      buildSections();
+      renderTradersSection();
+    };
+    rankDown.addEventListener('click', () => updateRank(-1));
+    rankUp.addEventListener('click',   () => updateRank(+1));
+    rankControls.append(rankLabel, rankDown, rankVal, rankUp);
+    contentEl.appendChild(rankControls);
+
+    const itemsEl = document.createElement('div');
+    contentEl.appendChild(itemsEl);
+
+    function buildSections() {
+      itemsEl.innerHTML = '';
+      const allItems = [
+        ...vendor.neutral_items.map(it => ({ ...it, _neutral: true })),
+        ...items,
+      ];
+      const available = allItems.filter(it => alignItemAvailable(it, rank, act));
+      const locked    = allItems.filter(it => !alignItemAvailable(it, rank, act));
+      if (available.length) {
+        const h = document.createElement('div');
+        h.className = 'vendor-section-heading'; h.textContent = 'Available';
+        itemsEl.appendChild(h);
+        available.forEach(it => itemsEl.appendChild(buildAlignVendorItemEl(it, true, act)));
+      }
+      if (locked.length) {
+        const h = document.createElement('div');
+        h.className = 'vendor-section-heading'; h.textContent = 'Locked';
+        itemsEl.appendChild(h);
+        locked.forEach(it => itemsEl.appendChild(buildAlignVendorItemEl(it, false, act)));
+      }
+    }
+    buildSections();
+  }
+
+  ALIGNMENTS.forEach(a => {
+    const btn = document.createElement('button');
+    btn.className = 'tab-btn' + (a === activeAlign ? ' active' : '');
+    btn.textContent = a;
+    btn.addEventListener('click', () => {
+      activeAlign = a;
+      _curiosityActiveAlignment = a;
+      tabBar.querySelectorAll('.tab-btn').forEach(b => b.classList.toggle('active', b.textContent === a));
+      buildAlignContent();
+    });
+    tabBar.appendChild(btn);
+  });
+
+  wrap.appendChild(tabBar);
+  wrap.appendChild(contentEl);
+  buildAlignContent();
+  return wrap;
+}
+
+function buildAlignVendorItemEl(item, available, act) {
+  const el = document.createElement('div');
+  el.className = 'vendor-item' + (available ? ' available' : ' locked');
+  el.dataset.itemName = item.name;
+  const pfHtml = item.pf ? `<span class="vendor-item-pf">PF ${item.pf}</span>` : '';
+  const metaParts = [];
+  if (!item._neutral && item.rank) metaParts.push(`Rank ${item.rank}+`);
+  metaParts.push(`Act ${item.act}`);
+  el.innerHTML = `<div class="vendor-item-header"><div class="vendor-item-name">${item.name}</div>${pfHtml}</div>
+    <div class="vendor-item-meta">${metaParts.join(' · ')}</div>`;
+  if (!available && act < item.act) {
+    const lock = document.createElement('div');
+    lock.className = 'vendor-item-lock-reason';
+    lock.textContent = `Available in Act ${item.act}`;
+    el.appendChild(lock);
+  }
+  if (available) {
+    el.addEventListener('click', () => {
+      const found = lookupGear(item.name.replace(/\s*\(.*?\)\s*$/, '').trim());
+      if (found) pushGearDetail(found, item.name);
+    });
+  }
+  return el;
 }
 
 function buildFactionContent(faction, act, scrollToItem) {
@@ -1622,8 +1788,9 @@ function buildVendorItemEl(item, available, factionName) {
   const el = document.createElement('div');
   el.className = 'vendor-item' + (available ? ' available' : ' locked');
   el.dataset.itemName = item.name;
-  el.innerHTML = `<div class="vendor-item-name">${item.name}</div>
-    <div class="vendor-item-meta">Rep ${item.rep} · Act ${item.act}${item.pf ? ` · PF ${item.pf}` : ''}</div>`;
+  const pfHtml = item.pf ? `<span class="vendor-item-pf">PF ${item.pf}</span>` : '';
+  el.innerHTML = `<div class="vendor-item-header"><div class="vendor-item-name">${item.name}</div>${pfHtml}</div>
+    <div class="vendor-item-meta">Rep ${item.rep} · Act ${item.act}</div>`;
   if (!available) {
     const lock = document.createElement('div');
     lock.className = 'vendor-item-lock-reason';
