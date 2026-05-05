@@ -392,3 +392,90 @@ once online to populate caches, then app works offline.
   not authoritative source data. It can be edited freely in `index.html`.
 - Source spreadsheet structure is assumed stable. Major reorganisation by
   Revan619 will require updating the extraction script.
+
+
+---
+
+## 10. Version 5 Additions
+
+### 10.1 Archetype Callouts (L16 / L36)
+
+Each build records its three chosen archetypes (tier 1 / 2 / 3) directly
+in the source spreadsheet's "Talent" header row, in the columns above
+each level group:
+
+- Column `base_col` → tier-1 archetype (active L1-15)
+- Column `base_col + 3` → tier-2 archetype (chosen at L16, active L16-35)
+- Column `base_col + 6` → tier-3 archetype (chosen at L36, active L36-55)
+
+These are extracted into `DATA.archetypes.{mc,comp}[buildName] = {t1, t2, t3}`
+during build, and looked up by name at runtime via `getBuildArchetypes()`.
+
+When the current level is 16 or 36, character cards, the description sheet,
+and the catch-up timeline all render an inline callout below the pick text:
+
+> ⚜ Tier 2 archetype · Master Tactician
+
+The catch-up header additionally shows the **full archetype path** for the
+build as three pill-bordered tags joined by arrows:
+
+> Officer → Master Tactician → Exemplar
+
+so the player can see the whole arc at a glance.
+
+Coverage is **100% of source builds** (64 MC + 44 companion variants).
+Where the source row has an empty cell (some flavor / unfinished builds
+in the source sheet), no callout appears for that tier.
+
+#### Layout-shift edge case
+
+For a small number of builds (mostly Ministorum Priest variants) the
+source sheet has no separate name row above the origin, so the level
+data starts one row earlier. The extractor detects this by checking
+whether `block_start + 2` contains a tier-1 archetype name (Officer,
+Warrior, Soldier, Operative, Bladedancer); if not, it falls back to
+`block_start + 1`.
+
+### 10.2 Skills & Gear Panels in Catch-Up
+
+Each build's "Skill Options" and "Gear to Consider" sections from the
+source spreadsheet are extracted alongside the level data. They appear at
+the bottom of the catch-up timeline as two visually-distinct panels:
+
+- **Skill Options** — a single Garamond paragraph of the recommended
+  skill allocations.
+- **Gear to Consider** — one row per slot (Helm, Armour, Cloak, Neck,
+  Accessory 1/2, Gloves, Boots, Weapon Set 1/2, Pet for psyker
+  companions). Each slot's options are rendered as gold-bordered "pills".
+
+### 10.3 Gear Cross-Reference
+
+The bundled `gear_db` (~983 entries) merges every item from the source
+spreadsheet's `Helmet`, `Armour`, `Necklaces`, `Trinkets`, `Gloves`,
+`Cloaks`, `Boots`, and `Weapons By Type` tabs. Each entry stores name,
+slot, location text, act number, description, and (for weapons) category.
+
+When a gear pill in the catch-up panel matches a record in `gear_db`:
+- The pill shows a short suffix like `· Act 1` for at-a-glance act timing.
+- Tapping the pill pushes a gear-detail sheet onto the back-stack
+  (back-arrow returns to the timeline). The detail sheet shows Slot/
+  Category, Where (free-text location), When (act), and Effect text.
+
+When a gear pill does **not** match (~30% of options — the source
+spreadsheet's gear tabs are not 100% complete), the pill renders with a
+dashed border in dim ink and is non-interactive. The user still sees the
+recommendation, just without cross-referenced location data.
+
+Match logic uses normalized exact match (lowercase, strip `[Origin]`
+tags and punctuation, trim whitespace) with singular/plural fallbacks
+and a token-set fuzzy match for cases where word order differs.
+
+### 10.4 Bundle Size
+
+With definitions, extras, and gear DB embedded:
+- `full_bundle.json`: ~720 KB minified JSON
+- `index.html`: ~790 KB (bundle + CSS + JS)
+
+Still acceptable for a static PWA. First-paint cost is the parse of
+that JSON (negligible on modern devices); subsequent renders cache the
+indices in module-scope.
