@@ -1,0 +1,177 @@
+name: Kibellah the Dancer of Death
+archetypes:
+  t1: Blade Dancer
+  t2: Executioner
+  t3: Exemplar
+extras:
+  skills: Medicae / Demolitions / Awareness / Athletics
+  gear:
+    - slot: Helm
+      options: Carmine Crown / Mechanicus Respirator
+    - slot: Armour
+      options: High Spinner Armour / Shadow of the undying One / Armour of Hidden Promise
+    - slot: Cloak
+      options: Swashbuckler Cloak / Malpain Shroud / Pack of Reagents / Blade Dancer's Mantle
+    - slot: Neck
+      options: Anatomist's Amulet / The Vial of Falstow
+    - slot: Accessory 1
+      options: Chirurgeon's Manual / Bead of might / book of war prayers / knuckle Guard
+    - slot: Accessory 2
+      options: Voidborn's pride / Diagnostor / Iron Cape
+    - slot: Gloves
+      options: Crimson Oblivion / Augmented Gloves / Inevietable Demise / The Hand of Avolius / metal claw gloves
+    - slot: Boots
+      options: Fencing Boots / Sororitas Boots / Enforcers light boots
+    - slot: Weapon Set 1
+      options: Symphony of Pain / Imminent Torment / Blood Hunter / Symphony of Pain / Imminent Torment / Virulent Slicer
+    - slot: Weapon Set 2
+      options: Djin Blade of Yremeryss / Well-Maintained Rocksaw / Insatiable Djin Blade
+levels:
+  '1':
+    m: Blade Dance
+  '2':
+    m: Medicae
+  '3':
+    m: Death From Above
+  '4':
+    m: Death Waltz
+    e: Death Warden
+  '5':
+    m: Duelling Mastery
+    e: Weapon Skill
+  '6':
+    m: Blood Oath
+    e: Medicae
+  '7':
+    m: Weapon Skill
+    e: Blood Rush
+  '8':
+    m: Awareness
+    e: Jinx / Nimble / Bloody Mess
+  '9':
+    m: Death Waltz II
+  '10':
+    m: Escape Artist
+    e: Agility
+  '11':
+    m: Acrobatic Artistry
+    e: Dance Partners
+  '12':
+    m: Agility
+    e: Awareness
+  '13':
+    m: 'Characteristic Training: Per'
+    e: Demolition
+  '14':
+    m: Perception
+    e: Guillotine
+  '15':
+    m: Death Waltz III
+  '16':
+    m: Forced Repentance
+    e: Scourging Strike + Where it hurts
+  '17':
+    m: Pain Resonance
+  '18':
+    m: Anatomy Expert
+  '19':
+    m: Carnival of Misery
+  '20':
+    m: AP +1
+    e: Weapon Skill
+  '21':
+    m: Weapon Skill
+    e: Does It Hurt?
+  '22':
+    m: Reckless Abandon
+  '23':
+    m: Sower of Distress
+    e: Lore Xenos
+  '24':
+    m: Agility
+    e: Drukhari Weapon Prof
+  '25':
+    m: Master of Torture
+  '26':
+    m: Agility
+    e: Medicae
+  '27':
+    m: Carnival of Misery III
+  '28':
+    m: Invigorating Screams / Perfect Anatomy
+  '29':
+    m: Perception
+    e: Medicae
+  '30':
+    m: Exsanguination
+    e: Finesse
+  '31':
+    m: Fragile Playthings
+  '32':
+    m: Perception
+    e: Demolition
+  '33':
+    m: Racking Weakness
+  '34':
+    m: Perception
+    e: Dual Weapon Combat
+  '35':
+    m: Carnival of Misery I
+  '36':
+    m: Eagar for Battle *
+    e: Sweeping Motions
+  '37':
+    m: Medicae
+    e: Perfect Anatomy
+  '38':
+    m: Weapon Skill
+    e: 'Dance of Blood / Base Skill: Medicae'
+  '39':
+    m: Captive Audience
+    e: Medicae
+  '40':
+    m: Degraded Defence
+    e: All-Encompassing Agony
+  '41':
+    m: Weapon Skill
+    e: Grand Performance
+  '42':
+    m: Terrifying Strike
+    e: Agility
+  '43':
+    m: Unbearable Presence
+    e: 'Open the Veins / Advanced Skill: Medicae'
+  '44':
+    m: Awareness
+    e: Destroyer *
+  '45':
+    m: AP +1
+  '46':
+    m: Rising Tempo
+    e: Awareness
+  '47':
+    m: Duellist
+    e: Awareness
+  '48':
+    m: Deep Laceration
+    e: Agility
+  '49':
+    m: Perception
+    e: Awareness
+  '50':
+    m: Peak Condition
+    e: Race Against Death
+  '51':
+    m: Sickening Pain
+    e: Demolition
+  '52':
+    m: Bloody Requiem
+    e: Wounds Streaming Blood
+  '53':
+    m: Gift of Torment
+    e: Perception
+  '54':
+    m: Extermination
+    e: Blade in His Hand
+  '55':
+    m: AP +1

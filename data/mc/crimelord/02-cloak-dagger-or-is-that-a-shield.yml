@@ -1,0 +1,180 @@
+name: Cloak & Dagger... Or is that a shield?
+theme: Crimelord
+origin: >-
+  Forge World (Locomotion System Systems) - Crimelord - Warrior - Weapon Skill +2 / Agility +2 / Toughness +1 /
+  Perception +1
+archetypes:
+  t1: Warrior
+  t2: Assassin
+  t3: Exemplar
+extras:
+  skills: demolition / coercion / awareness
+  gear:
+    - slot: Helm
+      options: self calibrating goggles / self calibrating helm
+    - slot: Armour
+      options: Armour of hidden promise
+    - slot: Cloak
+      options: swiftshroud cloak
+    - slot: Neck
+      options: slicing symbol
+    - slot: Accessory 1
+      options: notes on weakness
+    - slot: Accessory 2
+      options: knuckle guard
+    - slot: Gloves
+      options: Riposte Gloves
+    - slot: Boots
+      options: Inertia boots
+    - slot: Weapon Set 1
+      options: Interrogator knife, Ritual knife / Shields
+    - slot: Weapon Set 2
+      options: Rock saws
+levels:
+  '1':
+    m: Charge
+  '2':
+    m: Medicae
+  '3':
+    m: Endure
+  '4':
+    m: Daring Breach
+    e: Rigorous Training
+  '5':
+    m: Desolation
+    e: Weapon Skill
+  '6':
+    m: Break Through
+    e: Awareness
+  '7':
+    m: Weapon Skill
+    e: Killing Plan
+  '8':
+    m: Awareness
+    e: Blade Flurry
+  '9':
+    m: Daring breach II
+  '10':
+    m: Impetus
+    e: Agility
+  '11':
+    m: Reckless Strike
+    e: Contingency Plan
+  '12':
+    m: Agility
+    e: Coercion
+  '13':
+    m: Shearing Strikes
+    e: Coercion
+  '14':
+    m: Perception
+    e: Instant Retribution
+  '15':
+    m: Daring Breach IV
+  '16':
+    m: Seek the Opening
+  '17':
+    m: Danse Macarbe
+  '18':
+    m: Deadly Calculation
+  '19':
+    m: Dispatch
+  '20':
+    m: AP +1
+    e: Weapon Skill
+  '21':
+    m: Imminent Demise
+    e: Weapon Skill
+  '22':
+    m: Awareness
+    e: Death Whisper
+  '23':
+    m: Lethality Heightens
+  '24':
+    m: Agility
+    e: Defensive Manoeuvre
+  '25':
+    m: Disarray
+  '26':
+    m: Agility
+    e: Awareness
+  '27':
+    m: Dispatch II
+  '28':
+    m: Dual-Weapon Combat
+    e: Seize the Advantage
+  '29':
+    m: Perception
+    e: Coercion
+  '30':
+    m: Killing Edge
+  '31':
+    m: Shield Mastery
+    e: Morbid pirouette
+  '32':
+    m: Coercion
+  '33':
+    m: Lone Killer
+    e: Perception
+  '34':
+    m: Persistence of the Forge
+  '35':
+    m: Dispatch III
+  '36':
+    m: Malign Influence
+    e: Cautious Disengage
+  '37':
+    m: Awareness
+    e: Lethal Concentration
+  '38':
+    m: Weapon Skill
+    e: Grenadier
+  '39':
+    m: Taunting Scream
+    e: Awareness
+  '40':
+    m: Eager for Battle
+    e: Perfect Opening / Outsmart
+  '41':
+    m: Weapon Skill
+    e: Easy Target
+  '42':
+    m: Elusive Shadow
+    e: Agility
+  '43':
+    m: Bringer of Doom
+    e: 'Characteristic Training: Per'
+  '44':
+    m: Coercion
+    e: Lethal Threat
+  '45':
+    m: AP +1
+  '46':
+    m: Defensive Manoeuvres
+    e: Coercion
+  '47':
+    m: Interception
+    e: Medicae
+  '48':
+    m: Killing spree
+    e: Agility
+  '49':
+    m: Perception
+    e: Medicae
+  '50':
+    m: Degraded Defence
+    e: Crowd Kill
+  '51':
+    m: Outsmart / Perfect Opening
+    e: Medicae
+  '52':
+    m: Esquive
+    e: 'Characteristic Training: Agi'
+  '53':
+    m: Poised to Strike
+    e: Perception
+  '54':
+    m: Peak Condition
+    e: Flawless Lunge
+  '55':
+    m: AP +1

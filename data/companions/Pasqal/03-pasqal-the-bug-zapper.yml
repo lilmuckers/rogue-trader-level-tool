@@ -1,0 +1,177 @@
+name: Pasqal the Bug Zapper
+archetypes:
+  t1: Operative
+  t2: Assassin
+  t3: Exemplar
+extras:
+  skills: Tech-Use / Logic / Lore Imperium / Lore Xenos / Medicae / Awareness
+  gear:
+    - slot: Helm
+      options: Enhanced Data-Tether Mask / Weakness Detector / Vivisector's Visor
+    - slot: Armour
+      options: Skiitaari Ranger Armour / [Hiveworld] Voidsman Armour
+    - slot: Cloak
+      options: Shadowguide Cloak / Cape of Righteous Fury / Von Valancius Cloak (might be a bug not being RT restricted)
+    - slot: Neck
+      options: Synaptic Coagulator / Warlord's Amulet / Hypnotising Pendant
+    - slot: Accessory 1
+      options: Long-Range Aim Lens / Vid-Capture Relay
+    - slot: Accessory 2
+      options: Note on Weaknesses / Untuning combi-tool / bead of might
+    - slot: Gloves
+      options: Plasmashaper Gloves / Overcharge Gloves
+    - slot: Boots
+      options: Sharpshooter Boots
+    - slot: Weapon Set 1
+      options: Omnissiah's Providence
+    - slot: Weapon Set 2
+      options: Arc Rifle Mindstorm / Corpuscarii Oath / Alpha's Arc Rifle
+levels:
+  '1':
+    m: Analyse Enemies
+  '2':
+    m: Tech-Use
+  '3':
+    m: Expose Weakness
+  '4':
+    m: Dismantling
+    e: Passive learning
+  '5':
+    m: Ballistic Skill
+    e: Aiming Protocols
+  '6':
+    m: Uncanny Sight
+    e: Ballistic Skill
+  '7':
+    m: Joint Analysis / Intimidation
+    e: Tech-Use
+  '8':
+    m: Tide of Excellence
+    e: Scanner Mechadendrite
+  '9':
+    m: Dismantling III
+    e: Medicae
+  '10':
+    m: Logic
+    e: Intelligence
+  '11':
+    m: Ballistic Calculations / Sharpshooter
+    e: Logic
+  '12':
+    m: Perfect Spot
+    e: Liturgy of Insulation
+  '13':
+    m: Sniper Expertise
+    e: Intelligence
+  '14':
+    m: Perception
+    e: Residual Charge
+  '15':
+    m: Dismantling II
+  '16':
+    m: Seek the Opening
+  '17':
+    m: Death Whisper
+  '18':
+    m: Deadly Calculation
+  '19':
+    m: Dispatch
+  '20':
+    m: AP +1
+    e: Ballistic Skill
+  '21':
+    m: Imminent Demise
+    e: Ballistic Skill
+  '22':
+    m: Tech-Use
+    e: Killing Edge
+  '23':
+    m: Lethality Heightens
+  '24':
+    m: Perception
+    e: Staggering Jolt
+  '25':
+    m: Disarray
+  '26':
+    m: Perception
+    e: Tech-Use
+  '27':
+    m: Dispatch II
+  '28':
+    m: Overclocking Module
+    e: Seize the Advantage
+  '29':
+    m: Intelligence
+    e: Logic
+  '30':
+    m: Elusive Shadow
+  '31':
+    m: Machine Spirit Scan Protocols
+    e: Perfect Opening
+  '32':
+    m: Logic
+  '33':
+    m: Lone Killer
+    e: Intelligence
+  '34':
+    m: Pulse Amplifier
+  '35':
+    m: Dispatch I
+  '36':
+    m: DeathDealer *
+    e: Fresh Target
+  '37':
+    m: Tech-Use
+    e: Lethal Concentration
+  '38':
+    m: Ballistic Skill
+    e: Grenadier
+  '39':
+    m: Precise Attack
+    e: Tech-Use
+  '40':
+    m: Degraded Defence
+    e: Bringer of Doom
+  '41':
+    m: Intelligence
+    e: Insightful Precision
+  '42':
+    m: Poised to Strike
+    e: Intelligence
+  '43':
+    m: Flawless Lunge
+    e: Echopulse
+  '44':
+    m: Logic
+    e: Eager for Battle *
+  '45':
+    m: AP +1
+  '46':
+    m: Sharpshooter / Ballistic Calculations
+    e: Logic
+  '47':
+    m: Combat Insight
+    e: Lore Xenos
+  '48':
+    m: An Eye for the Unscathed
+    e: Perception
+  '49':
+    m: Perception
+    e: Lore Xenos
+  '50':
+    m: Vital Points / Masterful Display
+    e: Weak Body, Weak Soul
+  '51':
+    m: Create an Opening
+    e: Lore Xenos
+  '52':
+    m: Continuous Analysis
+    e: Persistence of the Forge
+  '53':
+    m: Tactical Knowledge
+    e: Perception
+  '54':
+    m: Deadly Aim / Extermination
+    e: Improved Tactics
+  '55':
+    m: AP +1

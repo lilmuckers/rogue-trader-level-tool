@@ -1,0 +1,180 @@
+name: Company Commander
+theme: Astra Militarum Commander
+origin: Fortress World - Astra Militarum Commander - Soldier - Ballistic Skill +2 / Agility +2 / Perception +1 / Willpower +1
+archetypes:
+  t1: Soldier
+  t2: Arch-Militant
+  t3: Exemplar
+extras:
+  skills: Awareness / Demolition
+  gear:
+    - slot: Helm
+      options: Gunslinger Helm / Commissar Cap / Peripheral Visor
+    - slot: Armour
+      options: '[Hive World Origin] Voidsmen Armour / [Death World Origin] Enforcer Light Carapace'
+    - slot: Cloak
+      options: Tempestus Carapace Elite Backpack / Tactical Backpack
+    - slot: Neck
+      options: Fury Incarnate / Slicing Symbol / Ruby Splash Necklace / Dog Tags / Focus Incense
+    - slot: Accessory 1
+      options: Echo of Victory / Demolition Instructions / Litany of Exhaustion
+    - slot: Accessory 2
+      options: Bead of Might / Iron Cape / Cruciatum Litany
+    - slot: Gloves
+      options: Compensator Gloves / Gloves of Rapid Desolation / Marksman Bracers
+    - slot: Boots
+      options: Caligae of Saint Keefe / Breaching Boots / Recoil Warboots / Sororitas Boots
+    - slot: Weapon Set 1
+      options: Necrontech Hot Shot Lasgun / Assault Lasgun / Hot Shot Lasgun / Implacable Tempest / [Mezoa-Pattern] Lasgun
+    - slot: Weapon Set 2
+      options: Full-Auto Shotgun / [Sol-Pattern] Shotgun
+levels:
+  '1':
+    m: Run and Gun
+  '2':
+    m: Medicae
+  '3':
+    m: Revel in Slaughter
+  '4':
+    m: Firearm Mastery
+    e: Muzzle Velocity
+  '5':
+    m: Ballistic Skill
+    e: Rapid Reload
+  '6':
+    m: Ballistic Skill
+    e: Rapid Fire
+  '7':
+    m: Agility
+    e: Trench Warefare
+  '8':
+    m: Unfaltering Fire
+    e: Awareness
+  '9':
+    m: Firearm Mastery II
+  '10':
+    m: Fired Up
+    e: Agility
+  '11':
+    m: Concentrated Fire
+    e: Awareness
+  '12':
+    m: Perception
+    e: Never Stop Believing
+  '13':
+    m: Swift Slaughter
+    e: Field of Fire
+  '14':
+    m: Hail of Steel
+    e: Demolition
+  '15':
+    m: Firearm Mastery III
+  '16':
+    m: Versatility
+  '17':
+    m: Wilfire
+  '18':
+    m: Always Ready
+  '19':
+    m: Steady Superiority
+  '20':
+    m: Ap +1
+    e: Ballistic Skill
+  '21':
+    m: Flash Fire
+    e: Ballistic Skill
+  '22':
+    m: Reckless Rush
+    e: Familiar Kickback
+  '23':
+    m: Demolition
+    e: All Out
+  '24':
+    m: Agility
+    e: Unflinching Heroism
+  '25':
+    m: Adaptability
+  '26':
+    m: Demolition
+    e: Agility
+  '27':
+    m: Steady Superiority IV
+  '28':
+    m: Awareness
+    e: Critical Vesatility
+  '29':
+    m: Perception
+    e: Suppression Fire!
+  '30':
+    m: Devestating Attack
+  '31':
+    m: Breaking Attack
+  '32':
+    m: Perception
+    e: Awareness
+  '33':
+    m: Dismantle
+    e: Perception
+  '34':
+    m: Fellowship
+    e: Grenadier
+  '35':
+    m: Steady Superiority II
+  '36':
+    m: Eager for Battle
+    e: Rack and Ruin
+  '37':
+    m: Awareness
+    e: Exploit Weakness
+  '38':
+    m: Ballistic Skill
+    e: Fix Bayonets!
+  '39':
+    m: Entrench
+    e: Awareness
+  '40':
+    m: Degraded Defence
+    e: Distract
+  '41':
+    m: Ballistic Skill
+    e: Camraderie
+  '42':
+    m: Kick
+    e: Agility
+  '43':
+    m: Ingenious
+    e: Combat Addict
+  '44':
+    m: Demolition
+    e: Deadly Aim
+  '45':
+    m: AP +1
+  '46':
+    m: Demolition Engineer
+    e: Demolition
+  '47':
+    m: Point-Blank
+    e: Demolition
+  '48':
+    m: Contempt for the weak
+    e: Agility
+  '49':
+    m: Perception
+    e: Medicae
+  '50':
+    m: Extermination
+    e: Enough Bullets for Everyone
+  '51':
+    m: Preferred Targets
+    e: Medicae
+  '52':
+    m: Fortress
+    e: Spare Magazine
+  '53':
+    m: Controlled Shot
+    e: Perception
+  '54':
+    m: Vital Points
+    e: Accustomed to Glory
+  '55':
+    m: AP +1

@@ -1,0 +1,178 @@
+name: Jae the Vanguard
+archetypes:
+  t1: Officer
+  t2: Vanguard
+  t3: Exemplar
+extras:
+  skills: All Fellowship / All Intelligence
+  gear:
+    - slot: Helm
+      options: Helm of Determination / Commissar Cap / Gunslinger's helm
+    - slot: Armour
+      options: Breacher Armour / Duellist Uniform
+    - slot: Cloak
+      options: Rogue Trader's Cloak / Tactical Backpack / Tempestus elite carapace backpack
+    - slot: Neck
+      options: Medal of Alacrity / Omnissiah Holy Symbol / Soldier aquila Pendant
+    - slot: Accessory 1
+      options: Saint Cognatius Scriptures / Pair Holster
+    - slot: Accessory 2
+      options: Commander's Chrono / Heart of the Nameless / Tactica Imperialis Exerpt
+    - slot: Gloves
+      options: >-
+        Deflection Gloves / Thrice-Pioneer's Bracers / Gloves of Rapid Desolation / Freedom and Vengeance / Compensator
+        Gloves
+    - slot: Boots
+      options: Commissar Boots / Recoil Warboots
+    - slot: Weapon Set 1
+      options: Upgraded Shuriken Pistol / quick-firing laspistol / Desolation Blast Pistol / [Sol Pattern] Laspistol
+    - slot: Weapon Set 2
+      options: Chorus of Battle / Blessing of Death / Gift of Kurnous
+levels:
+  '1':
+    m: Voice Of Command
+  '2':
+    m: Commerce
+  '3':
+    m: Bring it Down !
+  '4':
+    m: Finest Hour
+    e: Commanding Voice
+  '5':
+    m: Fellowship
+    e: Nimble
+  '6':
+    m: Lasting Impression
+    e: Fellowship
+  '7':
+    m: Move, Move, Move
+    e: Swift Movements
+  '8':
+    m: March
+    e: Commerce
+  '9':
+    m: Finest Hour I
+  '10':
+    m: Lore Imperium
+    e: Ballistic Skill
+  '11':
+    m: leader Assault
+    e: Ballistic Skill
+  '12':
+    m: Take Aim!
+    e: 'Characteristic Training : BS'
+  '13':
+    m: Heroism
+    e: Lore Imperium
+  '14':
+    m: Willpower
+    e: 'Characteristic Training : FEL'
+  '15':
+    m: Finest Hour III
+  '16':
+    m: Unyelding Beacon
+  '17':
+    m: Bulwark
+    e: Shield Master
+  '18':
+    m: Enduring Shield
+  '19':
+    m: Unyelding Guard
+  '20':
+    m: AP +1
+    e: Toughness
+  '21':
+    m: Toughness
+    e: Covering Bulwark
+  '22':
+    m: Follow my lead
+    e: Lore Imperium
+  '23':
+    m: Offensive Follow
+    e: Grenadier
+  '24':
+    m: Ballistic Skill
+    e: Ready to Serve
+  '25':
+    m: Resilient beacon
+  '26':
+    m: Lore Imperium
+    e: Ballistic Skill
+  '27':
+    m: Unyelding Guard I
+  '28':
+    m: Renitent Beacon
+  '29':
+    m: Commerce / Coercion
+    e: Fellowship
+  '30':
+    m: Forced distraction / Defensive Stance
+  '31':
+    m: Formidable Distraction / Counter-Attack Stance
+  '32':
+    m: Fellowship
+    e: Commerce / Coercion
+  '33':
+    m: Taunting Defence
+  '34':
+    m: It will not die
+  '35':
+    m: Unyelding Guard IV
+  '36':
+    m: Eager for Battle
+    e: Decisive Response
+  '37':
+    m: Lore Imperium
+    e: Defensive Comrade
+  '38':
+    m: Ballistic Skill
+    e: Characteristic Training TGH
+  '39':
+    m: Air Of Authority
+    e: Lore Imperium
+  '40':
+    m: Firebrand
+    e: Unyielding Resolve
+  '41':
+    m: Ballistic Skill
+    e: Inspiring Speech
+  '42':
+    m: Wall of Rockcrete
+    e: Fellowship
+  '43':
+    m: Wall of Ferror Crete
+    e: Stronger Together
+  '44':
+    m: Commerce / Coercion
+    e: Eager Subordinates
+  '45':
+    m: Ap +1
+  '46':
+    m: Focus!
+    e: Commerce / Coercion
+  '47':
+    m: Steel Resolve
+    e: Medicae / Coercion
+  '48':
+    m: Unflinching
+    e: Fellowship
+  '49':
+    m: Toughness
+    e: Medicae / Coercion
+  '50':
+    m: Attention!
+    e: Watch Yourself!
+  '51':
+    m: Words of Endurance
+    e: Medicae / Coercion
+  '52':
+    m: Be Vigilant!
+    e: Character Training PER
+  '53':
+    m: Get back in the fight!
+    e: Toughness
+  '54':
+    m: Degraded Defence
+    e: Wounds are no excuse!
+  '55':
+    m: Ap +1

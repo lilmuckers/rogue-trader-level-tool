@@ -1,0 +1,180 @@
+name: Abelard Offhand Foehammer
+archetypes:
+  t1: Warrior
+  t2: Arch-Militant
+  t3: Exemplar
+extras:
+  skills: Athletics / Carouse
+  gear:
+    - slot: Helm
+      options: The Guardian Crown / Tactical Genius / Retinal analyser
+    - slot: Armour
+      options: Invincible Onsalught Armour / Sanguine Judgement / Adherent of Mainkind
+    - slot: Cloak
+      options: Arch-Militant Cape / Malpain Shroud / Swashbuckler cloak
+    - slot: Neck
+      options: Invigorating Resolve / Solid Shield Enarmes
+    - slot: Accessory 1
+      options: Empyrean Transceiver / Portative Manipulator
+    - slot: Accessory 2
+      options: Peculiar Trinket / Hellbrute Horn Trophy / Bead of Might
+    - slot: Gloves
+      options: Augmented Gloves / Adaptive Gloves / Relish Anguish / Metal Claw Gloves
+    - slot: Boots
+      options: Pneumo Boots / Void Veteran Boots / Enforcer's Light boots
+    - slot: Weapon Set 1
+      options: >-
+        Coffinmaker Sledge / Auto-striking power sword / Bonebreaker Maul / Tearing Vengence / Carnage / Blade of Sorrow
+        / Bone-Shatterer / Quick-Fire Las Pistol / [Sol Pattern] Las Pistol
+    - slot: Weapon Set 2
+      options: Well-Maintained Rock Saw / Bonecracker
+levels:
+  '1':
+    m: Charge
+  '2':
+    m: Medicae
+  '3':
+    m: Endure
+  '4':
+    m: Daring Breach
+    e: Thick skin
+  '5':
+    m: Hardened Scars / Crowd Kill
+    e: Weapon Skill
+  '6':
+    m: Taunting Scream
+    e: Athletics
+  '7':
+    m: Weapon Skill
+    e: Fleet Combat Training
+  '8':
+    m: Athletics
+    e: Crowd Kill / Opening Strike
+  '9':
+    m: Daring Breach II
+  '10':
+    m: Impetus
+    e: Toughness
+  '11':
+    m: Reckless Strike
+    e: Melee Weapon Specialist
+  '12':
+    m: Toughness
+    e: Carouse
+  '13':
+    m: Reckless Fury / Opening Strike
+    e: Carouse
+  '14':
+    m: Perception
+    e: Dual Weapon Combat
+  '15':
+    m: Daring Breach IV
+  '16':
+    m: Versitility
+  '17':
+    m: Wildfire
+  '18':
+    m: Always Ready
+  '19':
+    m: Steady Superiority
+  '20':
+    m: AP +1
+    e: Weapon Skill
+  '21':
+    m: Broad Expertise
+    e: Weapon Skill
+  '22':
+    m: Reckless Rush
+    e: Dual Weapon Specialist
+  '23':
+    m: Athletics
+    e: Allout
+  '24':
+    m: Toughness
+    e: Get off Me!
+  '25':
+    m: Flashfire
+  '26':
+    m: Athletics
+    e: Toughness
+  '27':
+    m: Steady Superiority IV
+  '28':
+    m: Carouse
+    e: Adaptability
+  '29':
+    m: Perception
+    e: Stentorian Voice
+  '30':
+    m: Kick
+  '31':
+    m: Martial Art
+  '32':
+    m: Perception
+    e: Carouse
+  '33':
+    m: Critical Versatility
+    e: Perception
+  '34':
+    m: Strength
+    e: Power Armour Proficiency
+  '35':
+    m: Steady Superiority II
+  '36':
+    m: Eagar for battle *
+    e: Easy Target
+  '37':
+    m: Athletics
+    e: Armsmaster
+  '38':
+    m: Weapon Skill
+    e: Power Weapon Expert
+  '39':
+    m: Forceful Strike
+    e: Athletics
+  '40':
+    m: Degraded Defence
+    e: Contempt for the weak
+  '41':
+    m: Weapon Skill
+    e: Open Engagement
+  '42':
+    m: Devestating Attack
+    e: Toughness
+  '43':
+    m: Breaking Attack
+    e: Know No Heresy
+  '44':
+    m: Carouse
+    e: Destroyer *
+  '45':
+    m: AP +1
+  '46':
+    m: Contempt
+    e: Carouse
+  '47':
+    m: Desolation
+    e: Medicae
+  '48':
+    m: Exploit Weakness
+    e: Toughness
+  '49':
+    m: Strength / Agility
+    e: Medicae
+  '50':
+    m: Peak Condition
+    e: Ramming Speed
+  '51':
+    m: Distract
+    e: Medicae
+  '52':
+    m: Preferred Targets
+    e: It Will Not Die
+  '53':
+    m: Sworn Enemy
+    e: Strength
+  '54':
+    m: Extermination
+    e: Accustomed to Glory
+  '55':
+    m: AP +1

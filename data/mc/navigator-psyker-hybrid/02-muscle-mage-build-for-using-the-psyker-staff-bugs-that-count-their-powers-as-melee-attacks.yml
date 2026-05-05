@@ -1,0 +1,180 @@
+name: Muscle Mage (Build for using the psyker staff bugs that count their powers as melee attacks)
+theme: Navigator/Psyker Hybrid
+origin: Fortress World - Sanctioned Psyker (Pyromancer) - Warrior - Weapon Skill +2 / Agility +2 / Willpower +2
+archetypes:
+  t1: Warrior
+  t2: Arch-Militant
+  t3: Exemplar
+extras:
+  skills: Athletics / Demolition - lower difficulties / Lore Warp / Carouse
+  gear:
+    - slot: Helm
+      options: Eyes of Joyeuse / Ghost Helm
+    - slot: Armour
+      options: Psyker's Breast Plate
+    - slot: Cloak
+      options: Tactical Backpack
+    - slot: Neck
+      options: Starmist Scarf
+    - slot: Accessory 1
+      options: Warp Surge brooch
+    - slot: Accessory 2
+      options: Hand of Offence / Chains of Domination
+    - slot: Gloves
+      options: Abyssal Conduit / (Augmented Gloves) / Inevitable Demise
+    - slot: Boots
+      options: Inertia Boots / Boots of Decay
+    - slot: Weapon Set 1
+      options: Solar Staff
+    - slot: Weapon Set 2
+      options: Sanctified Staff / Staff of Shock and Awe / Melee
+levels:
+  '1':
+    m: Charge
+  '2':
+    m: Medicae
+  '3':
+    m: Endure
+  '4':
+    m: Daring Breach
+    e: Desolation
+  '5':
+    m: Open Engagement
+    e: Agility
+  '6':
+    m: Firestorm
+    e: Demolitions
+  '7':
+    m: Agility
+    e: Psyker Minoris
+  '8':
+    m: Demolitions
+    e: Crowd Kill
+  '9':
+    m: Daring Breach II
+  '10':
+    m: Easy Target
+    e: Weapon Skill
+  '11':
+    m: Reckless Strike
+    e: Never Stop Believing
+  '12':
+    m: Weapon Skill
+    e: Athletics
+  '13':
+    m: Reckless Fury
+    e: Athletics
+  '14':
+    m: Willpower
+    e: Psyker Majoris
+  '15':
+    m: Daring Breach IV
+  '16':
+    m: Versitility
+  '17':
+    m: Wildfire
+  '18':
+    m: Always Ready
+  '19':
+    m: Steady Superiority
+  '20':
+    m: AP +1
+    e: Weapon Skill
+  '21':
+    m: Broad Expertise
+    e: Weapon Skill
+  '22':
+    m: Reckless Rush
+    e: Backdraft
+  '23':
+    m: Demolitions
+    e: Allout
+  '24':
+    m: Strength
+    e: Psyker Terminus
+  '25':
+    m: Flashfire
+  '26':
+    m: Demolitions
+    e: Strength
+  '27':
+    m: Steady Superiority IV
+  '28':
+    m: Athletics
+    e: Adaptability
+  '29':
+    m: Strength
+    e: Heavy Armour Proficiency
+  '30':
+    m: Devestating Attack
+  '31':
+    m: Breaking Attack
+  '32':
+    m: Willpower
+    e: Athletics
+  '33':
+    m: Critical Versatility
+    e: Willpower
+  '34':
+    m: Willpower
+    e: Psyker Extremis
+  '35':
+    m: Steady Superiority II
+  '36':
+    m: Eager for battle *
+    e: Thick Skin
+  '37':
+    m: Athletics
+    e: Exploit Weakness
+  '38':
+    m: Weapon Skill
+    e: Psychic Barrage
+  '39':
+    m: Molten Beam
+    e: Athletics
+  '40':
+    m: Degraded Defence
+    e: Contempt for the Weak
+  '41':
+    m: Weapon Skill
+    e: Still Mind
+  '42':
+    m: Sanctic Powers
+    e: Agility
+  '43':
+    m: Preferred Targets
+    e: Fire Within
+  '44':
+    m: Demolitions
+    e: Peak Condition
+  '45':
+    m: AP +1
+  '46':
+    m: Edge of Dawn
+    e: Demolitions
+  '47':
+    m: Hymns of Hatred
+    e: Medicae
+  '48':
+    m: Distract
+    e: Agility
+  '49':
+    m: Willpower
+    e: Medicae
+  '50':
+    m: Destroyer *
+    e: Psalms of Heroes
+  '51':
+    m: Dismantle
+    e: Medicae
+  '52':
+    m: Accustomed to Glory
+    e: Combat Addict
+  '53':
+    m: Sworn Enemy
+    e: Willpower
+  '54':
+    m: Extermination / Combat Meditation
+    e: Eternal Glory
+  '55':
+    m: AP +1

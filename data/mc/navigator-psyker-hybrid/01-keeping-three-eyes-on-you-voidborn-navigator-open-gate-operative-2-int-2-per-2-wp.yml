@@ -1,0 +1,180 @@
+name: Keeping Three Eyes on You - Voidborn - Navigator (Open Gate) - Operative - +2 Int / +2 Per / +2 WP
+theme: Navigator/Psyker Hybrid
+origin: Kick Cassia off the ship and you can make a custom navigator. You monster, you!
+archetypes:
+  t1: Operative
+  t2: Grand Strategist
+  t3: Exemplar
+extras:
+  skills: Lore Warp / Awareness
+  gear:
+    - slot: Helm
+      options: Arch-Strategist's Visor / Great Librarian Glasses / Lingering Whisper
+    - slot: Armour
+      options: Slick Bodyglove
+    - slot: Cloak
+      options: Cloak of Mercy
+    - slot: Neck
+      options: Daemon Tool / Aquila Pendant
+    - slot: Accessory 1
+      options: Chains of Domination
+    - slot: Accessory 2
+      options: Commander's Notes
+    - slot: Gloves
+      options: Thrice Pioneers Bracers / Grenadier's Gloves
+    - slot: Boots
+      options: Soriritas Boots / Adrenaline Warboots
+    - slot: Weapon Set 1
+      options: Warp Guide Staff / Astronomican Regalia
+    - slot: Weapon Set 2
+      options: Red Crystal Staff / Staff of Orsellio Novator
+levels:
+  '1':
+    m: Analyse Enemies
+  '2':
+    m: Medicae
+  '3':
+    m: Expose Weakness
+  '4':
+    m: Dismantling
+    e: Uncanny Sight
+  '5':
+    m: Willpower
+    e: Be Smart
+  '6':
+    m: Fresh Target
+    e: Willpower
+  '7':
+    m: Held in My Gaze
+    e: Lore Warp
+  '8':
+    m: Ebb and Flow
+    e: Eyes of Oblivion
+  '9':
+    m: Dismantling III
+    e: Lore Warp
+  '10':
+    m: Awareness
+    e: Perception
+  '11':
+    m: Mind Over Matter
+    e: Awareness
+  '12':
+    m: Zone of Fear
+    e: Strange Vitality
+  '13':
+    m: Passive Learning
+    e: Intelligence
+  '14':
+    m: Perception
+    e: Undam the Sea of Souls
+  '15':
+    m: Dismantling II
+  '16':
+    m: Combat Tactics
+  '17':
+    m: Point of Curiosity
+  '18':
+    m: Improvised Strategy
+  '19':
+    m: Take and Hold
+  '20':
+    m: Ap +1
+    e: Willpower
+  '21':
+    m: Pass Unscathed
+    e: Willpower
+  '22':
+    m: Combat Locus Stratagem
+  '23':
+    m: Awareness
+    e: Blood Augury
+  '24':
+    m: Perception
+    e: Tonicity
+  '25':
+    m: Mastery of Time
+  '26':
+    m: Intelligence
+    e: Awareness
+  '27':
+    m: Take and Hold IV
+  '28':
+    m: Threads of Faults
+    e: Intelligence
+  '29':
+    m: Perception
+    e: Lore Warp
+  '30':
+    m: Blitz Stratagem
+  '31':
+    m: Blurred Locus
+    e: The Course Untravelled
+  '32':
+    m: Lore Warp
+    e: Intelligence
+  '33':
+    m: Weapon Skill
+    e: Opening Strategy
+  '34':
+    m: Bloody Mess
+  '35':
+    m: Take and Hold III
+  '36':
+    m: Eager for Battle
+    e: Ballistics Calculation
+  '37':
+    m: Awareness
+    e: Strongpoint
+  '38':
+    m: Willpower
+    e: 'Open to the Warp / Base Skill: Lore Warp'
+  '39':
+    m: Joint Analysis
+    e: Awareness
+  '40':
+    m: Degraded Defence
+    e: Fire at Will
+  '41':
+    m: Willpower
+    e: Comprehensive Analysis
+  '42':
+    m: Waking Nightmare
+    e: Perception
+  '43':
+    m: Personal Combat Zone
+    e: 'Jinx / Advanced Skill: Warp'
+  '44':
+    m: Lore Warp
+    e: Malign Influence
+  '45':
+    m: AP +1
+  '46':
+    m: Sharpshooter
+    e: Lore Warp
+  '47':
+    m: Weak Body, Weak Soul
+    e: Medicae
+  '48':
+    m: Personal Zone
+    e: Perception
+  '49':
+    m: Intelligence
+    e: Medicae
+  '50':
+    m: Extermination
+    e: Tide of Excellence
+  '51':
+    m: Adjusting Frontline
+    e: Medicae
+  '52':
+    m: Combat Insight
+    e: 'Characteristic Training: PER'
+  '53':
+    m: Warp Curse Unleashed
+    e: Intelligence
+  '54':
+    m: Cataclysm / Vital Points
+    e: Strategic Offensive
+  '55':
+    m: AP +1

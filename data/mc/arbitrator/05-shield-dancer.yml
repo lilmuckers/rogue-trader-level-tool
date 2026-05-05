@@ -1,0 +1,178 @@
+name: Shield Dancer
+theme: Arbitrator
+origin: Forge World (Locomotive Systems) - Arbitrator Subductor) - Bladedancer - WS +2 / Agility +2 / Perception +2
+archetypes:
+  t1: Blade Dancer
+  t2: Overseer
+  t3: Exemplar
+extras:
+  skills: Medicae / Demolition / Coercion
+  gear:
+    - slot: Helm
+      options: The Guardian Crown / Adeptus Arbites Helmet / Retinal Analyser
+    - slot: Armour
+      options: Armour of Hidden Promise / [Death World Origin] Enforcer Light Crapace / Shadow of the Undying One
+    - slot: Cloak
+      options: Malpain Shroud / Swashbuckler Cloak
+    - slot: Neck
+      options: Invigorating Resolve
+    - slot: Accessory 1
+      options: Bead of Might / Voidborn's pride
+    - slot: Accessory 2
+      options: Portable Motive Force Storage
+    - slot: Gloves
+      options: Augmented Gloves / Adaptive Gloves / Metal Claw Gloves / Inevitable Demise
+    - slot: Boots
+      options: Fencing Boots / Inertia Boots
+    - slot: Weapon Set 1
+      options: >-
+        Blade of the Blood Hunter / Imminent Torment / Virulent Slicer / Advanced Shield / Meragon Shield /
+        Kinesiostatic Shield
+    - slot: Weapon Set 2
+      options: Djin Blade of Yremeryss / Insatiable Djin Blade
+levels:
+  '1':
+    m: Blade Dance
+  '2':
+    m: Medicae
+  '3':
+    m: Death From Above
+  '4':
+    m: Death Waltz
+    e: Death Warden
+  '5':
+    m: Duelling Mastery
+    e: Weapon Skill
+  '6':
+    m: Veil of Blades
+    e: Medicae
+  '7':
+    m: Weapon Skill
+    e: Anticipation
+  '8':
+    m: Coercion
+    e: Law and Order
+  '9':
+    m: Death Waltz II
+  '10':
+    m: Spinning Blades
+    e: Agility
+  '11':
+    m: Blood Oath
+    e: Blood Rush
+  '12':
+    m: Agility
+    e: Coercion
+  '13':
+    m: Public Sentencing
+    e: Carouse
+  '14':
+    m: Toughness
+    e: Escape Artist
+  '15':
+    m: Death Waltz III
+  '16':
+    m: Cyber-Mastiff Proficiency
+  '17':
+    m: Advanced Tracking
+  '18':
+    m: Rite of Calibration
+  '19':
+    m: Overcharge
+  '20':
+    m: Ap +1
+    e: Weapon Skill
+  '21':
+    m: Shared Blood
+    e: Weapon Skill
+  '22':
+    m: Strategic Adaptation
+    e: Medicae
+  '23':
+    m: Chain-Maw
+  '24':
+    m: Agility
+    e: Armour-Piercing
+  '25':
+    m: Enhanced Augmetics
+  '26':
+    m: Agility
+    e: Medicae
+  '27':
+    m: Overcharge II
+  '28':
+    m: Dependable Ally
+    e: 'Base Skill: Lore Xenos'
+  '29':
+    m: Perception
+    e: Coercion
+  '30':
+    m: Bite!
+  '31':
+    m: Suppression Factor
+    e: Drukhari Weapon Proficiency
+  '32':
+    m: Perception
+    e: Coercion
+  '33':
+    m: Perimeter Defence
+  '34':
+    m: Finesse
+  '35':
+    m: Overcharge I
+  '36':
+    m: Eager for Battle *
+    e: Guillotine
+  '37':
+    m: Medicae
+    e: Side by Side
+  '38':
+    m: Weapon Skill
+    e: Shield Mastery
+  '39':
+    m: Acrobatic Artistry
+    e: Medicae
+  '40':
+    m: Degraded Defence
+    e: 'Battle Mode: Terror'
+  '41':
+    m: Weapon Skill
+    e: Duellist
+  '42':
+    m: Consolidation
+    e: Agility
+  '43':
+    m: Relentless Pursuit
+    e: Mob Justice
+  '44':
+    m: Coercion
+    e: Destroyer *
+  '46':
+    m: Rising Tempo
+    e: Coercion
+  '47':
+    m: Blade in His Hand
+    e: Demolition
+  '48':
+    m: Autonomous Medikit
+    e: Agility
+  '49':
+    m: Toughness
+    e: Demolition
+  '50':
+    m: Peak Condtion
+    e: It Takes Two
+  '51':
+    m: Brother-In-Arms
+    e: Demolition
+  '52':
+    m: Unforgiving
+    e: Pacification Procedures / Dual Weapon Combat
+  '53':
+    m: Captive Audience
+    e: Toughness
+  '54':
+    m: Extermination
+    e: Grand Performance
+  '55':
+    m: AP +1

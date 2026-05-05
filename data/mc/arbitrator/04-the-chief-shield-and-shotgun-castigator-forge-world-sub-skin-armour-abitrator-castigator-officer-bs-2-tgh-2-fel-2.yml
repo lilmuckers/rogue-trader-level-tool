@@ -1,0 +1,183 @@
+name: >-
+  The Chief (Shield and Shotgun Castigator) - Forge World (Sub Skin Armour) - Abitrator (Castigator) - Officer - BS + 2
+  / TGH +2 / Fel +2
+theme: Arbitrator
+origin: >-
+  Chartist Pendant/Ancient Terra Moncle to turn Lore Imperium to Fel to stack with breacher armour and saint cognacius'
+  scriptures for a super tanky officer. Foehammers until shotgun Mastery
+archetypes:
+  t1: Officer
+  t2: Grand Strategist
+  t3: Exemplar
+extras:
+  skills: Coercion / Lore Imperium
+  gear:
+    - slot: Helm
+      options: Commander's Moncole / Steel Guidance / Helm of Determination
+    - slot: Armour
+      options: Breacher's Armour / Arbitrator Solomon Vhyr's Armour
+    - slot: Cloak
+      options: Cape of Reckoning / Von Valancius Cloak / Rogue Trader's Cloak
+    - slot: Neck
+      options: Chartist Pendant
+    - slot: Accessory 1
+      options: Saint Cognacius' Scriptures
+    - slot: Accessory 2
+      options: Prescint Vox-Relay / Commander's Notes
+    - slot: Gloves
+      options: Thrice-Pioneer's Bracers / Elastic Gloves / Relished Anguish
+    - slot: Boots
+      options: Enforcer Light Boots / Commissar Boots
+    - slot: Weapon Set 1
+      options: Advanced Adeptus Arbites Shotgun / Scoped Shotgun / Advanced Shield / Meragon Shield
+    - slot: Weapon Set 2
+      options: Bone-Shatteerer / Advanced Shield / Meragon Shield
+levels:
+  '1':
+    m: Voice Of Command
+  '2':
+    m: Coercion
+  '3':
+    m: Bring it Down !
+  '4':
+    m: Finest Hour
+    e: Lasting Impression
+  '5':
+    m: Ballistic Skill
+    e: Lawful Intervention
+  '6':
+    m: Decisive Response
+    e: Ballistic Skill
+  '7':
+    m: Air of Authority
+    e: Grenadier
+  '8':
+    m: Steel Resolve
+    e: Coercion
+  '9':
+    m: Finest Hour IV
+  '10':
+    m: Lore Imperium
+    e: Toughness
+  '11':
+    m: Inspiring speech
+    e: Fellowship
+  '12':
+    m: In the Name of the Lex Imperialis!
+    e: 'Characteristic Training: Per'
+  '13':
+    m: Focus!
+    e: Lore Imperium
+  '14':
+    m: Fellowship
+    e: Armour-Piercing
+  '15':
+    m: Finest Hour I
+  '16':
+    m: Combat Tactics
+  '17':
+    m: Combat Locus Stratagem
+  '18':
+    m: Improvised Strategy
+  '19':
+    m: Take and Hold
+  '20':
+    m: Ap +1
+    e: Fellowship
+  '21':
+    m: Shotgun Mastery
+    e: Ballistic Skill
+  '22':
+    m: Blitz Stratagem
+  '23':
+    m: Coercion
+    e: Opening Strategy
+  '24':
+    m: Ballistic Skill
+    e: Law and Order
+  '25':
+    m: Blurred Locus
+  '26':
+    m: Fellowship
+    e: Coercion
+  '27':
+    m: Take and Hold IV
+  '28':
+    m: Personal Combat Zone
+    e: Toughness
+  '29':
+    m: Toughness
+    e: Lore Imperium
+  '30':
+    m: That's an Order!
+  '31':
+    m: Fire at Will
+    e: Public Sentencing
+  '32':
+    m: Lore Imperium
+    e: Perception
+  '33':
+    m: Perception
+    e: Adjusting Frontline
+  '34':
+    m: Arbites Physical Training
+  '35':
+    m: Take and Hold III
+  '36':
+    m: Firebrand
+    e: Seize the Initiative
+  '37':
+    m: Coercion
+    e: Strongpoint
+  '38':
+    m: Fellowship
+    e: Mob Justice
+  '39':
+    m: Move, Move, Move
+    e: Coercion
+  '40':
+    m: Peak Condition
+    e: Disputed Zone
+  '41':
+    m: Ballistic Skill
+    e: Be Vigilant!
+  '42':
+    m: Overwhelming Stratagem
+    e: Ballistic Skill
+  '43':
+    m: Daunting Zone
+    e: Heavy Armour Proficiency
+  '44':
+    m: Lore Imperium
+    e: Eager for Battle
+  '45':
+    m: Ap +1
+  '46':
+    m: Leader's Assault
+    e: Lore Imperium
+  '47':
+    m: Personal Oversight
+    e: Medicae
+  '48':
+    m: Sniping Zone
+    e: Fellowship
+  '49':
+    m: Toughness
+    e: Persuasion
+  '50':
+    m: Eager Subordinates
+    e: No Respite
+  '51':
+    m: Binding Purpose
+    e: Persuasion
+  '52':
+    m: Blood of Matyrs
+    e: Pillar of the Law
+  '53':
+    m: Take Aim!
+    e: Toughness
+  '54':
+    m: Degraded Defence
+    e: Steady!
+  '55':
+    m: Ap +1

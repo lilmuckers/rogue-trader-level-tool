@@ -1,0 +1,178 @@
+name: The Kisballica Cold Trader
+theme: Crimelord
+origin: Fortress World - Crimelord - Ballistic Skill +2 - Agility +2 - Intelligence +2
+archetypes:
+  t1: Operative
+  t2: Bounty Hunter
+  t3: Exemplar
+extras:
+  skills: Awareness / Logic / Tech-Use / Lore Impeium / Lore Xenos / Medicae
+  gear:
+    - slot: Helm
+      options: Self-Calibrating Goggles / Self-Calibrating Helm
+    - slot: Armour
+      options: Commissar Flak Breastplate / [Hive world Origin] Voidsmen Armour
+    - slot: Cloak
+      options: Shadowguide Cloak / Von Valancius Cloak
+    - slot: Neck
+      options: Synaptic Coagulator
+    - slot: Accessory 1
+      options: Long Range Lens / Vid-Capture Relay / Armour-Piercing Ammo
+    - slot: Accessory 2
+      options: Bead of Might / Portative Manipulator / Prey Scanner / Target Designator
+    - slot: Gloves
+      options: Marksman Bracers / Inevitable Demise
+    - slot: Boots
+      options: Sharpshooter Boots
+    - slot: Weapon Set 1
+      options: Wonderer's Potent / Gift of Kurnous / Deadshot Splinter Rfile
+    - slot: Weapon Set 2
+      options: Eye of Hectacon / Chorus of Battle / Quickeye Splinter Rifle
+levels:
+  '1':
+    m: Analyse Enemies
+  '2':
+    m: Medicae
+  '3':
+    m: Expose Weakness
+  '4':
+    m: Dismantling
+    e: Uncanny Sight
+  '5':
+    m: Ballistic Skill
+    e: Never Stop Believing
+  '6':
+    m: Tide of Excellence
+    e: Ballistic Skill
+  '7':
+    m: Joint Analysis
+    e: Awareness
+  '8':
+    m: Ballistic Calculations
+    e: Familiar Kickback
+  '9':
+    m: Dismantling III
+    e: Awareness
+  '10':
+    m: Lore Xenos
+    e: Perception
+  '11':
+    m: Sharpshooter
+    e: Lore Xenos
+  '12':
+    m: Perfect Spot
+    e: Contingency Plan
+  '13':
+    m: Sniper Expertise
+    e: Intelligence
+  '14':
+    m: Intelligence
+    e: Spare Magazine
+  '15':
+    m: Dismantling II
+  '16':
+    m: Hunt Down The Prey
+  '17':
+    m: Claim the Bounty
+  '18':
+    m: Hunting Surge / Hunter's Ambush
+  '19':
+    m: Wild Hunt
+  '20':
+    m: AP +1 - Ballistic Skill
+    e: Killing Plan
+  '21':
+    m: Ballistic Skill
+    e: Hunter's Ambush / Hunting Surge
+  '22':
+    m: Cull the bold
+  '23':
+    m: Flay the bold
+    e: Awareness
+  '24':
+    m: Perception
+    e: Aeldari Weapon Proficiency
+  '25':
+    m: Heightened Concentration
+  '26':
+    m: Awareness
+    e: Perception
+  '27':
+    m: Wild Hunt II
+  '28':
+    m: Savour the kill
+  '29':
+    m: Lore Xenos
+    e: Intelligence
+  '30':
+    m: Deadly Accuracy
+    e: Hot on the trail
+  '31':
+    m: Trail and Shatter
+  '32':
+    m: Intelligence
+    e: Lore Xenos
+  '33':
+    m: Expert Finesse
+  '34':
+    m: Grenadier
+  '35':
+    m: Wild Hunt III
+  '36':
+    m: Eager for Battle
+    e: Fresh Target
+  '37':
+    m: Awareness
+    e: Share the Spoils
+  '38':
+    m: Ballistic Skill
+    e: Drukhari Weapon Proficiency
+  '39':
+    m: Tactical Knowledge
+    e: Awareness
+  '40':
+    m: Degraded Defence
+    e: Inspiring Trophy
+  '41':
+    m: Ballistic Skill
+    e: Improved Tactics
+  '42':
+    m: Ensnare the Pray
+    e: Perception
+  '43':
+    m: Pierce the Armour
+    e: Poetry of Pain
+  '44':
+    m: Lore Xenos
+    e: Deathdealer
+  '45':
+    m: AP +1
+  '46':
+    m: Combat Insight
+    e: Lore Xenos
+  '47':
+    m: Passive Learning
+    e: Medicae
+  '48':
+    m: Critical Chain
+    e: Perception
+  '49':
+    m: Intelligence
+    e: Medicae
+  '50':
+    m: Deadly Aim
+    e: Weak Body, Weak Soul
+  '51':
+    m: Guresome Kill
+    e: Medicae
+  '52':
+    m: Instant Exposure
+    e: 'Characteristic Training: PER'
+  '53':
+    m: Precise Attack
+    e: Intelligence
+  '54':
+    m: Vital Points
+    e: Insightful Percision
+  '55':
+    m: AP +1

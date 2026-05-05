@@ -1,0 +1,434 @@
+- name: Operator's gloves
+  slot: gloves
+  location: null
+  act: 0
+  description: Grants +3 Tech-Use
+- name: Gloves of Endurance
+  slot: gloves
+  location: null
+  act: 0
+  description: >-
+    Whenever the wearer of these gloves gets an injury or falls unconcious in combat, their allies gain a +1 bonus to
+    damage.
+- name: Thrice-Pioneer;s Bracers
+  slot: gloves
+  location: Eurac V
+  act: 1
+  description: Every time the wearrer deals damage, the target's WS and BS is reduced by -5 for 2 rounds.Stacks up to 6 times
+- name: Stalker Glove
+  slot: gloves
+  location: Fellowship of the Void Rep 1
+  act: 1
+  description: If weaerer's ranged attack hits, gain 5% critical hit chance next ranged attack against same enemy. DOES NOT STACK
+- name: Stabilising Bracer
+  slot: gloves
+  location: Tech Trader Rep 1
+  act: 1
+  description: Run n Gun gives AGI Bonus / 3 more dmg on their ranged attacks
+- name: Sniper Gloves
+  slot: gloves
+  location: Rykad Minoris
+  act: 1
+  description: Wearer Deals +5% dmg. Gain 5% on single shots and deadeye shots
+- name: Relished Anguish
+  slot: gloves
+  location: Freight Line
+  act: 1
+  description: End of wearer's turn, gain temp wounds = collision dmg dealt
+- name: Noble Silk Gloves
+  slot: gloves
+  location: Eurac V
+  act: 1
+  description: Grants +5 Persuasion
+- name: Crimson Oblivion
+  slot: gloves
+  location: Freight Line
+  act: 1
+  description: >-
+    If worn by a Death Cult assassin. Enemy killed by wearer explodes in pool of blood. Nearby tiles change to blood as
+    if affected by Blood Phial
+- name: Avenger's Gauntlet
+  slot: gloves
+  location: Rykad Minoris Mechanicus Temple kill prophet
+  act: 1
+  description: Add +AGI Bonus base dmg to AoO
+- name: Intoxication with suffering
+  slot: gloves
+  location: (Void Shadows DLC) Freight Line, from Outcast Leader
+  act: 1
+  description: >-
+    At the end of their turn, the character gains temporary health equal to the amount of collision damage they dealt
+    that turn.
+- name: Crimson Oblivion
+  slot: gloves
+  location: (Void Shadows DLC) freight line, chest behind tripwires near Eden
+  act: 1
+  description: >-
+    If the character is a Death Cult Assassin, when they kill an enemy, a stream of blood erupts from them, drenching
+    nearby cells, similar to using a blood vial.
+- name: Composite gloves
+  slot: gloves
+  location: >-
+    Rogue Trader's Quarters Limited-run reward for watching streams celebrating the release of the Lex Imperialis
+    expansion
+  act: 1
+  description: >-
+    If a character is holding a shield when they are hit (multiple hits in a row count as one), the shield gains a +5%
+    block bonus. This stacks up to 3 times and lasts until the end of the round.
+- name: Warp Conductor Boots
+  slot: gloves
+  location: Idira quest 1 random void encounter
+  act: 2
+  description: >-
+    After trigger Psy phenom/perils. Wearer gain + 1 PR. Wearer gain momentum & temp wound = resolve. Can only be
+    equipped by unsanctioned psyker
+- name: Torment Bracelets
+  slot: gloves
+  location: kasballica 3. pf 50
+  act: 2
+  description: >-
+    If the owner of Torment Bracelets deals damage, their enemies suffer 1-3 Rending Damage (with Penetration of 10) for
+    each cell they move during the owner's [round]. Heretical Adherent - Glove deals 1 to 6 warp dmg instead
+- name: Stabiliser Bracers
+  slot: gloves
+  location: Kiava Gama
+  act: 2
+  description: Increase BS by 10 and crit dmg by 25%
+- name: Redemption Gauntlets
+  slot: gloves
+  location: Kiava Gama
+  act: 2
+  description: Attacks vs target suffering exposed weakness decrease their STR & AGI by -10
+- name: Recoil Gloves
+  slot: gloves
+  location: Janus Forest
+  act: 2
+  description: Reduce recoil 50% of all automatic weapons
+- name: Radiant Glove
+  slot: gloves
+  location: drusian 10. pf26
+  act: 2
+  description: >-
+    Grants wearer +5 parry reduction. If Iconoclast, all allies gain +(10 + 2x Iconoclast) hit chance to enemies adj. to
+    wearer. Wearer auto dodge melee friendly fire
+- name: Power Grips
+  slot: gloves
+  location: Janus Governer Fight
+  act: 2
+  description: These augmented gloves increase Strength of the wearer by 10.
+- name: Plasmashaper Gloves
+  slot: gloves
+  location: Dargonus Palace Bedroom secret
+  act: 2
+  description: Tech Use +10. Plasma weapon do base dmg +3
+- name: Master Duellist's gloves
+  slot: gloves
+  location: 'Ship Crypt: Abulation in Blood'
+  act: 2
+  description: When wearer scores a crit with ranged, their next attack against any target auto hits and cannot be parried/dodged
+- name: Karskin's Gauntlets
+  slot: gloves
+  location: kasballica 6. pf 46
+  act: 2
+  description: Gauntlet grant wearer +10% crit chance. Doubles if wearer hasn't move
+- name: Hand of Avolious
+  slot: gloves
+  location: 'Foulstone: Support Argenta advice, make Lugnalia prelate. Then contract -5 Pop resource'
+  act: 2
+  description: >-
+    Successful attack grants wearer 50% chance to inflict Bleed on target that fail TGH test. If Dogmatic 45, test is
+    made with -20 penalty
+- name: Grenadier's Gloves
+  slot: gloves
+  location: Shadow Quarters
+  act: 2
+  description: Using grenades costs -AP for the wearer. They also increase Damage from grenades by +2.
+- name: Executioner's Gauntlets
+  slot: gloves
+  location: drusian 13. pf43
+  act: 2
+  description: Increase Crit dmg of Where it Hurts (Attack and DoT procs) by Medicae/5
+- name: Deflection Gloves
+  slot: gloves
+  location: Mechanicus Trader Rep 0
+  act: 2
+  description: These gloves allow the wielder to Parry melee attacks with their ranged weapon using BS instead of WS.
+- name: Bladedancer's Bracers
+  slot: gloves
+  location: kasballica 13. pf58
+  act: 2
+  description: Each hit of Blade Dance increase wearer's critical hit by (2 x WS bonus) until end of turn
+- name: Augmented Gloves
+  slot: gloves
+  location: Aviorus System - Drifting Voidship
+  act: 2
+  description: Grants +10 WS and +5 STR
+- name: Arsonist's Bracers
+  slot: gloves
+  location: 'Dargonus: Return to Dargonus for Drukhari'
+  act: 2
+  description: These bracers grant the wearer a +5 bonus to Tech-Use Tests. They also increase Damage from Flame Weapon by +3.
+- name: Apex Predator Glove
+  slot: gloves
+  location: Pirate Rep8. PF 32
+  act: 2
+  description: Improve and adds to hunt down the prey BH bonuses
+- name: Adaptive Gloves
+  slot: gloves
+  location: Footfall, liege, demand compensation
+  act: 2
+  description: >-
+    These gloves adapt to any hand and dampen vibrations, allowing for better grip and helping deflect strikes. Increase
+    Weapon Skill and Parry by 10.
+- name: Executioner's Bracers
+  slot: gloves
+  location: (Void Shadows DLC) Drusians - Level 13
+  act: 2
+  description: >-
+    Increases the critical damage of the Sick ability (including damage from the attack itself and from additional
+    activations of periodic damage effects) by (Medicae / 5)
+- name: Bladedancer's Bracers
+  slot: gloves
+  location: (Void Shadows DLC) Kasballica Mission - Level 13
+  act: 2
+  description: Each hit of Blade Dance increases Critical Hit Chance by (2 x WS Bonus)% until the end of his turn.
+- name: Master Duelist's Gloves
+  slot: gloves
+  location: (Void Shadows DLC) crypt, coffin to the left of the entrance
+  act: 2
+  description: >-
+    When a character scores a critical hit with a ranged attack, their next attack against any enemy automatically hits
+    (the enemy does not dodge or parry).
+- name: Gloves of unbearable torment
+  slot: gloves
+  location: (Lex Imperialis DLC) Boarding the "Heartless." In a Drukhari crate near the drawbridge, on the sniper's side.
+  act: 2
+  description: The character gets +15 to Pressure
+- name: Xenohide Gloves
+  slot: gloves
+  location: Spyre peak, next to Tervantias
+  act: 3
+  description: Drukhari Equipment. Grants wearer +10% parry and +10% area attack damage
+- name: Undying Rage
+  slot: gloves
+  location: null
+  act: 3
+  description: Each melee attack performed by the wearer increases their armour by +AGI bonus% until the start of their next turn
+- name: Stabilising Gauntlets
+  slot: gloves
+  location: >-
+    Chasm - After meeting Malice BS check to shoot down the body near the place where we spawned in originally in
+    commoragh
+  act: 3
+  description: Run and Gun gives AGI bonus/3 more damage on ranged attacks and do not suffer winded
+- name: Riposte Gloves
+  slot: gloves
+  location: Mangled Sector - skill check behin demolition check near Commissar
+  act: 3
+  description: >-
+    If wearer is Assassin and successfully dodges or parries an enemy's attack, it automatically creates an additional
+    opening on that enemy on the side closest to the wearer
+- name: Gloves of Rapid Desolation
+  slot: gloves
+  location: The Spyre, Farseer side
+  act: 3
+  description: >-
+    Increases fire rate of wearer's weapon by +1. Each time an enemy is killed, perplexed is inflicted on all other
+    enemies in a 2 cell radius
+- name: Commander's gloves
+  slot: gloves
+  location: Escaping Arena, first chest
+  act: 3
+  description: >-
+    At the end of the turn, the wearer gains stacks of tactical advantage equal to the number of enemies they hit during
+    their turn
+- name: Heartseeker Glove
+  slot: gloves
+  location: Tervintas Trade
+  act: 3
+  description: First crit in combat +50% crit dmg. This effect resets after they or ally perform heroic/desperate action
+- name: Avenger Tactical Gloves
+  slot: gloves
+  location: null
+  act: 3
+  description: >-
+    When wearer is able to perfrom AoO, they gain 1 stack of vengance. Wearer's AoO deal additional AGI bonus * vengance
+    stacks dmg
+- name: Exoskeleton gloves
+  slot: gloves
+  location: 'Comorragh: Trade with Tervantias'
+  act: 3
+  description: Gain +10 STR and +5 TGH
+- name: Pain Grip
+  slot: gloves
+  location: Haemonculus Prims rumour final reward
+  act: 4
+  description: >-
+    All wearer's melee attacks inflict bleeding (4). All bleeding effects inflicted by the wearer have their power
+    increased by +2
+- name: Overcharge Gloves
+  slot: gloves
+  location: Pasqal personal quest location behind hidden door
+  act: 4
+  description: >-
+    When wearer uses overcharge on a plasma weapon that attack ignores enemy deflection and deals +(2x(INTb+Bb))
+    additonal dmg
+- name: Master Surgeon Gloves
+  slot: gloves
+  location: Marazhai going mad during warp travel event
+  act: 4
+  description: Grants +25 Medicae. Each time wearer sues medikit it provides additional INTb+AGIb termp wounds
+- name: Heavy Lifters
+  slot: gloves
+  location: Pasqal personal quest location behind hidden door
+  act: 4
+  description: >-
+    Wearer gains +30 STR. If wearer has not moved the previous turn their ranged attacks with heavy weapons deal +50%
+    damage until the end of the turn
+- name: Harrowing Gloves
+  slot: gloves
+  location: Argenta quest location
+  act: 4
+  description: When wearer uses Intimidation, the targets inflicted with it also gain staggered for 1 round
+- name: Elite Marksman Gloves
+  slot: gloves
+  location: Cassia's personal quest location
+  act: 4
+  description: Drukhari Equipment. +15BS
+- name: Fine Work Gloves
+  slot: gloves
+  location: Emperor's Plan system - Eufrates II
+  act: 4
+  description: Grant +25 Demolition and Tech-use
+- name: Crusade Plate Gloves
+  slot: gloves
+  location: Mundus Nullius system - Ruined Palace
+  act: 4
+  description: >-
+    When wearer deals dmg with a heavy weapon that enemy suffers +1 stack of perplexed. If 3 or more stacks of perplexed
+    are alrewady on the target, the wearer's attacks also inflict staggered for 2 round.
+- name: Abyssal Conduit
+  slot: gloves
+  location: Kasballica 19. pf82
+  act: 4
+  description: Every second use of Psyker staff ability deals 2 x WPb more base dmg
+- name: Slayer's delight
+  slot: gloves
+  location: Kasballica 21. pf90
+  act: 4
+  description: Drukhari only. Wearer's single target attack with 2H melee weapon deals 3 x STRb more base dmg
+- name: Helliarch's goves
+  slot: gloves
+  location: Kasballica 23. pf98
+  act: 4
+  description: Attacks ignore cover eff
+- name: Breacher's Bracers
+  slot: gloves
+  location: Kasballica 24. pf100
+  act: 4
+  description: Whenever wearer push target, next attack against that target deals 10% more dmg. Stacks
+- name: Death Dealer's Glove
+  slot: gloves
+  location: Kasballica 26. pf106
+  act: 4
+  description: Wearer gain 2%dmg for each critical hit and each enemy they dealt until end of combat
+- name: Abyss Spinner Glove
+  slot: gloves
+  location: Void 30. pf102
+  act: 4
+  description: >-
+    Allies targetted by wearer's abilities gain 20% wearer's armour pen and 30% wearer's crit dmg for 1 round. If ally
+    crit, wearer next attack is a crit
+- name: Compensator Gloves
+  slot: gloves
+  location: Void 36. pf126
+  act: 4
+  description: >-
+    Wearer ignores weapon recoil while doing ranged burst attack. Weapon's RoF increase by BS / 2, RoF is rounded down
+    to the nearest interger
+- name: Metal Claw Gloves
+  slot: gloves
+  location: Explorators 25. pf 100
+  act: 4
+  description: Whenever wearer hits a target, reduce their armour -2% until end of combat. Stacks
+- name: Gloves with metal claws
+  slot: gloves
+  location: (Void Shadows DLC) Explorators - Level 25
+  act: 4
+  description: >-
+    Whenever a character hits a target with melee attacks, the target's armor is reduced by 2% for the rest of the
+    battle. The effect stacks.
+- name: Boarder's Bracers
+  slot: gloves
+  location: (Void Shadows DLC) Kasballica Mission - Level 24
+  act: 4
+  description: >-
+    When a character pushes a target, their next attack against the same target in the same round deals 10% more damage.
+    The effect stacks.
+- name: Iron Grip
+  slot: gloves
+  location: (Lex Imperialis DLC) Drusians
+  act: 4
+  description: If a character's familiar is in a cell adjacent to him, that familiar always succeeds on any checks in combat.
+- name: Studded gloves
+  slot: gloves
+  location: (Lex Imperialis DLC) Kasballica Mission
+  act: 4
+  description: >-
+    The character's melee attacks gain a +15% armor penetration bonus. If the target's armor is less than or equal to
+    the character's armor penetration bonus, the target makes a Stamina check to resist with a +20 bonus and, on a
+    failed save, suffers bleeding (4).
+- name: Elastic gloves
+  slot: gloves
+  location: (Lex Imperialis DLC) Leethus, in a chest immediately after meeting the clerk
+  act: 4
+  description: >-
+    If a character kills 3 or more targets with an area-of-effect weapon attack for the first time in a round, that
+    attack does not consume any XP and does not count towards the attack limit per turn.
+- name: Servo gloves
+  slot: gloves
+  location: (Lex Imperialis DLC) Leethus, in a container near the Arbiter base, accessible from two terminals
+  act: 4
+  description: >-
+    The character's armor evasion penalty is reduced by 10%. If the character's Dexterity is greater than or equal to
+    60, this penalty is reduced by 15%.
+- name: Tear-Blade Gloves
+  slot: gloves
+  location: AN#8954no01-KT system -Dead World Drukhari Camp (Marazhai required)
+  act: 5
+  description: Drukhari equipment. Wearer's damage is increased by +1% for every 2% wounds lost
+- name: Inevitable Demise
+  slot: gloves
+  location: Sanctum of Taaphetus system - Rocky world Surface
+  act: 5
+  description: Wearer's critical hits deal double damage
+- name: Claws of the Black Hunt
+  slot: gloves
+  location: AN#8954no01-KT system -Dead World Drukhari Camp (Marazhai required)
+  act: 5
+  description: >-
+    When wearer performs melee attack on an enemy it inflicts +1 stack of black hunt. If enemy has at least 1 such
+    stack, each ally attack vs that enemy inflicts +1 more stack. Each stack grants +1% critical hit chance and +1%
+    critical damage to all attacks against that creature
+- name: The Hand of Avolius
+  slot: gloves
+  location: null
+  act: null
+  description: >-
+    After a successful melee attack this gauntlets grant wearer's WS chance to apply Bleeding effect on enemies that
+    failed Toughness Test.
+- name: Sapper Gloves
+  slot: gloves
+  location: null
+  act: null
+  description: 10 bonus to Demolition Tests.
+- name: Knuckle-Dusters
+  slot: gloves
+  location: null
+  act: null
+  description: These knuckle-dusters grant the wielder a +5 bonus to Coercion Tests.
+- name: Grox Bracers
+  slot: gloves
+  location: null
+  act: null
+  description: This sturdy hand protection. Increases Parry by 10.

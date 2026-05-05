@@ -1,0 +1,182 @@
+name: Warrant of Ragefire
+theme: Crimelord
+origin: Fortress World - Crimelord - Operative - Ballistic Skill +2 / Agility +2 / Intelligence +2
+archetypes:
+  t1: Operative
+  t2: Bounty Hunter
+  t3: Exemplar
+extras:
+  skills: Tech-Use / Logic / Lore Imperium / Lore Xenos / Medicae / Awareness
+  gear:
+    - slot: Helm
+      options: Self-Calibrating Goggles / Helm
+    - slot: Armour
+      options: '[Hiveworld] Voidsman Armour / [Death World Origin] Enforcer Light Carapace /'
+    - slot: Cloak
+      options: >-
+        Shadowguide Cloak / Cape of Righteous Fury / Zealot Cloak / Von Valancius Cloak (might be a bug not being RT
+        restricted)
+    - slot: Neck
+      options: Synaptic Coagulator / Warlord's Amulet / Hypnotising Pendant
+    - slot: Accessory 1
+      options: Long-Range Aim Lens / Bead of Might / Echo of Victory / Untuning combi-tool
+    - slot: Accessory 2
+      options: Commander's Chrono / Prey Scanner / Armour-Piercing Ammo / Vid-Capture Relay / Untuning combi-tool
+    - slot: Gloves
+      options: Overcharge Gloves / Plasmashaper Gloves / Marksman Bracers / Inevietable Demise
+    - slot: Boots
+      options: Sharpshooter Boots / Tracking Boots
+    - slot: Weapon Set 1
+      options: Ragefire Plasma Gun / Ancient Plasma Rifle / Incandecent Storm / Stella Neutrona / [Mars-Pattern] Plasma Gun
+    - slot: Weapon Set 2
+      options: >-
+        Advanced Adeptus Arbites Shotgun / Scoped Shotgun / Final Chord / Double-Barrel Shotgun / Full-Auto Shotgun /
+        [Sol-Pattern] Shotgun
+levels:
+  '1':
+    m: Analyse Enemies
+  '2':
+    m: Medicae
+  '3':
+    m: Expose Weakness
+  '4':
+    m: Dismantling
+    e: Uncanny Sight
+  '5':
+    m: Ballistic Skill
+    e: Never Stop Believing
+  '6':
+    m: Tide of Excellence
+    e: Ballistic Skill
+  '7':
+    m: Tactical Knowlege
+    e: Tech-Use / Lore Imperium
+  '8':
+    m: Improved Tactics
+    e: Plasma Weapon Proficiency
+  '9':
+    m: Dismantling II
+    e: Tech-Use / Lore Imperium
+  '10':
+    m: Logic / Awareness
+    e: Intelligence
+  '11':
+    m: Sharpshooter / Ballistics Calculation
+    e: Logic / Awareness
+  '12':
+    m: Perfect Spot
+    e: External Power Block
+  '13':
+    m: Sniper Expertise
+    e: Intelligence
+  '14':
+    m: Perception
+    e: Plasma Bank
+  '15':
+    m: Dismantling III
+  '16':
+    m: Hunt Down The Prey
+  '17':
+    m: Claim the Bounty
+  '18':
+    m: Hunting Surge
+  '19':
+    m: Wild Hunt
+  '20':
+    m: AP +1 - Ballistic Skill
+    e: Safety Training
+  '21':
+    m: Ballistic Skill
+    e: Hunter's Ambush
+  '22':
+    m: Cull the bold
+  '23':
+    m: Flay the bold
+    e: Tech-Use / Lore Imperium
+  '24':
+    m: Agility
+    e: Familiar Kickback
+  '25':
+    m: Heightened Concentration
+  '26':
+    m: Tech-Use / Lore Imperium
+    e: Agility
+  '27':
+    m: Wild Hunt II
+  '28':
+    m: Savour the kill
+  '29':
+    m: Logic
+    e: Perception
+  '30':
+    m: Contingency Plan
+    e: Hot on the trail
+  '31':
+    m: Trail and Shatter
+  '32':
+    m: Perception
+    e: Logic
+  '33':
+    m: Expert Finesse
+  '34':
+    m: Grenadier
+  '35':
+    m: Wild Hunt III
+  '36':
+    m: Eager for Battle *
+    e: Passive Learning
+  '37':
+    m: Tech-Use / Lore Imperium
+    e: Share the Spoils
+  '38':
+    m: Ballistic Skill
+    e: Disorienting Plan / Killing Plan
+  '39':
+    m: Joint Analysis
+    e: Tech-Use / Lore Imperium
+  '40':
+    m: Degraded Defence
+    e: Inspiring Trophy
+  '41':
+    m: Ballistic Skill
+    e: Fresh Target
+  '42':
+    m: Piercing Shot
+    e: Intelligence
+  '43':
+    m: Pierce and Ruin
+    e: Enhanced Splash Area
+  '44':
+    m: Logic / Awareness
+    e: Deathdealer *
+  '45':
+    m: AP +1
+  '46':
+    m: Ballistic Calculations
+    e: Logic / Awareness
+  '47':
+    m: Combat Insight
+    e: Awareness / Lore Xenos
+  '48':
+    m: Pierce the Armour
+    e: Intelligence
+  '49':
+    m: Perception
+    e: Awareness / Lore Xenos
+  '50':
+    m: Deadly Aim / Vital Points
+    e: Weak Body, Weak Soul
+  '51':
+    m: Gruesome Kill
+    e: Awareness / Lore Xenos
+  '52':
+    m: Comprehensive Analysis
+    e: Combat Addict
+  '53':
+    m: Precise Attack
+    e: Perception
+  '54':
+    m: Extermination
+    e: Insightful Percision
+  '55':
+    m: AP +1

@@ -1,0 +1,180 @@
+name: Red Mage
+theme: Sanctioned Psyker (Support)
+origin: Death World - Sanctioned Psyker (Pyromancer) - WS +2 / Str +1 / Agi +2 / Willpower +1
+archetypes:
+  t1: Warrior
+  t2: Arch-Militant
+  t3: Exemplar
+extras:
+  skills: Athletics / Carouse
+  gear:
+    - slot: Helm
+      options: Eyes of Joyeuse / Ghost Helm
+    - slot: Armour
+      options: Armour of Hidden Promise / High Spinner Armour / Phantom-Killer Bodyglove
+    - slot: Cloak
+      options: Malpain Shroud / Swashbuckler Cloak
+    - slot: Neck
+      options: Invigorating Resolve / Starmist Scarf / Solid Shield Enarmes
+    - slot: Accessory 1
+      options: Warp Surge brooch
+    - slot: Accessory 2
+      options: Hand of Offence / Chains of domination / Bead of Might
+    - slot: Gloves
+      options: Augmented Gloves / Adaptive Gloves / Inevietable Demise / Metal Claw Gloves
+    - slot: Boots
+      options: Void Veteran Boots / Enforcer Light boots / Inertia Boots / Fencing Boots / stalking boots
+    - slot: Weapon Set 1
+      options: Immaterium's Channeller / The Distortion / Incinerator / Sacrifice / Veilrender / Cursebringer
+    - slot: Weapon Set 2
+      options: Well-Maintained Rocksaw / Solar Staff
+levels:
+  '1':
+    m: Charge
+  '2':
+    m: Medicae
+  '3':
+    m: Endure
+  '4':
+    m: Daring Breach
+    e: Thick Skin
+  '5':
+    m: Rigorous Training
+    e: Weapon Skill
+  '6':
+    m: Break through
+    e: Athletics
+  '7':
+    m: Weapon Skill
+    e: Psyker Minoris
+  '8':
+    m: Athletics
+    e: Shearing Strikes
+  '9':
+    m: Daring Breach II
+  '10':
+    m: Desolation
+    e: Agility
+  '11':
+    m: Orchestrate flame
+    e: Body of Flames
+  '12':
+    m: Agility
+    e: Carouse
+  '13':
+    m: Blade Flurry
+    e: Carouse
+  '14':
+    m: Toughness
+    e: Psyker Majoris
+  '15':
+    m: Daring Breach IV
+  '16':
+    m: Versitility
+  '17':
+    m: Wildfire
+  '18':
+    m: Always Ready
+  '19':
+    m: Steady Superiority
+  '20':
+    m: AP +1
+    e: Weapon Skill
+  '21':
+    m: Flashfire
+    e: Weapon Skill
+  '22':
+    m: Reckless Rush
+    e: Blade of Light
+  '23':
+    m: Athletics
+    e: Allout
+  '24':
+    m: Agility
+    e: Psyker Terminus
+  '25':
+    m: Adaptability
+  '26':
+    m: Athletics
+    e: Agility
+  '27':
+    m: Steady Superiority IV
+  '28':
+    m: Carouse
+    e: Critical Versatility
+  '29':
+    m: Toughness
+    e: 'Characteristic Training: Per'
+  '30':
+    m: Inflame
+  '31':
+    m: Dismantle
+  '32':
+    m: Perception
+    e: Carouse
+  '33':
+    m: Distract
+    e: Perception
+  '34':
+    m: Perception
+    e: Psyker Extremis
+  '35':
+    m: Steady Superiority II
+  '36':
+    m: Eager for battle *
+    e: Impetus
+  '37':
+    m: Athletics
+    e: Exploit Weakness
+  '38':
+    m: Weapon Skill
+    e: Melting Armour
+  '39':
+    m: Molten Beam
+    e: Athletics
+  '40':
+    m: Degraded Defence
+    e: Contempt for the weak
+  '41':
+    m: Weapon Skill
+    e: Easy Target
+  '42':
+    m: Devestating Attack
+    e: Agility
+  '43':
+    m: Breaking Attack
+    e: Fire Within
+  '44':
+    m: Carouse
+    e: Destroyer *
+  '45':
+    m: AP +1
+  '46':
+    m: Crowd Kill
+    e: Carouse
+  '47':
+    m: Ramming Speed
+    e: Medicae
+  '48':
+    m: Preferred Targets
+    e: Agility
+  '49':
+    m: Willpower
+    e: Medicae
+  '50':
+    m: Peak Condition
+    e: Relentless Blaze
+  '51':
+    m: Backdraft
+    e: Medicae
+  '52':
+    m: Open Engagement
+    e: Still Mind
+  '53':
+    m: Reckless Strike
+    e: Willpower
+  '54':
+    m: Extermination
+    e: Accustomed to Glory
+  '55':
+    m: AP +1

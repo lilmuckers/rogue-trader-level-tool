@@ -1,0 +1,179 @@
+name: Idira the lightning buff queen
+archetypes:
+  t1: Operative
+  t2: Overseer
+  t3: Exemplar
+extras:
+  skills: Awareness / Lore Xenos / Lore Warp
+  gear:
+    - slot: Helm
+      options: Ghost Helm / Cultist Hood / Ethereal Visor / Dark Visionary Hood
+    - slot: Armour
+      options: Psychic Bodyglove
+    - slot: Cloak
+      options: Singed Cape
+    - slot: Neck
+      options: Starmist Scarf / Vortex Pendant
+    - slot: Accessory 1
+      options: Spirit Drape / Warp Surge Brooch / Metronome
+    - slot: Accessory 2
+      options: Experimental Psy-Amplifier / Chains of Domination
+    - slot: Gloves
+      options: Warp Conductor Gloves
+    - slot: Boots
+      options: Psyker's Footware / Boots of Decay / Battle-Psyker Boots
+    - slot: Weapon Set 1
+      options: Bloodrinker Staff / Staff of Shock and Awe
+    - slot: Weapon Set 2
+      options: Corpuscarii Oath / Arc Rifle Mindstorm
+    - slot: Pet
+      options: Grave Chill / Warp Conductive Frame
+levels:
+  '1':
+    m: Analyse Enemies
+  '2':
+    m: Awareness
+  '3':
+    m: Expose Weakness
+  '4':
+    m: Dismantling Attack
+    e: Uncanny Sight
+  '5':
+    m: Ballistic Skill
+    e: Thriving In Peril
+  '6':
+    m: Tide of Excellence
+    e: Ballistic Skill
+  '7':
+    m: Biomancy
+    e: Awareness / Lore warp
+  '8':
+    m: Ballistics Calculation
+    e: Second Sight
+  '9':
+    m: Dismantling Attack III
+    e: Medicae / Lore warp
+  '10':
+    m: Lore Xenos
+    e: Perception
+  '11':
+    m: Psyker Minoris
+    e: Lore Xenos
+  '12':
+    m: Enfeeble
+    e: Pain Channelling
+  '13':
+    m: Liturgy of Insulation
+    e: Perception
+  '14':
+    m: Willpower / Intelligence
+    e: Overclocking Module
+  '15':
+    m: Dismantling II
+  '16':
+    m: Psyber-Raven Proficiency
+  '17':
+    m: Prescience
+  '18':
+    m: Warp Buffer
+  '19':
+    m: Overcharge
+  '20':
+    m: Ap +1
+    e: Ballistic Skill
+  '21':
+    m: Psyker Majoris
+    e: Ballistic Skill
+  '22':
+    m: Warp Speed
+    e: Awareness / Lore warp
+  '23':
+    m: Sacrificial Penance
+  '24':
+    m: Intelligence
+    e: Residual Charge
+  '25':
+    m: Rite of Calibration
+  '26':
+    m: Intelligence
+    e: Awareness / Lore warp
+  '27':
+    m: Overcharge II
+  '28':
+    m: Castigating Echoes
+    e: Staggering Jolt
+  '29':
+    m: Willpower
+    e: Lore Xenos
+  '30':
+    m: Strategic Adaptation
+  '31':
+    m: Warp Saturation
+    e: Psyker Terminus
+  '32':
+    m: Willpower
+    e: Lore Xenos
+  '33':
+    m: Enhanced Augmetics
+  '34':
+    m: Grenadier
+  '35':
+    m: Overcharge I
+  '36':
+    m: Eager for Battle *
+    e: Sharpshooter
+  '37':
+    m: Awareness / Lore Warp
+    e: Fatebringer
+  '38':
+    m: Intelligence
+    e: Echopulse
+  '39':
+    m: Sensory Deprivation
+    e: Awareness / Lore Warp
+  '40':
+    m: Degraded Defence
+    e: Psyker Extremis
+  '41':
+    m: Intelligence
+    e: Fresh Target
+  '42':
+    m: Psychic Assault
+    e: Perception
+  '43':
+    m: Power Conduit
+    e: Weak Hearts
+  '44':
+    m: Lore Xenos / Lore Warp
+    e: Extermination *
+  '45':
+    m: Ap +1
+  '46':
+    m: Combat Insight
+    e: Lore Xenos / Lore Warp
+  '47':
+    m: Weak Body, Weak Soul
+    e: Medicae
+  '48':
+    m: Psy-Resonator
+    e: Perception
+  '49':
+    m: Willpower
+    e: Medicae
+  '50':
+    m: Cataclysm / VItal Points
+    e: Instant Exposure
+  '51':
+    m: Psychic Barrage
+    e: Medicae
+  '52':
+    m: Deterioration
+    e: Corpus Conversion
+  '53':
+    m: Evil Eye
+    e: Willpower
+  '54':
+    m: Combat Meditation
+    e: Bound by Warp
+  '55':
+    m: Ap +1

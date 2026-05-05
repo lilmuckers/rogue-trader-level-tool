@@ -1,0 +1,177 @@
+name: Yrliet the Avenger
+archetypes:
+  t1: Operative
+  t2: Assassin
+  t3: Exemplar
+extras:
+  skills: Awareness / Lore Xenos / Demolitions
+  gear:
+    - slot: Helm
+      options: Outcast Visor / Hunter's Focus
+    - slot: Armour
+      options: The Hunter-Father's Armour / Khaine's Revenge
+    - slot: Cloak
+      options: Backpack With Armour-Piercing Ammo / Cape of Righteous Fury / Xeno Emitter / Cameleoline Cloak
+    - slot: Neck
+      options: Wraithbone Necklace
+    - slot: Accessory 1
+      options: Notes on Weakness / Armour-Piercing Ammo / Target Designator / Aeldari Flow
+    - slot: Accessory 2
+      options: Aeldari Ranger Sight / Aeldari Flow
+    - slot: Gloves
+      options: Death Dealer Gloves / Marksman Brancers
+    - slot: Boots
+      options: Sharpshooter Boots
+    - slot: Weapon Set 1
+      options: Deadshot Splinter Rifle / Wonderer's Potent / Lullaby of Sha'eil / Gift of Kurnous / Chorus of Battle
+    - slot: Weapon Set 2
+      options: Eye of Hecaton / Blessing of Death / Wonderer's Potent
+levels:
+  '1':
+    m: Analyse Enemies
+  '2':
+    m: Awareness
+  '3':
+    m: Expose Weakness
+  '4':
+    m: Dismantling Attack
+    e: Sharpshooter
+  '5':
+    m: Perception
+    e: Nimble
+  '6':
+    m: Ballistic Calculation
+    e: Perception
+  '7':
+    m: Precise Attack
+    e: Awareness
+  '8':
+    m: Fresh Target
+    e: Swift Movements
+  '9':
+    m: Dismantling III
+    e: Lore Xenos
+  '10':
+    m: Lore Xenos
+    e: Ballistic Skill
+  '11':
+    m: Insightful Precision
+    e: Medicae
+  '12':
+    m: Perfect Spot
+    e: Las Weapon Expert
+  '13':
+    m: Comprehensive Analysis
+    e: Ballistic Skill
+  '14':
+    m: Intelligence
+    e: Swift Sight
+  '15':
+    m: Dismantling IV
+  '16':
+    m: Seek the Opening
+  '17':
+    m: Death Whisper
+  '18':
+    m: Deadly Calculations
+  '19':
+    m: Dispatch
+  '20':
+    m: AP +1
+    e: Ballistic Skill
+  '21':
+    m: Imminent Demise
+    e: Intelligence
+  '22':
+    m: Awareness
+    e: Killing Edge
+  '23':
+    m: Lethality Heightens
+  '24':
+    m: Agility
+    e: Path of the Outcast
+  '25':
+    m: Perfect Opening
+  '26':
+    m: Perception
+    e: Awareness
+  '27':
+    m: Dispatch II
+  '28':
+    m: Deadly Accuracy
+    e: Disarray
+  '29':
+    m: Perception
+    e: Lore Xenos
+  '30':
+    m: Elusive Shadow
+  '31':
+    m: Drukhari Weapon Prof
+    e: Seize the Advantage
+  '32':
+    m: Lore Xenos
+  '33':
+    m: Lone Killer
+    e: Ballistic Skill
+  '34':
+    m: Drukhari Equipment
+  '35':
+    m: Dispatch I / III
+  '36':
+    m: Eager for Battle *
+    e: Uncanny Sight
+  '37':
+    m: Awareness
+    e: Lethal Concentration
+  '38':
+    m: Ballistic Skill
+    e: Grenadier
+  '39':
+    m: Tactical Knowledge
+    e: Awareness
+  '40':
+    m: Degraded Defence
+    e: Killing Spree
+  '41':
+    m: Ballistic Skill
+    e: Tide Of Excellence
+  '42':
+    m: Poised To Strike
+    e: Agility
+  '43':
+    m: Flawless Lunge
+    e: 'Characteristic Training: PER / Base Skill: Lore Xenos'
+  '44':
+    m: Lore Xenos
+    e: Deathdealer *
+  '45':
+    m: AP + 1
+  '46':
+    m: Sniper Expertise
+    e: Lore Xenos
+  '47':
+    m: Improved tactics
+    e: Medicae
+  '48':
+    m: Bringer of Doom
+    e: Agility
+  '49':
+    m: Perception
+    e: Medicae
+  '50':
+    m: Deadly Aim / Extermination
+    e: Combat Insight
+  '51':
+    m: Mortally Effective
+    e: Medicae
+  '52':
+    m: Continuous Analysis
+    e: 'Characteristic Training Int / Advanced Skill: Lore Xenos'
+  '53':
+    m: Joint Analysis
+    e: Perception
+  '54':
+    m: Vital Points
+    e: Professional Acumen
+  '55':
+    m: AP + 1

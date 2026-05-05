@@ -1,0 +1,180 @@
+name: Proctor Exactant (Exaction Squad Commander - Kill Team)
+theme: Arbitrator
+origin: Fortress world - Arbitrator (Vigilant) - Soldier - BS +2 / Agility +2 / Perception +2
+archetypes:
+  t1: Soldier
+  t2: Arch-Militant
+  t3: Exemplar
+extras:
+  skills: Demolition / Coercion / Awareness
+  gear:
+    - slot: Helm
+      options: Steel Guidance / Gunslinger's Helm / Commissar Cap / Adeptus Arbites Helmet
+    - slot: Armour
+      options: '[Hive World Origin] Voidsmen Armour / [Death World Origin] Enforcer''s Light Carapace'
+    - slot: Cloak
+      options: Tempestus Elite Carapace Backpack / Cloak of Hatred / Tactical Backpack
+    - slot: Neck
+      options: Fury Incarnate / Ruby Splash Necklace / Dog Tags / Focus Incense
+    - slot: Accessory 1
+      options: Demolition Instructions / Litany of Exhaustion / Echo of Victory
+    - slot: Accessory 2
+      options: Bead of Might / Iron Cape / Cruciatum Litany
+    - slot: Gloves
+      options: Compensator Gloves / Gloves of Rapid Desolation / Elastic Gloves / Marksman Gloves
+    - slot: Boots
+      options: Caligae of Saint Keefe / Recoil Warboots / Sororitas Boots / Inertia Boots (Heavy breacher still bugged)
+    - slot: Weapon Set 1
+      options: Double-Barrel Shotgun / Scoped Shotgun / [Sol Pattern] Shotgun / Advanced Shield / Gunnery Shield
+    - slot: Weapon Set 2
+      options: Necrontech Lasgun / Implacable Tempest / Hot Shot Lasgun / [Mezoa-Pattern] Lasgun
+levels:
+  '1':
+    m: Run and Gun
+  '2':
+    m: Demolition
+  '3':
+    m: Revel in Slaughter
+  '4':
+    m: Firearm Mastery
+    e: Point-Blank
+  '5':
+    m: Ballistic Skill
+    e: Demolition Engineer
+  '6':
+    m: Ballistic Skill
+    e: Concentrated Fire
+  '7':
+    m: Agility
+    e: Lawful Intervention
+  '8':
+    m: Rack and Ruin
+    e: Demolition
+  '9':
+    m: Firearm Mastery III
+  '10':
+    m: Fired Up
+    e: Agility
+  '11':
+    m: Rapid Fire
+    e: Coercion
+  '12':
+    m: Perception
+    e: Never Stop Believing
+  '13':
+    m: Unfaltering Fire
+    e: Familiar Kickback
+  '14':
+    m: Shield Mastery
+    e: Coercion
+  '15':
+    m: Firearm Mastery II
+  '16':
+    m: Versitility
+  '17':
+    m: Reckless Rush
+  '18':
+    m: Allout
+  '19':
+    m: Steady Superiority
+  '20':
+    m: AP +1
+    e: Ballistic Skill
+  '21':
+    m: Dependable
+    e: Ballistic Skill
+  '22':
+    m: Wildfire
+    e: Shotgun Mastery
+  '23':
+    m: Demolition
+    e: Always Ready
+  '24':
+    m: Agility
+    e: Law and Order
+  '25':
+    m: Flashfire
+  '26':
+    m: Demolition
+    e: Agility
+  '27':
+    m: Steady Superiority IV
+  '28':
+    m: Coercion
+    e: Adaptability
+  '29':
+    m: Perception
+    e: Armour-Piercing
+  '30':
+    m: Devestating Attack
+  '31':
+    m: Breaking Attack
+  '32':
+    m: Perception
+    e: Coercion
+  '33':
+    m: Critical Versatility
+    e: Perception
+  '34':
+    m: Toughness
+    e: Public Sentencing
+  '35':
+    m: Steady Superiority II
+  '36':
+    m: Eager for Battle
+    e: Rapid Reload
+  '37':
+    m: Demolition
+    e: Dismantle
+  '38':
+    m: Ballistic Skill
+    e: Arbites Physicial Training
+  '39':
+    m: Entrench
+    e: Demolition
+  '40':
+    m: Degraded Defence
+    e: Distract
+  '41':
+    m: Ballistic Skill
+    e: Swift Slaughter
+  '42':
+    m: Kick
+    e: Agility
+  '43':
+    m: Ingenious
+    e: Pillar of the Law
+  '44':
+    m: Coercion
+    e: Extermination
+  '45':
+    m: AP +1
+  '46':
+    m: Muzzle Velocity
+    e: Coercion
+  '47':
+    m: Enough bullets foir Everyone
+    e: Awareness
+  '48':
+    m: Contempt for the weak
+    e: Agility
+  '49':
+    m: Fellowship
+    e: Awareness
+  '50':
+    m: Deadly Aim
+    e: Second Skin
+  '51':
+    m: Preferred Targets
+    e: Awareness
+  '52':
+    m: Exploit Weakness
+    e: Combat Addict
+  '53':
+    m: Controlled Shot
+    e: Fellowship
+  '54':
+    m: Cataclysm / VItal Points
+    e: Accustomed to Glory
+  '55':
+    m: AP +1
