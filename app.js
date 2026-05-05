@@ -1533,7 +1533,7 @@ function renderTradersSection() {
       wasHeld = false;
       holdTimer = setTimeout(() => {
         wasHeld = true;
-        repeatInterval = setInterval(() => updatePF(delta * 10), 100);
+        repeatInterval = setInterval(() => updatePF(delta), 100);
       }, 1000);
     });
     btn.addEventListener('pointerup',     stop);
