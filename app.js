@@ -1528,17 +1528,34 @@ function renderTradersSection() {
       clearTimeout(holdTimer); clearInterval(repeatInterval);
       holdTimer = null; repeatInterval = null;
     };
-    btn.addEventListener('click', () => { if (!wasHeld) updatePF(delta); wasHeld = false; });
-    btn.addEventListener('pointerdown', () => {
+    // Touch path — preventDefault blocks iOS callout/selection/synthetic-click
+    btn.addEventListener('touchstart', (e) => {
+      e.preventDefault();
+      wasHeld = false;
+      holdTimer = setTimeout(() => {
+        wasHeld = true;
+        updatePF(delta);
+        repeatInterval = setInterval(() => updatePF(delta), 100);
+      }, 1000);
+    }, { passive: false });
+    btn.addEventListener('touchend', (e) => {
+      e.preventDefault();
+      if (!wasHeld) updatePF(delta);
+      wasHeld = false;
+      stop();
+    });
+    btn.addEventListener('touchcancel', stop);
+    // Mouse path (desktop / preview)
+    btn.addEventListener('mousedown', () => {
       wasHeld = false;
       holdTimer = setTimeout(() => {
         wasHeld = true;
         repeatInterval = setInterval(() => updatePF(delta), 100);
       }, 1000);
     });
-    btn.addEventListener('pointerup',     stop);
-    btn.addEventListener('pointercancel', stop);
-    btn.addEventListener('pointerleave',  stop);
+    btn.addEventListener('click', () => { if (!wasHeld) updatePF(delta); wasHeld = false; });
+    btn.addEventListener('mouseup',    stop);
+    btn.addEventListener('mouseleave', stop);
   }
   addHoldRepeat(pfDown, -1);
   addHoldRepeat(pfUp,   +1);

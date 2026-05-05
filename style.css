@@ -6,7 +6,7 @@
     --rule: #2d2520;
     --shadow: 0 2px 0 #000, 0 0 24px rgba(201,164,76,0.08);
   }
-  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; user-select: none; -webkit-user-select: none; }
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; user-select: none; -webkit-user-select: none; -webkit-touch-callout: none; }
   html, body { margin: 0; padding: 0; background: var(--bg); color: var(--ink); font-family: 'EB Garamond', Georgia, serif; font-size: 17px; line-height: 1.5; min-height: 100vh; overscroll-behavior: none; }
   body {
     background:
