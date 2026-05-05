@@ -22,11 +22,12 @@
 
 <div class="header">
   <div class="eagle">⚜ Imperium of Man ⚜</div>
-  <h1 class="title">Rogue Trader</h1>
-  <div class="subtitle">Level Tracker &amp; Build Companion</div>
+  <h1 class="title" id="section-title">Rogue Trader</h1>
+  <div class="subtitle" id="section-subtitle">Level Tracker &amp; Build Companion</div>
 </div>
 
-<div id="tracker-view">
+<!-- ── Section: Builds (default) ── -->
+<div id="tracker-view" class="section-view">
   <div class="top-actions">
     <button id="edit-setup-btn">⚙ Edit Roster</button>
     <button id="goto-50-btn">Jump ▸ Lvl</button>
@@ -47,6 +48,22 @@
   <div class="footer-note">In the grim darkness of the far future,<br>there is only optimised XP allocation.</div>
 </div>
 
+<!-- ── Section: Colony Projects ── -->
+<div id="colony-view" class="section-view hidden">
+  <div id="colony-content"></div>
+</div>
+
+<!-- ── Section: Traders ── -->
+<div id="traders-view" class="section-view hidden">
+  <div id="traders-content"></div>
+</div>
+
+<!-- ── Section: Resources ── -->
+<div id="resources-view" class="section-view hidden">
+  <div id="resources-content"></div>
+</div>
+
+<!-- ── Setup overlay (not a section) ── -->
 <div id="setup-view" class="hidden">
   <div class="setup-tip">
     Choose your <strong>Main Character</strong> build, a variant for each <strong>companion</strong>, and the level at which each companion <strong>joins your party</strong>. Companions appear greyed out below their join level.
@@ -70,6 +87,26 @@
   <button id="cancel-setup-btn" class="reset-btn hidden">Cancel</button>
   <button id="reset-btn" class="reset-btn hidden">Reset All Data</button>
 </div>
+
+<!-- ── Bottom Nav ── -->
+<nav class="bottom-nav" id="bottom-nav">
+  <button class="nav-btn active" data-section="tracker">
+    <svg class="nav-icon" viewBox="0 0 24 24"><path d="M12 2a5 5 0 1 0 0 10A5 5 0 0 0 12 2zm0 12c-5.33 0-8 2.67-8 4v2h16v-2c0-1.33-2.67-4-8-4z"/></svg>
+    <span>Builds</span>
+  </button>
+  <button class="nav-btn" data-section="colony">
+    <svg class="nav-icon" viewBox="0 0 24 24"><path d="M15 2H9L3 8v8l6 6h6l6-6V8l-6-6zm-1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+    <span>Colonies</span>
+  </button>
+  <button class="nav-btn" data-section="traders">
+    <svg class="nav-icon" viewBox="0 0 24 24"><path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2 5h14M9 21a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm10 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <span>Traders</span>
+  </button>
+  <button class="nav-btn" data-section="resources">
+    <svg class="nav-icon" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+    <span>Resources</span>
+  </button>
+</nav>
 
 </div>
 

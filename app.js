@@ -1245,8 +1245,514 @@ function populateBuildSelect(theme) {
   });
 }
 
-function showTracker() { $('setup-view').classList.add('hidden'); $('tracker-view').classList.remove('hidden'); renderTracker(); }
-function showSetup() { $('tracker-view').classList.add('hidden'); $('setup-view').classList.remove('hidden'); renderSetup(); }
+// ============= SECTION NAVIGATION =============
+let _activeSection = 'tracker';
+
+const SECTION_META = {
+  tracker:   { title: 'Rogue Trader',    subtitle: 'Level Tracker & Build Companion' },
+  colony:    { title: 'Colony Projects', subtitle: 'Track your colonial development' },
+  traders:   { title: 'Traders',         subtitle: 'Faction reputations & available items' },
+  resources: { title: 'Resources',       subtitle: 'Star system resources' },
+};
+
+function showSection(name) {
+  _activeSection = name;
+  document.querySelectorAll('.section-view').forEach(el => el.classList.add('hidden'));
+  $(`${name}-view`).classList.remove('hidden');
+  $('setup-view').classList.add('hidden');
+  document.querySelectorAll('.nav-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.section === name);
+  });
+  const meta = SECTION_META[name] || {};
+  $('section-title').textContent  = meta.title    || 'Rogue Trader';
+  $('section-subtitle').textContent = meta.subtitle || '';
+  if (name === 'tracker')   renderTracker();
+  else if (name === 'colony')    renderColonySection();
+  else if (name === 'traders')   renderTradersSection();
+  else if (name === 'resources') renderResourcesSection();
+}
+
+document.querySelectorAll('.nav-btn').forEach(btn => {
+  btn.addEventListener('click', () => showSection(btn.dataset.section));
+});
+
+function showTracker() { showSection('tracker'); }
+function showSetup() {
+  document.querySelectorAll('.section-view').forEach(el => el.classList.add('hidden'));
+  $('setup-view').classList.remove('hidden');
+  renderSetup();
+}
+
+// ============= COLONY PROJECTS =============
+
+const KEY_COLONY_DONE  = 'rt.colony-done.v1';
+const KEY_COLONY_LEVEL = 'rt.colony-level.v1';
+
+function getColonyDone(colonyName) {
+  return (Store.get(KEY_COLONY_DONE) || {})[colonyName] || {};
+}
+function toggleColonyProject(colonyName, projectName) {
+  const all = Store.get(KEY_COLONY_DONE) || {};
+  if (!all[colonyName]) all[colonyName] = {};
+  if (all[colonyName][projectName]) delete all[colonyName][projectName];
+  else all[colonyName][projectName] = true;
+  Store.set(KEY_COLONY_DONE, all);
+}
+function getColonyLevel(colonyName) {
+  return (Store.get(KEY_COLONY_LEVEL) || {})[colonyName] || 1;
+}
+function setColonyLevel(colonyName, newLevel) {
+  const all = Store.get(KEY_COLONY_LEVEL) || {};
+  all[colonyName] = Math.max(1, Math.min(5, newLevel));
+  Store.set(KEY_COLONY_LEVEL, all);
+}
+
+let _selectedColony = 0;
+
+function renderColonySection() {
+  const el = $('colony-content');
+  el.innerHTML = '';
+  if (!DATA.colonies || !DATA.colonies.length) {
+    el.textContent = 'No colony data available.';
+    return;
+  }
+  const colony = DATA.colonies[_selectedColony];
+  const colonyLevel = getColonyLevel(colony.name);
+  const done = getColonyDone(colony.name);
+
+  // Colony selector + level stepper
+  const selectorWrap = document.createElement('div');
+  selectorWrap.className = 'colony-selector-wrap';
+
+  const sel = document.createElement('select');
+  sel.className = 'colony-select';
+  DATA.colonies.forEach((c, i) => {
+    const o = document.createElement('option');
+    o.value = i; o.textContent = c.name; o.selected = i === _selectedColony;
+    sel.appendChild(o);
+  });
+  sel.addEventListener('change', () => { _selectedColony = parseInt(sel.value, 10); renderColonySection(); });
+  selectorWrap.appendChild(sel);
+
+  const levelWrap = document.createElement('div');
+  levelWrap.className = 'colony-level-wrap';
+  const levelLabel = document.createElement('span');
+  levelLabel.className = 'colony-level-label';
+  levelLabel.textContent = 'Level';
+  const btnDown = document.createElement('button');
+  btnDown.className = 'colony-level-btn'; btnDown.textContent = '−';
+  btnDown.addEventListener('click', () => { setColonyLevel(colony.name, colonyLevel - 1); renderColonySection(); });
+  const levelNum = document.createElement('span');
+  levelNum.className = 'colony-level-num'; levelNum.textContent = colonyLevel;
+  const btnUp = document.createElement('button');
+  btnUp.className = 'colony-level-btn'; btnUp.textContent = '+';
+  btnUp.addEventListener('click', () => { setColonyLevel(colony.name, colonyLevel + 1); renderColonySection(); });
+  levelWrap.append(levelLabel, btnDown, levelNum, btnUp);
+  selectorWrap.appendChild(levelWrap);
+  el.appendChild(selectorWrap);
+
+  // Project levels
+  const levels = colony.levels || {};
+  for (const lvlStr of Object.keys(levels).sort((a, b) => a - b)) {
+    const lvl = parseInt(lvlStr, 10);
+    const projects = levels[lvlStr];
+    const isCurrent = lvl === colonyLevel;
+    const isFuture  = lvl > colonyLevel;
+    const isPast    = lvl < colonyLevel;
+
+    const section = document.createElement('div');
+    section.className = 'colony-level-section';
+
+    const heading = document.createElement('div');
+    heading.className = 'colony-level-heading' +
+      (isCurrent ? ' is-current' : isPast ? ' is-past' : ' is-future');
+    heading.textContent = `Level ${lvl}`;
+    section.appendChild(heading);
+
+    for (const project of (projects || [])) {
+      const isDone = !!done[project.name];
+      const card = document.createElement('div');
+      card.className = 'colony-project' +
+        (isDone ? ' is-done' : '') +
+        (isFuture ? ' is-future' : '') +
+        (isPast && !isDone ? ' is-past-uncomplete' : '');
+
+      const header = document.createElement('div');
+      header.className = 'colony-project-header';
+      const check = document.createElement('div');
+      check.className = 'colony-project-check';
+      check.textContent = isDone ? '✓' : '';
+      const nameEl = document.createElement('div');
+      nameEl.className = 'colony-project-name';
+      nameEl.textContent = project.name;
+      header.append(check, nameEl);
+      card.appendChild(header);
+
+      const details = document.createElement('div');
+      details.className = 'colony-project-details hidden';
+      if (project.cost && project.cost !== 'None') {
+        const row = document.createElement('div');
+        row.className = 'colony-project-row';
+        row.innerHTML = `<strong>Cost:</strong> ${project.cost}`;
+        details.appendChild(row);
+      }
+      if (project.benefit) {
+        const row = document.createElement('div');
+        row.className = 'colony-project-row';
+        row.innerHTML = `<strong>Reward:</strong> ${project.benefit}`;
+        details.appendChild(row);
+      }
+      card.appendChild(details);
+
+      if (!isFuture) {
+        card.addEventListener('click', (e) => {
+          if (check.contains(e.target) || e.target === check) {
+            toggleColonyProject(colony.name, project.name);
+            renderColonySection();
+          } else {
+            details.classList.toggle('hidden');
+          }
+        });
+      }
+      section.appendChild(card);
+    }
+    el.appendChild(section);
+  }
+}
+
+// ============= TRADERS =============
+
+const KEY_TRADERS_ACT = 'rt.traders-act.v1';
+const KEY_TRADERS_REP = 'rt.traders-rep.v1';
+
+function getTradersAct() { return Store.get(KEY_TRADERS_ACT) || 1; }
+function setTradersAct(act) { Store.set(KEY_TRADERS_ACT, act); }
+function getFactionRep(factionName) {
+  return (Store.get(KEY_TRADERS_REP) || {})[factionName] || 0;
+}
+function setFactionRep(factionName, rep) {
+  const all = Store.get(KEY_TRADERS_REP) || {};
+  all[factionName] = Math.max(0, Math.min(10, rep));
+  Store.set(KEY_TRADERS_REP, all);
+}
+function vendorItemAvailable(item, rep, act) {
+  if (act < item.act) return false;
+  if (typeof item.rep === 'number') return rep >= item.rep;
+  return true;  // text rep (alignment-based) — always show
+}
+function vendorItemLockReason(item, rep, act) {
+  if (act < item.act) return `Available in Act ${item.act}`;
+  if (typeof item.rep === 'number' && rep < item.rep) return `Requires rep ${item.rep}`;
+  if (typeof item.rep === 'string') return `Requires: ${item.rep}`;
+  return null;
+}
+
+let _traderSearchText = '';
+
+function renderTradersSection() {
+  const el = $('traders-content');
+  el.innerHTML = '';
+  if (!DATA.vendors || !DATA.vendors.length) { el.textContent = 'No vendor data available.'; return; }
+
+  const act = getTradersAct();
+
+  // Act selector
+  const actRow = document.createElement('div');
+  actRow.className = 'traders-act-row';
+  const actLabel = document.createElement('span');
+  actLabel.className = 'traders-act-label';
+  actLabel.textContent = 'Act';
+  const actBtns = document.createElement('div');
+  actBtns.className = 'traders-act-btns';
+  [1, 2, 3, 4].forEach(a => {
+    const btn = document.createElement('button');
+    btn.className = 'traders-act-btn' + (a === act ? ' active' : '');
+    btn.textContent = a;
+    btn.addEventListener('click', () => { setTradersAct(a); renderTradersSection(); });
+    actBtns.appendChild(btn);
+  });
+  actRow.append(actLabel, actBtns);
+  el.appendChild(actRow);
+
+  // Search bar
+  const searchInput = document.createElement('input');
+  searchInput.className = 'traders-search';
+  searchInput.type = 'search';
+  searchInput.placeholder = 'Search items across all factions…';
+  searchInput.value = _traderSearchText;
+  searchInput.addEventListener('input', (e) => { _traderSearchText = e.target.value; renderTradersSection(); });
+  el.appendChild(searchInput);
+  if (_traderSearchText) {
+    requestAnimationFrame(() => {
+      searchInput.focus();
+      searchInput.setSelectionRange(searchInput.value.length, searchInput.value.length);
+    });
+  }
+
+  const query = _traderSearchText.trim().toLowerCase();
+  if (query.length >= 2) {
+    // Search results mode
+    const matches = [];
+    DATA.vendors.forEach(faction => {
+      faction.items.forEach(item => {
+        if (item.name.toLowerCase().includes(query)) matches.push({ item, factionName: faction.name });
+      });
+    });
+    if (!matches.length) {
+      const empty = document.createElement('div');
+      empty.style.cssText = 'color:var(--ink-dim);padding:12px 0;font-size:15px;';
+      empty.textContent = 'No items found.';
+      el.appendChild(empty);
+    } else {
+      matches.forEach(({ item, factionName }) => {
+        const rep = getFactionRep(factionName);
+        const available = vendorItemAvailable(item, rep, act);
+        const row = document.createElement('div');
+        row.className = 'search-result-item';
+        row.innerHTML = `<div class="search-result-name">${item.name}</div>
+          <div class="search-result-meta">
+            <span>${factionName}</span> · Rep <span>${item.rep}</span> · Act <span>${item.act}</span>
+            ${!available ? '<em style="color:var(--ink-faint)"> (locked)</em>' : ''}
+          </div>`;
+        row.addEventListener('click', () => {
+          _traderSearchText = '';
+          const faction = DATA.vendors.find(f => f.name === factionName);
+          openFactionSheet(faction, act, item.name);
+        });
+        el.appendChild(row);
+      });
+    }
+    return;
+  }
+
+  // Faction list
+  DATA.vendors.forEach(faction => {
+    const rep = getFactionRep(faction.name);
+    const availCount = faction.items.filter(it => vendorItemAvailable(it, rep, act)).length;
+    const card = document.createElement('div');
+    card.className = 'faction-card';
+    card.innerHTML = `<div class="faction-card-header">
+      <div class="faction-name">${faction.name}</div>
+      <div class="faction-rep-badge">Rep ${rep}</div>
+      <div class="faction-available-count">${availCount} available</div>
+    </div>`;
+    card.addEventListener('click', () => openFactionSheet(faction, act, null));
+    el.appendChild(card);
+  });
+}
+
+function openFactionSheet(faction, act, scrollToItem) {
+  openSheet(faction.name, () => buildFactionContent(faction, act, scrollToItem));
+}
+
+function buildFactionContent(faction, act, scrollToItem) {
+  const wrap = document.createElement('div');
+  let rep = getFactionRep(faction.name);
+
+  // Rep stepper
+  const repControls = document.createElement('div');
+  repControls.className = 'faction-rep-controls';
+  const repLabel = document.createElement('div');
+  repLabel.className = 'faction-rep-label';
+  repLabel.textContent = 'Reputation level';
+  const repDown = document.createElement('button');
+  repDown.className = 'faction-rep-btn'; repDown.textContent = '−';
+  const repVal = document.createElement('div');
+  repVal.className = 'faction-rep-val'; repVal.textContent = rep;
+  const repUp = document.createElement('button');
+  repUp.className = 'faction-rep-btn'; repUp.textContent = '+';
+
+  const updateRep = (delta) => {
+    rep = Math.max(0, Math.min(10, rep + delta));
+    setFactionRep(faction.name, rep);
+    repVal.textContent = rep;
+    buildItems();
+  };
+  repDown.addEventListener('click', () => updateRep(-1));
+  repUp.addEventListener('click',   () => updateRep(+1));
+  repControls.append(repLabel, repDown, repVal, repUp);
+  wrap.appendChild(repControls);
+
+  const itemsEl = document.createElement('div');
+  wrap.appendChild(itemsEl);
+
+  function buildItems() {
+    itemsEl.innerHTML = '';
+    const available = faction.items.filter(it => vendorItemAvailable(it, rep, act));
+    const locked    = faction.items.filter(it => !vendorItemAvailable(it, rep, act));
+
+    if (available.length) {
+      const h = document.createElement('div');
+      h.className = 'vendor-section-heading'; h.textContent = 'Available';
+      itemsEl.appendChild(h);
+      available.forEach(item => itemsEl.appendChild(buildVendorItemEl(item, true, faction.name)));
+    }
+    if (locked.length) {
+      const h = document.createElement('div');
+      h.className = 'vendor-section-heading'; h.textContent = 'Locked';
+      itemsEl.appendChild(h);
+      locked.forEach(item => itemsEl.appendChild(buildVendorItemEl(item, false, faction.name)));
+    }
+
+    if (scrollToItem) {
+      requestAnimationFrame(() => {
+        const all = itemsEl.querySelectorAll('[data-item-name]');
+        for (const el of all) {
+          if (el.dataset.itemName === scrollToItem) {
+            el.scrollIntoView({ block: 'center' });
+            el.style.outline = '1px solid var(--gold)';
+            setTimeout(() => { el.style.outline = ''; }, 1500);
+            break;
+          }
+        }
+      });
+    }
+  }
+
+  buildItems();
+  return wrap;
+}
+
+function buildVendorItemEl(item, available, factionName) {
+  const el = document.createElement('div');
+  el.className = 'vendor-item' + (available ? ' available' : ' locked');
+  el.dataset.itemName = item.name;
+  el.innerHTML = `<div class="vendor-item-name">${item.name}</div>
+    <div class="vendor-item-meta">Rep ${item.rep} · Act ${item.act}${item.pf ? ` · PF ${item.pf}` : ''}</div>`;
+  if (!available) {
+    const lock = document.createElement('div');
+    lock.className = 'vendor-item-lock-reason';
+    lock.textContent = vendorItemLockReason(item, getFactionRep(factionName), getTradersAct()) || '';
+    el.appendChild(lock);
+  }
+  if (available) {
+    el.addEventListener('click', () => {
+      const found = lookupGear(item.name.replace(/\s*\(.*?\)\s*$/, '').trim());
+      if (found) pushGearDetail(found, item.name);
+    });
+  }
+  return el;
+}
+
+// ============= RESOURCES =============
+
+const RESOURCE_TYPES = ['people','provisions','chemicals','plasteel','mechanisms','promethium','weapons','xenotech','adamantine','flogiston'];
+
+let _resourceTab      = 'system';
+let _selectedSystem   = null;
+let _selectedResource = null;
+
+function renderResourcesSection() {
+  const el = $('resources-content');
+  el.innerHTML = '';
+  if (!DATA.resourceSystems || !DATA.resourceSystems.length) { el.textContent = 'No resource data.'; return; }
+
+  // Tab bar
+  const tabBar = document.createElement('div');
+  tabBar.className = 'tab-bar';
+  ['system', 'resource'].forEach(tab => {
+    const btn = document.createElement('button');
+    btn.className = 'tab-btn' + (_resourceTab === tab ? ' active' : '');
+    btn.textContent = tab === 'system' ? 'By System' : 'By Resource';
+    btn.addEventListener('click', () => { _resourceTab = tab; renderResourcesSection(); });
+    tabBar.appendChild(btn);
+  });
+  el.appendChild(tabBar);
+
+  if (_resourceTab === 'system') renderResourcesBySystem(el);
+  else renderResourcesByType(el);
+}
+
+function renderResourcesBySystem(el) {
+  DATA.resourceSystems.forEach(system => {
+    const isSelected = _selectedSystem === system.name;
+    const item = document.createElement('div');
+    item.className = 'selectable-item' + (isSelected ? ' active' : '');
+    const nameEl = document.createElement('div');
+    nameEl.className = 'selectable-item-name';
+    nameEl.textContent = system.name;
+    const resPreview = system.resources
+      ? Object.entries(system.resources)
+          .sort(([, a], [, b]) => (Array.isArray(b) ? b[0] : b) - (Array.isArray(a) ? a[0] : a))
+          .map(([k, v]) => `${k} ×${Array.isArray(v) ? v[0] : v}`)
+          .join(' · ')
+      : '';
+    if (resPreview || system.extractum || system.event) {
+      const sub = document.createElement('div');
+      sub.className = 'selectable-item-sub';
+      sub.textContent = resPreview;
+      item.append(nameEl, sub);
+    } else {
+      item.appendChild(nameEl);
+    }
+    item.addEventListener('click', () => {
+      _selectedSystem = isSelected ? null : system.name;
+      renderResourcesSection();
+    });
+    el.appendChild(item);
+
+    if (isSelected) {
+      const panel = document.createElement('div');
+      panel.className = 'resource-detail-panel';
+      if (system.resources) {
+        Object.entries(system.resources)
+          .sort(([, a], [, b]) => (Array.isArray(b) ? b[0] : b) - (Array.isArray(a) ? a[0] : a))
+          .forEach(([res, qty]) => {
+            const row = document.createElement('div');
+            row.className = 'resource-row';
+            row.innerHTML = `<div class="resource-name-col">${res[0].toUpperCase() + res.slice(1)}</div>
+              <div class="resource-qty">${Array.isArray(qty) ? qty.join('/') : qty}</div>`;
+            panel.appendChild(row);
+          });
+      }
+      ['extractum', 'event'].forEach(type => {
+        if (system[type]) {
+          const row = document.createElement('div');
+          row.className = 'resource-row';
+          row.innerHTML = `<div class="resource-name-col">${type[0].toUpperCase() + type.slice(1)} Resources</div>
+            <span class="resource-quality-badge ${system[type]}">${system[type]}</span>`;
+          panel.appendChild(row);
+        }
+      });
+      el.appendChild(panel);
+    }
+  });
+}
+
+function renderResourcesByType(el) {
+  RESOURCE_TYPES.forEach(resType => {
+    const entries = DATA.resourceSystems
+      .filter(s => s.resources && resType in s.resources)
+      .map(s => ({ system: s.name, qty: s.resources[resType], qtyNum: Array.isArray(s.resources[resType]) ? s.resources[resType][0] : s.resources[resType] }))
+      .sort((a, b) => b.qtyNum - a.qtyNum);
+
+    if (!entries.length) return;
+    const isSelected = _selectedResource === resType;
+    const label = resType[0].toUpperCase() + resType.slice(1);
+    const item = document.createElement('div');
+    item.className = 'selectable-item' + (isSelected ? ' active' : '');
+    item.innerHTML = `<div class="selectable-item-name">${label}</div>
+      <div class="selectable-item-sub">${entries.length} system${entries.length !== 1 ? 's' : ''} · best: ${entries[0].system} ×${entries[0].qtyNum}</div>`;
+    item.addEventListener('click', () => {
+      _selectedResource = isSelected ? null : resType;
+      renderResourcesSection();
+    });
+    el.appendChild(item);
+
+    if (isSelected) {
+      const panel = document.createElement('div');
+      panel.className = 'resource-detail-panel';
+      entries.forEach(({ system, qty }) => {
+        const row = document.createElement('div');
+        row.className = 'resource-row';
+        row.innerHTML = `<div class="resource-name-col">${system}</div>
+          <div class="resource-qty">${Array.isArray(qty) ? qty.join('/') : qty}</div>`;
+        panel.appendChild(row);
+      });
+      el.appendChild(panel);
+    }
+  });
+}
 
 $('lvl-up').addEventListener('click', () => { if (level < MAX_LVL) { level++; Store.set(KEY_LEVEL, level); renderTracker(); } });
 $('lvl-down').addEventListener('click', () => { if (level > MIN_LVL) { level--; Store.set(KEY_LEVEL, level); renderTracker(); } });
