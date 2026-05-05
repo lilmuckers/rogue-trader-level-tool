@@ -1388,30 +1388,39 @@ function renderColonySection() {
       header.append(check, nameEl);
       card.appendChild(header);
 
-      const details = document.createElement('div');
-      details.className = 'colony-project-details hidden';
-      if (project.cost && project.cost !== 'None') {
-        const row = document.createElement('div');
-        row.className = 'colony-project-row';
-        row.innerHTML = `<strong>Cost:</strong> ${project.cost}`;
-        details.appendChild(row);
-      }
-      if (project.benefit) {
-        const row = document.createElement('div');
-        row.className = 'colony-project-row';
-        row.innerHTML = `<strong>Reward:</strong> ${project.benefit}`;
-        details.appendChild(row);
-      }
-      card.appendChild(details);
-
       if (!isFuture) {
+        check.addEventListener('click', (e) => {
+          e.stopPropagation();
+          toggleColonyProject(colony.name, project.name);
+          renderColonySection();
+        });
+        nameEl.style.cursor = 'pointer';
         card.addEventListener('click', (e) => {
-          if (check.contains(e.target) || e.target === check) {
-            toggleColonyProject(colony.name, project.name);
-            renderColonySection();
-          } else {
-            details.classList.toggle('hidden');
-          }
+          if (check.contains(e.target)) return;
+          // Open modal sheet with project details
+          openSheet(project.name, () => {
+            const wrap = document.createElement('div');
+            wrap.className = 'colony-project-detail-sheet';
+            if (project.cost && project.cost !== 'None') {
+              const row = document.createElement('div');
+              row.className = 'colony-project-row';
+              row.innerHTML = `<strong>Cost:</strong> ${project.cost}`;
+              wrap.appendChild(row);
+            }
+            if (project.benefit) {
+              const row = document.createElement('div');
+              row.className = 'colony-project-row';
+              row.innerHTML = `<strong>Reward:</strong> ${project.benefit}`;
+              wrap.appendChild(row);
+            }
+            if (!project.cost && !project.benefit) {
+              const row = document.createElement('div');
+              row.className = 'colony-project-row';
+              row.textContent = 'No details available.';
+              wrap.appendChild(row);
+            }
+            return wrap;
+          });
         });
       }
       section.appendChild(card);
@@ -1459,19 +1468,13 @@ function renderTradersSection() {
   // Act selector
   const actRow = document.createElement('div');
   actRow.className = 'traders-act-row';
-  const actLabel = document.createElement('span');
-  actLabel.className = 'traders-act-label';
-  actLabel.textContent = 'Act';
-  const actBtns = document.createElement('div');
-  actBtns.className = 'traders-act-btns';
   [1, 2, 3, 4].forEach(a => {
     const btn = document.createElement('button');
     btn.className = 'traders-act-btn' + (a === act ? ' active' : '');
-    btn.textContent = a;
+    btn.textContent = `Act ${a}`;
     btn.addEventListener('click', () => { setTradersAct(a); renderTradersSection(); });
-    actBtns.appendChild(btn);
+    actRow.appendChild(btn);
   });
-  actRow.append(actLabel, actBtns);
   el.appendChild(actRow);
 
   // Search bar

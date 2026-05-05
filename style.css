@@ -666,27 +666,25 @@
   color: var(--gold-bright); letter-spacing: 0.04em; flex: 1;
 }
 .colony-project.is-future .colony-project-name { color: var(--ink-faint); }
-.colony-project-details { margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--rule); }
-.colony-project-row { font-size: 14px; color: var(--ink-dim); margin-bottom: 4px; }
+.colony-project-detail-sheet { padding: 4px 0; }
+.colony-project-row { font-size: 15px; color: var(--ink-dim); margin-bottom: 12px; line-height: 1.5; }
 .colony-project-row strong { color: var(--ink); font-weight: 600; }
 .colony-project.is-past-uncomplete { opacity: 0.45; }
 
 /* ── Traders section ─────────────────────────────────────────────────────────── */
 .traders-act-row {
-  display: flex; align-items: center; gap: 10px; margin-bottom: 16px;
+  display: flex; gap: 8px; margin-bottom: 16px;
 }
-.traders-act-label {
-  font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 0.25em;
-  text-transform: uppercase; color: var(--ink-dim);
-}
-.traders-act-btns { display: flex; gap: 4px; }
 .traders-act-btn {
-  padding: 5px 12px; background: var(--bg-3); border: 1px solid var(--rule);
+  flex: 1; padding: 10px 4px; background: var(--bg-3); border: 1px solid var(--rule);
   color: var(--ink-dim); font-family: 'Cinzel', serif; font-size: 11px;
-  letter-spacing: 0.1em; border-radius: 3px; cursor: pointer;
-  touch-action: manipulation;
+  letter-spacing: 0.12em; text-transform: uppercase; border-radius: 3px; cursor: pointer;
+  touch-action: manipulation; transition: border-color 0.15s, color 0.15s, background 0.15s;
 }
-.traders-act-btn.active { border-color: var(--gold); color: var(--gold); background: rgba(201,164,76,0.08); }
+.traders-act-btn.active {
+  border-color: var(--gold); color: var(--gold);
+  background: rgba(201,164,76,0.1); font-weight: 600;
+}
 .traders-search {
   width: 100%; background: var(--bg-3); border: 1px solid var(--rule);
   border-radius: 3px; padding: 9px 12px; color: var(--ink);
