@@ -1532,6 +1532,7 @@ const SECTION_META = {
   colony:    { title: 'Colony Projects', subtitle: 'Track your colonial development' },
   traders:   { title: 'Traders',         subtitle: 'Faction reputations & available items' },
   resources: { title: 'Resources',       subtitle: 'Star system resources' },
+  notes:     { title: 'Notes',           subtitle: 'Campaign notes & reminders' },
 };
 
 function showSection(name) {
@@ -1549,6 +1550,7 @@ function showSection(name) {
   else if (name === 'colony')    renderColonySection();
   else if (name === 'traders')   renderTradersSection();
   else if (name === 'resources') renderResourcesSection();
+  else if (name === 'notes')     renderNotesSection();
 }
 
 document.querySelectorAll('.nav-btn').forEach(btn => {
@@ -2154,6 +2156,222 @@ function buildVendorItemEl(item, available, factionName) {
     if (found) pushGearDetail(found, item.name);
   });
   return el;
+}
+
+// ============= NOTES =============
+const KEY_NOTES = 'rt.notes.v1';
+
+function getNotes() { return Store.get(KEY_NOTES) || []; }
+function setNotes(notes) { Store.set(KEY_NOTES, notes); }
+function noteTitle(content) {
+  const first = (content || '').split('\n').find(l => l.trim());
+  if (!first) return 'Untitled';
+  return first.replace(/^#+\s*/, '').slice(0, 60) || 'Untitled';
+}
+function noteSnippet(content) {
+  const lines = (content || '').split('\n').filter(l => l.trim());
+  const body = lines.slice(1, 3).join(' ').replace(/[#*`_]/g, '');
+  return body.slice(0, 100) || '';
+}
+function renderMarkdown(text) {
+  if (!text) return '';
+  // Escape HTML
+  let s = text.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  // Headers
+  s = s.replace(/^### (.+)$/gm, '<h3>$1</h3>');
+  s = s.replace(/^## (.+)$/gm,  '<h2>$1</h2>');
+  s = s.replace(/^# (.+)$/gm,   '<h1>$1</h1>');
+  // Bold/italic/code (inline)
+  s = s.replace(/\*\*\*(.+?)\*\*\*/g, '<strong><em>$1</em></strong>');
+  s = s.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+  s = s.replace(/\*(.+?)\*/g,    '<em>$1</em>');
+  s = s.replace(/`(.+?)`/g,      '<code>$1</code>');
+  // Horizontal rule
+  s = s.replace(/^---$/gm, '<hr>');
+  // Lists: group consecutive - lines into <ul>
+  s = s.replace(/((?:^- .+\n?)+)/gm, (block) => {
+    const items = block.split('\n').filter(l => l.startsWith('- ')).map(l => `<li>${l.slice(2)}</li>`).join('');
+    return `<ul>${items}</ul>`;
+  });
+  // Paragraphs: blank-line separated non-block content
+  s = s.replace(/\n{2,}/g, '\n\n');
+  const blocks = s.split('\n\n');
+  s = blocks.map(b => {
+    b = b.trim();
+    if (!b) return '';
+    if (/^<[hul]|^<hr/.test(b)) return b;
+    return '<p>' + b.replace(/\n/g, '<br>') + '</p>';
+  }).join('\n');
+  return s;
+}
+
+function renderNotesSection() {
+  const el = $('notes-content');
+  el.innerHTML = '';
+  const notes = getNotes();
+
+  // Header row with + button
+  const headerRow = document.createElement('div');
+  headerRow.className = 'notes-header-row';
+  const addBtn = document.createElement('button');
+  addBtn.className = 'notes-add-btn';
+  addBtn.textContent = '＋ New Note';
+  addBtn.addEventListener('click', () => openNoteEditor(null));
+  headerRow.appendChild(addBtn);
+  el.appendChild(headerRow);
+
+  if (!notes.length) {
+    const empty = document.createElement('div');
+    empty.className = 'notes-empty';
+    empty.textContent = 'No notes yet. Tap ＋ to create one.';
+    el.appendChild(empty);
+    return;
+  }
+
+  const sorted = [...notes].sort((a, b) => (b.updatedAt || 0) - (a.updatedAt || 0));
+  sorted.forEach(note => {
+    const card = document.createElement('div');
+    card.className = 'note-card';
+    const title = document.createElement('div');
+    title.className = 'note-card-title';
+    title.textContent = noteTitle(note.content);
+    const snippet = document.createElement('div');
+    snippet.className = 'note-card-snippet';
+    snippet.textContent = noteSnippet(note.content);
+    const date = document.createElement('div');
+    date.className = 'note-card-date';
+    date.textContent = note.updatedAt ? new Date(note.updatedAt).toLocaleDateString() : '';
+    card.append(title, snippet, date);
+    card.addEventListener('click', () => openNoteEditor(note));
+    el.appendChild(card);
+  });
+}
+
+function openNoteEditor(note) {
+  const isNew = !note;
+  if (isNew) {
+    note = { id: Date.now() + Math.random(), content: '', updatedAt: Date.now() };
+    const notes = getNotes();
+    notes.unshift(note);
+    setNotes(notes);
+  }
+  openSheet(isNew ? 'New Note' : noteTitle(note.content), () => buildNoteEditorContent(note));
+}
+
+function buildNoteEditorContent(note) {
+  const wrap = document.createElement('div');
+  wrap.className = 'note-editor-wrap';
+
+  // Toolbar
+  const toolbar = document.createElement('div');
+  toolbar.className = 'note-toolbar';
+
+  // Preview toggle
+  let previewMode = false;
+  const previewBtn = document.createElement('button');
+  previewBtn.className = 'note-tool-btn note-preview-btn';
+  previewBtn.textContent = 'Preview';
+
+  // Format buttons
+  const fmtButtons = [
+    { label: 'B',  title: 'Bold',        wrap: ['**','**'] },
+    { label: 'I',  title: 'Italic',      wrap: ['*','*'] },
+    { label: 'H1', title: 'Heading 1',   prefix: '# ' },
+    { label: 'H2', title: 'Heading 2',   prefix: '## ' },
+    { label: '•',  title: 'List item',   prefix: '- ' },
+    { label: '—',  title: 'Divider',     insert: '\n---\n' },
+  ];
+
+  // Textarea
+  const textarea = document.createElement('textarea');
+  textarea.className = 'note-textarea';
+  textarea.value = note.content || '';
+  textarea.placeholder = 'Start writing…';
+  textarea.style.userSelect = 'text';
+  textarea.style.webkitUserSelect = 'text';
+  textarea.spellcheck = true;
+  textarea.autocorrect = 'on';
+
+  // Preview pane
+  const preview = document.createElement('div');
+  preview.className = 'note-preview hidden';
+
+  // Auto-save
+  const save = () => {
+    note.content = textarea.value;
+    note.updatedAt = Date.now();
+    const notes = getNotes();
+    const idx = notes.findIndex(n => n.id === note.id);
+    if (idx >= 0) notes[idx] = note; else notes.unshift(note);
+    setNotes(notes);
+    // Update sheet title
+    $('sheet-title').textContent = noteTitle(note.content) || 'New Note';
+  };
+  textarea.addEventListener('input', save);
+
+  // Format button handlers
+  fmtButtons.forEach(({ label, title, wrap: w, prefix, insert }) => {
+    const btn = document.createElement('button');
+    btn.className = 'note-tool-btn';
+    btn.textContent = label;
+    btn.title = title;
+    btn.addEventListener('click', () => {
+      const start = textarea.selectionStart;
+      const end = textarea.selectionEnd;
+      const selected = textarea.value.slice(start, end);
+      let newText, newStart, newEnd;
+      if (insert) {
+        newText = textarea.value.slice(0, start) + insert + textarea.value.slice(end);
+        newStart = newEnd = start + insert.length;
+      } else if (w) {
+        const replacement = w[0] + (selected || 'text') + w[1];
+        newText = textarea.value.slice(0, start) + replacement + textarea.value.slice(end);
+        newStart = start + w[0].length;
+        newEnd = newStart + (selected || 'text').length;
+      } else if (prefix) {
+        // Find line start
+        const lineStart = textarea.value.lastIndexOf('\n', start - 1) + 1;
+        const lineContent = textarea.value.slice(lineStart, end);
+        const already = lineContent.startsWith(prefix);
+        const replacement = already ? lineContent.slice(prefix.length) : prefix + lineContent;
+        newText = textarea.value.slice(0, lineStart) + replacement + textarea.value.slice(end);
+        newStart = newEnd = lineStart + replacement.length;
+      }
+      textarea.value = newText;
+      textarea.focus();
+      textarea.setSelectionRange(newStart, newEnd);
+      save();
+    });
+    toolbar.appendChild(btn);
+  });
+
+  toolbar.appendChild(previewBtn);
+
+  // Delete button
+  const deleteBtn = document.createElement('button');
+  deleteBtn.className = 'note-tool-btn note-delete-btn';
+  deleteBtn.textContent = '🗑';
+  deleteBtn.title = 'Delete note';
+  deleteBtn.addEventListener('click', () => {
+    const notes = getNotes().filter(n => n.id !== note.id);
+    setNotes(notes);
+    closeSheet();
+    renderNotesSection();
+  });
+  toolbar.appendChild(deleteBtn);
+
+  // Preview toggle handler
+  previewBtn.addEventListener('click', () => {
+    previewMode = !previewMode;
+    preview.innerHTML = renderMarkdown(textarea.value);
+    preview.classList.toggle('hidden', !previewMode);
+    textarea.classList.toggle('hidden', previewMode);
+    previewBtn.textContent = previewMode ? 'Edit' : 'Preview';
+    previewBtn.classList.toggle('active', previewMode);
+  });
+
+  wrap.append(toolbar, textarea, preview);
+  return wrap;
 }
 
 // ============= RESOURCES =============

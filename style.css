@@ -579,17 +579,17 @@
 }
 .nav-btn {
   flex: 1; display: flex; flex-direction: column; align-items: center;
-  gap: 3px; padding: 10px 4px 8px;
+  gap: 2px; padding: 8px 2px 7px;
   background: transparent; border: none; cursor: pointer;
   color: var(--ink-faint); font-family: 'Cinzel', serif;
-  font-size: 9px; letter-spacing: 0.15em; text-transform: uppercase;
+  font-size: 8px; letter-spacing: 0.1em; text-transform: uppercase;
   touch-action: manipulation; user-select: none; -webkit-user-select: none;
   transition: color 0.15s;
 }
 .nav-btn:active { color: var(--ink); }
 .nav-btn.active { color: var(--gold); }
 .nav-icon {
-  width: 22px; height: 22px; fill: currentColor;
+  width: 20px; height: 20px; fill: currentColor;
 }
 /* Shift app content up so it's not hidden behind nav */
 .app { padding-bottom: calc(72px + env(safe-area-inset-bottom)); }
@@ -959,3 +959,70 @@
 }
 .party-toggle-btn.in-party { border-color: var(--gold); color: var(--gold); background: rgba(201,164,76,0.08); }
 .party-toggle-btn:disabled { opacity: 0.4; cursor: default; }
+
+/* === NOTES === */
+.notes-header-row { display: flex; justify-content: flex-end; margin-bottom: 14px; }
+.notes-add-btn {
+  padding: 9px 18px; background: rgba(201,164,76,0.1);
+  border: 1px solid var(--gold-deep); border-radius: 3px;
+  color: var(--gold); font-family: 'Cinzel', serif; font-size: 12px;
+  letter-spacing: 0.12em; cursor: pointer;
+}
+.notes-add-btn:active { background: rgba(201,164,76,0.2); }
+.notes-empty { color: var(--ink-dim); font-style: italic; text-align: center; padding: 32px 0; }
+.note-card {
+  background: var(--bg-2); border-left: 2px solid var(--gold-deep);
+  border-radius: 0 3px 3px 0; padding: 12px 14px; margin-bottom: 10px;
+  cursor: pointer;
+}
+.note-card:active { background: var(--bg-3); }
+.note-card-title {
+  font-family: 'Cinzel', serif; font-size: 14px; font-weight: 600;
+  color: var(--gold-bright); margin-bottom: 4px;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.note-card-snippet {
+  font-size: 13px; color: var(--ink-dim); margin-bottom: 4px;
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+}
+.note-card-date { font-size: 11px; color: var(--ink-faint); }
+/* Editor */
+.note-editor-wrap { display: flex; flex-direction: column; height: 100%; gap: 8px; }
+.note-toolbar {
+  display: flex; gap: 6px; flex-wrap: wrap;
+  padding-bottom: 8px; border-bottom: 1px solid var(--rule);
+}
+.note-tool-btn {
+  padding: 6px 10px; background: var(--bg-3); border: 1px solid var(--rule);
+  border-radius: 3px; color: var(--ink-dim); font-family: 'Cinzel', serif;
+  font-size: 11px; font-weight: 700; cursor: pointer; letter-spacing: 0.05em;
+  touch-action: manipulation;
+}
+.note-tool-btn:active { background: var(--bg-2); }
+.note-tool-btn.active { border-color: var(--gold); color: var(--gold); background: rgba(201,164,76,0.1); }
+.note-preview-btn { margin-left: auto; }
+.note-delete-btn { color: var(--blood-bright); border-color: var(--blood); }
+.note-delete-btn:active { background: var(--blood); color: #fff; }
+.note-textarea {
+  flex: 1; width: 100%; min-height: 400px;
+  background: var(--bg-2); border: 1px solid var(--rule); border-radius: 3px;
+  color: var(--ink); font-family: 'EB Garamond', serif; font-size: 17px;
+  line-height: 1.6; padding: 12px; resize: none;
+  user-select: text !important; -webkit-user-select: text !important;
+}
+.note-textarea:focus { outline: none; border-color: var(--gold-deep); }
+.note-textarea::placeholder { color: var(--ink-faint); font-style: italic; }
+.note-preview {
+  flex: 1; overflow-y: auto; padding: 4px 0;
+  color: var(--ink); font-family: 'EB Garamond', serif; font-size: 17px; line-height: 1.6;
+}
+.note-preview h1 { font-family: 'Cinzel', serif; font-size: 22px; color: var(--gold-bright); margin: 0 0 10px; border-bottom: 1px solid var(--rule); padding-bottom: 6px; }
+.note-preview h2 { font-family: 'Cinzel', serif; font-size: 17px; color: var(--gold); margin: 14px 0 6px; }
+.note-preview h3 { font-family: 'Cinzel', serif; font-size: 14px; color: var(--ink-dim); letter-spacing: 0.1em; text-transform: uppercase; margin: 12px 0 4px; }
+.note-preview p { margin: 0 0 10px; }
+.note-preview ul { margin: 0 0 10px; padding-left: 18px; }
+.note-preview li { margin-bottom: 4px; }
+.note-preview strong { color: var(--gold-bright); }
+.note-preview em { color: var(--ink-dim); font-style: italic; }
+.note-preview code { font-family: 'JetBrains Mono', monospace; font-size: 14px; background: var(--bg-3); padding: 1px 5px; border-radius: 3px; color: var(--gold); }
+.note-preview hr { border: none; border-top: 1px solid var(--rule); margin: 14px 0; }
