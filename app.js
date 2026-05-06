@@ -2759,6 +2759,35 @@ window.addEventListener('keydown', (e) => { if (e.key === 'Escape') popSheet(); 
 
 if (!config) showSetup(); else showTracker();
 
+// ── Google Analytics ──
+const KEY_CLIENT_UUID = 'rt.client-uuid.v1';
+function getOrCreateUUID() {
+  let id = Store.get(KEY_CLIENT_UUID);
+  if (!id) {
+    id = typeof crypto !== 'undefined' && crypto.randomUUID
+      ? crypto.randomUUID()
+      : 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => {
+          const r = Math.random() * 16 | 0;
+          return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
+        });
+    Store.set(KEY_CLIENT_UUID, id);
+  }
+  return id;
+}
+if (typeof gtag === 'function') {
+  const uuid = getOrCreateUUID();
+  const rtName = getMCName() || 'Unknown';
+  gtag('config', 'G-H6KCF4RNBT', {
+    user_id: uuid,
+    custom_map: { dimension1: 'rogue_trader_name' },
+  });
+  gtag('event', 'app_open', {
+    rogue_trader_name: rtName,
+    user_id: uuid,
+    app_version: 'v17',
+  });
+}
+
 // Dismiss splash after app is ready
 requestAnimationFrame(() => {
   const splash = document.getElementById('splash');
