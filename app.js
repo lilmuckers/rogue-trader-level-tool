@@ -578,7 +578,7 @@ function attachSwipeDelete(card, charName, wrap) {
   // Delete button revealed behind card
   const deleteBg = document.createElement('div');
   deleteBg.className = 'swipe-delete-bg';
-  deleteBg.textContent = 'Delete';
+  deleteBg.textContent = 'Remove';
   wrap.insertBefore(deleteBg, card); // behind card (card has z-index:1)
 
   const reset = (animate = true) => {
