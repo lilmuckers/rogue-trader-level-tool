@@ -2224,22 +2224,51 @@ function renderMarkdown(text, onToggleTodo) {
   return s;
 }
 
+const KEY_NOTES_SORT = 'rt.notes-sort.v1';
+function getNotesSort() { return Store.get(KEY_NOTES_SORT) || 'updated'; }
+function setNotesSort(v) { Store.set(KEY_NOTES_SORT, v); }
+
+function sortedNotes(notes, sort) {
+  const active   = notes.filter(n => !n.archived);
+  const archived = notes.filter(n =>  n.archived);
+  const cmp = sort === 'title'   ? (a,b) => noteTitle(a.content).localeCompare(noteTitle(b.content))
+            : sort === 'created' ? (a,b) => (b.createdAt||b.updatedAt||0) - (a.createdAt||a.updatedAt||0)
+            :                      (a,b) => (b.updatedAt||0) - (a.updatedAt||0);
+  return { active: [...active].sort(cmp), archived: [...archived].sort(cmp) };
+}
+
 function renderNotesSection() {
   const el = $('notes-content');
   el.innerHTML = '';
   const notes = getNotes();
+  const sort  = getNotesSort();
 
-  // Header row with + button
+  // Header row
   const headerRow = document.createElement('div');
   headerRow.className = 'notes-header-row';
+
+  // Sort control
+  const sortRow = document.createElement('div');
+  sortRow.className = 'notes-sort-row';
+  ['updated','created','title'].forEach(s => {
+    const btn = document.createElement('button');
+    btn.className = 'notes-sort-btn' + (sort === s ? ' active' : '');
+    btn.textContent = s === 'updated' ? 'Last edited' : s === 'created' ? 'Created' : 'Title';
+    btn.addEventListener('click', () => { setNotesSort(s); renderNotesSection(); });
+    sortRow.appendChild(btn);
+  });
+
   const addBtn = document.createElement('button');
   addBtn.className = 'notes-add-btn';
-  addBtn.textContent = '＋ New Note';
+  addBtn.textContent = '＋';
+  addBtn.title = 'New note';
   addBtn.addEventListener('click', () => openNoteEditor(null));
-  headerRow.appendChild(addBtn);
+  headerRow.append(sortRow, addBtn);
   el.appendChild(headerRow);
 
-  if (!notes.length) {
+  const { active, archived } = sortedNotes(notes, sort);
+
+  if (!active.length && !archived.length) {
     const empty = document.createElement('div');
     empty.className = 'notes-empty';
     empty.textContent = 'No notes yet. Tap ＋ to create one.';
@@ -2247,51 +2276,102 @@ function renderNotesSection() {
     return;
   }
 
-  const sorted = [...notes].sort((a, b) => (b.updatedAt || 0) - (a.updatedAt || 0));
-  sorted.forEach(note => {
-    const card = document.createElement('div');
-    card.className = 'note-card';
-    const title = document.createElement('div');
-    title.className = 'note-card-title';
-    title.textContent = noteTitle(note.content);
-    const snippet = document.createElement('div');
-    snippet.className = 'note-card-snippet';
-    snippet.textContent = noteSnippet(note.content);
-    const date = document.createElement('div');
-    date.className = 'note-card-date';
-    date.textContent = note.updatedAt ? new Date(note.updatedAt).toLocaleDateString() : '';
-    card.append(title, snippet, date);
-    card.addEventListener('click', () => openNoteEditor(note));
-    el.appendChild(card);
+  active.forEach(note => el.appendChild(buildNoteCard(note, false)));
+
+  if (archived.length) {
+    const archHeading = document.createElement('div');
+    archHeading.className = 'notes-archive-heading';
+    archHeading.textContent = `Archived (${archived.length})`;
+    el.appendChild(archHeading);
+    archived.forEach(note => el.appendChild(buildNoteCard(note, true)));
+  }
+}
+
+function buildNoteCard(note, isArchived) {
+  const outer = document.createElement('div');
+  outer.className = 'note-card-outer';
+
+  const hint = document.createElement('div');
+  hint.className = 'note-swipe-hint ' + (isArchived ? 'hint-right' : 'hint-left');
+  hint.textContent = isArchived ? '↩ Restore' : '🗄 Archive';
+  outer.appendChild(hint);
+
+  const card = document.createElement('div');
+  card.className = 'note-card' + (isArchived ? ' note-archived' : '');
+
+  const title = document.createElement('div');
+  title.className = 'note-card-title';
+  title.textContent = noteTitle(note.content);
+  const snippet = document.createElement('div');
+  snippet.className = 'note-card-snippet';
+  snippet.textContent = noteSnippet(note.content);
+  const date = document.createElement('div');
+  date.className = 'note-card-date';
+  date.textContent = note.updatedAt ? new Date(note.updatedAt).toLocaleDateString() : '';
+  card.append(title, snippet, date);
+  card.addEventListener('click', () => openNoteEditor(note));
+  outer.appendChild(card);
+
+  // Swipe to archive/restore
+  let startX = 0, startY = 0, dx = 0, swiping = false;
+  const THRESHOLD = 80;
+  card.addEventListener('touchstart', e => {
+    startX = e.touches[0].clientX; startY = e.touches[0].clientY; dx = 0; swiping = false;
+  }, { passive: true });
+  card.addEventListener('touchmove', e => {
+    dx = e.touches[0].clientX - startX;
+    const dy = e.touches[0].clientY - startY;
+    if (!swiping && Math.abs(dy) > Math.abs(dx)) return;
+    swiping = true;
+    const ok = isArchived ? dx > 0 : dx < 0;
+    if (ok) card.style.transform = `translateX(${dx}px)`;
+  }, { passive: true });
+  card.addEventListener('touchend', () => {
+    card.style.transition = 'transform 0.2s';
+    card.style.transform = '';
+    setTimeout(() => { card.style.transition = ''; }, 220);
+    if (!swiping) return;
+    if (!isArchived && dx < -THRESHOLD) {
+      note.archived = true;
+      const all = getNotes(); const i = all.findIndex(n => n.id === note.id);
+      if (i >= 0) { all[i] = note; setNotes(all); }
+      renderNotesSection();
+    } else if (isArchived && dx > THRESHOLD) {
+      note.archived = false;
+      note.updatedAt = Date.now(); // bump to top
+      const all = getNotes(); const i = all.findIndex(n => n.id === note.id);
+      if (i >= 0) { all[i] = note; setNotes(all); }
+      renderNotesSection();
+    }
+    dx = 0;
   });
+
+  return outer;
 }
 
 function openNoteEditor(note) {
   const isNew = !note;
   if (isNew) {
-    note = { id: Date.now() + Math.random(), content: '', updatedAt: Date.now() };
+    note = { id: Date.now() + Math.random(), content: '', updatedAt: Date.now(), createdAt: Date.now() };
     const notes = getNotes();
     notes.unshift(note);
     setNotes(notes);
   }
-  openSheet(isNew ? 'New Note' : noteTitle(note.content), () => buildNoteEditorContent(note));
+  // New notes start in edit; existing notes start in preview
+  openSheet(isNew ? 'New Note' : noteTitle(note.content), () => buildNoteEditorContent(note, isNew));
 }
 
-function buildNoteEditorContent(note) {
+function buildNoteEditorContent(note, startInEdit = false) {
   const wrap = document.createElement('div');
   wrap.className = 'note-editor-wrap';
 
-  // Toolbar
   const toolbar = document.createElement('div');
   toolbar.className = 'note-toolbar';
 
-  // Preview toggle
-  let previewMode = false;
+  let previewMode = !startInEdit;
   const previewBtn = document.createElement('button');
   previewBtn.className = 'note-tool-btn note-preview-btn';
-  previewBtn.textContent = 'Preview';
 
-  // Format buttons
   const fmtButtons = [
     { label: 'B',  title: 'Bold',        wrap: ['**','**'] },
     { label: 'I',  title: 'Italic',      wrap: ['*','*'] },
@@ -2302,7 +2382,6 @@ function buildNoteEditorContent(note) {
     { label: '—',  title: 'Divider',     insert: '\n---\n' },
   ];
 
-  // Textarea
   const textarea = document.createElement('textarea');
   textarea.className = 'note-textarea';
   textarea.value = note.content || '';
@@ -2312,11 +2391,9 @@ function buildNoteEditorContent(note) {
   textarea.spellcheck = true;
   textarea.autocorrect = 'on';
 
-  // Preview pane
   const preview = document.createElement('div');
-  preview.className = 'note-preview hidden';
+  preview.className = 'note-preview';
 
-  // Auto-save
   const save = () => {
     note.content = textarea.value;
     note.updatedAt = Date.now();
@@ -2324,15 +2401,34 @@ function buildNoteEditorContent(note) {
     const idx = notes.findIndex(n => n.id === note.id);
     if (idx >= 0) notes[idx] = note; else notes.unshift(note);
     setNotes(notes);
-    // Update sheet title
     $('sheet-title').textContent = noteTitle(note.content) || 'New Note';
   };
   textarea.addEventListener('input', save);
 
-  // Format button handlers
+  const refreshPreview = () => { preview.innerHTML = renderMarkdown(textarea.value); };
+
+  const applyMode = () => {
+    if (previewMode) {
+      refreshPreview();
+      preview.classList.remove('hidden');
+      textarea.classList.add('hidden');
+      // Hide format buttons in preview mode
+      toolbar.querySelectorAll('.note-fmt-btn').forEach(b => b.classList.add('hidden'));
+      previewBtn.textContent = 'Edit';
+      previewBtn.classList.add('active');
+    } else {
+      preview.classList.add('hidden');
+      textarea.classList.remove('hidden');
+      toolbar.querySelectorAll('.note-fmt-btn').forEach(b => b.classList.remove('hidden'));
+      previewBtn.textContent = 'Preview';
+      previewBtn.classList.remove('active');
+      requestAnimationFrame(() => textarea.focus());
+    }
+  };
+
   fmtButtons.forEach(({ label, title, wrap: w, prefix, insert }) => {
     const btn = document.createElement('button');
-    btn.className = 'note-tool-btn';
+    btn.className = 'note-tool-btn note-fmt-btn';
     btn.textContent = label;
     btn.title = title;
     btn.addEventListener('click', () => {
@@ -2349,7 +2445,6 @@ function buildNoteEditorContent(note) {
         newStart = start + w[0].length;
         newEnd = newStart + (selected || 'text').length;
       } else if (prefix) {
-        // Find line start
         const lineStart = textarea.value.lastIndexOf('\n', start - 1) + 1;
         const lineContent = textarea.value.slice(lineStart, end);
         const already = lineContent.startsWith(prefix);
@@ -2367,7 +2462,6 @@ function buildNoteEditorContent(note) {
 
   toolbar.appendChild(previewBtn);
 
-  // Delete button
   const deleteBtn = document.createElement('button');
   deleteBtn.className = 'note-tool-btn note-delete-btn';
   deleteBtn.textContent = '🗑';
@@ -2380,36 +2474,29 @@ function buildNoteEditorContent(note) {
   });
   toolbar.appendChild(deleteBtn);
 
-  const refreshPreview = () => { preview.innerHTML = renderMarkdown(textarea.value); };
-
-  // Todo tap handler — delegated on preview
+  // Todo tap in preview
   preview.addEventListener('click', (e) => {
     const item = e.target.closest('.todo-item');
     if (!item) return;
     const lineIdx = parseInt(item.dataset.line, 10);
     const lines = textarea.value.split('\n');
     const line = lines[lineIdx];
-    if (/^- \[x\] /i.test(line)) {
-      lines[lineIdx] = line.replace(/^- \[x\] /i, '- [ ] ');
-    } else if (/^- \[ \] /.test(line)) {
-      lines[lineIdx] = line.replace(/^- \[ \] /, '- [x] ');
-    }
+    if (/^- \[x\] /i.test(line)) lines[lineIdx] = line.replace(/^- \[x\] /i, '- [ ] ');
+    else if (/^- \[ \] /.test(line)) lines[lineIdx] = line.replace(/^- \[ \] /, '- [x] ');
     textarea.value = lines.join('\n');
     save();
     refreshPreview();
   });
 
-  // Preview toggle handler
   previewBtn.addEventListener('click', () => {
     previewMode = !previewMode;
-    refreshPreview();
-    preview.classList.toggle('hidden', !previewMode);
-    textarea.classList.toggle('hidden', previewMode);
-    previewBtn.textContent = previewMode ? 'Edit' : 'Preview';
-    previewBtn.classList.toggle('active', previewMode);
+    applyMode();
   });
 
   wrap.append(toolbar, textarea, preview);
+
+  // Initialise mode after elements are in DOM (via requestAnimationFrame post-openSheet)
+  requestAnimationFrame(applyMode);
   return wrap;
 }
 
@@ -2575,6 +2662,24 @@ requestAnimationFrame(() => {
     splash.addEventListener('transitionend', () => splash.remove(), { once: true });
   }
 });
+
+// ── Keyboard / visualViewport handling (iOS: keyboard pushes content) ──
+if (window.visualViewport) {
+  const sheet = document.getElementById('sheet');
+  const onVVChange = () => {
+    if (!sheet.classList.contains('open')) return;
+    const vv = window.visualViewport;
+    // Gap between visual viewport top + height and window height = keyboard height
+    const keyboardH = Math.max(0, window.innerHeight - (vv.offsetTop + vv.height));
+    sheet.style.bottom = keyboardH > 50 ? keyboardH + 'px' : '';
+  };
+  window.visualViewport.addEventListener('resize', onVVChange);
+  window.visualViewport.addEventListener('scroll', onVVChange);
+  // Reset when sheet closes
+  document.getElementById('sheet-overlay').addEventListener('click', () => {
+    sheet.style.bottom = '';
+  });
+}
 
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {

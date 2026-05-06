@@ -1044,3 +1044,38 @@
 .note-preview .todo-done .todo-label {
   text-decoration: line-through; color: var(--ink-faint);
 }
+
+/* Notes sort row */
+.notes-header-row { display: flex; align-items: center; gap: 8px; margin-bottom: 14px; }
+.notes-sort-row { display: flex; gap: 4px; flex: 1; }
+.notes-sort-btn {
+  flex: 1; padding: 6px 4px; background: var(--bg-3); border: 1px solid var(--rule);
+  border-radius: 3px; color: var(--ink-faint); font-family: 'Cinzel', serif;
+  font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer;
+}
+.notes-sort-btn.active { border-color: var(--gold-deep); color: var(--gold); }
+.notes-add-btn {
+  padding: 6px 14px; background: rgba(201,164,76,0.1);
+  border: 1px solid var(--gold-deep); border-radius: 3px;
+  color: var(--gold); font-family: 'Cinzel', serif; font-size: 16px;
+  cursor: pointer; flex-shrink: 0;
+}
+/* Note card outer (swipe container) */
+.note-card-outer { position: relative; margin-bottom: 10px; overflow: hidden; border-radius: 0 3px 3px 0; }
+.note-swipe-hint {
+  position: absolute; top: 0; bottom: 0; display: flex; align-items: center;
+  padding: 0 16px; font-size: 12px; font-family: 'Cinzel', serif;
+  letter-spacing: 0.1em; white-space: nowrap; pointer-events: none;
+  color: var(--ink-dim);
+}
+.hint-left { right: 0; background: linear-gradient(270deg, var(--bg-3), transparent); }
+.hint-right { left: 0; background: linear-gradient(90deg, var(--bg-3), transparent); }
+.note-card {
+  background: var(--bg-2); border-left: 2px solid var(--gold-deep);
+  border-radius: 0 3px 3px 0; padding: 12px 14px;
+  cursor: pointer; position: relative;
+}
+.note-card:active { background: var(--bg-3); }
+.note-card.note-archived { opacity: 0.45; border-left-color: var(--rule); }
+.note-archive-heading { font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 0.3em; color: var(--ink-faint); text-transform: uppercase; margin: 20px 0 8px; }
+/* Hide old duplicate .notes-header-row rule that conflicts */
