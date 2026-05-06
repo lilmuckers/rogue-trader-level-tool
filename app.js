@@ -2228,6 +2228,25 @@ const KEY_NOTES_SORT = 'rt.notes-sort.v1';
 function getNotesSort() { return Store.get(KEY_NOTES_SORT) || 'updated'; }
 function setNotesSort(v) { Store.set(KEY_NOTES_SORT, v); }
 
+// In-memory undo history per note (session only)
+const _noteHistory = new Map(); // noteId → [content, ...]
+const MAX_UNDO = 50;
+function historyPush(noteId, content) {
+  if (!_noteHistory.has(noteId)) _noteHistory.set(noteId, []);
+  const h = _noteHistory.get(noteId);
+  if (h.length && h[h.length - 1] === content) return; // no duplicate
+  h.push(content);
+  if (h.length > MAX_UNDO) h.shift();
+}
+function historyPop(noteId) {
+  const h = _noteHistory.get(noteId);
+  if (!h || !h.length) return null;
+  return h.pop();
+}
+function historyLen(noteId) {
+  return (_noteHistory.get(noteId) || []).length;
+}
+
 function sortedNotes(notes, sort) {
   const active   = notes.filter(n => !n.archived);
   const archived = notes.filter(n =>  n.archived);
@@ -2394,7 +2413,26 @@ function buildNoteEditorContent(note, startInEdit = false) {
   const preview = document.createElement('div');
   preview.className = 'note-preview';
 
-  const save = () => {
+  // Save indicator
+  const saveIndicator = document.createElement('span');
+  saveIndicator.className = 'note-save-indicator';
+  let fadeTimer = null;
+  const flashSaved = () => {
+    saveIndicator.classList.add('visible');
+    clearTimeout(fadeTimer);
+    fadeTimer = setTimeout(() => saveIndicator.classList.remove('visible'), 1200);
+  };
+
+  // Undo button (declared here, updated after history changes)
+  const undoBtn = document.createElement('button');
+  undoBtn.className = 'note-tool-btn note-undo-btn';
+  undoBtn.textContent = '↩';
+  undoBtn.title = 'Undo';
+  const updateUndoBtn = () => { undoBtn.disabled = historyLen(note.id) === 0; };
+  updateUndoBtn();
+
+  let saveTimer = null;
+  const commitSave = () => {
     note.content = textarea.value;
     note.updatedAt = Date.now();
     const notes = getNotes();
@@ -2402,8 +2440,30 @@ function buildNoteEditorContent(note, startInEdit = false) {
     if (idx >= 0) notes[idx] = note; else notes.unshift(note);
     setNotes(notes);
     $('sheet-title').textContent = noteTitle(note.content) || 'New Note';
+    flashSaved();
+    updateUndoBtn();
   };
-  textarea.addEventListener('input', save);
+  const save = () => { clearTimeout(saveTimer); saveTimer = setTimeout(commitSave, 600); };
+
+  textarea.addEventListener('input', () => {
+    // Snapshot BEFORE the debounce fires so undo restores to last persisted state
+    historyPush(note.id, note.content);
+    updateUndoBtn();
+    save();
+  });
+  textarea.addEventListener('blur', () => {
+    clearTimeout(saveTimer);
+    if (textarea.value !== note.content) commitSave();
+  });
+
+  undoBtn.addEventListener('click', () => {
+    const prev = historyPop(note.id);
+    if (prev == null) return;
+    textarea.value = prev;
+    clearTimeout(saveTimer);
+    commitSave();
+    if (previewMode) refreshPreview();
+  });
 
   const refreshPreview = () => { preview.innerHTML = renderMarkdown(textarea.value); };
 
@@ -2460,6 +2520,8 @@ function buildNoteEditorContent(note, startInEdit = false) {
     toolbar.appendChild(btn);
   });
 
+  toolbar.appendChild(undoBtn);
+  toolbar.appendChild(saveIndicator);
   toolbar.appendChild(previewBtn);
 
   const deleteBtn = document.createElement('button');
@@ -2484,7 +2546,9 @@ function buildNoteEditorContent(note, startInEdit = false) {
     if (/^- \[x\] /i.test(line)) lines[lineIdx] = line.replace(/^- \[x\] /i, '- [ ] ');
     else if (/^- \[ \] /.test(line)) lines[lineIdx] = line.replace(/^- \[ \] /, '- [x] ');
     textarea.value = lines.join('\n');
-    save();
+    historyPush(note.id, note.content); // snapshot before commit
+    clearTimeout(saveTimer);
+    commitSave();
     refreshPreview();
   });
 

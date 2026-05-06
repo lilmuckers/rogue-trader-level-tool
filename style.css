@@ -1082,3 +1082,14 @@
 .note-card.note-archived { opacity: 0.45; border-left-color: var(--rule); }
 .note-archive-heading { font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 0.3em; color: var(--ink-faint); text-transform: uppercase; margin: 20px 0 8px; }
 /* Hide old duplicate .notes-header-row rule that conflicts */
+
+/* Save indicator + undo */
+.note-save-indicator {
+  font-family: 'Cinzel', serif; font-size: 9px; letter-spacing: 0.2em;
+  text-transform: uppercase; color: var(--gold-deep);
+  opacity: 0; transition: opacity 0.3s;
+  align-self: center; margin-left: 4px;
+}
+.note-save-indicator.visible { opacity: 1; }
+.note-undo-btn { font-size: 15px; }
+.note-undo-btn:disabled { opacity: 0.25; cursor: default; }
