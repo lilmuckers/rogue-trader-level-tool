@@ -2873,28 +2873,22 @@ if (window.visualViewport) {
   const sheet = document.getElementById('sheet');
   const resetSheet = () => {
     sheet.style.bottom = '';
+    sheet.style.height = '';
     sheet.style.maxHeight = '';
-    const ta = sheet.querySelector('.note-textarea');
-    if (ta) { ta.style.height = ''; ta.style.minHeight = ''; }
+    sheet.classList.remove('keyboard-open');
   };
   const onVVChange = () => {
     if (!sheet.classList.contains('open')) return;
     const vv = window.visualViewport;
+    // keyboard height = gap between bottom of visual viewport and bottom of layout viewport
     const keyboardH = Math.max(0, window.innerHeight - (vv.offsetTop + vv.height));
     if (keyboardH > 50) {
+      // Pin sheet exactly above keyboard; set explicit height = visible area
+      // CSS flex handles internal distribution — no JS component measurement needed
       sheet.style.bottom    = keyboardH + 'px';
+      sheet.style.height    = vv.height + 'px';
       sheet.style.maxHeight = vv.height + 'px';
-      // Shrink textarea to exactly fill remaining space above keyboard
-      const ta = sheet.querySelector('.note-textarea:not(.hidden)');
-      if (ta) {
-        const grabberH   = sheet.querySelector('.sheet-grabber')?.offsetHeight  || 16;
-        const headerH    = sheet.querySelector('.sheet-header')?.offsetHeight   || 52;
-        const toolbarH   = sheet.querySelector('.note-toolbar')?.offsetHeight   || 50;
-        const bodyPadV   = 32; // 16px top + 16px bottom from .sheet-body padding
-        const taH = Math.max(80, vv.height - grabberH - headerH - toolbarH - bodyPadV);
-        ta.style.minHeight = taH + 'px';
-        ta.style.height    = taH + 'px';
-      }
+      sheet.classList.add('keyboard-open');
     } else {
       resetSheet();
     }

@@ -268,10 +268,13 @@
     transition: transform 0.28s cubic-bezier(0.32, 0.72, 0, 1);
     max-height: 85vh;
     display: flex; flex-direction: column;
+    overflow: hidden;
     padding-bottom: env(safe-area-inset-bottom);
     user-select: none; -webkit-user-select: none;
   }
   .sheet.open { transform: translateY(0); }
+  /* When keyboard is open JS sets explicit height; disable safe-area padding so it doesn't add extra */
+  .sheet.keyboard-open { padding-bottom: 0; border-radius: 0; transition: none; }
   .sheet-grabber {
     width: 40px; height: 4px;
     background: var(--ink-faint);
@@ -332,6 +335,9 @@
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
     padding: 18px;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
   }
 
   /* Description sheet content */
@@ -990,12 +996,12 @@
 }
 .note-card-date { font-size: 11px; color: var(--ink-faint); }
 /* Editor */
-.note-editor-wrap { display: flex; flex-direction: column; min-height: 0; }
+.note-editor-wrap { display: flex; flex-direction: column; flex: 1; min-height: 0; }
 .note-toolbar {
-  display: flex; gap: 6px; flex-wrap: wrap;
-  padding: 6px 0 8px; border-bottom: 1px solid var(--rule);
-  position: sticky; top: -16px; z-index: 10;
-  background: var(--bg-2); margin: -16px -16px 0; padding: 10px 16px 8px;
+  display: flex; gap: 6px; flex-wrap: wrap; flex-shrink: 0;
+  border-bottom: 1px solid var(--rule);
+  position: sticky; top: -18px; z-index: 10;
+  background: var(--bg-2); margin: -18px -18px 0; padding: 10px 18px 8px;
 }
 .note-tool-btn {
   padding: 6px 10px; background: var(--bg-3); border: 1px solid var(--rule);
@@ -1009,11 +1015,12 @@
 .note-delete-btn { color: var(--blood-bright); border-color: var(--blood); }
 .note-delete-btn:active { background: var(--blood); color: #fff; }
 .note-textarea {
-  width: 100%; min-height: 50vh;
+  width: 100%; flex: 1; min-height: 120px;
   background: var(--bg-2); border: 1px solid var(--rule); border-radius: 3px;
   color: var(--ink); font-family: 'EB Garamond', serif; font-size: 17px;
   line-height: 1.6; padding: 12px; resize: none; margin-top: 10px;
   user-select: text !important; -webkit-user-select: text !important;
+  /* flex: 1 lets it fill remaining sheet space without JS height calculation */
 }
 .note-textarea:focus { outline: none; border-color: var(--gold-deep); }
 .note-textarea::placeholder { color: var(--ink-faint); font-style: italic; }
