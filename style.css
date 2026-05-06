@@ -46,6 +46,7 @@
   .top-actions { display: flex; gap: 8px; margin-bottom: 14px; }
   .top-actions button { flex: 1; background: transparent; color: var(--ink-dim); border: 1px solid var(--rule); padding: 9px 8px; font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; border-radius: 2px; cursor: pointer; }
   .top-actions button:active { background: var(--bg-3); color: var(--gold); }
+  #reorder-btn.active { border-color: var(--gold); color: var(--gold); background: rgba(201,164,76,0.08); }
 
   .roster { margin-top: 20px; }
   .roster-heading { font-family: 'Cinzel', serif; font-size: 11px; letter-spacing: 0.35em; color: var(--ink-dim); text-transform: uppercase; text-align: center; margin: 24px 0 14px; position: relative; }
@@ -896,13 +897,15 @@
 .roster-card-wrap { display: flex; align-items: flex-start; gap: 0; position: relative; }
 .roster-card-wrap .char-card { flex: 1; }
 .drag-handle {
-  display: flex; align-items: center; justify-content: center;
+  display: none; /* hidden until reorder mode */
+  align-items: center; justify-content: center;
   width: 28px; flex-shrink: 0; align-self: stretch;
-  color: var(--ink-faint); font-size: 18px; cursor: grab;
+  color: var(--gold-deep); font-size: 18px; cursor: grab;
   touch-action: none; user-select: none; -webkit-user-select: none;
-  background: var(--bg-2); border-left: 3px solid var(--rule);
+  background: rgba(201,164,76,0.06); border-left: 3px solid var(--gold-deep);
   border-radius: 0 0 0 4px;
 }
+.reorder-active .drag-handle { display: flex; }
 .roster-card-wrap.dragging { opacity: 0.4; }
 .roster-card-wrap.drag-over { outline: 1px solid var(--gold); }
 .drag-ghost {

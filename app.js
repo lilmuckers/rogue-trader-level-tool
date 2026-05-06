@@ -594,6 +594,7 @@ function attachDragReorder(handle, wrap, section) {
   };
 
   handle.addEventListener('touchstart', (e) => {
+    if (!_reorderMode) return; // only active in reorder mode
     e.preventDefault();
     e.stopPropagation();
     startX = e.touches[0].clientX;
@@ -1561,6 +1562,17 @@ function populateBuildSelect(theme) {
 
 // ============= SECTION NAVIGATION =============
 let _activeSection = 'tracker';
+let _reorderMode = false;
+
+function setReorderMode(on) {
+  _reorderMode = on;
+  $('roster').classList.toggle('reorder-active', on);
+  const btn = $('reorder-btn');
+  if (btn) {
+    btn.textContent = on ? '✓ Done' : '⇅ Reorder';
+    btn.classList.toggle('active', on);
+  }
+}
 
 const SECTION_META = {
   tracker:   { title: 'Rogue Trader',    subtitle: 'Level Tracker & Build Companion' },
@@ -1571,6 +1583,7 @@ const SECTION_META = {
 };
 
 function showSection(name) {
+  if (name !== 'tracker') setReorderMode(false);
   _activeSection = name;
   document.querySelectorAll('.section-view').forEach(el => el.classList.add('hidden'));
   $(`${name}-view`).classList.remove('hidden');
@@ -2793,6 +2806,7 @@ function jumpPrompt() {
 $('lvl-num').addEventListener('click', jumpPrompt);
 $('goto-50-btn').addEventListener('click', jumpPrompt);
 $('edit-setup-btn').addEventListener('click', showSetup);
+$('reorder-btn').addEventListener('click', () => setReorderMode(!_reorderMode));
 $('cancel-setup-btn').addEventListener('click', () => { if (config) showTracker(); });
 $('add-companion-btn').addEventListener('click', openAddCompanionSheet);
 $('save-btn').addEventListener('click', () => {
