@@ -2534,45 +2534,54 @@ function buildNoteCard(note, isArchived) {
     if (!active) return;
     card.style.transition = 'none';
     if (!isArchived) {
-      // active note: left swipe to archive or delete
+      // Active note: left swipe → archive only (no delete from active)
       card.style.transform = `translateX(${Math.min(0, dx)}px)`;
+      deleteBg.textContent = 'Archive';
       deleteBg.classList.toggle('visible', dx < -20);
     } else {
-      // archived note: left swipe to delete, right swipe to restore
+      // Archived note: left → delete, right → restore
       card.style.transform = `translateX(${dx}px)`;
-      if (dx < -20) deleteBg.classList.add('visible');
-      else deleteBg.classList.remove('visible');
+      deleteBg.textContent = 'Delete';
+      deleteBg.classList.toggle('visible', dx < -20);
     }
   }, { passive: true });
 
   card.addEventListener('touchend', () => {
     if (!active) return;
-    if (dx < -DELETE_THRESHOLD) {
-      doDelete();
-      return;
-    }
-    if (!isArchived && dx < -ARCHIVE_THRESHOLD) {
-      // archive
-      note.archived = true;
-      const all = getNotes(); const i = all.findIndex(n => n.id === note.id);
-      if (i >= 0) { all[i] = note; setNotes(all); }
-      renderNotesSection();
-      return;
-    }
-    if (isArchived && dx > ARCHIVE_THRESHOLD) {
-      // restore
-      note.archived = false;
-      note.updatedAt = Date.now();
-      const all = getNotes(); const i = all.findIndex(n => n.id === note.id);
-      if (i >= 0) { all[i] = note; setNotes(all); }
-      renderNotesSection();
-      return;
+    if (!isArchived) {
+      // Active: swipe left far enough → archive
+      if (dx < -ARCHIVE_THRESHOLD) {
+        note.archived = true;
+        const all = getNotes(); const i = all.findIndex(n => n.id === note.id);
+        if (i >= 0) { all[i] = note; setNotes(all); }
+        renderNotesSection();
+        return;
+      }
+    } else {
+      // Archived: swipe left → delete, swipe right → restore
+      if (dx < -ARCHIVE_THRESHOLD) { doDelete(); return; }
+      if (dx > ARCHIVE_THRESHOLD) {
+        note.archived = false;
+        note.updatedAt = Date.now();
+        const all = getNotes(); const i = all.findIndex(n => n.id === note.id);
+        if (i >= 0) { all[i] = note; setNotes(all); }
+        renderNotesSection();
+        return;
+      }
     }
     reset();
   });
 
   card.addEventListener('touchcancel', reset);
-  deleteBg.addEventListener('click', doDelete);
+  deleteBg.addEventListener('click', () => {
+    if (isArchived) doDelete();
+    else {
+      note.archived = true;
+      const all = getNotes(); const i = all.findIndex(n => n.id === note.id);
+      if (i >= 0) { all[i] = note; setNotes(all); }
+      renderNotesSection();
+    }
+  });
 
   return outer;
 }
