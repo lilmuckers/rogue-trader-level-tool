@@ -566,7 +566,75 @@ function buildCompanionCard(entry, idx, section) {
 
   // Attach drag-to-reorder on handle
   attachDragReorder(handle, wrap, section);
+  // Swipe-left to delete (only when not in reorder mode)
+  attachSwipeDelete(card, charName, wrap);
   return wrap;
+}
+
+function attachSwipeDelete(card, charName, wrap) {
+  const DELETE_THRESHOLD = 100; // px to trigger delete
+  let startX = 0, startY = 0, dx = 0, intentDecided = false, active = false;
+
+  // Delete button revealed behind card
+  const deleteBg = document.createElement('div');
+  deleteBg.className = 'swipe-delete-bg';
+  deleteBg.textContent = 'Delete';
+  wrap.insertBefore(deleteBg, card); // behind card (card has z-index:1)
+
+  const reset = (animate = true) => {
+    if (animate) card.style.transition = 'transform 0.2s ease';
+    card.style.transform = '';
+    deleteBg.classList.remove('visible');
+    setTimeout(() => { card.style.transition = ''; }, 220);
+    active = false; intentDecided = false; dx = 0;
+  };
+
+  const doDelete = () => {
+    card.style.transition = 'transform 0.2s ease, opacity 0.2s ease';
+    card.style.transform = 'translateX(-100%)';
+    card.style.opacity = '0';
+    setTimeout(() => {
+      removeFromRoster(charName);
+      removeFromParty(charName);
+      renderTracker();
+    }, 200);
+  };
+
+  card.addEventListener('touchstart', (e) => {
+    if (_reorderMode) return;
+    startX = e.touches[0].clientX;
+    startY = e.touches[0].clientY;
+    dx = 0; intentDecided = false; active = false;
+  }, { passive: true });
+
+  card.addEventListener('touchmove', (e) => {
+    if (_reorderMode) return;
+    dx = e.touches[0].clientX - startX;
+    const dy = e.touches[0].clientY - startY;
+    if (!intentDecided) {
+      if (Math.abs(dx) < 5 && Math.abs(dy) < 5) return;
+      if (Math.abs(dy) >= Math.abs(dx)) { intentDecided = true; return; } // vertical — ignore
+      if (dx > 0) { intentDecided = true; return; } // swipe right — ignore
+      intentDecided = true;
+      active = true;
+    }
+    if (!active) return;
+    card.style.transition = 'none';
+    card.style.transform = `translateX(${Math.min(0, dx)}px)`;
+    deleteBg.classList.toggle('visible', dx < -20);
+  }, { passive: true });
+
+  card.addEventListener('touchend', () => {
+    if (!active) return;
+    if (dx < -DELETE_THRESHOLD) {
+      doDelete();
+    } else {
+      reset();
+    }
+  });
+
+  card.addEventListener('touchcancel', () => reset(false));
+  deleteBg.addEventListener('click', doDelete);
 }
 
 // ============= DRAG REORDER =============

@@ -900,8 +900,17 @@
 .mc-name-input::placeholder { color: var(--ink-faint); font-style: italic; }
 
 /* === ROSTER CARD WRAP + DRAG === */
-.roster-card-wrap { display: flex; align-items: flex-start; gap: 0; position: relative; }
-.roster-card-wrap .char-card { flex: 1; }
+.roster-card-wrap { display: flex; align-items: flex-start; gap: 0; position: relative; overflow: hidden; margin-bottom: 10px; }
+.roster-card-wrap .char-card { flex: 1; margin-bottom: 0; }
+.swipe-delete-bg {
+  position: absolute; right: 0; top: 0; bottom: 0;
+  background: var(--blood); color: #fff;
+  display: flex; align-items: center; padding: 0 22px;
+  font-family: 'Cinzel', serif; font-size: 12px; letter-spacing: 0.2em;
+  text-transform: uppercase; opacity: 0; transition: opacity 0.15s;
+  pointer-events: none; z-index: 0;
+}
+.swipe-delete-bg.visible { opacity: 1; pointer-events: auto; }
 .drag-handle {
   display: none; /* hidden until reorder mode */
   align-items: center; justify-content: center;
