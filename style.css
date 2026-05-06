@@ -268,7 +268,7 @@
     transition: transform 0.28s cubic-bezier(0.32, 0.72, 0, 1);
     max-height: 85vh;
     display: flex; flex-direction: column;
-    overflow: hidden;
+    overflow: visible; /* don't clip — iOS blocks inner touch-scroll when parent is overflow:hidden */
     padding-bottom: env(safe-area-inset-bottom);
     user-select: none; -webkit-user-select: none;
   }
@@ -1015,12 +1015,13 @@
 .note-delete-btn { color: var(--blood-bright); border-color: var(--blood); }
 .note-delete-btn:active { background: var(--blood); color: #fff; }
 .note-textarea {
-  width: 100%; flex: 1; min-height: 120px;
+  width: 100%; flex: 1; min-height: 45vh;
   background: var(--bg-2); border: 1px solid var(--rule); border-radius: 3px;
   color: var(--ink); font-family: 'EB Garamond', serif; font-size: 17px;
   line-height: 1.6; padding: 12px; resize: none; margin-top: 10px;
   user-select: text !important; -webkit-user-select: text !important;
-  /* flex: 1 lets it fill remaining sheet space without JS height calculation */
+  overflow-y: scroll; -webkit-overflow-scrolling: touch;
+  touch-action: pan-y; /* allow vertical scroll on iOS */
 }
 .note-textarea:focus { outline: none; border-color: var(--gold-deep); }
 .note-textarea::placeholder { color: var(--ink-faint); font-style: italic; }
