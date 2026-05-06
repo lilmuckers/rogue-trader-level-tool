@@ -2244,42 +2244,61 @@ function getNotesSort() { return Store.get(KEY_NOTES_SORT) || 'updated'; }
 function setNotesSort(v) { Store.set(KEY_NOTES_SORT, v); }
 
 // Persistent undo history (localStorage + in-memory write-through)
-const KEY_NOTES_HISTORY = 'rt.notes-history.v1';
+// ── Undo / Redo history (persistent, per-note) ──
+// Storage format: { noteId: { u: [undoStack], r: [redoStack] } }
+const KEY_NOTES_HISTORY = 'rt.notes-history.v2';
 const MAX_UNDO = 20;
-const _historyCache = new Map(); // noteId → [content, ...] (in-memory mirror)
+const _historyCache = new Map(); // noteId → { u: [], r: [] }
+let _historyCacheLoaded = false;
 
 function _loadHistory() {
-  if (_historyCache.size) return;
+  if (_historyCacheLoaded) return;
+  _historyCacheLoaded = true;
   const raw = Store.get(KEY_NOTES_HISTORY) || {};
-  for (const [id, arr] of Object.entries(raw)) _historyCache.set(id, arr);
+  for (const [id, h] of Object.entries(raw)) _historyCache.set(id, { u: h.u || [], r: h.r || [] });
 }
 function _saveHistory() {
   const obj = {};
-  _historyCache.forEach((arr, id) => { if (arr.length) obj[id] = arr; });
+  _historyCache.forEach(({ u, r }, id) => { if (u.length || r.length) obj[id] = { u, r }; });
   Store.set(KEY_NOTES_HISTORY, obj);
 }
-function historyPush(noteId, content) {
+function _getH(noteId) {
   _loadHistory();
-  if (!_historyCache.has(noteId)) _historyCache.set(noteId, []);
-  const h = _historyCache.get(noteId);
-  if (h.length && h[h.length - 1] === content) return;
-  h.push(content);
-  if (h.length > MAX_UNDO) h.shift();
+  if (!_historyCache.has(noteId)) _historyCache.set(noteId, { u: [], r: [] });
+  return _historyCache.get(noteId);
+}
+// Call before committing a new edit: snapshot current, clear redo (new branch)
+function historyPushEdit(noteId, prevContent) {
+  const h = _getH(noteId);
+  if (h.u.length && h.u[h.u.length - 1] === prevContent) return; // no dup
+  h.u.push(prevContent);
+  if (h.u.length > MAX_UNDO) h.u.shift();
+  h.r = []; // new edit prunes redo
   _saveHistory();
 }
-function historyPop(noteId) {
-  _loadHistory();
-  const h = _historyCache.get(noteId);
-  if (!h || !h.length) return null;
-  const val = h.pop();
+// Returns previous content (or null); caller should push current to redo
+function historyUndo(noteId, currentContent) {
+  const h = _getH(noteId);
+  if (!h.u.length) return null;
+  h.r.push(currentContent);
+  if (h.r.length > MAX_UNDO) h.r.shift();
+  const prev = h.u.pop();
   _saveHistory();
-  return val;
+  return prev;
 }
-function historyLen(noteId) {
-  _loadHistory();
-  return (_historyCache.get(noteId) || []).length;
+// Returns next content (or null); caller should push current to undo
+function historyRedo(noteId, currentContent) {
+  const h = _getH(noteId);
+  if (!h.r.length) return null;
+  h.u.push(currentContent);
+  if (h.u.length > MAX_UNDO) h.u.shift();
+  const next = h.r.pop();
+  _saveHistory();
+  return next;
 }
-// Prune history for deleted notes to avoid unbounded growth
+function historyUndoLen(noteId) { return _getH(noteId).u.length; }
+function historyRedoLen(noteId) { return _getH(noteId).r.length; }
+// Prune history for deleted notes
 function pruneHistory(activeIds) {
   _loadHistory();
   let changed = false;
@@ -2463,13 +2482,21 @@ function buildNoteEditorContent(note, startInEdit = false) {
     fadeTimer = setTimeout(() => saveIndicator.classList.remove('visible'), 1200);
   };
 
-  // Undo button (declared here, updated after history changes)
+  // Undo / Redo buttons
   const undoBtn = document.createElement('button');
   undoBtn.className = 'note-tool-btn note-undo-btn';
   undoBtn.textContent = '↩';
   undoBtn.title = 'Undo';
-  const updateUndoBtn = () => { undoBtn.disabled = historyLen(note.id) === 0; };
-  updateUndoBtn();
+  const redoBtn = document.createElement('button');
+  redoBtn.className = 'note-tool-btn note-undo-btn';
+  redoBtn.textContent = '↪';
+  redoBtn.title = 'Redo';
+
+  const updateHistoryBtns = () => {
+    undoBtn.disabled = historyUndoLen(note.id) === 0;
+    redoBtn.disabled = historyRedoLen(note.id) === 0;
+  };
+  updateHistoryBtns();
 
   let saveTimer = null;
   const commitSave = () => {
@@ -2481,14 +2508,14 @@ function buildNoteEditorContent(note, startInEdit = false) {
     setNotes(notes);
     $('sheet-title').textContent = noteTitle(note.content) || 'New Note';
     flashSaved();
-    updateUndoBtn();
+    updateHistoryBtns();
   };
   const save = () => { clearTimeout(saveTimer); saveTimer = setTimeout(commitSave, 600); };
 
   textarea.addEventListener('input', () => {
-    // Snapshot BEFORE the debounce fires so undo restores to last persisted state
-    historyPush(note.id, note.content);
-    updateUndoBtn();
+    // Snapshot current persisted state before new edit; clears redo (new branch)
+    historyPushEdit(note.id, note.content);
+    updateHistoryBtns();
     save();
   });
   textarea.addEventListener('blur', () => {
@@ -2497,10 +2524,19 @@ function buildNoteEditorContent(note, startInEdit = false) {
   });
 
   undoBtn.addEventListener('click', () => {
-    const prev = historyPop(note.id);
+    clearTimeout(saveTimer);
+    const prev = historyUndo(note.id, note.content);
     if (prev == null) return;
     textarea.value = prev;
+    commitSave();
+    if (previewMode) refreshPreview();
+  });
+
+  redoBtn.addEventListener('click', () => {
     clearTimeout(saveTimer);
+    const next = historyRedo(note.id, note.content);
+    if (next == null) return;
+    textarea.value = next;
     commitSave();
     if (previewMode) refreshPreview();
   });
@@ -2561,6 +2597,7 @@ function buildNoteEditorContent(note, startInEdit = false) {
   });
 
   toolbar.appendChild(undoBtn);
+  toolbar.appendChild(redoBtn);
   toolbar.appendChild(saveIndicator);
   toolbar.appendChild(previewBtn);
 
@@ -2587,7 +2624,7 @@ function buildNoteEditorContent(note, startInEdit = false) {
     if (/^- \[x\] /i.test(line)) lines[lineIdx] = line.replace(/^- \[x\] /i, '- [ ] ');
     else if (/^- \[ \] /.test(line)) lines[lineIdx] = line.replace(/^- \[ \] /, '- [x] ');
     textarea.value = lines.join('\n');
-    historyPush(note.id, note.content); // snapshot before commit
+    historyPushEdit(note.id, note.content); // snapshot before commit (clears redo)
     clearTimeout(saveTimer);
     commitSave();
     refreshPreview();
