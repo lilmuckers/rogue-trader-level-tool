@@ -571,29 +571,53 @@ function buildCompanionCard(entry, idx, section) {
 
 // ============= DRAG REORDER =============
 function attachDragReorder(handle, wrap, section) {
-  let startY = 0, startIdx = 0, ghost = null;
+  let startX = 0, startY = 0, startIdx = 0;
+  let ghost = null, dragging = false, intentDecided = false;
 
-  handle.addEventListener('touchstart', (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    startY = e.touches[0].clientY;
+  const cleanup = () => {
+    if (ghost) { ghost.remove(); ghost = null; }
+    wrap.classList.remove('dragging');
+    $('roster').querySelectorAll('.drag-over').forEach(el => el.classList.remove('drag-over'));
+    dragging = false;
+    intentDecided = false;
+  };
+
+  const startDrag = () => {
+    dragging = true;
     wrap.classList.add('dragging');
     ghost = wrap.cloneNode(true);
     ghost.classList.add('drag-ghost');
     ghost.style.top = wrap.getBoundingClientRect().top + 'px';
     document.body.appendChild(ghost);
-
     const siblings = Array.from(wrap.parentElement.querySelectorAll(`.roster-card-wrap[data-section="${section}"]`));
     startIdx = siblings.indexOf(wrap);
+  };
+
+  handle.addEventListener('touchstart', (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    startX = e.touches[0].clientX;
+    startY = e.touches[0].clientY;
+    intentDecided = false;
+    dragging = false;
   }, { passive: false });
 
   handle.addEventListener('touchmove', (e) => {
-    if (!ghost) return;
-    e.preventDefault();
+    const dx = Math.abs(e.touches[0].clientX - startX);
     const dy = e.touches[0].clientY - startY;
+    const adx = dx, ady = Math.abs(dy);
+
+    // Decide intent on first significant movement
+    if (!intentDecided && (adx > 5 || ady > 5)) {
+      intentDecided = true;
+      if (adx > ady) { cleanup(); return; } // horizontal swipe — abort
+      startDrag();
+    }
+    if (!dragging) return;
+    e.preventDefault();
+
     ghost.style.transform = `translateY(${dy}px)`;
 
-    // Find which slot we're over
     const rEl = $('roster');
     const siblings = Array.from(rEl.querySelectorAll(`.roster-card-wrap[data-section="${section}"]`));
     const fingerY = e.touches[0].clientY;
@@ -603,8 +627,6 @@ function attachDragReorder(handle, wrap, section) {
       const rect = el.getBoundingClientRect();
       if (fingerY > rect.top + rect.height / 2) targetIdx = i;
     });
-
-    // Visually reorder
     siblings.forEach(el => el.classList.remove('drag-over'));
     if (siblings[targetIdx] && siblings[targetIdx] !== wrap) {
       siblings[targetIdx].classList.add('drag-over');
@@ -612,15 +634,11 @@ function attachDragReorder(handle, wrap, section) {
   }, { passive: false });
 
   handle.addEventListener('touchend', (e) => {
-    if (!ghost) return;
-    wrap.classList.remove('dragging');
-    ghost.remove(); ghost = null;
-    $('roster').querySelectorAll('.drag-over').forEach(el => el.classList.remove('drag-over'));
+    if (!dragging) { cleanup(); return; }
 
     const rEl = $('roster');
     const siblings = Array.from(rEl.querySelectorAll(`.roster-card-wrap[data-section="${section}"]`));
     const fingerY = e.changedTouches[0].clientY;
-
     let targetIdx = startIdx;
     siblings.forEach((el, i) => {
       if (el === wrap) return;
@@ -628,27 +646,29 @@ function attachDragReorder(handle, wrap, section) {
       if (fingerY > rect.top + rect.height / 2) targetIdx = i;
     });
 
+    cleanup();
     if (targetIdx === startIdx) return;
 
     if (section === 'party') {
       const p = getParty();
-      const party = p.filter(n => getRoster().some(e => e.char === n));
-      const moved = party.splice(startIdx, 1)[0];
-      party.splice(targetIdx, 0, moved);
-      // Rebuild full party array preserving any non-roster members
-      setParty(party);
+      const partyVisible = p.filter(n => getRoster().some(e => e.char === n));
+      const moved = partyVisible.splice(startIdx, 1)[0];
+      if (!moved) return;
+      partyVisible.splice(targetIdx, 0, moved);
+      setParty(partyVisible);
     } else {
       const r = getRoster();
       const retinue = r.filter(e => !getParty().includes(e.char));
       const moved = retinue.splice(startIdx, 1)[0];
+      if (!moved) return; // safety: invalid index, abort
       retinue.splice(targetIdx, 0, moved);
-      // Rebuild full roster preserving party members
-      const party = getParty();
-      const partyEntries = r.filter(e => party.includes(e.char));
-      setRoster([...partyEntries, ...retinue]);
+      const partyEntries = r.filter(e => getParty().includes(e.char));
+      setRoster([...partyEntries, ...retinue].filter(Boolean));
     }
     renderTracker();
   });
+
+  handle.addEventListener('touchcancel', cleanup);
 }
 
 // ============= ADD COMPANION SHEET =============
