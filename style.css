@@ -1048,19 +1048,19 @@
 }
 
 /* Notes sort row */
-.notes-header-row { display: flex; align-items: center; gap: 8px; margin-bottom: 14px; }
+.notes-header-row { display: flex; align-items: stretch; gap: 8px; margin-bottom: 14px; }
 .notes-sort-row { display: flex; gap: 4px; flex: 1; }
 .notes-sort-btn {
-  flex: 1; padding: 6px 4px; background: var(--bg-3); border: 1px solid var(--rule);
+  flex: 1; padding: 0 4px; height: 32px; background: var(--bg-3); border: 1px solid var(--rule);
   border-radius: 3px; color: var(--ink-faint); font-family: 'Cinzel', serif;
   font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer;
 }
 .notes-sort-btn.active { border-color: var(--gold-deep); color: var(--gold); }
 .notes-add-btn {
-  padding: 6px 14px; background: rgba(201,164,76,0.1);
+  padding: 0 16px; height: 32px; background: rgba(201,164,76,0.1);
   border: 1px solid var(--gold-deep); border-radius: 3px;
-  color: var(--gold); font-family: 'Cinzel', serif; font-size: 16px;
-  cursor: pointer; flex-shrink: 0;
+  color: var(--gold); font-family: 'Cinzel', serif; font-size: 14px;
+  cursor: pointer; flex-shrink: 0; display: flex; align-items: center;
 }
 /* Note card outer (swipe container) */
 .note-card-outer { position: relative; margin-bottom: 10px; overflow: hidden; border-radius: 0 3px 3px 0; }

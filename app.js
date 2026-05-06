@@ -2228,23 +2228,48 @@ const KEY_NOTES_SORT = 'rt.notes-sort.v1';
 function getNotesSort() { return Store.get(KEY_NOTES_SORT) || 'updated'; }
 function setNotesSort(v) { Store.set(KEY_NOTES_SORT, v); }
 
-// In-memory undo history per note (session only)
-const _noteHistory = new Map(); // noteId → [content, ...]
-const MAX_UNDO = 50;
+// Persistent undo history (localStorage + in-memory write-through)
+const KEY_NOTES_HISTORY = 'rt.notes-history.v1';
+const MAX_UNDO = 20;
+const _historyCache = new Map(); // noteId → [content, ...] (in-memory mirror)
+
+function _loadHistory() {
+  if (_historyCache.size) return;
+  const raw = Store.get(KEY_NOTES_HISTORY) || {};
+  for (const [id, arr] of Object.entries(raw)) _historyCache.set(id, arr);
+}
+function _saveHistory() {
+  const obj = {};
+  _historyCache.forEach((arr, id) => { if (arr.length) obj[id] = arr; });
+  Store.set(KEY_NOTES_HISTORY, obj);
+}
 function historyPush(noteId, content) {
-  if (!_noteHistory.has(noteId)) _noteHistory.set(noteId, []);
-  const h = _noteHistory.get(noteId);
-  if (h.length && h[h.length - 1] === content) return; // no duplicate
+  _loadHistory();
+  if (!_historyCache.has(noteId)) _historyCache.set(noteId, []);
+  const h = _historyCache.get(noteId);
+  if (h.length && h[h.length - 1] === content) return;
   h.push(content);
   if (h.length > MAX_UNDO) h.shift();
+  _saveHistory();
 }
 function historyPop(noteId) {
-  const h = _noteHistory.get(noteId);
+  _loadHistory();
+  const h = _historyCache.get(noteId);
   if (!h || !h.length) return null;
-  return h.pop();
+  const val = h.pop();
+  _saveHistory();
+  return val;
 }
 function historyLen(noteId) {
-  return (_noteHistory.get(noteId) || []).length;
+  _loadHistory();
+  return (_historyCache.get(noteId) || []).length;
+}
+// Prune history for deleted notes to avoid unbounded growth
+function pruneHistory(activeIds) {
+  _loadHistory();
+  let changed = false;
+  _historyCache.forEach((_, id) => { if (!activeIds.has(id)) { _historyCache.delete(id); changed = true; } });
+  if (changed) _saveHistory();
 }
 
 function sortedNotes(notes, sort) {
@@ -2531,6 +2556,7 @@ function buildNoteEditorContent(note, startInEdit = false) {
   deleteBtn.addEventListener('click', () => {
     const notes = getNotes().filter(n => n.id !== note.id);
     setNotes(notes);
+    pruneHistory(new Set(notes.map(n => String(n.id))));
     closeSheet();
     renderNotesSection();
   });
@@ -2730,15 +2756,30 @@ requestAnimationFrame(() => {
 // ── Keyboard / visualViewport handling (iOS: keyboard pushes content) ──
 if (window.visualViewport) {
   const sheet = document.getElementById('sheet');
-  const resetSheet = () => { sheet.style.bottom = ''; sheet.style.maxHeight = ''; };
+  const resetSheet = () => {
+    sheet.style.bottom = '';
+    sheet.style.maxHeight = '';
+    const ta = sheet.querySelector('.note-textarea');
+    if (ta) { ta.style.height = ''; ta.style.minHeight = ''; }
+  };
   const onVVChange = () => {
     if (!sheet.classList.contains('open')) return;
     const vv = window.visualViewport;
     const keyboardH = Math.max(0, window.innerHeight - (vv.offsetTop + vv.height));
     if (keyboardH > 50) {
-      // Lift sheet above keyboard and shrink it to the available visual space
       sheet.style.bottom    = keyboardH + 'px';
       sheet.style.maxHeight = vv.height + 'px';
+      // Shrink textarea to exactly fill remaining space above keyboard
+      const ta = sheet.querySelector('.note-textarea:not(.hidden)');
+      if (ta) {
+        const grabberH   = sheet.querySelector('.sheet-grabber')?.offsetHeight  || 16;
+        const headerH    = sheet.querySelector('.sheet-header')?.offsetHeight   || 52;
+        const toolbarH   = sheet.querySelector('.note-toolbar')?.offsetHeight   || 50;
+        const bodyPadV   = 32; // 16px top + 16px bottom from .sheet-body padding
+        const taH = Math.max(80, vv.height - grabberH - headerH - toolbarH - bodyPadV);
+        ta.style.minHeight = taH + 'px';
+        ta.style.height    = taH + 'px';
+      }
     } else {
       resetSheet();
     }
