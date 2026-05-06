@@ -2173,27 +2173,46 @@ function noteSnippet(content) {
   const body = lines.slice(1, 3).join(' ').replace(/[#*`_]/g, '');
   return body.slice(0, 100) || '';
 }
-function renderMarkdown(text) {
+function renderMarkdown(text, onToggleTodo) {
   if (!text) return '';
-  // Escape HTML
-  let s = text.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  const lines = text.split('\n');
+  // Escape HTML per-line, tracking line indices for todos
+  const escaped = lines.map(l => l.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'));
+  let s = escaped.join('\n');
   // Headers
   s = s.replace(/^### (.+)$/gm, '<h3>$1</h3>');
   s = s.replace(/^## (.+)$/gm,  '<h2>$1</h2>');
   s = s.replace(/^# (.+)$/gm,   '<h1>$1</h1>');
-  // Bold/italic/code (inline)
+  // Bold/italic/code
   s = s.replace(/\*\*\*(.+?)\*\*\*/g, '<strong><em>$1</em></strong>');
   s = s.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
   s = s.replace(/\*(.+?)\*/g,    '<em>$1</em>');
   s = s.replace(/`(.+?)`/g,      '<code>$1</code>');
   // Horizontal rule
   s = s.replace(/^---$/gm, '<hr>');
-  // Lists: group consecutive - lines into <ul>
+  // Todo items (before general list so they match first)
+  // We need line numbers — rebuild from per-line processing
+  const processedLines = s.split('\n');
+  s = processedLines.map((line, i) => {
+    // Match on processed line (brackets not escaped)
+    if (/^- \[x\] /i.test(line)) {
+      const label = line.replace(/^- \[x\] /i, '');
+      return `<li class="todo-item todo-done" data-line="${i}"><span class="todo-check">✓</span><span class="todo-label">${label}</span></li>`;
+    }
+    if (/^- \[ \] /.test(line)) {
+      const label = line.replace(/^- \[ \] /, '');
+      return `<li class="todo-item" data-line="${i}"><span class="todo-check">☐</span><span class="todo-label">${label}</span></li>`;
+    }
+    return line;
+  }).join('\n');
+  // Wrap consecutive todo items in <ul class="todo-list">
+  s = s.replace(/((?:<li class="todo-item[^"]*"[^>]*>.*?<\/li>\n?)+)/g, '<ul class="todo-list">$1</ul>');
+  // Regular lists: group consecutive - lines
   s = s.replace(/((?:^- .+\n?)+)/gm, (block) => {
     const items = block.split('\n').filter(l => l.startsWith('- ')).map(l => `<li>${l.slice(2)}</li>`).join('');
     return `<ul>${items}</ul>`;
   });
-  // Paragraphs: blank-line separated non-block content
+  // Paragraphs
   s = s.replace(/\n{2,}/g, '\n\n');
   const blocks = s.split('\n\n');
   s = blocks.map(b => {
@@ -2279,6 +2298,7 @@ function buildNoteEditorContent(note) {
     { label: 'H1', title: 'Heading 1',   prefix: '# ' },
     { label: 'H2', title: 'Heading 2',   prefix: '## ' },
     { label: '•',  title: 'List item',   prefix: '- ' },
+    { label: '☐',  title: 'Todo item',   prefix: '- [ ] ' },
     { label: '—',  title: 'Divider',     insert: '\n---\n' },
   ];
 
@@ -2360,10 +2380,29 @@ function buildNoteEditorContent(note) {
   });
   toolbar.appendChild(deleteBtn);
 
+  const refreshPreview = () => { preview.innerHTML = renderMarkdown(textarea.value); };
+
+  // Todo tap handler — delegated on preview
+  preview.addEventListener('click', (e) => {
+    const item = e.target.closest('.todo-item');
+    if (!item) return;
+    const lineIdx = parseInt(item.dataset.line, 10);
+    const lines = textarea.value.split('\n');
+    const line = lines[lineIdx];
+    if (/^- \[x\] /i.test(line)) {
+      lines[lineIdx] = line.replace(/^- \[x\] /i, '- [ ] ');
+    } else if (/^- \[ \] /.test(line)) {
+      lines[lineIdx] = line.replace(/^- \[ \] /, '- [x] ');
+    }
+    textarea.value = lines.join('\n');
+    save();
+    refreshPreview();
+  });
+
   // Preview toggle handler
   previewBtn.addEventListener('click', () => {
     previewMode = !previewMode;
-    preview.innerHTML = renderMarkdown(textarea.value);
+    refreshPreview();
     preview.classList.toggle('hidden', !previewMode);
     textarea.classList.toggle('hidden', previewMode);
     previewBtn.textContent = previewMode ? 'Edit' : 'Preview';
