@@ -658,6 +658,8 @@ function openAddCompanionSheet() {
 
 function buildAddCompanionContent() {
   const wrap = document.createElement('div');
+  wrap.className = 'add-comp-form';
+
   const added = new Set(getRoster().map(e => e.char));
   const available = COMPANION_ORDER.filter(n => !added.has(n) && DATA.companions[n]);
 
@@ -669,77 +671,90 @@ function buildAddCompanionContent() {
     return wrap;
   }
 
-  let selectedChar = null, selectedBuild = null;
-
-  // Character list
-  const charList = document.createElement('div');
-  charList.className = 'add-comp-list';
-
-  const buildSection = document.createElement('div');
-  buildSection.className = 'add-comp-build-section hidden';
-
-  const joinSection = document.createElement('div');
-  joinSection.className = 'add-comp-join-section hidden';
-
-  const confirmBtn = document.createElement('button');
-  confirmBtn.className = 'save-btn hidden';
-  confirmBtn.textContent = 'Add to Roster';
-
+  // ── Character dropdown ──
+  const charLabel = document.createElement('div');
+  charLabel.className = 'add-comp-section-label';
+  charLabel.textContent = 'Character';
+  const charSel = document.createElement('select');
+  charSel.className = 'setup-select';
   available.forEach(charName => {
-    const item = document.createElement('div');
-    item.className = 'add-comp-item';
-    item.innerHTML = `<span class="add-comp-name">${charName}</span><span class="add-comp-arch">${COMPANION_ARCH[charName] || ''}</span>`;
-    item.addEventListener('click', () => {
-      charList.querySelectorAll('.add-comp-item').forEach(el => el.classList.remove('active'));
-      item.classList.add('active');
-      selectedChar = charName;
-      selectedBuild = null;
-
-      // Build picker
-      buildSection.innerHTML = '';
-      buildSection.classList.remove('hidden');
-      const buildLabel = document.createElement('div');
-      buildLabel.className = 'add-comp-section-label';
-      buildLabel.textContent = 'Build';
-      buildSection.appendChild(buildLabel);
-      const buildSel = document.createElement('select');
-      buildSel.className = 'setup-select';
-      const variants = DATA.companions[charName] || [];
-      variants.forEach((v, i) => {
-        const o = document.createElement('option');
-        o.value = i; o.textContent = v.name;
-        buildSel.appendChild(o);
-      });
-      selectedBuild = variants[0]?.name;
-      buildSel.addEventListener('change', () => {
-        selectedBuild = variants[parseInt(buildSel.value, 10)]?.name;
-      });
-      buildSection.appendChild(buildSel);
-
-      // Join level picker
-      joinSection.innerHTML = '';
-      joinSection.classList.remove('hidden');
-      const joinLabel = document.createElement('div');
-      joinLabel.className = 'add-comp-section-label';
-      joinLabel.textContent = 'Joins at level';
-      const joinInput = document.createElement('input');
-      joinInput.type = 'number'; joinInput.min = 1; joinInput.max = 55;
-      joinInput.className = 'add-comp-join-input';
-      joinInput.value = DEFAULT_JOIN_LEVELS[charName] || 1;
-      joinSection.append(joinLabel, joinInput);
-
-      confirmBtn.classList.remove('hidden');
-      confirmBtn.onclick = () => {
-        const joinLevel = Math.max(1, Math.min(55, parseInt(joinInput.value, 10) || 1));
-        addToRoster({ char: selectedChar, build: selectedBuild, joinLevel });
-        closeSheet();
-        renderTracker();
-      };
-    });
-    charList.appendChild(item);
+    const o = document.createElement('option');
+    o.value = charName;
+    o.textContent = `${charName}  ·  ${COMPANION_ARCH[charName] || ''}`;
+    charSel.appendChild(o);
   });
 
-  wrap.append(charList, buildSection, joinSection, confirmBtn);
+  // ── Build dropdown ──
+  const buildLabel = document.createElement('div');
+  buildLabel.className = 'add-comp-section-label';
+  buildLabel.textContent = 'Build';
+  const buildSel = document.createElement('select');
+  buildSel.className = 'setup-select';
+
+  // ── Join level ──
+  const joinLabel = document.createElement('div');
+  joinLabel.className = 'add-comp-section-label';
+  joinLabel.textContent = 'Joins at level';
+  const joinInput = document.createElement('input');
+  joinInput.type = 'number'; joinInput.min = 1; joinInput.max = 55;
+  joinInput.className = 'add-comp-join-input';
+  joinInput.style.userSelect = 'text'; joinInput.style.webkitUserSelect = 'text';
+
+  // ── Buttons ──
+  const partyFull = getParty().length >= MAX_PARTY;
+  const btnRow = document.createElement('div');
+  btnRow.className = 'add-comp-btn-row';
+
+  const rosterBtn = document.createElement('button');
+  rosterBtn.className = 'add-comp-confirm-btn';
+  rosterBtn.textContent = 'Add to Roster';
+
+  const partyBtn = document.createElement('button');
+  partyBtn.className = 'add-comp-confirm-btn add-comp-party-btn';
+  partyBtn.textContent = partyFull ? 'Party Full' : 'Add to Party';
+  partyBtn.disabled = partyFull;
+
+  btnRow.append(rosterBtn, partyBtn);
+
+  // Update builds + join level when character changes
+  const updateForChar = () => {
+    const charName = charSel.value;
+    const variants = DATA.companions[charName] || [];
+    buildSel.innerHTML = '';
+    variants.forEach((v, i) => {
+      const o = document.createElement('option');
+      o.value = i; o.textContent = v.name;
+      buildSel.appendChild(o);
+    });
+    buildSel.disabled = variants.length <= 1;
+    joinInput.value = DEFAULT_JOIN_LEVELS[charName] || 1;
+  };
+  charSel.addEventListener('change', updateForChar);
+  updateForChar(); // init
+
+  const getEntry = () => {
+    const charName = charSel.value;
+    const variants = DATA.companions[charName] || [];
+    const build = (variants[parseInt(buildSel.value, 10)] || variants[0])?.name || '';
+    const joinLevel = Math.max(1, Math.min(55, parseInt(joinInput.value, 10) || 1));
+    return { char: charName, build, joinLevel };
+  };
+
+  rosterBtn.addEventListener('click', () => {
+    addToRoster(getEntry());
+    closeSheet();
+    renderTracker();
+  });
+
+  partyBtn.addEventListener('click', () => {
+    const entry = getEntry();
+    addToRoster(entry);
+    addToParty(entry.char);
+    closeSheet();
+    renderTracker();
+  });
+
+  wrap.append(charLabel, charSel, buildLabel, buildSel, joinLabel, joinInput, btnRow);
   return wrap;
 }
 

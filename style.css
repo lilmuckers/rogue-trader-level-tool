@@ -1093,3 +1093,25 @@
 .note-save-indicator.visible { opacity: 1; }
 .note-undo-btn { font-size: 15px; }
 .note-undo-btn:disabled { opacity: 0.25; cursor: default; }
+
+/* Add companion form (dropdown layout) */
+.add-comp-form { display: flex; flex-direction: column; gap: 6px; }
+.add-comp-form .add-comp-section-label { margin-top: 8px; }
+.add-comp-btn-row { display: flex; gap: 10px; margin-top: 16px; }
+.add-comp-confirm-btn {
+  flex: 1; padding: 13px 8px;
+  font-family: 'Cinzel', serif; font-size: 12px; font-weight: 700;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  border-radius: 3px; cursor: pointer;
+}
+.add-comp-confirm-btn:not(.add-comp-party-btn) {
+  background: linear-gradient(180deg, var(--gold) 0%, var(--gold-deep) 100%);
+  color: var(--bg); border: 1px solid var(--gold-bright);
+}
+.add-comp-confirm-btn:not(.add-comp-party-btn):active { transform: translateY(1px); }
+.add-comp-party-btn {
+  background: transparent; color: var(--gold);
+  border: 1px solid var(--gold-deep);
+}
+.add-comp-party-btn:active { background: rgba(201,164,76,0.1); }
+.add-comp-party-btn:disabled { opacity: 0.3; cursor: default; }
