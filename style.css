@@ -987,10 +987,12 @@
 }
 .note-card-date { font-size: 11px; color: var(--ink-faint); }
 /* Editor */
-.note-editor-wrap { display: flex; flex-direction: column; height: 100%; gap: 8px; }
+.note-editor-wrap { display: flex; flex-direction: column; min-height: 0; }
 .note-toolbar {
   display: flex; gap: 6px; flex-wrap: wrap;
-  padding-bottom: 8px; border-bottom: 1px solid var(--rule);
+  padding: 6px 0 8px; border-bottom: 1px solid var(--rule);
+  position: sticky; top: -16px; z-index: 10;
+  background: var(--bg-2); margin: -16px -16px 0; padding: 10px 16px 8px;
 }
 .note-tool-btn {
   padding: 6px 10px; background: var(--bg-3); border: 1px solid var(--rule);
@@ -1004,10 +1006,10 @@
 .note-delete-btn { color: var(--blood-bright); border-color: var(--blood); }
 .note-delete-btn:active { background: var(--blood); color: #fff; }
 .note-textarea {
-  flex: 1; width: 100%; min-height: 400px;
+  width: 100%; min-height: 50vh;
   background: var(--bg-2); border: 1px solid var(--rule); border-radius: 3px;
   color: var(--ink); font-family: 'EB Garamond', serif; font-size: 17px;
-  line-height: 1.6; padding: 12px; resize: none;
+  line-height: 1.6; padding: 12px; resize: none; margin-top: 10px;
   user-select: text !important; -webkit-user-select: text !important;
 }
 .note-textarea:focus { outline: none; border-color: var(--gold-deep); }
@@ -1063,17 +1065,18 @@
 /* Note card outer (swipe container) */
 .note-card-outer { position: relative; margin-bottom: 10px; overflow: hidden; border-radius: 0 3px 3px 0; }
 .note-swipe-hint {
-  position: absolute; top: 0; bottom: 0; display: flex; align-items: center;
-  padding: 0 16px; font-size: 12px; font-family: 'Cinzel', serif;
+  position: absolute; top: 0; bottom: 0; z-index: 0;
+  display: flex; align-items: center;
+  padding: 0 16px; font-size: 11px; font-family: 'Cinzel', serif;
   letter-spacing: 0.1em; white-space: nowrap; pointer-events: none;
   color: var(--ink-dim);
 }
-.hint-left { right: 0; background: linear-gradient(270deg, var(--bg-3), transparent); }
-.hint-right { left: 0; background: linear-gradient(90deg, var(--bg-3), transparent); }
+.hint-left  { right: 0; background: linear-gradient(270deg, var(--blood) 0%, rgba(139,26,26,0.6) 60%, transparent 100%); color: #fff; }
+.hint-right { left: 0;  background: linear-gradient(90deg,  var(--gold-deep) 0%, rgba(138,111,45,0.5) 60%, transparent 100%); color: var(--gold-bright); }
 .note-card {
   background: var(--bg-2); border-left: 2px solid var(--gold-deep);
   border-radius: 0 3px 3px 0; padding: 12px 14px;
-  cursor: pointer; position: relative;
+  cursor: pointer; position: relative; z-index: 1;
 }
 .note-card:active { background: var(--bg-3); }
 .note-card.note-archived { opacity: 0.45; border-left-color: var(--rule); }

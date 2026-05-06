@@ -2666,19 +2666,23 @@ requestAnimationFrame(() => {
 // ── Keyboard / visualViewport handling (iOS: keyboard pushes content) ──
 if (window.visualViewport) {
   const sheet = document.getElementById('sheet');
+  const resetSheet = () => { sheet.style.bottom = ''; sheet.style.maxHeight = ''; };
   const onVVChange = () => {
     if (!sheet.classList.contains('open')) return;
     const vv = window.visualViewport;
-    // Gap between visual viewport top + height and window height = keyboard height
     const keyboardH = Math.max(0, window.innerHeight - (vv.offsetTop + vv.height));
-    sheet.style.bottom = keyboardH > 50 ? keyboardH + 'px' : '';
+    if (keyboardH > 50) {
+      // Lift sheet above keyboard and shrink it to the available visual space
+      sheet.style.bottom    = keyboardH + 'px';
+      sheet.style.maxHeight = vv.height + 'px';
+    } else {
+      resetSheet();
+    }
   };
   window.visualViewport.addEventListener('resize', onVVChange);
   window.visualViewport.addEventListener('scroll', onVVChange);
-  // Reset when sheet closes
-  document.getElementById('sheet-overlay').addEventListener('click', () => {
-    sheet.style.bottom = '';
-  });
+  document.getElementById('sheet-overlay').addEventListener('click', resetSheet);
+  document.getElementById('sheet-close').addEventListener('click', resetSheet);
 }
 
 if ('serviceWorker' in navigator) {
