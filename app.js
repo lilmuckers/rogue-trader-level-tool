@@ -2470,10 +2470,11 @@ function buildNoteCard(note, isArchived) {
   const outer = document.createElement('div');
   outer.className = 'note-card-outer';
 
-  const hint = document.createElement('div');
-  hint.className = 'note-swipe-hint ' + (isArchived ? 'hint-right' : 'hint-left');
-  hint.textContent = isArchived ? '↩ Restore' : '🗄 Archive';
-  outer.appendChild(hint);
+  // Delete background (revealed on left-swipe for active; also archived)
+  const deleteBg = document.createElement('div');
+  deleteBg.className = 'note-delete-bg';
+  deleteBg.textContent = 'Delete';
+  outer.appendChild(deleteBg);
 
   const card = document.createElement('div');
   card.className = 'note-card' + (isArchived ? ' note-archived' : '');
@@ -2491,39 +2492,87 @@ function buildNoteCard(note, isArchived) {
   card.addEventListener('click', () => openNoteEditor(note));
   outer.appendChild(card);
 
-  // Swipe to archive/restore
-  let startX = 0, startY = 0, dx = 0, swiping = false;
-  const THRESHOLD = 80;
+  let startX = 0, startY = 0, dx = 0, intentDecided = false, active = false;
+  const DELETE_THRESHOLD = 100;
+  const ARCHIVE_THRESHOLD = 80;
+
+  const doDelete = () => {
+    card.style.transition = 'transform 0.2s, opacity 0.2s';
+    card.style.transform = 'translateX(-100%)';
+    card.style.opacity = '0';
+    setTimeout(() => {
+      const all = getNotes().filter(n => n.id !== note.id);
+      setNotes(all);
+      pruneHistory(new Set(all.map(n => String(n.id))));
+      renderNotesSection();
+    }, 200);
+  };
+
+  const reset = () => {
+    card.style.transition = 'transform 0.2s';
+    card.style.transform = '';
+    deleteBg.classList.remove('visible');
+    setTimeout(() => { card.style.transition = ''; }, 220);
+    intentDecided = false; active = false; dx = 0;
+  };
+
   card.addEventListener('touchstart', e => {
-    startX = e.touches[0].clientX; startY = e.touches[0].clientY; dx = 0; swiping = false;
+    startX = e.touches[0].clientX; startY = e.touches[0].clientY;
+    dx = 0; intentDecided = false; active = false;
   }, { passive: true });
+
   card.addEventListener('touchmove', e => {
     dx = e.touches[0].clientX - startX;
     const dy = e.touches[0].clientY - startY;
-    if (!swiping && Math.abs(dy) > Math.abs(dx)) return;
-    swiping = true;
-    const ok = isArchived ? dx > 0 : dx < 0;
-    if (ok) card.style.transform = `translateX(${dx}px)`;
+    if (!intentDecided) {
+      if (Math.abs(dx) < 5 && Math.abs(dy) < 5) return;
+      if (Math.abs(dy) >= Math.abs(dx)) { intentDecided = true; return; } // vertical
+      intentDecided = true;
+      if (dx > 0 && !isArchived) return; // right swipe on active note — ignore
+      active = true;
+    }
+    if (!active) return;
+    card.style.transition = 'none';
+    if (!isArchived) {
+      // active note: left swipe to archive or delete
+      card.style.transform = `translateX(${Math.min(0, dx)}px)`;
+      deleteBg.classList.toggle('visible', dx < -20);
+    } else {
+      // archived note: left swipe to delete, right swipe to restore
+      card.style.transform = `translateX(${dx}px)`;
+      if (dx < -20) deleteBg.classList.add('visible');
+      else deleteBg.classList.remove('visible');
+    }
   }, { passive: true });
+
   card.addEventListener('touchend', () => {
-    card.style.transition = 'transform 0.2s';
-    card.style.transform = '';
-    setTimeout(() => { card.style.transition = ''; }, 220);
-    if (!swiping) return;
-    if (!isArchived && dx < -THRESHOLD) {
+    if (!active) return;
+    if (dx < -DELETE_THRESHOLD) {
+      doDelete();
+      return;
+    }
+    if (!isArchived && dx < -ARCHIVE_THRESHOLD) {
+      // archive
       note.archived = true;
       const all = getNotes(); const i = all.findIndex(n => n.id === note.id);
       if (i >= 0) { all[i] = note; setNotes(all); }
       renderNotesSection();
-    } else if (isArchived && dx > THRESHOLD) {
+      return;
+    }
+    if (isArchived && dx > ARCHIVE_THRESHOLD) {
+      // restore
       note.archived = false;
-      note.updatedAt = Date.now(); // bump to top
+      note.updatedAt = Date.now();
       const all = getNotes(); const i = all.findIndex(n => n.id === note.id);
       if (i >= 0) { all[i] = note; setNotes(all); }
       renderNotesSection();
+      return;
     }
-    dx = 0;
+    reset();
   });
+
+  card.addEventListener('touchcancel', reset);
+  deleteBg.addEventListener('click', doDelete);
 
   return outer;
 }
@@ -2701,19 +2750,6 @@ function buildNoteEditorContent(note, startInEdit = false) {
   toolbar.appendChild(redoBtn);
   toolbar.appendChild(saveIndicator);
   toolbar.appendChild(previewBtn);
-
-  const deleteBtn = document.createElement('button');
-  deleteBtn.className = 'note-tool-btn note-delete-btn';
-  deleteBtn.textContent = '🗑';
-  deleteBtn.title = 'Delete note';
-  deleteBtn.addEventListener('click', () => {
-    const notes = getNotes().filter(n => n.id !== note.id);
-    setNotes(notes);
-    pruneHistory(new Set(notes.map(n => String(n.id))));
-    closeSheet();
-    renderNotesSection();
-  });
-  toolbar.appendChild(deleteBtn);
 
   // Todo tap in preview
   preview.addEventListener('click', (e) => {

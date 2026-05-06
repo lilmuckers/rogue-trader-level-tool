@@ -1021,8 +1021,6 @@
 .note-tool-btn:active { background: var(--bg-2); }
 .note-tool-btn.active { border-color: var(--gold); color: var(--gold); background: rgba(201,164,76,0.1); }
 .note-preview-btn { margin-left: auto; }
-.note-delete-btn { color: var(--blood-bright); border-color: var(--blood); }
-.note-delete-btn:active { background: var(--blood); color: #fff; }
 .note-textarea {
   width: 100%; flex: 1; min-height: 45vh;
   background: var(--bg-2); border: 1px solid var(--rule); border-radius: 3px;
@@ -1084,22 +1082,25 @@
 }
 /* Note card outer (swipe container) */
 .note-card-outer { position: relative; margin-bottom: 10px; overflow: hidden; border-radius: 0 3px 3px 0; }
-.note-swipe-hint {
-  position: absolute; top: 0; bottom: 0; z-index: 0;
-  display: flex; align-items: center;
-  padding: 0 16px; font-size: 11px; font-family: 'Cinzel', serif;
-  letter-spacing: 0.1em; white-space: nowrap; pointer-events: none;
-  color: var(--ink-dim);
+.note-delete-bg {
+  position: absolute; right: 0; top: 0; bottom: 0; z-index: 0;
+  background: var(--blood); color: #fff;
+  display: flex; align-items: center; padding: 0 22px;
+  font-family: 'Cinzel', serif; font-size: 12px; letter-spacing: 0.2em;
+  text-transform: uppercase; opacity: 0; transition: opacity 0.15s;
+  pointer-events: none;
 }
-.hint-left  { right: 0; background: linear-gradient(270deg, var(--blood) 0%, rgba(139,26,26,0.6) 60%, transparent 100%); color: #fff; }
-.hint-right { left: 0;  background: linear-gradient(90deg,  var(--gold-deep) 0%, rgba(138,111,45,0.5) 60%, transparent 100%); color: var(--gold-bright); }
+.note-delete-bg.visible { opacity: 1; pointer-events: auto; }
 .note-card {
   background: var(--bg-2); border-left: 2px solid var(--gold-deep);
   border-radius: 0 3px 3px 0; padding: 12px 14px;
   cursor: pointer; position: relative; z-index: 1;
 }
 .note-card:active { background: var(--bg-3); }
-.note-card.note-archived { opacity: 0.45; border-left-color: var(--rule); }
+.note-card.note-archived {
+  opacity: 0.4; border-left-color: var(--rule);
+  filter: grayscale(0.4);
+}
 .note-archive-heading { font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 0.3em; color: var(--ink-faint); text-transform: uppercase; margin: 20px 0 8px; }
 /* Hide old duplicate .notes-header-row rule that conflicts */
 
