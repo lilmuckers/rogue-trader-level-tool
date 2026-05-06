@@ -18,6 +18,11 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
+<div id="splash">
+  <div class="splash-eagle">⚜ Imperium of Man ⚜</div>
+  <div class="splash-title">Rogue Trader</div>
+  <div class="splash-sub">Level Tracker &amp; Build Companion</div>
+</div>
 <div class="app">
 
 <div class="header">
@@ -66,10 +71,14 @@
 <!-- ── Setup overlay (not a section) ── -->
 <div id="setup-view" class="hidden">
   <div class="setup-tip">
-    Choose your <strong>Main Character</strong> build, a variant for each <strong>companion</strong>, and the level at which each companion <strong>joins your party</strong>. Companions appear greyed out below their join level.
+    Choose your <strong>Main Character</strong> build and name. Add companions from the <strong>Builds</strong> screen using the ＋ button.
   </div>
   <div class="setup-section">
     <div class="setup-heading">⟡ Main Character ⟡</div>
+    <div class="setup-row mc-row">
+      <label class="setup-label" for="mc-name-input">Name</label>
+      <input id="mc-name-input" type="text" class="mc-name-input" placeholder="e.g. Maximilian" maxlength="32" autocomplete="off" autocorrect="off" spellcheck="false">
+    </div>
     <div class="setup-row mc-row">
       <label class="setup-label" for="mc-theme-select">Theme</label>
       <select id="mc-theme-select"></select>
@@ -82,6 +91,7 @@
   <div class="setup-section">
     <div class="setup-heading">⟡ Companions ⟡</div>
     <div id="companion-selects"></div>
+    <button id="add-companion-btn" class="add-companion-btn">＋ Add Companion</button>
   </div>
   <button id="save-btn" class="save-btn">Confirm &amp; Begin</button>
   <button id="cancel-setup-btn" class="reset-btn hidden">Cancel</button>

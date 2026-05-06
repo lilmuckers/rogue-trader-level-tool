@@ -13,10 +13,14 @@ const Store = (() => {
   };
 })();
 
-const KEY_CONFIG = 'rt.config.v2';
-const KEY_LEVEL = 'rt.level.v1';
+const KEY_CONFIG  = 'rt.config.v2';
+const KEY_LEVEL   = 'rt.level.v1';
 const KEY_CHOICES = 'rt.choices.v1';
+const KEY_MC_NAME = 'rt.mc-name.v1';
+const KEY_ROSTER  = 'rt.roster.v1';   // [{char, build, joinLevel}] ordered
+const KEY_PARTY   = 'rt.party.v1';    // [charName] ordered, max 5
 const MIN_LVL = 1, MAX_LVL = 55;
+const MAX_PARTY = 5;
 
 // ============= PICK CHOICES =============
 // Storage format: { charName: { normalizedPickName: levelNumber } }
@@ -160,6 +164,30 @@ function renderChoiceSection(rawPick, charName, atLevel, targetEl, isExtra) {
   }
 })();
 
+// Roster helpers
+function getRoster() { return Store.get(KEY_ROSTER) || []; }
+function setRoster(r) { Store.set(KEY_ROSTER, r); }
+function addToRoster(entry) { const r = getRoster(); r.push(entry); setRoster(r); }
+function removeFromRoster(charName) { setRoster(getRoster().filter(e => e.char !== charName)); }
+function rosterHas(charName) { return getRoster().some(e => e.char === charName); }
+// Party helpers
+function getParty() { return Store.get(KEY_PARTY) || []; }
+function setParty(p) { Store.set(KEY_PARTY, p); }
+function inParty(charName) { return getParty().includes(charName); }
+function addToParty(charName) {
+  const p = getParty();
+  if (p.length >= MAX_PARTY || p.includes(charName)) return false;
+  p.push(charName); setParty(p); return true;
+}
+function removeFromParty(charName) { setParty(getParty().filter(n => n !== charName)); }
+// MC name
+function getMCName() { return Store.get(KEY_MC_NAME) || ''; }
+function setMCName(n) { Store.set(KEY_MC_NAME, n.trim()); }
+function getMCDisplayName() {
+  const n = getMCName();
+  return n ? `${n} Von Valencius` : 'Rogue Trader';
+}
+
 let config = Store.get(KEY_CONFIG);
 let level = Store.get(KEY_LEVEL) || 1;
 if (level < MIN_LVL) level = MIN_LVL;
@@ -177,6 +205,23 @@ const COMPANION_ORDER = [
   'Abelard','Idira','Argenta','Cassia','Pasqal','Heinrix','Jae','Yrliet',
   'Ulfar','Marazhai','Kibellah','Solomorne','Incendia Chorda','Calligos Winterscale','Uralon'
 ];
+
+// ── Roster migration: build KEY_ROSTER from legacy KEY_CONFIG on first run ──
+(() => {
+  if (Store.get(KEY_ROSTER)) return;
+  const cfg = Store.get(KEY_CONFIG);
+  if (!cfg || !cfg.companions) return;
+  const roster = [];
+  COMPANION_ORDER.forEach(charName => {
+    if (cfg.companions[charName] == null) return;
+    const variants = DATA.companions[charName];
+    if (!variants) return;
+    const build = (variants[cfg.companions[charName]] || variants[0]).name;
+    const joinLevel = (cfg.joinLevels && cfg.joinLevels[charName]) || DEFAULT_JOIN_LEVELS[charName] || 1;
+    roster.push({ char: charName, build, joinLevel });
+  });
+  Store.set(KEY_ROSTER, roster);
+})();
 
 // ============= DEFINITIONS LOOKUP =============
 const DEFS = DATA.definitions; // {talents, abilities, heroic}
@@ -442,35 +487,260 @@ function renderTracker() {
   $('lvl-down').disabled = level <= MIN_LVL;
   $('lvl-up').disabled = level >= MAX_LVL;
 
-  const roster = $('roster');
-  roster.innerHTML = '';
+  const rosterEl = $('roster');
+  rosterEl.innerHTML = '';
 
+  // MC
   const mc = getCurrentMC();
   if (mc) {
-    roster.appendChild(charCard({
-      mc: true, key: 'Rogue Trader', displayName: 'Rogue Trader',
+    rosterEl.appendChild(charCard({
+      mc: true, key: 'Rogue Trader', displayName: getMCDisplayName(),
       buildName: mc.name, arch: detectArchetype(mc.origin) || '—',
       pick: pickAt(mc, level), available: true, build: mc,
     }));
   }
 
-  const sectionH = document.createElement('div');
-  sectionH.className = 'roster-heading';
-  sectionH.textContent = '◆ Retinue ◆';
-  roster.appendChild(sectionH);
+  const rosterData = getRoster();
+  const party = getParty();
 
-  COMPANION_ORDER.forEach(charName => {
-    const variant = getCompanionVariant(charName);
-    if (!variant) return;
-    const join = getJoinLevel(charName);
-    const available = level >= join;
-    roster.appendChild(charCard({
-      mc: false, key: charName, displayName: charName,
-      buildName: variant.name, arch: COMPANION_ARCH[charName] || '',
-      pick: available ? pickAt(variant, level) : null,
-      available, joinLevel: join, build: variant,
-    }));
+  // Party section
+  const partyMembers = party.filter(n => rosterData.some(e => e.char === n));
+  if (partyMembers.length) {
+    const ph = document.createElement('div');
+    ph.className = 'roster-heading';
+    ph.textContent = '◆ Party ◆';
+    rosterEl.appendChild(ph);
+    partyMembers.forEach((charName, idx) => {
+      const entry = rosterData.find(e => e.char === charName);
+      if (!entry) return;
+      rosterEl.appendChild(buildCompanionCard(entry, idx, 'party'));
+    });
+  }
+
+  // Retinue section (non-party roster members)
+  const retinue = rosterData.filter(e => !party.includes(e.char));
+  const heading = document.createElement('div');
+  heading.className = 'roster-heading';
+  heading.textContent = '◆ Retinue ◆';
+  rosterEl.appendChild(heading);
+
+  retinue.forEach((entry, idx) => {
+    rosterEl.appendChild(buildCompanionCard(entry, idx, 'retinue'));
   });
+
+  // Add companion button
+  const addBtn = document.createElement('button');
+  addBtn.className = 'roster-add-btn';
+  addBtn.textContent = '＋ Add Companion';
+  addBtn.addEventListener('click', openAddCompanionSheet);
+  rosterEl.appendChild(addBtn);
+}
+
+function buildCompanionCard(entry, idx, section) {
+  const { char: charName, build: buildName, joinLevel } = entry;
+  const variants = DATA.companions[charName];
+  const variant = variants ? (variants.find(v => v.name === buildName) || variants[0]) : null;
+  if (!variant) return document.createTextNode('');
+  const available = level >= joinLevel;
+
+  const wrap = document.createElement('div');
+  wrap.className = 'roster-card-wrap';
+  wrap.dataset.char = charName;
+  wrap.dataset.section = section;
+
+  // Drag handle
+  const handle = document.createElement('div');
+  handle.className = 'drag-handle';
+  handle.innerHTML = '⠿';
+  handle.setAttribute('aria-label', 'Drag to reorder');
+  wrap.appendChild(handle);
+
+  const card = charCard({
+    mc: false, key: charName, displayName: charName,
+    buildName: variant.name, arch: COMPANION_ARCH[charName] || '',
+    pick: available ? pickAt(variant, level) : null,
+    available, joinLevel, build: variant,
+    isCompanion: true,
+  });
+  wrap.appendChild(card);
+
+  // Attach drag-to-reorder on handle
+  attachDragReorder(handle, wrap, section);
+  return wrap;
+}
+
+// ============= DRAG REORDER =============
+function attachDragReorder(handle, wrap, section) {
+  let startY = 0, startIdx = 0, ghost = null;
+
+  handle.addEventListener('touchstart', (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    startY = e.touches[0].clientY;
+    wrap.classList.add('dragging');
+    ghost = wrap.cloneNode(true);
+    ghost.classList.add('drag-ghost');
+    ghost.style.top = wrap.getBoundingClientRect().top + 'px';
+    document.body.appendChild(ghost);
+
+    const siblings = Array.from(wrap.parentElement.querySelectorAll(`.roster-card-wrap[data-section="${section}"]`));
+    startIdx = siblings.indexOf(wrap);
+  }, { passive: false });
+
+  handle.addEventListener('touchmove', (e) => {
+    if (!ghost) return;
+    e.preventDefault();
+    const dy = e.touches[0].clientY - startY;
+    ghost.style.transform = `translateY(${dy}px)`;
+
+    // Find which slot we're over
+    const rEl = $('roster');
+    const siblings = Array.from(rEl.querySelectorAll(`.roster-card-wrap[data-section="${section}"]`));
+    const fingerY = e.touches[0].clientY;
+    let targetIdx = startIdx;
+    siblings.forEach((el, i) => {
+      if (el === wrap) return;
+      const rect = el.getBoundingClientRect();
+      if (fingerY > rect.top + rect.height / 2) targetIdx = i;
+    });
+
+    // Visually reorder
+    siblings.forEach(el => el.classList.remove('drag-over'));
+    if (siblings[targetIdx] && siblings[targetIdx] !== wrap) {
+      siblings[targetIdx].classList.add('drag-over');
+    }
+  }, { passive: false });
+
+  handle.addEventListener('touchend', (e) => {
+    if (!ghost) return;
+    wrap.classList.remove('dragging');
+    ghost.remove(); ghost = null;
+    $('roster').querySelectorAll('.drag-over').forEach(el => el.classList.remove('drag-over'));
+
+    const rEl = $('roster');
+    const siblings = Array.from(rEl.querySelectorAll(`.roster-card-wrap[data-section="${section}"]`));
+    const fingerY = e.changedTouches[0].clientY;
+
+    let targetIdx = startIdx;
+    siblings.forEach((el, i) => {
+      if (el === wrap) return;
+      const rect = el.getBoundingClientRect();
+      if (fingerY > rect.top + rect.height / 2) targetIdx = i;
+    });
+
+    if (targetIdx === startIdx) return;
+
+    if (section === 'party') {
+      const p = getParty();
+      const party = p.filter(n => getRoster().some(e => e.char === n));
+      const moved = party.splice(startIdx, 1)[0];
+      party.splice(targetIdx, 0, moved);
+      // Rebuild full party array preserving any non-roster members
+      setParty(party);
+    } else {
+      const r = getRoster();
+      const retinue = r.filter(e => !getParty().includes(e.char));
+      const moved = retinue.splice(startIdx, 1)[0];
+      retinue.splice(targetIdx, 0, moved);
+      // Rebuild full roster preserving party members
+      const party = getParty();
+      const partyEntries = r.filter(e => party.includes(e.char));
+      setRoster([...partyEntries, ...retinue]);
+    }
+    renderTracker();
+  });
+}
+
+// ============= ADD COMPANION SHEET =============
+function openAddCompanionSheet() {
+  openSheet('Add Companion', () => buildAddCompanionContent());
+}
+
+function buildAddCompanionContent() {
+  const wrap = document.createElement('div');
+  const added = new Set(getRoster().map(e => e.char));
+  const available = COMPANION_ORDER.filter(n => !added.has(n) && DATA.companions[n]);
+
+  if (!available.length) {
+    const msg = document.createElement('div');
+    msg.style.cssText = 'color:var(--ink-dim);padding:12px 0;';
+    msg.textContent = 'All companions already added.';
+    wrap.appendChild(msg);
+    return wrap;
+  }
+
+  let selectedChar = null, selectedBuild = null;
+
+  // Character list
+  const charList = document.createElement('div');
+  charList.className = 'add-comp-list';
+
+  const buildSection = document.createElement('div');
+  buildSection.className = 'add-comp-build-section hidden';
+
+  const joinSection = document.createElement('div');
+  joinSection.className = 'add-comp-join-section hidden';
+
+  const confirmBtn = document.createElement('button');
+  confirmBtn.className = 'save-btn hidden';
+  confirmBtn.textContent = 'Add to Roster';
+
+  available.forEach(charName => {
+    const item = document.createElement('div');
+    item.className = 'add-comp-item';
+    item.innerHTML = `<span class="add-comp-name">${charName}</span><span class="add-comp-arch">${COMPANION_ARCH[charName] || ''}</span>`;
+    item.addEventListener('click', () => {
+      charList.querySelectorAll('.add-comp-item').forEach(el => el.classList.remove('active'));
+      item.classList.add('active');
+      selectedChar = charName;
+      selectedBuild = null;
+
+      // Build picker
+      buildSection.innerHTML = '';
+      buildSection.classList.remove('hidden');
+      const buildLabel = document.createElement('div');
+      buildLabel.className = 'add-comp-section-label';
+      buildLabel.textContent = 'Build';
+      buildSection.appendChild(buildLabel);
+      const buildSel = document.createElement('select');
+      buildSel.className = 'setup-select';
+      const variants = DATA.companions[charName] || [];
+      variants.forEach((v, i) => {
+        const o = document.createElement('option');
+        o.value = i; o.textContent = v.name;
+        buildSel.appendChild(o);
+      });
+      selectedBuild = variants[0]?.name;
+      buildSel.addEventListener('change', () => {
+        selectedBuild = variants[parseInt(buildSel.value, 10)]?.name;
+      });
+      buildSection.appendChild(buildSel);
+
+      // Join level picker
+      joinSection.innerHTML = '';
+      joinSection.classList.remove('hidden');
+      const joinLabel = document.createElement('div');
+      joinLabel.className = 'add-comp-section-label';
+      joinLabel.textContent = 'Joins at level';
+      const joinInput = document.createElement('input');
+      joinInput.type = 'number'; joinInput.min = 1; joinInput.max = 55;
+      joinInput.className = 'add-comp-join-input';
+      joinInput.value = DEFAULT_JOIN_LEVELS[charName] || 1;
+      joinSection.append(joinLabel, joinInput);
+
+      confirmBtn.classList.remove('hidden');
+      confirmBtn.onclick = () => {
+        const joinLevel = Math.max(1, Math.min(55, parseInt(joinInput.value, 10) || 1));
+        addToRoster({ char: selectedChar, build: selectedBuild, joinLevel });
+        closeSheet();
+        renderTracker();
+      };
+    });
+    charList.appendChild(item);
+  });
+
+  wrap.append(charList, buildSection, joinSection, confirmBtn);
+  return wrap;
 }
 
 function makePortrait(key) {
@@ -863,6 +1133,25 @@ function buildCatchupContent(ctx) {
   }
   wrap.appendChild(meta);
 
+  // Party button (companions only)
+  if (isCompanion && rosterHas(displayName)) {
+    const partyBtn = document.createElement('button');
+    const updatePartyBtn = () => {
+      const inP = inParty(displayName);
+      partyBtn.className = 'party-toggle-btn' + (inP ? ' in-party' : '');
+      partyBtn.textContent = inP ? '★ In Party — Remove' : `☆ Add to Party${getParty().length >= MAX_PARTY ? ' (party full)' : ''}`;
+      partyBtn.disabled = !inP && getParty().length >= MAX_PARTY;
+    };
+    updatePartyBtn();
+    partyBtn.addEventListener('click', () => {
+      if (inParty(displayName)) removeFromParty(displayName);
+      else addToParty(displayName);
+      updatePartyBtn();
+      renderTracker();
+    });
+    wrap.appendChild(partyBtn);
+  }
+
   // Decide whether to show tabs (only when there are extras to put in the second tab)
   const extras = getExtrasForBuildName(buildName, isCompanion);
   const hasExtras = extras && (extras.skills || (extras.gear && extras.gear.length));
@@ -1169,6 +1458,11 @@ function buildSinglePickContent(rawPick, displayName, atLevel) {
 
 // ============= SETUP =============
 function renderSetup() {
+  // MC name
+  const nameInput = $('mc-name-input');
+  nameInput.value = getMCName();
+
+  // MC theme/build
   const themeSel = $('mc-theme-select');
   themeSel.innerHTML = '';
   const themes = getMCThemes();
@@ -1182,49 +1476,32 @@ function renderSetup() {
   populateBuildSelect(themeSel.value);
   themeSel.onchange = () => populateBuildSelect(themeSel.value);
 
+  // Companion list (read-only summary in setup — managed via + button on main screen)
   const cWrap = $('companion-selects');
   cWrap.innerHTML = '';
-  COMPANION_ORDER.forEach(charName => {
-    const variants = DATA.companions[charName];
-    if (!variants || variants.length === 0) return;
+  const roster = getRoster();
+  roster.forEach(({ char: charName, build: buildName, joinLevel }) => {
     const row = document.createElement('div');
     row.className = 'setup-row companion-setup-row';
-    const lbl = document.createElement('label');
-    lbl.className = 'setup-label';
-    lbl.textContent = charName + ' · ' + (COMPANION_ARCH[charName] || '');
-    lbl.htmlFor = 'comp-' + charName;
-    row.appendChild(lbl);
-    const grid = document.createElement('div');
-    grid.className = 'companion-setup-grid';
-    const sel = document.createElement('select');
-    sel.id = 'comp-' + charName;
-    sel.dataset.char = charName;
-    const curIdx = (config && config.companions && config.companions[charName] != null) ? config.companions[charName] : 0;
-    variants.forEach((v, i) => {
-      const o = document.createElement('option');
-      o.value = i; o.textContent = v.name;
-      if (i === curIdx) o.selected = true;
-      sel.appendChild(o);
+    row.style.cssText = 'display:flex;align-items:center;gap:8px;';
+    const info = document.createElement('span');
+    info.className = 'setup-label';
+    info.style.flex = '1';
+    info.textContent = `${charName} · ${buildName} · Lv ${joinLevel}`;
+    const removeBtn = document.createElement('button');
+    removeBtn.className = 'companion-remove-btn';
+    removeBtn.textContent = '✕';
+    removeBtn.title = `Remove ${charName}`;
+    removeBtn.addEventListener('click', () => {
+      removeFromRoster(charName);
+      removeFromParty(charName);
+      renderSetup();
+      renderTracker();
     });
-    if (variants.length === 1) { sel.disabled = true; sel.style.opacity = '0.7'; }
-    grid.appendChild(sel);
-    const joinWrap = document.createElement('div');
-    joinWrap.className = 'join-input-wrap';
-    const joinLbl = document.createElement('div');
-    joinLbl.className = 'join-input-label';
-    joinLbl.textContent = 'Joins @';
-    const joinInput = document.createElement('input');
-    joinInput.type = 'number';
-    joinInput.min = 1; joinInput.max = 55;
-    joinInput.dataset.char = charName;
-    joinInput.dataset.role = 'join';
-    joinInput.value = getJoinLevel(charName);
-    joinWrap.appendChild(joinLbl);
-    joinWrap.appendChild(joinInput);
-    grid.appendChild(joinWrap);
-    row.appendChild(grid);
+    row.append(info, removeBtn);
     cWrap.appendChild(row);
   });
+
   $('cancel-setup-btn').classList.toggle('hidden', !config);
   $('reset-btn').classList.toggle('hidden', !config);
 }
@@ -2011,27 +2288,20 @@ $('lvl-num').addEventListener('click', jumpPrompt);
 $('goto-50-btn').addEventListener('click', jumpPrompt);
 $('edit-setup-btn').addEventListener('click', showSetup);
 $('cancel-setup-btn').addEventListener('click', () => { if (config) showTracker(); });
+$('add-companion-btn').addEventListener('click', openAddCompanionSheet);
 $('save-btn').addEventListener('click', () => {
+  const name = ($('mc-name-input').value || '').trim();
+  setMCName(name);
   const theme = $('mc-theme-select').value;
   const buildIndex = parseInt($('mc-build-select').value, 10);
-  const companions = {};
-  document.querySelectorAll('#companion-selects select').forEach(sel => {
-    companions[sel.dataset.char] = parseInt(sel.value, 10);
-  });
-  const joinLevels = {};
-  document.querySelectorAll('input[data-role="join"]').forEach(inp => {
-    let n = parseInt(inp.value, 10);
-    if (isNaN(n) || n < 1) n = 1;
-    if (n > 55) n = 55;
-    joinLevels[inp.dataset.char] = n;
-  });
-  config = { mc: { theme, buildIndex }, companions, joinLevels };
+  config = { mc: { theme, buildIndex }, companions: {}, joinLevels: {} };
   Store.set(KEY_CONFIG, config);
   showTracker();
 });
 $('reset-btn').addEventListener('click', () => {
   if (!confirm('Erase your saved roster, join levels, and current level?')) return;
   Store.remove(KEY_CONFIG); Store.remove(KEY_LEVEL);
+  Store.remove(KEY_MC_NAME); Store.remove(KEY_ROSTER); Store.remove(KEY_PARTY);
   config = null; level = 1;
   showSetup();
 });
@@ -2039,6 +2309,15 @@ $('reset-btn').addEventListener('click', () => {
 window.addEventListener('keydown', (e) => { if (e.key === 'Escape') popSheet(); });
 
 if (!config) showSetup(); else showTracker();
+
+// Dismiss splash after app is ready
+requestAnimationFrame(() => {
+  const splash = document.getElementById('splash');
+  if (splash) {
+    splash.classList.add('fade-out');
+    splash.addEventListener('transitionend', () => splash.remove(), { once: true });
+  }
+});
 
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {

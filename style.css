@@ -868,3 +868,94 @@
 .pick-chosen { font-weight: 600; color: var(--gold-bright); }
 .pick-unavailable { text-decoration: line-through; color: var(--ink-faint); }
 .pick-unchosen { font-style: italic; color: var(--ink-dim); }
+
+/* === SPLASH SCREEN === */
+#splash {
+  position: fixed; inset: 0; z-index: 9999;
+  background: var(--bg);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 10px;
+  transition: opacity 0.4s ease;
+}
+#splash.fade-out { opacity: 0; pointer-events: none; }
+.splash-eagle { font-family: 'Cinzel', serif; font-size: 12px; letter-spacing: 0.4em; color: var(--gold-deep); text-transform: uppercase; }
+.splash-title { font-family: 'Cinzel', serif; font-size: 36px; font-weight: 700; color: var(--gold-bright); letter-spacing: 0.08em; }
+.splash-sub { font-family: 'EB Garamond', serif; font-size: 15px; color: var(--ink-dim); font-style: italic; }
+
+/* === MC NAME INPUT === */
+.mc-name-input {
+  background: var(--bg); color: var(--ink); border: 1px solid var(--rule);
+  border-radius: 3px; padding: 10px 12px; font-family: 'EB Garamond', serif;
+  font-size: 16px; width: 100%;
+  user-select: text; -webkit-user-select: text;
+}
+.mc-name-input:focus { outline: none; border-color: var(--gold); }
+.mc-name-input::placeholder { color: var(--ink-faint); font-style: italic; }
+
+/* === ROSTER CARD WRAP + DRAG === */
+.roster-card-wrap { display: flex; align-items: flex-start; gap: 0; position: relative; }
+.roster-card-wrap .char-card { flex: 1; }
+.drag-handle {
+  display: flex; align-items: center; justify-content: center;
+  width: 28px; flex-shrink: 0; align-self: stretch;
+  color: var(--ink-faint); font-size: 18px; cursor: grab;
+  touch-action: none; user-select: none; -webkit-user-select: none;
+  background: var(--bg-2); border-left: 3px solid var(--rule);
+  border-radius: 0 0 0 4px;
+}
+.roster-card-wrap.dragging { opacity: 0.4; }
+.roster-card-wrap.drag-over { outline: 1px solid var(--gold); }
+.drag-ghost {
+  position: fixed; left: 0; right: 0; z-index: 8000;
+  opacity: 0.85; pointer-events: none;
+  display: flex; align-items: flex-start;
+}
+
+/* === ADD COMPANION === */
+.roster-add-btn {
+  width: 100%; margin-top: 14px; padding: 12px;
+  background: transparent; color: var(--gold); border: 1px dashed var(--gold-deep);
+  border-radius: 3px; font-family: 'Cinzel', serif; font-size: 13px;
+  letter-spacing: 0.15em; cursor: pointer;
+}
+.roster-add-btn:active { background: var(--bg-2); }
+.add-companion-btn {
+  width: 100%; margin-top: 10px; padding: 10px;
+  background: transparent; color: var(--gold); border: 1px dashed var(--gold-deep);
+  border-radius: 3px; font-family: 'Cinzel', serif; font-size: 12px;
+  letter-spacing: 0.12em; cursor: pointer;
+}
+.add-comp-list { margin-bottom: 16px; }
+.add-comp-item {
+  padding: 10px 14px; background: var(--bg-2); border-left: 2px solid var(--rule);
+  border-radius: 0 3px 3px 0; margin-bottom: 6px; cursor: pointer;
+  display: flex; align-items: center; gap: 10px;
+}
+.add-comp-item.active { border-left-color: var(--gold); background: var(--bg-3); }
+.add-comp-item:active { background: var(--bg-3); }
+.add-comp-name { font-family: 'Cinzel', serif; font-size: 14px; color: var(--gold-bright); flex: 1; }
+.add-comp-arch { font-size: 12px; color: var(--ink-dim); }
+.add-comp-section-label { font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--ink-dim); margin-bottom: 6px; }
+.add-comp-build-section, .add-comp-join-section { margin-bottom: 14px; }
+.add-comp-join-input { background: var(--bg); color: var(--gold); border: 1px solid var(--rule); border-radius: 3px; padding: 10px 12px; font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 20px; width: 100%; text-align: center; -webkit-appearance: none; }
+.add-comp-join-input:focus { outline: none; border-color: var(--gold); }
+.setup-select { background: var(--bg); color: var(--ink); border: 1px solid var(--rule); border-radius: 3px; padding: 10px 12px; font-family: 'EB Garamond', serif; font-size: 16px; width: 100%; -webkit-appearance: none; appearance: none; }
+
+/* === COMPANION REMOVE BTN (setup) === */
+.companion-remove-btn {
+  width: 30px; height: 30px; border-radius: 50%; border: 1px solid var(--rule);
+  background: var(--bg-3); color: var(--ink-faint); font-size: 14px; cursor: pointer;
+  flex-shrink: 0; display: flex; align-items: center; justify-content: center;
+}
+.companion-remove-btn:active { background: var(--blood); color: #fff; }
+
+/* === PARTY TOGGLE BUTTON === */
+.party-toggle-btn {
+  width: 100%; margin-bottom: 12px; padding: 10px 14px;
+  background: var(--bg-3); border: 1px solid var(--rule);
+  color: var(--ink-dim); border-radius: 3px; cursor: pointer;
+  font-family: 'Cinzel', serif; font-size: 11px; letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+.party-toggle-btn.in-party { border-color: var(--gold); color: var(--gold); background: rgba(201,164,76,0.08); }
+.party-toggle-btn:disabled { opacity: 0.4; cursor: default; }
