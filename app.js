@@ -1065,7 +1065,12 @@ function popSheet() {
 function closeSheet() {
   _sheetStack = [];
   $('sheet-overlay').classList.remove('open');
-  $('sheet').classList.remove('open');
+  const sh = $('sheet');
+  sh.classList.remove('open');
+  sh.classList.remove('note-editing');
+  sh.style.height = '';
+  sh.style.maxHeight = '';
+  sh.style.bottom = '';
   $('sheet-back').classList.add('hidden');
   document.body.style.overflow = '';
 }
@@ -1073,11 +1078,12 @@ function closeSheet() {
 $('sheet-close').addEventListener('click', popSheet);
 $('sheet-back').addEventListener('click', popSheet);
 $('sheet-overlay').addEventListener('click', closeSheet);
-// swipe-down to close
+// swipe-down to close (disabled when note editor is in edit mode)
 (() => {
   let startY = null;
   const sheet = $('sheet');
   sheet.addEventListener('touchstart', (e) => {
+    if (sheet.classList.contains('note-editing')) { startY = null; return; }
     const sb = $('sheet-body');
     if (sb.scrollTop > 0) { startY = null; return; }
     startY = e.touches[0].clientY;
@@ -2606,8 +2612,10 @@ function buildNoteEditorContent(note, startInEdit = false) {
   toolbar.className = 'note-toolbar';
 
   let previewMode = !startInEdit;
-  const previewBtn = document.createElement('button');
-  previewBtn.className = 'note-tool-btn note-preview-btn';
+
+  // Floating preview/edit toggle FAB
+  const previewFab = document.createElement('button');
+  previewFab.className = 'note-preview-fab';
 
   const fmtButtons = [
     { label: 'B',  title: 'Bold',        wrap: ['**','**'] },
@@ -2703,20 +2711,23 @@ function buildNoteEditorContent(note, startInEdit = false) {
   const refreshPreview = () => { preview.innerHTML = renderMarkdown(textarea.value); };
 
   const applyMode = () => {
+    const sh = document.getElementById('sheet');
     if (previewMode) {
       refreshPreview();
       preview.classList.remove('hidden');
       textarea.classList.add('hidden');
       // Hide format buttons in preview mode
-      toolbar.querySelectorAll('.note-fmt-btn').forEach(b => b.classList.add('hidden'));
-      previewBtn.textContent = 'Edit';
-      previewBtn.classList.add('active');
+      toolbar.querySelectorAll('.note-fmt-btn, .note-undo-btn').forEach(b => b.classList.add('hidden'));
+      previewFab.textContent = '✎ Edit';
+      previewFab.classList.add('active');
+      sh.classList.remove('note-editing');
     } else {
       preview.classList.add('hidden');
       textarea.classList.remove('hidden');
-      toolbar.querySelectorAll('.note-fmt-btn').forEach(b => b.classList.remove('hidden'));
-      previewBtn.textContent = 'Preview';
-      previewBtn.classList.remove('active');
+      toolbar.querySelectorAll('.note-fmt-btn, .note-undo-btn').forEach(b => b.classList.remove('hidden'));
+      previewFab.textContent = '👁 Preview';
+      previewFab.classList.remove('active');
+      sh.classList.add('note-editing');
       requestAnimationFrame(() => textarea.focus());
     }
   };
@@ -2758,7 +2769,6 @@ function buildNoteEditorContent(note, startInEdit = false) {
   toolbar.appendChild(undoBtn);
   toolbar.appendChild(redoBtn);
   toolbar.appendChild(saveIndicator);
-  toolbar.appendChild(previewBtn);
 
   // Todo tap in preview
   preview.addEventListener('click', (e) => {
@@ -2776,12 +2786,16 @@ function buildNoteEditorContent(note, startInEdit = false) {
     refreshPreview();
   });
 
-  previewBtn.addEventListener('click', () => {
+  previewFab.addEventListener('click', () => {
     previewMode = !previewMode;
     applyMode();
   });
 
-  wrap.append(toolbar, textarea, preview);
+  const editorArea = document.createElement('div');
+  editorArea.className = 'note-editor-area';
+  editorArea.append(textarea, preview, previewFab);
+
+  wrap.append(toolbar, editorArea);
 
   // Initialise mode after elements are in DOM (via requestAnimationFrame post-openSheet)
   requestAnimationFrame(applyMode);
@@ -3012,8 +3026,52 @@ if (window.visualViewport) {
   document.getElementById('sheet-close').addEventListener('click', resetSheet);
 }
 
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('sw.js').catch(err => console.warn('SW registration failed:', err));
-  });
-}
+// ── SW update badge ──
+(() => {
+  // Inject badge + toast into DOM
+  const badge = document.createElement('button');
+  badge.id = 'update-badge';
+  badge.className = 'update-badge hidden';
+  badge.setAttribute('aria-label', 'App update available');
+  badge.innerHTML = '⟳';
+
+  const toast = document.createElement('div');
+  toast.id = 'update-toast';
+  toast.className = 'update-toast hidden';
+  toast.innerHTML = `
+    <div class="update-toast-text">Update ready — close and reload to apply changes.</div>
+    <button class="update-toast-reload" id="update-reload-btn">Reload Now</button>`;
+
+  document.body.append(badge, toast);
+
+  const showBadge = () => badge.classList.remove('hidden');
+
+  badge.addEventListener('click', () => toast.classList.toggle('hidden'));
+  document.getElementById('update-reload-btn').addEventListener('click', () => window.location.reload());
+
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('sw.js').then(reg => {
+        // Already a new SW waiting (e.g. page refreshed after update downloaded)
+        if (reg.waiting && navigator.serviceWorker.controller) showBadge();
+
+        reg.addEventListener('updatefound', () => {
+          const newWorker = reg.installing;
+          newWorker.addEventListener('statechange', () => {
+            if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+              showBadge();
+            }
+          });
+        });
+      }).catch(err => console.warn('SW registration failed:', err));
+    });
+  }
+})();
+
+// ── About ──
+(() => {
+  const el = document.getElementById('app-about');
+  if (el && typeof APP_VERSION !== 'undefined') {
+    el.innerHTML = `<span class="app-about-version">v${APP_VERSION}</span><span class="app-about-sep">·</span><a class="app-about-link" href="https://github.com/patrick-mckinley/rogue-trader-characters" target="_blank" rel="noopener">GitHub</a>`;
+  }
+})();
