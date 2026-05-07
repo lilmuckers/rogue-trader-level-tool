@@ -175,6 +175,28 @@ const out = [
 
 fs.writeFileSync(path.join(ROOT, 'data.js'), out);
 
+// ─── write app.js (concatenate js/ source files) ────────────────────────────
+const JS_FILES = [
+  'js/core.js',
+  'js/store.js',
+  'js/choices.js',
+  'js/lookup.js',
+  'js/sheet.js',
+  'js/tracker.js',
+  'js/description.js',
+  'js/catchup.js',
+  'js/setup.js',
+  'js/nav.js',
+  'js/colonies.js',
+  'js/traders.js',
+  'js/notes.js',
+  'js/resources.js',
+  'js/init.js',
+];
+const appJs = JS_FILES.map(f => fs.readFileSync(path.join(ROOT, f), 'utf8')).join('\n\n');
+fs.writeFileSync(path.join(ROOT, 'app.js'), appJs);
+console.log(`✓ app.js   (${Math.round(Buffer.byteLength(appJs) / 1024)} KB, ${JS_FILES.length} modules)`);
+
 // ─── update sw.js cache version ──────────────────────────────────────────────
 const swPath = path.join(ROOT, 'sw.js');
 const swSrc  = fs.readFileSync(swPath, 'utf8');
