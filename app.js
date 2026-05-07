@@ -2297,9 +2297,19 @@ function noteChecklistProgress(content) {
   return total > 0 ? { total, checked } : null;
 }
 function noteSnippet(content) {
-  const lines = (content || '').split('\n').filter(l => l.trim());
-  const body = lines.slice(1, 3).join(' ').replace(/[#*`_]/g, '');
-  return body.slice(0, 100) || '';
+  const lines = (content || '').split('\n');
+  let titleSkipped = false;
+  const textLines = [];
+  for (const line of lines) {
+    const t = line.trim();
+    if (!t) continue;
+    if (!titleSkipped) { titleSkipped = true; continue; } // skip title line
+    // Stop at headings, any list item (bullets, checkboxes, numbered), dividers, code fences
+    if (/^#{1,6}\s/.test(t) || /^[-*+]\s/.test(t) || /^\d+\.\s/.test(t) || /^-{3,}$/.test(t) || /^`{3}/.test(t)) break;
+    textLines.push(t);
+    if (textLines.join(' ').length >= 120) break;
+  }
+  return textLines.join(' ').replace(/[*_`~]/g, '').slice(0, 100);
 }
 function renderMarkdown(text, onToggleTodo) {
   if (!text) return '';
