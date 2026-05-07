@@ -2676,6 +2676,8 @@ function buildNoteEditorContent(note, startInEdit = false) {
     $('sheet-title').textContent = noteTitle(note.content) || 'New Note';
     flashSaved();
     updateHistoryBtns();
+    // Refresh list behind the sheet so card titles/previews stay in sync
+    if (_activeSection === 'notes') renderNotesSection();
   };
   const save = () => { clearTimeout(saveTimer); saveTimer = setTimeout(commitSave, 600); };
 
