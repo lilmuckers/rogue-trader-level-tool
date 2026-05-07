@@ -1,0 +1,12 @@
+{
+  "blockedBy": [],
+  "completedDate": null,
+  "createdDate": "2026-05-07",
+  "description": "Update SPEC.md to reflect current feature set: notes section, traders/vendors, profit factor, reorder mode, multi-profile (once shipped), version/about footer, SW update badge, semantic versioning workflow.",
+  "id": "T-007",
+  "order": 20,
+  "phase": "future",
+  "status": "open",
+  "title": "SPEC.md accuracy pass",
+  "type": "chore"
+}

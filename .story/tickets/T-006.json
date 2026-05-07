@@ -1,0 +1,12 @@
+{
+  "blockedBy": [],
+  "completedDate": null,
+  "createdDate": "2026-05-07",
+  "description": "Test the full-screen edit mode and keyboard viewport handling on a real iOS device (not simulator). File issues for any remaining gaps: black background bleed, FAB overlap, safe-area insets.",
+  "id": "T-006",
+  "order": 10,
+  "phase": "future",
+  "status": "open",
+  "title": "Notes editor: verify keyboard/full-screen on real iOS device",
+  "type": "task"
+}

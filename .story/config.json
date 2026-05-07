@@ -1,0 +1,21 @@
+{
+  "features": {
+    "handovers": true,
+    "issues": true,
+    "reviews": true,
+    "roadmap": true,
+    "tickets": true
+  },
+  "language": "javascript",
+  "project": "Rogue Trader Build Tracker",
+  "type": "npm",
+  "version": 2,
+  "recipeOverrides": {
+    "maxTicketsPerSession": 0,
+    "reviewBackends": [
+      "lenses",
+      "agent"
+    ],
+    "handoverInterval": 3
+  }
+}

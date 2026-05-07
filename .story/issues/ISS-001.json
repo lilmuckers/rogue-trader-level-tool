@@ -1,0 +1,14 @@
+{
+  "components": [],
+  "discoveredDate": "2026-05-07",
+  "id": "ISS-001",
+  "impact": "Visual artifact: dark bg-1 bleeds through below the note textarea when soft keyboard is visible in note edit mode. Likely due to overflow:visible on sheet + timing of visualViewport resize event.",
+  "location": [],
+  "phase": null,
+  "relatedTickets": [],
+  "resolution": null,
+  "resolvedDate": null,
+  "severity": "medium",
+  "status": "open",
+  "title": "Black gap below textarea when keyboard opens on iOS"
+}
