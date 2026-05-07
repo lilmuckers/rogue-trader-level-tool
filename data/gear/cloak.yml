@@ -51,7 +51,7 @@
   slot: cloak
   location: Rykadi Philia Prison
   act: 1
-  description: 'When wearer use Endure, weaerer removes 1 condition in order: Burning, Toxin, Bleeding'
+  description: "When wearer use Endure, weaerer removes 1 condition in order: Burning, Toxin, Bleeding"
 - name: Fireproof Cape
   slot: cloak
   location: Footfall Atrium
@@ -64,7 +64,7 @@
   description: Combat tactic area bonus +5% for 1 round if used different strategem than before, doesn't stack
 - name: Backpack with Armour-Piercing Ammo
   slot: cloak
-  location: 'Plasma Chamber: (Abulation in Blood or Abberation Quest, servitors puzzle)'
+  location: "Plasma Chamber: (Abulation in Blood or Abberation Quest, servitors puzzle)"
   act: 2
   description: Wearer's ranged attack inflicts (armour pentration /5 bleed on) target
 - name: Battle Scarred Cape
@@ -84,7 +84,7 @@
   description: Grants +10% dodge
 - name: Cape of Righteous Fury
   slot: cloak
-  location: 'Footfall: Dreams and Stories quest'
+  location: "Footfall: Dreams and Stories quest"
   act: 2
   description: Every Kill increase Crit Chance +5% until the end of combat
 - name: Cloak of Hatred
@@ -99,7 +99,7 @@
   description: Wearer gain 15% dmg bonus to enemy that deal dmg to wearer this round
 - name: Cloak of Shadows
   slot: cloak
-  location: 'Last Chance of Cyrene: Yrliet quest end'
+  location: "Last Chance of Cyrene: Yrliet quest end"
   act: 2
   description: >-
     When wearer deals dmg with AoO they gain shrouded effect (doesnt stack). Shrouded - when becoming target of an
@@ -145,7 +145,7 @@
   description: Parry Reduc +10%. AR Pen +5% for melee
 - name: Pack of Reagents
   slot: cloak
-  location: 'Footfall: Mutant Hideout'
+  location: "Footfall: Mutant Hideout"
   act: 2
   description: >-
     This set of chemical reagents increases Damage of all Burning, Poison or Bleeding effects applied by the wearer by
@@ -312,7 +312,7 @@
   slot: cloak
   location: (Lex Imperialis DLC) Quetza Temer, in the ruined temple before meeting the Aeldari Explosives check required
   act: 4
-  description: null
+  description: Lidless Stare no longer damages allies; they gain Fellowship Bonus temporary wounds instead.
 - name: Sensory-Motor Modulator
   slot: cloak
   location: (Lex Imperialis DLC) Lethus, in the back crate in the arena with the ambull
@@ -395,4 +395,4 @@
   slot: cloak
   location: null
   act: null
-  description: null
+  description: Wearer takes −5 less damage from critical hits. +10 Coercion.

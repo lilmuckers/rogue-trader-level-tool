@@ -2,7 +2,7 @@
   slot: weapon
   location: Common
   act: 0
-  description: null
+  description: Solid projectile weapons have +50% overpenetration.
   category: Pistols (light, 1h)
 - name: Corrupted Inferno Pistol
   slot: weapon
@@ -16,13 +16,13 @@
   slot: weapon
   location: Common starting Prologue
   act: 0
-  description: null
+  description: Laser weapons are effective against targets in cover and those with high dodge.
   category: Pistols (light, 1h)
-- name: '[Mezoa] Bolt Pistol'
+- name: "[Mezoa] Bolt Pistol"
   slot: weapon
   location: Mechanicus 1
   act: 1
-  description: null
+  description: Standard bolt pistol variant.
   category: Pistols (light, 1h)
 - name: Foehammer
   slot: weapon
@@ -40,19 +40,19 @@
   slot: weapon
   location: Eurac V
   act: 1
-  description: null
+  description: Solid projectile weapons have +50% overpenetration.
   category: Pistols (light, 1h)
 - name: Stub Revolver
   slot: weapon
   location: Prison
   act: 1
-  description: null
+  description: Solid projectile weapons have +50% overpenetration.
   category: Pistols (light, 1h)
 - name: Bolt Pistol
   slot: weapon
   location: Freight Line gang loot
   act: 1
-  description: null
+  description: Standard bolt pistol.
   category: Pistols (light, 1h)
 - name: Orthlak Mark IV
   slot: weapon
@@ -74,7 +74,7 @@
   category: Pistols (light, 1h)
 - name: Bloodburner
   slot: weapon
-  location: 'Crypt: Abulation in Blood'
+  location: "Crypt: Abulation in Blood"
   act: 2
   description: Every hit of this pistol increase current DoT by 5, does not stack
   category: Pistols (light, 1h)
@@ -82,7 +82,7 @@
   slot: weapon
   location: Janus Govt Fight
   act: 2
-  description: null
+  description: Standard bolt pistol.
   category: Pistols (light, 1h)
 - name: Dead Shot Stub Revolver
   slot: weapon
@@ -94,13 +94,13 @@
   slot: weapon
   location: Agathus Archides, Wreck
   act: 2
-  description: null
+  description: Laser weapons are effective against targets in cover and those with high dodge.
   category: Pistols (light, 1h)
 - name: Inferno Pistol
   slot: weapon
   location: Pillars of Viridice - Inquisition Shipwreck
   act: 2
-  description: null
+  description: Melta pistol. Effective at short range against heavily armoured targets.
   category: Pistols (light, 1h)
 - name: Modified Splinter Pistol
   slot: weapon
@@ -136,7 +136,7 @@
   slot: weapon
   location: Commorah
   act: 3
-  description: null
+  description: Unique weapon obtained from a special encounter.
   category: Pistols (light, 1h)
 - name: Desolation Blast Pistol
   slot: weapon
@@ -158,11 +158,11 @@
   act: 4
   description: 6 Toxin dmg. Inflict fatigue
   category: Pistols (light, 1h)
-- name: '[Mars-Pattern] Bolt Pistol'
+- name: "[Mars-Pattern] Bolt Pistol"
   slot: weapon
   location: Sire loot DLC quest
   act: 4
-  description: null
+  description: Standard bolt pistol variant.
   category: Pistols (light, 1h)
 - name: Modified Splinter Pistol
   slot: weapon
@@ -186,7 +186,7 @@
   slot: weapon
   location: Quetza Temer - Tervantias Lab
   act: 4
-  description: null
+  description: Upgraded Aeldari shuriken pistol.
   category: Pistols (light, 1h)
 - name: Daredevil Pistol
   slot: weapon
@@ -208,7 +208,7 @@
   act: 4
   description: this weapon deals warp damage
   category: Pistols (light, 1h)
-- name: '[Mezoa] Astartes Bolt Pistol'
+- name: "[Mezoa] Astartes Bolt Pistol"
   slot: weapon
   location: Kasballica 17. pf 74
   act: 4
@@ -226,7 +226,7 @@
   act: 4
   description: Inflict (10) burning, toxin, bleeding on target
   category: Pistols (light, 1h)
-- name: '[Sol Pattern] Las Pistol'
+- name: "[Sol Pattern] Las Pistol"
   slot: weapon
   location: Sentinel pride awareness check / forceful genestealer encounter void shadows dlc
   act: 4
@@ -248,11 +248,11 @@
     When a character hits an ally with this weapon, that ally gains +1 AP, +FEL bonus) MP, and (2 x FEL)% to their
     critical hit chance on their next turn. This bonus does not stack.
   category: Pistols (light, 1h)
-- name: '[Mars-Pattern] Hot Shot Laspistol'
+- name: "[Mars-Pattern] Hot Shot Laspistol"
   slot: weapon
   location: (Lex Imperialis DLC) Tithe world, kill clerk
   act: 4
-  description: null
+  description: Laser weapons are effective against targets in cover and those with high dodge.
   category: Pistols (light, 1h)
 - name: Virtuous Vindication
   slot: weapon
@@ -266,7 +266,7 @@
   slot: weapon
   location: Argenta Recruit
   act: 0
-  description: null
+  description: Unique weapon.
   category: Rifles (Light, 2H, can't be shoot melee)
 - name: Arc Rifle
   slot: weapon
@@ -284,7 +284,7 @@
   slot: weapon
   location: Rykad Minoris
   act: 1
-  description: null
+  description: Standard bolter.
   category: Rifles (Light, 2H, can't be shoot melee)
 - name: Lasgun
   slot: weapon
@@ -304,7 +304,7 @@
   act: 2
   description: On successful hit with this weapon, the wielder also attacks all targets in a 4 cell radius around the target.
   category: Rifles (Light, 2H, can't be shoot melee)
-- name: '[Civitas] Autogun'
+- name: "[Civitas] Autogun"
   slot: weapon
   location: Footfall Jae's Garage
   act: 2
@@ -312,45 +312,45 @@
   category: Rifles (Light, 2H, can't be shoot melee)
 - name: Splinter Rifle
   slot: weapon
-  location: 'Palatium Stelos: Drukhari Raid'
+  location: "Palatium Stelos: Drukhari Raid"
   act: 2
   description: 6 Toxin. Only Burst Fire
   category: Rifles (Light, 2H, can't be shoot melee)
-- name: '[Mezoa] Arc Rifle'
+- name: "[Mezoa] Arc Rifle"
   slot: weapon
   location: Mechanicus 14. PF55
   act: 2
   description: When hit a target, also attack all other targets in 2 cell radius of 1st *
   category: Rifles (Light, 2H, can't be shoot melee)
-- name: '[Mezoa] Hexrifle'
+- name: "[Mezoa] Hexrifle"
   slot: weapon
   location: Kasballica 0. PF 66
   act: 2
   description: Drukhari. When shot hits, poison target 3 rounds lest pass TGH test
   category: Rifles (Light, 2H, can't be shoot melee)
-- name: '[Orthlack] - Autogun'
+- name: "[Orthlack] - Autogun"
   slot: weapon
   location: Footfall (incog) Funeral side quest
   act: 2
   description: 100% overpen
   category: Rifles (Light, 2H, can't be shoot melee)
-- name: '[Retobi] Bolter'
+- name: "[Retobi] Bolter"
   slot: weapon
   location: Mechanicusanicus 5. 18 PF
   act: 2
-  description: null
+  description: Standard bolter variant.
   category: Rifles (Light, 2H, can't be shoot melee)
 - name: Archeotech Lasgun
   slot: weapon
-  location: 'Lapidus Mortus: Curio Loot the Corpse'
+  location: "Lapidus Mortus: Curio Loot the Corpse"
   act: 2
-  description: null
+  description: Laser weapons are effective against targets in cover and those with high dodge.
   category: Rifles (Light, 2H, can't be shoot melee)
 - name: Focus Meltagun
   slot: weapon
   location: Mechanicus 20. PF60
   act: 2
-  description: null
+  description: Standard meltagun. Melta weapons are especially effective at short range.
   category: Rifles (Light, 2H, can't be shoot melee)
 - name: Hexrifle
   slot: weapon
@@ -360,15 +360,15 @@
   category: Rifles (Light, 2H, can't be shoot melee)
 - name: Imperial Pride
   slot: weapon
-  location: 'Footfall Shadow Quarters Quarantine Area: Mutant Hideout'
+  location: "Footfall Shadow Quarters Quarantine Area: Mutant Hideout"
   act: 2
   description: Dmg against Xenos, Psykers, Chaos + 4
   category: Rifles (Light, 2H, can't be shoot melee)
 - name: Improvised Webber
   slot: weapon
-  location: 'Plasma Chamber: Abulation in Blood'
+  location: "Plasma Chamber: Abulation in Blood"
   act: 2
-  description: null
+  description: Webber weapon. Entangles enemies, reducing their mobility.
   category: Rifles (Light, 2H, can't be shoot melee)
 - name: Precise Bolter
   slot: weapon
@@ -384,19 +384,19 @@
   category: Rifles (Light, 2H, can't be shoot melee)
 - name: Shardcarbine
   slot: weapon
-  location: 'Plasma Chamber: Drukhari Ambush'
+  location: "Plasma Chamber: Drukhari Ambush"
   act: 2
-  description: 'Notes: Low enough ROF for Tempest Backpack'
+  description: "Notes: Low enough ROF for Tempest Backpack"
   category: Rifles (Light, 2H, can't be shoot melee)
 - name: Shuriken Catapult
   slot: weapon
   location: Janus Forest
   act: 2
-  description: null
+  description: Standard Aeldari shuriken weapon.
   category: Rifles (Light, 2H, can't be shoot melee)
 - name: Star Blight
   slot: weapon
-  location: 'Janus Proj. 1: Ultrequisitors'
+  location: "Janus Proj. 1: Ultrequisitors"
   act: 2
   description: Has Deadeye Shot.+25% Hit Chance
   category: Rifles (Light, 2H, can't be shoot melee)
@@ -404,7 +404,7 @@
   slot: weapon
   location: Kasballica 9. Pf 59
   act: 2
-  description: null
+  description: Standard storm bolter.
   category: Rifles (Light, 2H, can't be shoot melee)
 - name: Sworn Protector
   slot: weapon
@@ -422,13 +422,13 @@
   slot: weapon
   location: Janus Courtyard Fight, Executing Commisar
   act: null
-  description: 'Comment: Extremely High AR Pen'
+  description: "Comment: Extremely High AR Pen"
   category: Rifles (Light, 2H, can't be shoot melee)
-- name: '[Retobi Pattern] Bolter'
+- name: "[Retobi Pattern] Bolter"
   slot: weapon
   location: Explorators
   act: 2
-  description: '-'
+  description: "-"
   category: Rifles (Light, 2H, can't be shoot melee)
 - name: Deadshot Splinter Rifle
   slot: weapon
@@ -448,7 +448,7 @@
   slot: weapon
   location: Ulfar Recruit and Shrieker Stash, Killing Malice/Commisar & Taking over the Den
   act: 3
-  description: null
+  description: A favoured weapon of the Adeptus Astartes.
   category: Rifles (Light, 2H, can't be shoot melee)
 - name: Blaster
   slot: weapon
@@ -497,7 +497,7 @@
     Enemies hit by this weapon suffer irradiated effect for 3 turns, decreasing all healing received by -50%. Also
     prevents using Reanimation Protocol for 3 rounds
   category: Rifles (Light, 2H, can't be shoot melee)
-- name: '[Mezoa-Pattern] Lasgun'
+- name: "[Mezoa-Pattern] Lasgun"
   slot: weapon
   location: Cassia's personal quest location
   act: 4
@@ -507,7 +507,7 @@
   slot: weapon
   location: Emperor's Plan system - Eufrates II Hellbrute loot
   act: 4
-  description: null
+  description: Standard Astartes storm bolter.
   category: Rifles (Light, 2H, can't be shoot melee)
 - name: Hymn of Vehemence
   slot: weapon
@@ -531,7 +531,7 @@
   slot: weapon
   location: Void 32. pf112
   act: 4
-  description: null
+  description: Webber weapon. Entangles enemies, reducing their mobility.
   category: Rifles (Light, 2H, can't be shoot melee)
 - name: Annihilating Astartes Bolter
   slot: weapon
@@ -629,7 +629,7 @@
   act: 2
   description: Dmg vs drukhari + 33%
   category: Snipers (Dead Eye Shot + Long range (18-36) + Hit Chance Buff)
-- name: '[Mezoa] Sniper Rifle'
+- name: "[Mezoa] Sniper Rifle"
   slot: weapon
   location: Kasballica 12. PF56
   act: 2
@@ -645,7 +645,7 @@
   category: Snipers (Dead Eye Shot + Long range (18-36) + Hit Chance Buff)
 - name: Dream's Infinity
   slot: weapon
-  location: 'Ship Crypt: Abulation in Blood hidden room'
+  location: "Ship Crypt: Abulation in Blood hidden room"
   act: 2
   description: dodge reduction 30, additional hit chance 20%
   category: Snipers (Dead Eye Shot + Long range (18-36) + Hit Chance Buff)
@@ -655,11 +655,11 @@
   act: 2
   description: Las weapons are effective against targets behind cover and targets with a high chance of evasion.
   category: Snipers (Dead Eye Shot + Long range (18-36) + Hit Chance Buff)
-- name: '[LD-Pattern] Needle Rifle'
+- name: "[LD-Pattern] Needle Rifle"
   slot: weapon
   location: (Void Shadows DLC), Various
   act: 2
-  description: '-'
+  description: "-"
   category: Snipers (Dead Eye Shot + Long range (18-36) + Hit Chance Buff)
 - name: The Silence of Sha'eil
   slot: weapon
@@ -706,7 +706,7 @@
   act: 4
   description: dodge reduction 30, additional hit chance 20%
   category: Snipers (Dead Eye Shot + Long range (18-36) + Hit Chance Buff)
-- name: '[Retobi-Pattern] Sniper Rifle'
+- name: "[Retobi-Pattern] Sniper Rifle"
   slot: weapon
   location: Emperor's Plan system - Eufrates II
   act: 4
@@ -754,7 +754,7 @@
   act: 2
   description: Armour pen increases by 4% but do not inflict burn
   category: Flamers (AoE guns + Inflict Burn on target)
-- name: '[Mezoa-Pattern] Hand Flamer'
+- name: "[Mezoa-Pattern] Hand Flamer"
   slot: weapon
   location: Footfall Shadow Quarters - Dark Hideout
   act: 2
@@ -792,13 +792,13 @@
   act: 4
   description: 12 Bruning
   category: Flamers (AoE guns + Inflict Burn on target)
-- name: '[Mars-Pattern] Astartes Flamer'
+- name: "[Mars-Pattern] Astartes Flamer"
   slot: weapon
   location: Explorators 28. Pf124 / Emperor's Plan system - Eufrates II Uralon Loot
   act: null
   description: 12 Burning
   category: Flamers (AoE guns + Inflict Burn on target)
-- name: '[Mars-Pattern] Hand Flamer'
+- name: "[Mars-Pattern] Hand Flamer"
   slot: weapon
   location: Pasqal personal quest location
   act: 4
@@ -850,7 +850,7 @@
   category: Meltas (High Armor Pen, High cost to shoot usually, Usually AoE)
 - name: Ashen Breath
   slot: weapon
-  location: 'Dargonus Proj.2: Kasball. Auction'
+  location: "Dargonus Proj.2: Kasball. Auction"
   act: 2
   description: Dodge Reduc +20%
   category: Meltas (High Armor Pen, High cost to shoot usually, Usually AoE)
@@ -860,11 +860,11 @@
   act: 4
   description: Additional +60% dmg to burinig enemies
   category: Meltas (High Armor Pen, High cost to shoot usually, Usually AoE)
-- name: '[Mars] Melta Gun'
+- name: "[Mars] Melta Gun"
   slot: weapon
   location: Explorators 36 pf 156
   act: 4
-  description: null
+  description: "Mars-pattern meltagun. High armour penetration (85). Melta weapons are most effective at short range."
   category: Meltas (High Armor Pen, High cost to shoot usually, Usually AoE)
 - name: Fusion Gun 'Spark'
   slot: weapon
@@ -886,7 +886,7 @@
   slot: weapon
   location: Freight Line
   act: 1
-  description: null
+  description: Autocannon. High damage heavy weapon.
   category: >-
     Heavy Weapons (STR Req usually, Works with the Overpower Heavy weapon talent and Heavy Gunner AM Talent otherwise
     high cost to shoot)
@@ -894,7 +894,7 @@
   slot: weapon
   location: Void Shadows DLC - Freight line, in the crates behind the old man near the vat
   act: 1
-  description: '-'
+  description: "-"
   category: >-
     Heavy Weapons (STR Req usually, Works with the Overpower Heavy weapon talent and Heavy Gunner AM Talent otherwise
     high cost to shoot)
@@ -910,7 +910,7 @@
   slot: weapon
   location: Drusian 3. PF.25
   act: 2
-  description: null
+  description: Standard heavy bolter.
   category: >-
     Heavy Weapons (STR Req usually, Works with the Overpower Heavy weapon talent and Heavy Gunner AM Talent otherwise
     high cost to shoot)
@@ -918,7 +918,7 @@
   slot: weapon
   location: Drusian 11. PF32
   act: 2
-  description: null
+  description: Standard heavy flamer. Area-of-effect flame weapon.
   category: >-
     Heavy Weapons (STR Req usually, Works with the Overpower Heavy weapon talent and Heavy Gunner AM Talent otherwise
     high cost to shoot)
@@ -926,7 +926,7 @@
   slot: weapon
   location: Litorium Maledicta System - Lost in the Void
   act: 2
-  description: null
+  description: Standard heavy stubber. Solid projectile weapons have +50% overpenetration.
   category: >-
     Heavy Weapons (STR Req usually, Works with the Overpower Heavy weapon talent and Heavy Gunner AM Talent otherwise
     high cost to shoot)
@@ -982,7 +982,7 @@
   slot: weapon
   location: null
   act: 3
-  description: null
+  description: Standard Drukhari splinter cannon.
   category: >-
     Heavy Weapons (STR Req usually, Works with the Overpower Heavy weapon talent and Heavy Gunner AM Talent otherwise
     high cost to shoot)
@@ -990,7 +990,7 @@
   slot: weapon
   location: null
   act: 3
-  description: null
+  description: Drukhari splinter cannon variant.
   category: >-
     Heavy Weapons (STR Req usually, Works with the Overpower Heavy weapon talent and Heavy Gunner AM Talent otherwise
     high cost to shoot)
@@ -998,7 +998,7 @@
   slot: weapon
   location: null
   act: 3
-  description: null
+  description: Drukhari splinter cannon variant with improved penetration.
   category: >-
     Heavy Weapons (STR Req usually, Works with the Overpower Heavy weapon talent and Heavy Gunner AM Talent otherwise
     high cost to shoot)
@@ -1006,7 +1006,7 @@
   slot: weapon
   location: Spire, Killing Tervantias
   act: 3
-  description: null
+  description: Heavy Aeldari shuriken weapon.
   category: >-
     Heavy Weapons (STR Req usually, Works with the Overpower Heavy weapon talent and Heavy Gunner AM Talent otherwise
     high cost to shoot)
@@ -1052,7 +1052,7 @@
   slot: weapon
   location: Footfall sewers
   act: 4
-  description: null
+  description: Heavy Aeldari shuriken weapon with rune carvings.
   category: >-
     Heavy Weapons (STR Req usually, Works with the Overpower Heavy weapon talent and Heavy Gunner AM Talent otherwise
     high cost to shoot)
@@ -1096,31 +1096,31 @@
   slot: weapon
   location: Tech Trader 2
   act: 1
-  description: null
+  description: Standard plasma pistol. Requires Plasma Weapon Proficiency.
   category: Plasma (Overcharge Mechanics added in 1.5)
 - name: Plasma Gun
   slot: weapon
   location: B4 Aurora Rykad Minoris
   act: 1
-  description: null
+  description: Standard plasma gun. Requires Plasma Weapon Proficiency.
   category: Plasma (Overcharge Mechanics added in 1.5)
-- name: '[Retobi] Plasma Pistol'
+- name: "[Retobi] Plasma Pistol"
   slot: weapon
   location: Mechanicus 6. PF 26
   act: 2
-  description: null
+  description: Standard plasma pistol variant. Requires Plasma Weapon Proficiency.
   category: Plasma (Overcharge Mechanics added in 1.5)
 - name: Heavy Plasma Gun
   slot: weapon
   location: Mechanicus 12. PF40
   act: 2
-  description: null
+  description: Heavy plasma weapon. Requires Plasma Weapon Proficiency.
   category: Plasma (Overcharge Mechanics added in 1.5)
-- name: '[Mezoa] Plasma Gun'
+- name: "[Mezoa] Plasma Gun"
   slot: weapon
-  location: 'Kiava Gama: Killing Dementz'
+  location: "Kiava Gama: Killing Dementz"
   act: 2
-  description: null
+  description: Standard plasma gun variant. Requires Plasma Weapon Proficiency.
   category: Plasma (Overcharge Mechanics added in 1.5)
 - name: The Dark Marchesa
   slot: weapon
@@ -1147,11 +1147,11 @@
     The plasma explosion from this weapon hits targets within a 2-tile radius. The damage dealt by the explosion changes
     to warp damage for all targets except the character.
   category: Plasma (Overcharge Mechanics added in 1.5)
-- name: '[Retobi-Pattern] Plasma Gun'
+- name: "[Retobi-Pattern] Plasma Gun"
   slot: weapon
   location: Looting Shrieker Arsenal post taking over Den
   act: 3
-  description: null
+  description: Standard plasma gun variant. Requires Plasma Weapon Proficiency.
   category: Plasma (Overcharge Mechanics added in 1.5)
 - name: Stella Neutrona
   slot: weapon
@@ -1169,11 +1169,11 @@
     If the character is a Tech-Priest or uses another plasma weapon in the same loadout, then overheat attacks from that
     weapon cost 1 less AP.
   category: Plasma (Overcharge Mechanics added in 1.5)
-- name: '[Sol-Pattern] Plasma Pistol'
+- name: "[Sol-Pattern] Plasma Pistol"
   slot: weapon
   location: Emperor's Plan system - Eufrates II
   act: 4
-  description: null
+  description: Standard plasma pistol variant. Requires Plasma Weapon Proficiency.
   category: Plasma (Overcharge Mechanics added in 1.5)
 - name: Overcharged Plasma Gun
   slot: weapon
@@ -1227,13 +1227,13 @@
   act: 1
   description: shots from this shotgun push targets 3 cells away even if the shot misses
   category: Shotgun (AoE Guns + Push / Knockdown targets in effective range)
-- name: '[Drusus prime pattern] Shotgun'
+- name: "[Drusus prime pattern] Shotgun"
   slot: weapon
   location: Pirate 15. PF.47
   act: 2
   description: shotguns knock enemies back at effective range
   category: Shotgun (AoE Guns + Push / Knockdown targets in effective range)
-- name: '[Retobi-Pattern] Shotgun'
+- name: "[Retobi-Pattern] Shotgun"
   slot: weapon
   location: Silence of Mer-Segrit system - Blades in the Void quest, talk to Merchant ship after rescuing it
   act: 2
@@ -1279,13 +1279,13 @@
     8 toxin, targets hit with this shotgun must pass a toughness resistance test or become poisoned, suffering toxin 8
     each turn
   category: Shotgun (AoE Guns + Push / Knockdown targets in effective range)
-- name: '[Mars Pattern] Shotgun'
+- name: "[Mars Pattern] Shotgun"
   slot: weapon
   location: (Lex Imperialis DLC) Commissar / Malice Arsenal
   act: 3
   description: When firing a shotgun at effective range, targets are knocked back
   category: Shotgun (AoE Guns + Push / Knockdown targets in effective range)
-- name: '[Mars-Pattern] Combat Shotgun'
+- name: "[Mars-Pattern] Combat Shotgun"
   slot: weapon
   location: null
   act: null
@@ -1297,7 +1297,7 @@
   act: 4
   description: Never Misses
   category: Shotgun (AoE Guns + Push / Knockdown targets in effective range)
-- name: '[Sol Pattern] Shotgun'
+- name: "[Sol Pattern] Shotgun"
   slot: weapon
   location: (Lex Imperialis DLC) Explorators
   act: 4
@@ -1365,7 +1365,7 @@
   category: Staff (Equippable only by unique respective psyker tree. Shares same abilities with staff in same tree)
 - name: Detachment from Death
   slot: weapon
-  location: 'Astropath Puzzle: Something wrong with the Astropath'
+  location: "Astropath Puzzle: Something wrong with the Astropath"
   act: 2
   description: Allies of this Staff Wielder have their dodge increased by wielder's WP bonus
   category: Staff (Equippable only by unique respective psyker tree. Shares same abilities with staff in same tree)
@@ -1391,7 +1391,7 @@
   category: Staff (Equippable only by unique respective psyker tree. Shares same abilities with staff in same tree)
 - name: Imperial Staff
   slot: weapon
-  location: 'Dargonus: Return to Dargonus for Drukhari'
+  location: "Dargonus: Return to Dargonus for Drukhari"
   act: 2
   description: WP + 10, FEL + 5
   category: Staff (Equippable only by unique respective psyker tree. Shares same abilities with staff in same tree)
@@ -1429,7 +1429,7 @@
   slot: weapon
   location: Eurac V
   act: 1
-  description: null
+  description: Staff associated with House Orseillo. Psyker weapon.
   category: >-
     Navigator Staff [Devastating = No CD on first Navi Attack abilities and more dmg on 2nd at cost of self dmg]
     [Castigating = Debuff / Reduce Enemy stat per cast by power lvl] [ Infusing = Buffing / Boost stats of allies / cast
@@ -1438,7 +1438,7 @@
   slot: weapon
   location: Eurac V
   act: 1
-  description: null
+  description: Staff of House Orseillo. Psyker weapon.
   category: >-
     Navigator Staff [Devastating = No CD on first Navi Attack abilities and more dmg on 2nd at cost of self dmg]
     [Castigating = Debuff / Reduce Enemy stat per cast by power lvl] [ Infusing = Buffing / Boost stats of allies / cast
@@ -1474,7 +1474,7 @@
   slot: weapon
   location: Drusian 0. PF15
   act: 2
-  description: null
+  description: Unique staff weapon.
   category: >-
     Navigator Staff [Devastating = No CD on first Navi Attack abilities and more dmg on 2nd at cost of self dmg]
     [Castigating = Debuff / Reduce Enemy stat per cast by power lvl] [ Infusing = Buffing / Boost stats of allies / cast
@@ -1529,7 +1529,7 @@
   slot: weapon
   location: Various
   act: 0
-  description: '"+10% Parry, -10 to enemy Melee when hitting."'
+  description: "\"+10% Parry, -10 to enemy Melee when hitting.\""
   category: Melee 1H
 - name: Chain Sword
   slot: weapon
@@ -1543,23 +1543,23 @@
   act: 1
   description: Hitting with this knife has a chance to inflict bleeding. 50 dodge reduction
   category: Melee 1H
-- name: '[Mars Pattern] Axe'
+- name: "[Mars Pattern] Axe"
   slot: weapon
   location: Fellowship of the Void
   act: 1
   description: Axes can be used to perform a special attack that inflicts bleeding on the target. Bleeding 2
   category: Melee 1H
-- name: '[Sol Pattern] Chain Sword'
+- name: "[Sol Pattern] Chain Sword"
   slot: weapon
   location: Fellowship of the Void
   act: 1
-  description: '"+10% Parry, -10 to enemy Melee when hitting."'
+  description: "\"+10% Parry, -10 to enemy Melee when hitting.\""
   category: Melee 1H
-- name: '[Mars Pattern] Sword'
+- name: "[Mars Pattern] Sword"
   slot: weapon
   location: Eurac V
   act: 1
-  description: '"+10% Parry, -10 to enemy Melee when hitting."'
+  description: "\"+10% Parry, -10 to enemy Melee when hitting.\""
   category: Melee 1H
 - name: Bloody Pact
   slot: weapon
@@ -1615,11 +1615,11 @@
   act: 1
   description: Maces and hammers allow you to perform a special attack that knocks back enemies
   category: Melee 1H
-- name: '[Mezoa Pattern] Sword'
+- name: "[Mezoa Pattern] Sword"
   slot: weapon
   location: Rykad Minoris
   act: 1
-  description: '"+10% Parry, -10 to enemy Melee when hitting."'
+  description: "\"+10% Parry, -10 to enemy Melee when hitting.\""
   category: Melee 1H
 - name: Officer's Chain sword
   slot: weapon
@@ -1684,7 +1684,7 @@
   category: Melee 1H
 - name: Bloodthirster
   slot: weapon
-  location: 'Dargonus: Return to Dargonus for Drukhari'
+  location: "Dargonus: Return to Dargonus for Drukhari"
   act: 2
   description: Each hit decrease target WS,BS,STR,TGH, and PER by -5. Stacks
   category: Melee 1H
@@ -1694,17 +1694,17 @@
   act: 2
   description: Venomous Attacks, +10%parry -10WS to enemy when hit
   category: Melee 1H
-- name: '[Mars] Chainaxe'
+- name: "[Mars] Chainaxe"
   slot: weapon
   location: Langrenn's Belt, Plundered Station
   act: 2
-  description: null
+  description: Chainaxe. Axes have a special attack that inflicts bleeding. Chain weapons deal +25% critical damage.
   category: Melee 1H
-- name: '[Mezoa Pattern]'
+- name: "[Mezoa Pattern]"
   slot: weapon
   location: Gift from Calligos during Magnae Accensio - likely Footfall provion decision dependant
   act: 2
-  description: null
+  description: Standard force weapon variant.
   category: Melee 1H
 - name: Aeldari Chain Sword
   slot: weapon
@@ -1726,7 +1726,7 @@
   act: 2
   description: When hit, target -5% armor. Stacks
   category: Melee 1H
-- name: '[LD-Pattern] Power Pickaxe'
+- name: "[LD-Pattern] Power Pickaxe"
   slot: weapon
   location: Crypt
   act: 2
@@ -1742,7 +1742,7 @@
   category: Melee 1H
 - name: Bio-Dagger
   slot: weapon
-  location: 'Crypt: Abulation in Blood'
+  location: "Crypt: Abulation in Blood"
   act: 2
   description: 6 Toxin. Each hit with this dagger increase base dmg by 1 until end of combat. Stacks didge reduction 50
   category: Melee 1H
@@ -1768,7 +1768,7 @@
   slot: weapon
   location: Drusian 1. PF 21
   act: 2
-  description: null
+  description: Chainsword variant. Chain weapons deal +25% critical damage.
   category: Melee 1H
 - name: Hardened Chainaxe
   slot: weapon
@@ -1778,7 +1778,7 @@
   category: Melee 1H
 - name: Epiphany
   slot: weapon
-  location: 'Foulstone Proj.2: Bonfire of Righteousness'
+  location: "Foulstone Proj.2: Bonfire of Righteousness"
   act: 2
   description: If wearer kill enemy with Charge, Charge has no CD
   category: Melee 1H
@@ -1802,7 +1802,7 @@
   category: Melee 1H
 - name: Karkalla's Honour
   slot: weapon
-  location: 'Janus Proj. 3: Forest Fortresses'
+  location: "Janus Proj. 3: Forest Fortresses"
   act: 2
   description: 360 AOE attack with +1 dmg / party member
   category: Melee 1H
@@ -1810,7 +1810,7 @@
   slot: weapon
   location: Footfall. Martyr's Endurance
   act: 2
-  description: null
+  description: Master-crafted power maul. Standard power weapon.
   category: Melee 1H
 - name: Poisoned Hekatarii Blade
   slot: weapon
@@ -1822,13 +1822,13 @@
   slot: weapon
   location: Mechanicus 11. PF 52
   act: 2
-  description: null
+  description: Power axe. Axes have a special attack that inflicts bleeding.
   category: Melee 1H
 - name: Scorpion Chainsword
   slot: weapon
-  location: 'Last Chance of Cyrene: Yrliet quest end'
+  location: "Last Chance of Cyrene: Yrliet quest end"
   act: 2
-  description: null
+  description: Chainsword variant. Chain weapons deal +25% critical damage.
   category: Melee 1H
 - name: Severed Hand
   slot: weapon
@@ -1878,11 +1878,11 @@
   slot: weapon
   location: Looting Shrieker Arsenal post taking over Den
   act: 3
-  description: null
+  description: Astartes chainsword. +10% critical hit chance. Chain weapons deal +25% critical damage.
   category: Melee 1H
 - name: Blackhaze Venom Blade
   slot: weapon
-  location: 'Comorragh: Trade with Tervantias'
+  location: "Comorragh: Trade with Tervantias"
   act: 3
   description: Attacking targets with toxin apply toxin with same power to all enemies with 2cells, dodge reduction 50
   category: Melee 1H
@@ -1918,7 +1918,7 @@
   category: Melee 1H
 - name: Glimmersteel Blade
   slot: weapon
-  location: 'Comorragh: Trade with Tervantias'
+  location: "Comorragh: Trade with Tervantias"
   act: 3
   description: Attacks inflict (4) bleed if fail TGH check
   category: Melee 1H
@@ -1976,7 +1976,7 @@
     Each critical hit reduces veil degradation by psy rating. increases willpower by 2xpsy rating for 1 round. This
     sword deals additional psy rating damage.
   category: Melee 1H
-- name: '[Sol-Pattern] Power sword'
+- name: "[Sol-Pattern] Power sword"
   slot: weapon
   location: Emperor's Plan system - Eufrates II
   act: 4
@@ -1986,7 +1986,7 @@
   slot: weapon
   location: Emperor's Plan system - Eufrates II
   act: 4
-  description: null
+  description: Chainaxe variant. Axes have a special attack that inflicts bleeding. Chain weapons deal +25% critical damage.
   category: Melee 1H
 - name: Singing Retribution
   slot: weapon
@@ -2008,11 +2008,11 @@
   act: 4
   description: Deals additional 10+2xAGIb to enemies with less than 50% wounds
   category: Melee 1H
-- name: '[Ryza] Astartes Chainsword'
+- name: "[Ryza] Astartes Chainsword"
   slot: weapon
   location: Kasballica 25. pf102
   act: 4
-  description: null
+  description: Astartes chainsword variant. +10% critical hit chance. Chain weapons deal +25% critical damage.
   category: Melee 1H
 - name: Auto-Striking Power Sword
   slot: weapon
@@ -2106,7 +2106,7 @@
   slot: weapon
   location: null
   act: null
-  description: null
+  description: Heavy axe. Primitive weapon.
   category: Melee 1H
 - name: Symphony of Pain x2
   slot: weapon
@@ -2122,7 +2122,7 @@
   category: Melee 1H
 - name: Watchers from Above
   slot: weapon
-  location: 'Janus Proj5: Pleasure World'
+  location: "Janus Proj5: Pleasure World"
   act: 4
   description: Wielder gain +25% dodge & parry. Enemy hit by this suffer -25WS until wearer's next turn
   category: Melee 1H
@@ -2193,7 +2193,7 @@
   slot: weapon
   location: Marazhai quest world act 5
   act: 5
-  description: '"10% parry, -10 to enemy weapon skill when hit"'
+  description: "\"10% parry, -10 to enemy weapon skill when hit\""
   category: Melee 1H
 - name: Blade of the Blood Hunter
   slot: weapon
@@ -2237,13 +2237,13 @@
   act: 1
   description: Omnissiah's Axes grant the character a +15 Melee bonus.
   category: Melee 2H
-- name: '[Retobi Pattern] Greatsword'
+- name: "[Retobi Pattern] Greatsword"
   slot: weapon
   location: Fellowship of the Void
   act: 1
-  description: '"+10% Parry, -10 to enemy Melee when hitting."'
+  description: "\"+10% Parry, -10 to enemy Melee when hitting.\""
   category: Melee 2H
-- name: '[C-Delp] Ommisiah Axe'
+- name: "[C-Delp] Ommisiah Axe"
   slot: weapon
   location: Mechanicus Trader 7. PF26
   act: 2
@@ -2255,11 +2255,11 @@
   act: 2
   description: if first strike parried/dodged all other are parried/dodged If first hits, all hit
   category: Melee 2H
-- name: '[LD] Industrial Hammer'
+- name: "[LD] Industrial Hammer"
   slot: weapon
   location: pirate 18. PF53
   act: 2
-  description: null
+  description: Heavy industrial hammer. Primitive weapon.
   category: Melee 2H
 - name: Death Cult Blade
   slot: weapon
@@ -2287,7 +2287,7 @@
   category: Melee 2H
 - name: Hammer of Epiphany
   slot: weapon
-  location: 'Foulstone Proj.3: Shrine'
+  location: "Foulstone Proj.3: Shrine"
   act: 2
   description: All dmg dealth with when this weapon pushes enemy +100%
   category: Melee 2H
@@ -2307,13 +2307,13 @@
   slot: weapon
   location: Pirate 5. PF 20
   act: 2
-  description: null
+  description: Heavy industrial hammer. Primitive weapon.
   category: Melee 2H
 - name: Power Claymore
   slot: weapon
   location: Drusian 4. PF32
   act: 2
-  description: null
+  description: +10% parry chance. Hits reduce enemy Weapon Skill by −10.
   category: Melee 2H
 - name: Roaring Thunder
   slot: weapon
@@ -2325,7 +2325,7 @@
   slot: weapon
   location: Drusian 7. PF27
   act: 2
-  description: null
+  description: Improvised chain weapon. Chain weapons deal +25% critical damage.
   category: Melee 2H
 - name: Serrated Greatsword
   slot: weapon
@@ -2337,7 +2337,7 @@
   slot: weapon
   location: Footfall Cinder Fight
   act: 2
-  description: null
+  description: Standard thunder hammer. Shock damage.
   category: Melee 2H
 - name: Wasteland Twister
   slot: weapon
@@ -2367,7 +2367,7 @@
   act: 2
   description: Maces and hammers allow you to perform a special attack that knocks back enemies
   category: Melee 2H
-- name: '[LD Pattern] Industrial Hammer'
+- name: "[LD Pattern] Industrial Hammer"
   slot: weapon
   location: Fellowship of the void
   act: 2
@@ -2387,17 +2387,17 @@
   act: 3
   description: gives +10% parry and - 10WS to enemy on hit
   category: Melee 2H
-- name: '[Death Cult Pattern'
+- name: "[Death Cult Pattern"
   slot: weapon
   location: Kibellah final quest loot
   act: 4
   description: Minus 2xAGI to the targets parry, AGI/2 to wearers critical chance
   category: Melee 2H
-- name: '[Mars-Pattern] Omnissian Axe'
+- name: "[Mars-Pattern] Omnissian Axe"
   slot: weapon
   location: Pasqal personal quest location
   act: 4
-  description: null
+  description: +15 Weapon Skill bonus. Axes have a special attack that inflicts bleeding.
   category: Melee 2H
 - name: Restless Absolution
   slot: weapon
@@ -2405,13 +2405,13 @@
   act: 4
   description: If this weapon's attack fully negates the target's armour, this attack deals additional 75% damage
   category: Melee 2H
-- name: '[LD] Chainsaw'
+- name: "[LD] Chainsaw"
   slot: weapon
   location: Explorators 29. pf 125
   act: 4
   description: Power Pick Passive
   category: Melee 2H
-- name: '[Mars] Thunder Hammer'
+- name: "[Mars] Thunder Hammer"
   slot: weapon
   location: Explorators 33 pf 144
   act: 4
@@ -2483,7 +2483,7 @@
   category: Melee 2H
 - name: Piety's Charge
   slot: weapon
-  location: 'Foulstone Proj5: Reliquary'
+  location: "Foulstone Proj5: Reliquary"
   act: 4
   description: >-
     All collision by this hammer's pushing attack deals +300% more dmg. All target hit pass a +10 AGI check or fall
@@ -2491,9 +2491,9 @@
   category: Melee 2H
 - name: Craven's Bane
   slot: weapon
-  location: 'Vheabos proj4: Navy Whips'
+  location: "Vheabos proj4: Navy Whips"
   act: 4
-  description: null
+  description: Unique weapon.
   category: Melee 2H
 - name: Triumph of Faith
   slot: weapon
@@ -2521,7 +2521,7 @@
   act: 4
   description: This blade allows you to perform an additional attack, Double-Edged Strike.
   category: Melee 2H
-- name: '[LD Pattern] Rcok Saw'
+- name: "[LD Pattern] Rcok Saw"
   slot: weapon
   location: Explorators
   act: 4
@@ -2535,7 +2535,7 @@
   act: 4
   description: This weapon allows you to perform a special attack called Drill Strike.
   category: Melee 2H
-- name: '[LD Pattern] Well-Maintained Heavy Rocksaw'
+- name: "[LD Pattern] Well-Maintained Heavy Rocksaw"
   slot: weapon
   location: Void Shadows DLC
   act: 4

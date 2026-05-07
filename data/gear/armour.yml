@@ -1,14 +1,14 @@
-- name: '[Death World Origin] Enforcer Light Carapace'
+- name: "[Death World Origin] Enforcer Light Carapace"
   slot: armour
   location: Rykad Minoris
   act: 1
-  description: 'Base Armour Property: +1 Deflection against human enemies World Property: +5 Agility'
-- name: '[Fortress] Mesh Vest'
+  description: "Base Armour Property: +1 Deflection against human enemies World Property: +5 Agility"
+- name: "[Fortress] Mesh Vest"
   slot: armour
   location: Rykad Minoris
   act: 1
   description: Req. Heretic +5% armour against range attack +5 TGH
-- name: '[Warworld] Fencing Bodyglove'
+- name: "[Warworld] Fencing Bodyglove"
   slot: armour
   location: Pirate Rep 1
   act: 1
@@ -22,7 +22,7 @@
   slot: armour
   location: Pirate
   act: 1
-  description: '-50% Dodge'
+  description: "-50% Dodge"
 - name: Mesh Vest
   slot: armour
   location: Rykad Minoris
@@ -32,7 +32,7 @@
   slot: armour
   location: Freight Line
   act: 1
-  description: 'Base Armour Property: -15% Absorption against energy damage'
+  description: "Base Armour Property: -15% Absorption against energy damage"
 - name: Spinner's Ritual Vestment
   slot: armour
   location: Bloodspun Quest
@@ -42,7 +42,7 @@
   slot: armour
   location: Various Heretics
   act: null
-  description: '-50% Dodge'
+  description: "-50% Dodge"
 - name: Light Spinner's Breastplate
   slot: armour
   location: Kibellah starting gear
@@ -59,22 +59,22 @@
     The grim garb of a Bloodweb initiate fills enemies with terror and the followers of the Undying One with awe. For
     the bone armor, covered in thin leather, reveals the wearer as a survivor of death itself. world property: +10%
     evasion when not protected by cover Additional property: +(STR bonus) to health
-- name: '[Death] Armoured Bodyglove'
+- name: "[Death] Armoured Bodyglove"
   slot: armour
   location: pirate rep14. pf45
   act: 2
   description: Dodge + 10% vs Range. + 2 MP
-- name: '[Death] Enforcer Light Carapace'
+- name: "[Death] Enforcer Light Carapace"
   slot: armour
   location: drusian 5. pf41
   act: 2
   description: Dodge + 10% vs humans. +10 AGI
-- name: '[Fortress] Tempest Carapace'
+- name: "[Fortress] Tempest Carapace"
   slot: armour
   location: Mech Rep21. PF 70
   act: 2
   description: Defl + 2 vs ranged. +10 TGH
-- name: '[War] Enforcer Carapace'
+- name: "[War] Enforcer Carapace"
   slot: armour
   location: drusian 9. pf41
   act: 2
@@ -103,7 +103,7 @@
   description: Dodge +10%. +2 MP
 - name: Breacher's Armour
   slot: armour
-  location: 'Ship Crypt: Abulation in Blood'
+  location: "Ship Crypt: Abulation in Blood"
   act: 2
   description: PER + 10, + Lore Imperium / 10 Armour
 - name: Condensed Carapace
@@ -115,7 +115,7 @@
   slot: armour
   location: Footfall Funeral
   act: 2
-  description: null
+  description: Standard light armour (35% armour). No special effects.
 - name: Fireblessed Carapace
   slot: armour
   location: Footfall Cinder
@@ -130,7 +130,7 @@
   slot: armour
   location: Vheabos surface
   act: 2
-  description: 'Base Armour Property: +105 armour if the wearer is in half cover'
+  description: "Base Armour Property: +105 armour if the wearer is in half cover"
 - name: Makeshift Heavy Xenomesh
   slot: armour
   location: Cradle of Khepri System - Distress Signal
@@ -140,7 +140,7 @@
   slot: armour
   location: Pirate Rep 4. PF25
   act: 2
-  description: null
+  description: Standard medium armour (50% armour). No special effects.
 - name: Psyker's Breastplate
   slot: armour
   location: kasballica 7. pf62
@@ -160,7 +160,7 @@
   description: Armour +15% vs ranged attack
 - name: Reinforced Kabalite Armour
   slot: armour
-  location: 'Palatium Stelos: Drukhari Raid'
+  location: "Palatium Stelos: Drukhari Raid"
   act: 2
   description: Dodge +15% if AGI > 65
 - name: Hunter-Father's Armour
@@ -204,7 +204,7 @@
   slot: armour
   location: Drusians
   act: 2
-  description: 'world property: +10% to evasion if the character''s Agility is above 50. Additional property: +15 to Toughness'
+  description: "world property: +10% to evasion if the character's Agility is above 50. Additional property: +15 to Toughness"
 - name: Silent Death
   slot: armour
   location: Drusians
@@ -241,7 +241,7 @@
   slot: armour
   location: Crypt
   act: 2
-  description: 'world property: +Knowledge: Imperium% to armor Additional property: +10 to Perception'
+  description: "world property: +Knowledge: Imperium% to armor Additional property: +10 to Perception"
 - name: Armor of the Final Threshold
   slot: armour
   location: Drusians
@@ -270,14 +270,14 @@
   description: >-
     When a character blocks an attack, all creatures in adjacent squares make a Fortitude check to resist and, if they
     fail, gain +1 level of confusion. world property: +10% armor against ranged attacks.
-- name: '[LD-Pattern] Heavy Leather Armor'
+- name: "[LD-Pattern] Heavy Leather Armor"
   slot: armour
   location: Shrine encounter
   act: 2
-  description: null
+  description: Standard heavy armour (55% armour, 3 deflection). Requires Heavy Armour Proficiency.
 - name: Incubus Blade Armour
   slot: armour
-  location: 'Commoragh: Bike by Killed runaway 3 patrol'
+  location: "Commoragh: Bike by Killed runaway 3 patrol"
   act: 3
   description: >-
     Deal 10-15 piercing dmg with 5% armour pen to all target in melee range when wearer makes melee attack. +3
@@ -308,7 +308,7 @@
   slot: armour
   location: Third Arena fight
   act: 3
-  description: 'The character gains +(Agility / 3) to Deflection. World property: +15% to evasion when out of cover.'
+  description: "The character gains +(Agility / 3) to Deflection. World property: +15% to evasion when out of cover."
 - name: Gladiator Mesh Armor
   slot: armour
   location: Commisar Trade & Turning Materials to Tervintas
@@ -318,12 +318,12 @@
   slot: armour
   location: Common, kill Drukhari enemies
   act: 3
-  description: null
+  description: Standard medium armour (45% armour). Requires Drukhari equipment.
 - name: Kabalite Armour
   slot: armour
   location: Common, kill Drukhari enemies
   act: 3
-  description: null
+  description: Standard light armour (30% armour). Requires Drukhari equipment.
 - name: Ceramite Xenochestplate
   slot: armour
   location: Tervintas Trade
@@ -340,7 +340,7 @@
   slot: armour
   location: In a crate to the right of the Commissar's platform
   act: 3
-  description: 'If there are no xenos in the squad, the character gains +10 to all stats. Basic Stat: +20 Strength'
+  description: "If there are no xenos in the squad, the character gains +10 to all stats. Basic Stat: +20 Strength"
 - name: Khaine's Revenge
   slot: armour
   location: Crone World (Cassia Quest)
@@ -381,21 +381,21 @@
   location: Argenta quest location
   act: 4
   description: Requires rank 1 heretical. Grants +15% more damage to any psyker or navigator power. +10% dodge against non-daemons
-- name: '[War World Origin] Crusade plate Armour'
+- name: "[War World Origin] Crusade plate Armour"
   slot: armour
   location: Footfall - Drussians max rank reward
   act: 4
   description: Grants +15 parry and +3 deflection against melee attacks
-- name: '[Fortress World Origin] Tempestus Carapace'
+- name: "[Fortress World Origin] Tempestus Carapace"
   slot: armour
   location: Mundus Nullius system - Ruined Palace
   act: 4
-  description: 'Gives +10TGH. Armour property: +2 deflection against ranged attacks'
+  description: "Gives +10TGH. Armour property: +2 deflection against ranged attacks"
 - name: Aeldari Farseer Mesh Armour
   slot: armour
   location: Quetza Temer
   act: 4
-  description: 'Wearer has -20% to suffer critical hit. Armour property: +15% armour if wearer''s WP is more than 70'
+  description: "Wearer has -20% to suffer critical hit. Armour property: +15% armour if wearer's WP is more than 70"
 - name: Heavy Xenomesh
   slot: armour
   location: Footfall Amasecus - Chorda retinue loot
@@ -428,7 +428,7 @@
   location: Drusian 31. pf101
   act: 4
   description: Once per round, wearer gain +2 MP/AP if the kill an enemy. +20 STR
-- name: '[Fortress] Chaos Light Enf. Carapace'
+- name: "[Fortress] Chaos Light Enf. Carapace"
   slot: armour
   location: Kasballica 28 pf.110
   act: 4
@@ -443,7 +443,7 @@
   location: Void 28. pf96
   act: 4
   description: Wearer suffer - (10 + Heretic Rank)% less dmg from direct, mental or warp dmg. Deflection +5 vs humans
-- name: '[War World Origin] Flak Chestplate'
+- name: "[War World Origin] Flak Chestplate"
   slot: armour
   location: null
   act: null
@@ -460,7 +460,7 @@
   description: >-
     Req. Heretic 500. Whenever wearer is attacked, attacker must pass WP -20 check or the attack will only deal half dmg
     on hit and attacker become staggered for 1 round
-- name: '[Forge] Skitarii Ranger Armour'
+- name: "[Forge] Skitarii Ranger Armour"
   slot: armour
   location: Explorators 26. pf 104
   act: 4
@@ -477,7 +477,7 @@
   location: Explorators 29. pf 126
   act: 4
   description: Gain 5 + Iconoclast rank for each allies at full wounds at start of turn. Gain PER / 10 Armour
-- name: '[War] Tempest Elite Carapace'
+- name: "[War] Tempest Elite Carapace"
   slot: armour
   location: Explorators 35 pf 152
   act: 4
@@ -491,7 +491,7 @@
     attack
 - name: Arbitrator Solomon Vhyr's Armor
   slot: armour
-  location: 'Foulstone Proj5: Holy Defenders'
+  location: "Foulstone Proj5: Holy Defenders"
   act: 4
   description: When wearer hits "criminal enemy" (???), that enemy gain +1 Perplexed for 2 rounds
 - name: Panoply of the Assassin
@@ -519,12 +519,12 @@
   slot: armour
   location: Dargonus project
   act: 4
-  description: 'world property: +15 to Strength'
+  description: "world property: +15 to Strength"
 - name: Might of Fenris Armor
   slot: armour
   location: Haemonculus Lab - In a crate next to Alpha and Beta's room Athletics check required
   act: 4
-  description: 'When a character kills an enemy, the cooldown of the Grasp by the Throat ability ends. Basic ability: +25 Strength'
+  description: "When a character kills an enemy, the cooldown of the Grasp by the Throat ability ends. Basic ability: +25 Strength"
 - name: Sanguine Judgement
   slot: armour
   location: Haemonculus Lab - In a secret compartment behind a closed door in the room with Alpha and Beta
@@ -569,7 +569,7 @@
   slot: armour
   location: Fellowship of the void
   act: 4
-  description: 'Base Property: +15% Armor vs. Xenos Enemies Additional Property: +15% Parry'
+  description: "Base Property: +15% Armor vs. Xenos Enemies Additional Property: +15% Parry"
 - name: Shadow of the Undying One
   slot: armour
   location: Foulstone with Kibellah
@@ -598,7 +598,7 @@
   description: >-
     While the character is below 100% health, their Attack Power is increased by 25 and their Critical Damage is
     increased by 25%. world property: +(Attack Power / 10) Armor
-- name: '[Hive World Origin] Voidsman''s Armour'
+- name: "[Hive World Origin] Voidsman's Armour"
   slot: armour
   location: Side with Chorda against Vladym on footfall to receive 5-7 copies from his body guards
   act: 4
@@ -620,12 +620,12 @@
   location: Iquisition boarding party loot
   act: 5
   description: Wearer restores 1AP after killing an enemy (once per roudn). +15% armour if the wearer's WS is more than 70
-- name: '[Daemon World Origin] Chaos Enforcer Carapace'
+- name: "[Daemon World Origin] Chaos Enforcer Carapace"
   slot: armour
   location: Tomb world Epitaph - RT heretic copy
   act: 5
   description: Req heretical rank 1. +20% armour against daemons. +10% armor pen
-- name: '[Armoury World Origin] Malleus Bodyglove'
+- name: "[Armoury World Origin] Malleus Bodyglove"
   slot: armour
   location: Tomb world Epitaph - RT heretic copy
   act: 5
@@ -637,7 +637,7 @@
   description: >-
     After using heroic act, the wearer immediately uses War Hymn or Furious Recital (regardless of its cooldown). +15
     STR
-- name: '[Hive World Origin] Voidsman''s Armour'
+- name: "[Hive World Origin] Voidsman's Armour"
   slot: armour
   location: Tomb world Epitaph - RT dogmatic copy
   act: 5
