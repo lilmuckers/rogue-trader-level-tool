@@ -323,6 +323,10 @@
     padding-bottom: env(safe-area-inset-bottom);
   }
   .sheet.note-editing.keyboard-open { padding-bottom: 0; }
+  /* Remove sheet-body padding so editor fills edge-to-edge; toolbar handles its own inset */
+  .sheet.note-editing .sheet-body { padding: 0; }
+  /* Toolbar resets margin/padding for edge-to-edge context */
+  .sheet.note-editing .note-toolbar { margin: 0; padding: 10px 18px 8px; top: 0; }
   .sheet-grabber {
     width: 40px; height: 4px;
     background: var(--ink-faint);
@@ -1054,7 +1058,7 @@
 .note-card-date { font-size: 11px; color: var(--ink-faint); }
 /* Editor */
 .note-editor-wrap { display: flex; flex-direction: column; flex: 1; min-height: 0; }
-.note-editor-area { flex: 1; min-height: 0; display: flex; flex-direction: column; position: relative; }
+.note-editor-area { flex: 1; min-height: 0; display: flex; flex-direction: column; position: relative; background: var(--bg-2); }
 .note-preview-fab {
   position: absolute; bottom: 12px; right: 12px;
   background: var(--bg-3); border: 1px solid var(--gold-deep);
@@ -1085,7 +1089,7 @@
   width: 100%; flex: 1; min-height: 0;
   background: var(--bg-2); border: 1px solid var(--rule); border-radius: 3px;
   color: var(--ink); font-family: 'EB Garamond', serif; font-size: 17px;
-  line-height: 1.6; padding: 12px 12px 50px; resize: none; margin-top: 10px;
+  line-height: 1.6; padding: 12px 12px 50px; resize: none; margin-top: 0; border-top: none; border-left: none; border-right: none; border-radius: 0;
   user-select: text !important; -webkit-user-select: text !important;
   overflow-y: scroll; -webkit-overflow-scrolling: touch;
   touch-action: pan-y; /* allow vertical scroll on iOS */

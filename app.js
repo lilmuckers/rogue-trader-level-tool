@@ -2690,6 +2690,46 @@ function buildNoteEditorContent(note, startInEdit = false) {
     if (textarea.value !== note.content) commitSave();
   });
 
+  // Auto-continue list / checklist on Enter; double-Enter on empty item exits list
+  textarea.addEventListener('keydown', (e) => {
+    if (e.key !== 'Enter' || e.shiftKey) return;
+    if (textarea.selectionStart !== textarea.selectionEnd) return; // selection → default
+
+    const val = textarea.value;
+    const pos = textarea.selectionStart;
+    const lineStart = val.lastIndexOf('\n', pos - 1) + 1;
+    const lineEnd   = val.indexOf('\n', pos);
+    const fullLine  = val.slice(lineStart, lineEnd === -1 ? undefined : lineEnd);
+
+    // Match: optional indent + (checkbox or bullet)
+    const m = fullLine.match(/^(\s*)(- \[[ xX]\] |- |\* )/);
+    if (!m) return;
+
+    e.preventDefault();
+
+    const indent     = m[1];
+    const rawPrefix  = m[2];
+    const content    = fullLine.slice(m[0].length).trim();
+    // Always start new checklist items unchecked
+    const newPrefix  = indent + (rawPrefix.match(/- \[/) ? '- [ ] ' : rawPrefix);
+
+    if (content === '') {
+      // Empty item — strip prefix, leave blank line (exit list)
+      const newVal = val.slice(0, lineStart) + val.slice(lineStart + m[0].length);
+      textarea.value = newVal;
+      textarea.setSelectionRange(lineStart, lineStart);
+    } else {
+      // Continue list
+      const insert = '\n' + newPrefix;
+      const newVal = val.slice(0, pos) + insert + val.slice(pos);
+      textarea.value = newVal;
+      textarea.setSelectionRange(pos + insert.length, pos + insert.length);
+    }
+
+    historyPushEdit(note.id, note.content);
+    save();
+  });
+
   undoBtn.addEventListener('click', () => {
     clearTimeout(saveTimer);
     const prev = historyUndo(note.id, note.content);
