@@ -327,10 +327,11 @@
   .sheet.note-editing {
     max-height: 100dvh; height: 100dvh; border-radius: 0; transition: none;
     padding-bottom: env(safe-area-inset-bottom);
+    overflow: hidden; /* clip to bounding box — textarea has its own overflow-y:scroll */
   }
   .sheet.note-editing.keyboard-open { padding-bottom: 0; }
   /* Remove sheet-body padding so editor fills edge-to-edge; toolbar handles its own inset */
-  .sheet.note-editing .sheet-body { padding: 0; }
+  .sheet.note-editing .sheet-body { padding: 0; background: var(--bg-2); }
   /* Toolbar resets margin/padding for edge-to-edge context */
   .sheet.note-editing .note-toolbar { margin: 0; padding: 10px 18px 8px; top: 0; }
   .sheet-grabber {
