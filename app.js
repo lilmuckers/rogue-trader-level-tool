@@ -3147,6 +3147,6 @@ if (window.visualViewport) {
 (() => {
   const el = document.getElementById('app-about');
   if (el && typeof APP_VERSION !== 'undefined') {
-    el.innerHTML = `<span class="app-about-version">v${APP_VERSION}</span><span class="app-about-sep">·</span><a class="app-about-link" href="https://github.com/patrick-mckinley/rogue-trader-characters" target="_blank" rel="noopener">GitHub</a>`;
+    el.innerHTML = `<span class="app-about-version">v${APP_VERSION}</span><span class="app-about-sep">·</span><a class="app-about-link" href="https://github.com/lilmuckers/rogue-trader-level-tool" target="_blank" rel="noopener">GitHub</a>`;
   }
 })();
