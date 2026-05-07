@@ -1,0 +1,14 @@
+{
+  "blockedBy": [
+    "T-010"
+  ],
+  "completedDate": null,
+  "createdDate": "2026-05-07",
+  "description": "List all entries in rt.custom-builds.v1. Show name, type, theme/character. Delete removes from storage and triggers DATA re-merge. If deleted build is currently selected in roster, reset that slot to first available variant.",
+  "id": "T-011",
+  "order": 50,
+  "phase": "future",
+  "status": "open",
+  "title": "Workshop UI: manage imported builds (list + delete)",
+  "type": "task"
+}

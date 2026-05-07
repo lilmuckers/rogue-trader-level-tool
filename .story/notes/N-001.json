@@ -1,0 +1,11 @@
+{
+  "content": "# ADR: Bottom Navigation Structure\n\n## Status\nOPEN — decision needed before Workshop tab can be placed\n\n## Context\nApp has 5 bottom-nav tabs: Builds, Colonies, Traders, Resources, Notes.\nNeed to add a 'Workshop' section (custom build import, management, future build-builder).\n5 tabs already feels cramped on small phones. Adding a 6th is not desirable.\n\n## Options\n\n### A — Replace Resources with Workshop; Resources moves inside Workshop\n- Pro: no extra tab, Workshop has full section\n- Con: Resources loses top-level visibility; user who uses it daily loses one tap\n- Con: Resources and Workshop are thematically unrelated (game reference vs build tooling)\n\n### B — Add 6th Workshop tab, keep all 5\n- Pro: everything visible, nothing displaced\n- Con: 6 tabs on 375px phone = ~62px each, very cramped\n- Con: icons lose labels or become unreadable\n\n### C — 'More' overflow: 4 core tabs + More (lists Resources, Workshop, future)\n- Pro: scales to any number of sections\n- Pro: core nav stays uncluttered\n- Con: Resources and Workshop both hidden behind extra tap\n- Con: less discoverable\n\n### D — Move Resources into Traders (game economy reference)\n- Pro: frees a slot for Workshop at top level\n- Con: Resources covers people/food/materials/etc — not just trader items; weak fit\n\n### E — Workshop as header action (gear icon top-left)\n- Pro: zero nav impact\n- Con: not discoverable, breaks the section model, header already has update badge top-right\n\n### F — Drawer / hamburger replacing one tab\n- Pro: scales well, iOS-familiar pattern\n- Con: adds complexity, inconsistent with current sheet-based interaction model\n\n## Constraints\n- Must work one-handed on iPhone SE (375px wide)\n- Workshop must be reachable in ≤2 taps\n- Resources must not be effectively hidden from regular users\n\n## Decision\nTBD\n\n## Consequences\nBlocks: T-W1 (Workshop tab placement)\nDoes NOT block: T-W3 (storage/merge), T-W6 (custom chars) — those are pure logic",
+  "createdDate": "2026-05-07",
+  "id": "N-001",
+  "status": "active",
+  "tags": [
+    "decisionnavux"
+  ],
+  "title": "ADR: Bottom navigation structure",
+  "updatedDate": "2026-05-07"
+}
