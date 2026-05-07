@@ -2290,6 +2290,12 @@ function noteTitle(content) {
   if (!first) return 'Untitled';
   return first.replace(/^#+\s*/, '').slice(0, 60) || 'Untitled';
 }
+function noteChecklistProgress(content) {
+  const lines = (content || '').split('\n');
+  const total   = lines.filter(l => /^\s*- \[[ xX]\] /.test(l)).length;
+  const checked = lines.filter(l => /^\s*- \[[xX]\] /.test(l)).length;
+  return total > 0 ? { total, checked } : null;
+}
 function noteSnippet(content) {
   const lines = (content || '').split('\n').filter(l => l.trim());
   const body = lines.slice(1, 3).join(' ').replace(/[#*`_]/g, '');
@@ -2495,6 +2501,23 @@ function buildNoteCard(note, isArchived) {
   date.className = 'note-card-date';
   date.textContent = note.updatedAt ? new Date(note.updatedAt).toLocaleDateString() : '';
   card.append(title, snippet, date);
+
+  const progress = noteChecklistProgress(note.content);
+  if (progress) {
+    const pct = progress.total ? Math.round((progress.checked / progress.total) * 100) : 0;
+    const bar = document.createElement('div');
+    bar.className = 'note-progress';
+    bar.innerHTML = `<div class="note-progress-bar" style="width:${pct}%"></div>`;
+    bar.title = `${progress.checked} of ${progress.total} tasks`;
+    const label = document.createElement('span');
+    label.className = 'note-progress-label';
+    label.textContent = `${progress.checked}/${progress.total}`;
+    const wrap = document.createElement('div');
+    wrap.className = 'note-progress-wrap';
+    wrap.append(bar, label);
+    card.appendChild(wrap);
+  }
+
   card.addEventListener('click', () => openNoteEditor(note));
   outer.appendChild(card);
 

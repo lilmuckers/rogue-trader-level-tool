@@ -1062,6 +1062,17 @@
   display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
 }
 .note-card-date { font-size: 11px; color: var(--ink-faint); }
+.note-progress-wrap { display: flex; align-items: center; gap: 8px; margin-top: 7px; }
+.note-progress {
+  flex: 1; height: 4px; background: var(--bg-3);
+  border-radius: 2px; overflow: hidden;
+}
+.note-progress-bar {
+  height: 100%; background: var(--gold-deep);
+  border-radius: 2px; transition: width 0.3s ease;
+}
+.note-progress-bar[style*="width:100%"] { background: var(--gold); }
+.note-progress-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--ink-faint); flex-shrink: 0; }
 /* Editor */
 .note-editor-wrap { display: flex; flex-direction: column; flex: 1; min-height: 0; }
 .note-editor-area { flex: 1; min-height: 0; display: flex; flex-direction: column; position: relative; background: var(--bg-2); }

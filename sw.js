@@ -1,7 +1,7 @@
 /* Rogue Trader Tracker — Service Worker
    Cache-first for app shell; network falls back gracefully when offline. */
 
-const CACHE_VERSION = 'rt-tracker-1.1.2';
+const CACHE_VERSION = 'rt-tracker-1.1.3';
 const APP_SHELL = [
   './',
   './index.html',
