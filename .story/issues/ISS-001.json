@@ -6,9 +6,9 @@
   "location": [],
   "phase": null,
   "relatedTickets": [],
-  "resolution": null,
-  "resolvedDate": null,
+  "resolution": "Added overflow:hidden to .sheet.note-editing in style.css. Previously overflow:visible allowed bg-1 to bleed through unfilled flex space. Textarea keeps own overflow-y:scroll so iOS scrolling unaffected. Also added explicit background:bg-2 to sheet-body in note-editing mode. Ships in v1.1.6.",
+  "resolvedDate": "2026-05-07",
   "severity": "medium",
-  "status": "open",
+  "status": "resolved",
   "title": "Black gap below textarea when keyboard opens on iOS"
 }
