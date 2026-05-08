@@ -40,6 +40,7 @@ function buildDescriptionContent(ctx) {
       return;
     }
     if (isSkillStatPick(rawPick)) {
+      const hit = lookupStatPick(rawPick);
       const block = document.createElement('div');
       block.className = 'desc-block';
       const nm = document.createElement('div');
@@ -47,11 +48,12 @@ function buildDescriptionContent(ctx) {
       nm.textContent = (isExtra ? '+ ' : '') + rawPick;
       const src = document.createElement('div');
       src.className = 'desc-source';
-      src.textContent = 'Skill / Stat allocation';
+      src.textContent = hit ? hit.kind : 'Skill / Stat allocation';
+      block.appendChild(nm); block.appendChild(src);
       const txt = document.createElement('div');
-      txt.className = 'desc-text-missing';
-      txt.textContent = 'A characteristic, skill, or AP allocation. No further description.';
-      block.appendChild(nm); block.appendChild(src); block.appendChild(txt);
+      txt.className = hit ? 'desc-text' : 'desc-text-missing';
+      txt.textContent = hit ? hit.desc : 'A characteristic, skill, or AP allocation.';
+      block.appendChild(txt);
       wrap.appendChild(block);
       return;
     }

@@ -112,7 +112,70 @@ if (window.visualViewport) {
 // ── About ──
 (() => {
   const el = document.getElementById('app-about');
-  if (el && typeof APP_VERSION !== 'undefined') {
-    el.innerHTML = `<span class="app-about-version">v${APP_VERSION}</span><span class="app-about-sep">·</span><a class="app-about-link" href="https://github.com/lilmuckers/rogue-trader-level-tool" target="_blank" rel="noopener">GitHub</a>`;
-  }
+  if (!el || typeof APP_VERSION === 'undefined') return;
+
+  const aboutBtn = document.createElement('button');
+  aboutBtn.className = 'app-about-link';
+  aboutBtn.style.background = 'none';
+  aboutBtn.style.border = 'none';
+  aboutBtn.style.cursor = 'pointer';
+  aboutBtn.style.padding = '0';
+  aboutBtn.textContent = 'About';
+
+  aboutBtn.addEventListener('click', () => {
+    openSheet('About', () => {
+      const wrap = document.createElement('div');
+      wrap.className = 'about-sheet';
+
+      wrap.innerHTML = `
+        <p class="about-blurb">
+          This app was built by <strong>Lilmuckers</strong> as a hobby project to make building
+          a min-maxed character easier when playing Warhammer 40,000: Rogue Trader.
+          True to form, it ended up being a bigger distraction from actually playing the
+          game than the game itself.
+        </p>
+        <p class="about-blurb">
+          If you find it useful, great. If you're also still on your first playthrough two
+          years in because you kept respeccing — you're not alone.
+        </p>
+
+        <div class="about-section-heading">Build Data</div>
+        <p class="about-blurb">
+          Build progression data comes from
+          <a class="about-link" href="https://docs.google.com/spreadsheets/d/1rskX4sYcNm6Wqt4rtm8EQqRR4__yrEuxCEzjwoKlHOY/" target="_blank" rel="noopener">
+            Revan619's community build sheet
+          </a>
+          — an exhaustive community resource covering optimal builds for every character
+          in the game. All credit for the build theory goes there.
+        </p>
+
+        <div class="about-section-heading">Item &amp; Ability Data</div>
+        <p class="about-blurb">
+          Item descriptions, locations, and ability details were sourced from:
+        </p>
+        <ul class="about-sources">
+          <li><a class="about-link" href="https://roguetrader.wh40k.wiki/" target="_blank" rel="noopener">roguetrader.wh40k.wiki</a></li>
+          <li><a class="about-link" href="https://roguetrader.wiki.fextralife.com/" target="_blank" rel="noopener">Fextralife Rogue Trader Wiki</a></li>
+        </ul>
+
+        <div class="about-section-heading">Source Code</div>
+        <p class="about-blurb">
+          <a class="about-link" href="https://github.com/lilmuckers/rogue-trader-level-tool" target="_blank" rel="noopener">
+            github.com/lilmuckers/rogue-trader-level-tool
+          </a>
+        </p>
+
+        <p class="about-disclaimer">
+          Warhammer 40,000: Rogue Trader is developed by Owlcat Games.
+          Warhammer 40,000 is a trademark of Games Workshop Ltd.
+          This app is a fan-made tool with no affiliation to either.
+        </p>
+      `;
+
+      return wrap;
+    });
+  });
+
+  el.innerHTML = `<span class="app-about-version">v${APP_VERSION}</span><span class="app-about-sep">·</span><a class="app-about-link" href="https://github.com/lilmuckers/rogue-trader-level-tool" target="_blank" rel="noopener">GitHub</a><span class="app-about-sep">·</span>`;
+  el.appendChild(aboutBtn);
 })();

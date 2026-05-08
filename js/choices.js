@@ -89,10 +89,17 @@ function renderChoiceSection(rawPick, charName, atLevel, targetEl, isExtra) {
     opt.appendChild(nameEl);
 
     if (isSkillStatPick(part)) {
+      const hit = lookupStatPick(part);
       const src = document.createElement('div');
       src.className = 'desc-source';
-      src.textContent = 'Skill / Stat allocation';
+      src.textContent = hit ? hit.kind : 'Skill / Stat allocation';
       opt.appendChild(src);
+      if (hit) {
+        const txt = document.createElement('div');
+        txt.className = 'desc-text';
+        txt.textContent = hit.desc;
+        opt.appendChild(txt);
+      }
     } else {
       const hits = lookupPick(part);
       if (hits.length > 0) {

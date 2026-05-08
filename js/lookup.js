@@ -1,5 +1,5 @@
 // ============= DEFINITIONS LOOKUP =============
-const DEFS = DATA.definitions; // {talents, abilities, heroic}
+const DEFS = DATA.definitions; // {talents, abilities, heroic, characteristics}
 
 const SKILL_STAT = new Set([
   'agility', 'strength', 'toughness', 'perception', 'fellowship', 'willpower', 'intelligence',
@@ -45,8 +45,43 @@ const _NORM_INDEX = (() => {
     const n = normalize(name);
     if (!idx[n]) idx[n] = { kind: 'Talent', name, desc };
   }
+  for (const [name, desc] of Object.entries(DEFS.characteristics || {})) {
+    const n = normalize(name);
+    if (!idx[n]) idx[n] = { kind: 'Characteristic', name, desc };
+  }
   return idx;
 })();
+
+// Look up a characteristic/skill description for stat allocation picks.
+// Handles "Characteristic Training: X", "Base Skill: X", "Lore X", "AP +N" patterns.
+function lookupStatPick(rawPick) {
+  if (!rawPick) return null;
+  const p = rawPick.trim();
+
+  // AP +N → look up exact or strip to "AP +1" generic
+  if (/^ap\s*\+?\d+$/i.test(p)) {
+    const exact = _NORM_INDEX[normalize(p)];
+    if (exact) return exact;
+    return _NORM_INDEX['ap +1'] || null; // fallback to generic AP entry
+  }
+
+  // Characteristic Training: X → look up X
+  const ctMatch = p.match(/^characteristic\s+training\s*:?\s*(.+)$/i);
+  if (ctMatch) {
+    const stat = ctMatch[1].trim();
+    return _NORM_INDEX[normalize(stat)] || null;
+  }
+
+  // Base Skill: X → look up X
+  const bsMatch = p.match(/^base\s+skill\s*:?\s*(.+)$/i);
+  if (bsMatch) {
+    const skill = bsMatch[1].trim();
+    return _NORM_INDEX[normalize(skill)] || null;
+  }
+
+  // Direct lookup
+  return _NORM_INDEX[normalize(p)] || null;
+}
 
 function isSkillStatPick(pick) {
   if (!pick) return false;

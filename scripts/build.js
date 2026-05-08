@@ -31,9 +31,10 @@ const PORTRAITS = readYaml(path.join(dataDir, 'portraits.yml'));
 // ─── definitions ─────────────────────────────────────────────────────────────
 
 const definitions = {
-  talents:   readYaml(path.join(dataDir, 'definitions', 'talents.yml'))   || {},
-  abilities: readYaml(path.join(dataDir, 'definitions', 'abilities.yml')) || {},
-  heroic:    readYaml(path.join(dataDir, 'definitions', 'heroic.yml'))    || {},
+  talents:         readYaml(path.join(dataDir, 'definitions', 'talents.yml'))         || {},
+  abilities:       readYaml(path.join(dataDir, 'definitions', 'abilities.yml'))       || {},
+  heroic:          readYaml(path.join(dataDir, 'definitions', 'heroic.yml'))          || {},
+  characteristics: readYaml(path.join(dataDir, 'definitions', 'characteristics.yml')) || {},
 };
 
 // ─── gear_db ─────────────────────────────────────────────────────────────────

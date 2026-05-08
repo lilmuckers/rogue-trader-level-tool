@@ -246,6 +246,16 @@
   .app-about-link { font-family: 'Cinzel', serif; font-size: 9px; color: var(--ink-faint); text-decoration: none; letter-spacing: 0.1em; text-transform: uppercase; }
   .app-about-link:hover { color: var(--gold); }
 
+  /* About sheet */
+  .about-sheet { padding: 4px 0; }
+  .about-blurb { font-family: 'EB Garamond', serif; font-size: 16px; line-height: 1.6; color: var(--ink); margin-bottom: 14px; }
+  .about-blurb strong { color: var(--gold-bright); }
+  .about-section-heading { font-family: 'Cinzel', serif; font-size: 11px; color: var(--gold); letter-spacing: 0.15em; text-transform: uppercase; margin: 20px 0 8px; border-bottom: 1px solid var(--rule); padding-bottom: 6px; }
+  .about-sources { font-family: 'EB Garamond', serif; font-size: 16px; line-height: 1.8; color: var(--ink); padding-left: 18px; margin-bottom: 14px; }
+  .about-link { color: var(--gold); text-decoration: none; }
+  .about-link:hover { color: var(--gold-bright); text-decoration: underline; }
+  .about-disclaimer { font-family: 'EB Garamond', serif; font-size: 12px; color: var(--ink-faint); line-height: 1.5; margin-top: 24px; font-style: italic; }
+
   /* SW update badge + toast */
   .update-badge {
     position: fixed;
