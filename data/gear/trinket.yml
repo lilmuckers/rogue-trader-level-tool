@@ -461,11 +461,11 @@
   location: Tervantias, post arena 2nd victory and having to escape
   act: 3
   description: If wearer has 8AP start of turn, gain +30% dmg start of combat
-- name: Haemonculus'prism
+- name: "Haemonculus's Prism"
   slot: trinket
-  location: Tervantias
+  location: Anatomical Opera — found in container on platform
   act: 3
-  description: null
+  description: "Xeno-artefact of cold black metal with no visible seams. When activated, unfurls into petal-like segments and projects holographic coordinates for an ice planet in Langrenn's Belt. Quest item: initiates the Loathsome Discovery rumour."
 - name: Iron Cape
   slot: trinket
   location: Tervantias
