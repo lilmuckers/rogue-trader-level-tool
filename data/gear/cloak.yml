@@ -396,3 +396,18 @@
   location: null
   act: null
   description: Wearer takes −5 less damage from critical hits. +10 Coercion.
+- name: Von Valancius Cloak
+  slot: cloak
+  location: Loot on Voidship Bridge
+  act: 1
+  description: While the wearer is at full wounds, they gain +5 to all characteristics.
+- name: Swashbuckler Coat
+  slot: cloak
+  location: Ryzza vendor
+  act: 2
+  description: Whenever the wearer has two melee weapons equipped, they gain +10 Weapon Skill and +15% critical damage.
+- name: Swashbuckler Cloak
+  slot: cloak
+  location: Ryzza vendor
+  act: 2
+  description: Whenever the wearer has two melee weapons equipped, they gain +10 Weapon Skill and +15% critical damage.

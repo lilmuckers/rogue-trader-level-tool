@@ -189,8 +189,15 @@ function _normalizeGearName(s) {
   if (!s) return '';
   let n = s.toLowerCase()
     .replace(/\s*\[.*?\]\s*/g, ' ')      // strip [Origin] tags
-    .replace(/[^a-z0-9 ]/g, '')           // strip punctuation
+    .replace(/'s\b/g, '')                 // strip possessives before punctuation removal
+    .replace(/-/g, ' ')                   // hyphens → spaces (preserve word boundaries)
+    .replace(/[^a-z0-9 ]/g, '')           // strip remaining punctuation
     .replace(/\s+/g, ' ').trim();
+  // Common spelling variants
+  n = n.replace(/\bbarreled\b/g, 'barrel')
+       .replace(/\bhelmet\b/g, 'helm')
+       .replace(/\bvengeance\b/g, 'vengance')
+       .replace(/\bvengence\b/g, 'vengance');
   return n;
 }
 

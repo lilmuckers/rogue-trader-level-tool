@@ -713,15 +713,13 @@
   description: >-
     If a character is an Overseer, they can use Recharge (ultimate ability) multiple times per battle, but no more than
     once per round. The bonuses from this ability do not stack.
-- name: Durable shield straps
+- name: Sturdy Shield Straps
   slot: trinket
-  location: (Lex Imperialis DLC) Fellowship of the void
+  location: (Lex Imperialis DLC) Fellowship of the Void vendor (Rep 32, PF 113)
   act: 4
   description: >-
-    When using Stalwart Defense, the character gains 3 levels of this ability's effect. Blocking an attack from a marked
-    enemy consumes one level. The block bonus remains the same as the regular version of the ability and lasts as long
-    as the character has at least one level of Stalwart Defense. The character's counterattacks with this ability
-    receive a +25% critical hit chance.
+    Successful counterattacks triggered by Stalwart Defence always score a critical hit and deal +25% more critical
+    damage.
 - name: Excerpt from Tactica Imperialis
   slot: trinket
   location: (Lex Imperialis DLC) Only available if you did not bring solomorne to act 3

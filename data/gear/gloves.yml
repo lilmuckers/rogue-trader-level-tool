@@ -434,3 +434,22 @@
   location: null
   act: null
   description: This sturdy hand protection. Increases Parry by 10.
+- name: Warp Conductor Gloves
+  slot: gloves
+  location: Chest next to Idira after her possession event (Echo of the Past quest) - investigate Theodora sighting yourself
+  act: 1
+  description: >-
+    For unsanctioned psykers only. When the wearer triggers a psychic phenomenon or perils of the warp, gains +1 psy
+    rating until end of combat and gains momentum and temporary wounds equal to their resolve stat.
+- name: Warp Conductors Gloves
+  slot: gloves
+  location: Chest next to Idira after her possession event (Echo of the Past quest) - investigate Theodora sighting yourself
+  act: 1
+  description: >-
+    For unsanctioned psykers only. When the wearer triggers a psychic phenomenon or perils of the warp, gains +1 psy
+    rating until end of combat and gains momentum and temporary wounds equal to their resolve stat.
+- name: Thrice-Pioneer's Bracers
+  slot: gloves
+  location: Dropped by Cassia's bodyguard on Eurac V (missable) / dropped by Theobald Orsellio
+  act: 1
+  description: Every time the wearer deals damage, the target's WS and BS are reduced by -5 for 2 rounds. Stacks up to 3 times.

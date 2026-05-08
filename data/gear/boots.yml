@@ -388,3 +388,10 @@
   location: null
   act: null
   description: The wearer of these boots receives double their STR Bonus to Parry while wearing a light armour.
+- name: Commissar Boots
+  slot: boots
+  location: Kasballica Mission vendor (PF 50)
+  act: 2
+  description: >-
+    Whenever the wearer chooses an ally as the target of their ability, the wearer immediately gains +(FEL bonus / 2)
+    MP. The targeted ally gains +(FEL bonus / 2) MP at the start of their next turn.

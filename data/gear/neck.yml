@@ -202,14 +202,11 @@
   location: (Lex Imperialis DLC) Explorators
   act: 2
   description: If a character is an Overseer, using the archetype's first ability in a round does not cost any AP.
-- name: A good quality shield mount
+- name: Solid Shield Enarmes
   slot: neck
-  location: Drusians - Level 9
+  location: Drusians vendor (Rep 9, PF 40)
   act: 2
-  description: >-
-    One of the metal skulls bears the creator's signature, and his vanity is understandable: this belt is the pinnacle
-    of leatherworking. If the character is holding a shield, they can use Shield Slam against multiple enemies in an
-    area of ​​effect. Their shield attacks deal +(CON bonus) additional damage.
+  description: The wearer can use Shield Swing with their shield against multiple enemies in an area. Shield attacks deal an additional +(TGH bonus) damage.
 - name: An ironclad argument
   slot: neck
   location: (Lex Imperialis DLC) Kasballica Mission
@@ -397,3 +394,10 @@
   description: >-
     When wearer is under the effect of Reckless Rush: all attacks gain +50%crit chance, wearer gains +50% critical
     damage, all attacks against the wearer gain +50% crit chance and 50% crit dmg
+- name: Precinct Vox-Relay
+  slot: neck
+  location: Fellowship of the Void vendor (Rep 20, PF 55)
+  act: 3
+  description: >-
+    When an ally affected by the wearer's Bring It Down! ability successfully hits or targets an enemy, the wearer
+    gains +1 Fellowship and Willpower until the end of combat for each different enemy hit or targeted.

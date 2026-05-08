@@ -2553,3 +2553,48 @@
     Each attack with this chainsaw involves multiple hits. If the first hit connects, so do the subsequent hits. If the
     target dodges or parries the first hit, the same happens with subsequent hits.
   category: Melee 2H
+- name: Coffinmaker's Sledge
+  slot: weapon
+  location: Loot in Leethus
+  act: 4
+  description: >-
+    Single-target attacks deal additional direct damage equal to 5% of target's maximum wounds (up to 300).
+    25-40 power damage, 40% armour penetration.
+  category: Melee 2H
+- name: Heavy Maul
+  slot: weapon
+  location: Carried by Commander Lucra
+  act: 2
+  description: >-
+    If the wielder has a shield equipped, whenever they hit the target with this maul, they immediately make a Shield
+    Bash against that target. On hit, target must pass Toughness resistance test (+20) or become stunned for 1 round.
+    14-18 power damage, 30% armour penetration.
+  category: Melee 2H
+- name: Double-Barreled Shotgun
+  slot: weapon
+  location: Fellowship of the Void vendor (Rep 28, PF 99)
+  act: 4
+  description: This shotgun never misses. 70-100 Rending damage. Rate of fire 2, max ammo 2. High dodge penalty.
+  category: Shotgun (AoE Guns + Push / Knockdown targets in effective range)
+- name: Watcher from Above
+  slot: weapon
+  location: Janus - Pleasure World Colony project (Tier 5)
+  act: 3
+  description: >-
+    +25% bonus to dodge and +25% bonus to parry. Enemies hit suffer -25 WS penalty until the wielder's next turn.
+    20-30 Rending damage, 30% armour penetration.
+  category: Melee 1H
+- name: Interrogator's Dagger
+  slot: weapon
+  location: Quest "The Emperor and My Right" - choose to kneel and swear oath to the Inquisition
+  act: 2
+  description: >-
+    On a successful hit, target must pass Willpower resistance test with -(Coercion / 3) penalty or be moved 4 cells
+    away, provoking attacks of opportunity. 16-20 Rending damage, 10% armour penetration.
+- name: Interrogator Knife
+  slot: weapon
+  location: Quest "The Emperor and My Right" - choose to kneel and swear oath to the Inquisition
+  act: 2
+  description: >-
+    On a successful hit, target must pass Willpower resistance test with -(Coercion / 3) penalty or be moved 4 cells
+    away, provoking attacks of opportunity. 16-20 Rending damage, 10% armour penetration.
