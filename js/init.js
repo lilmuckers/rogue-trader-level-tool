@@ -172,6 +172,61 @@ if (window.visualViewport) {
         </p>
       `;
 
+      // Check for updates button (only when SW supported)
+      if ('serviceWorker' in navigator) {
+        const updateSection = document.createElement('div');
+        updateSection.className = 'about-section-heading';
+        updateSection.textContent = 'App Version';
+        wrap.appendChild(updateSection);
+
+        const updateRow = document.createElement('div');
+        updateRow.className = 'about-update-row';
+
+        const versionLabel = document.createElement('span');
+        versionLabel.className = 'about-update-version';
+        versionLabel.textContent = `v${APP_VERSION}`;
+
+        const checkBtn = document.createElement('button');
+        checkBtn.className = 'about-update-btn';
+        checkBtn.textContent = 'Check for updates';
+
+        const statusEl = document.createElement('span');
+        statusEl.className = 'about-update-status';
+
+        checkBtn.addEventListener('click', async () => {
+          checkBtn.disabled = true;
+          statusEl.textContent = 'Checking…';
+          statusEl.className = 'about-update-status checking';
+          try {
+            const reg = await navigator.serviceWorker.getRegistration();
+            if (!reg) {
+              statusEl.textContent = 'No service worker registered.';
+              statusEl.className = 'about-update-status error';
+              checkBtn.disabled = false;
+              return;
+            }
+            await reg.update();
+            if (reg.waiting && navigator.serviceWorker.controller) {
+              statusEl.textContent = 'Update ready — reload to apply.';
+              statusEl.className = 'about-update-status ready';
+              document.getElementById('update-badge')?.classList.remove('hidden');
+            } else {
+              statusEl.textContent = 'Already up to date.';
+              statusEl.className = 'about-update-status ok';
+            }
+          } catch (e) {
+            statusEl.textContent = 'Check failed.';
+            statusEl.className = 'about-update-status error';
+          }
+          checkBtn.disabled = false;
+        });
+
+        updateRow.appendChild(versionLabel);
+        updateRow.appendChild(checkBtn);
+        updateRow.appendChild(statusEl);
+        wrap.appendChild(updateRow);
+      }
+
       return wrap;
     });
   });
