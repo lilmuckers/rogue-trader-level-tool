@@ -1,6 +1,8 @@
 - name: Grace of the Oblivious
   slot: neck
-  location: null
+  location: >-
+    Von Valancius Flagship — looted from heretics who ambush as you exit toward voidship bridge, during By the Right of
+    Blood
   act: 0
   description: Grants +5 Toughness if the wearer has less than 35 Intelligence
 - name: Daemon Tool
@@ -51,7 +53,7 @@
   description: Once per battle, when a character's health drops to 0, they recover 20% of their maximum health.
 - name: Denial of nightmares
   slot: neck
-  location: '(Void Shadows DLC) Astropathic Station in the Rykad System Knowledge: Warp check required'
+  location: "(Void Shadows DLC) Astropathic Station in the Rykad System Knowledge: Warp check required"
   act: 1
   description: >-
     An amulet that belonged to an astropath who steadfastly resisted the horrors of the warp. The previous owner met a
@@ -96,7 +98,7 @@
   description: TGH increase by Medicae/10
 - name: Focus Incense
   slot: neck
-  location: 'Footfall: Dreams and Stories Puzzle'
+  location: "Footfall: Dreams and Stories Puzzle"
   act: 2
   description: Each use of Revel in Slaughter increase PER +10 until the end of combat. Stacks
 - name: Heart of the Nameless
@@ -150,7 +152,7 @@
   description: PER & AGI + 10
 - name: Lady theodora's Immaculacy
   slot: neck
-  location: 'Ship Crypt: Abulation in Blood'
+  location: "Ship Crypt: Abulation in Blood"
   act: 2
   description: Commers/5 + Persuasion
 - name: Blessed Bolter Casing
@@ -227,7 +229,7 @@
   description: When wearer gains stack of versatility, they gain 3 momentum
 - name: The Last Flash
   slot: neck
-  location: null
+  location: Commorragh, Outer Spire Halls — chest by entrance to area after 3rd arena fight
   act: 3
   description: When wearer is a target of AoO, the attacker becomes blinded for 1 turn
 - name: Honour Insignia

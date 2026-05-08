@@ -1,11 +1,11 @@
 - name: Operator's gloves
   slot: gloves
-  location: null
+  location: Von Valancius Flagship — storeroom accessed via locked door left of mess hall, during By the Right of Blood
   act: 0
   description: Grants +3 Tech-Use
 - name: Gloves of Endurance
   slot: gloves
-  location: null
+  location: Found during prologue
   act: 0
   description: >-
     Whenever the wearer of these gloves gets an injury or falls unconcious in combat, their allies gain a +1 bonus to
@@ -123,7 +123,7 @@
   description: Tech Use +10. Plasma weapon do base dmg +3
 - name: Master Duellist's gloves
   slot: gloves
-  location: 'Ship Crypt: Abulation in Blood'
+  location: "Ship Crypt: Abulation in Blood"
   act: 2
   description: When wearer scores a crit with ranged, their next attack against any target auto hits and cannot be parried/dodged
 - name: Karskin's Gauntlets
@@ -133,7 +133,7 @@
   description: Gauntlet grant wearer +10% crit chance. Doubles if wearer hasn't move
 - name: Hand of Avolious
   slot: gloves
-  location: 'Foulstone: Support Argenta advice, make Lugnalia prelate. Then contract -5 Pop resource'
+  location: "Foulstone: Support Argenta advice, make Lugnalia prelate. Then contract -5 Pop resource"
   act: 2
   description: >-
     Successful attack grants wearer 50% chance to inflict Bleed on target that fail TGH test. If Dogmatic 45, test is
@@ -165,7 +165,7 @@
   description: Grants +10 WS and +5 STR
 - name: Arsonist's Bracers
   slot: gloves
-  location: 'Dargonus: Return to Dargonus for Drukhari'
+  location: "Dargonus: Return to Dargonus for Drukhari"
   act: 2
   description: These bracers grant the wearer a +5 bonus to Tech-Use Tests. They also increase Damage from Flame Weapon by +3.
 - name: Apex Predator Glove
@@ -211,7 +211,9 @@
   description: Drukhari Equipment. Grants wearer +10% parry and +10% area attack damage
 - name: Undying Rage
   slot: gloves
-  location: null
+  location: >-
+    Smuggler Hideout, Rocky World, Cradle of Khepri system. Also reward from Falco if Jae is handed over in Rat Hunting
+    quest
   act: 3
   description: Each melee attack performed by the wearer increases their armour by +AGI bonus% until the start of their next turn
 - name: Stabilising Gauntlets
@@ -249,14 +251,14 @@
   description: First crit in combat +50% crit dmg. This effect resets after they or ally perform heroic/desperate action
 - name: Avenger Tactical Gloves
   slot: gloves
-  location: null
+  location: Commorragh, Outer Spire Halls — same hidden container as Armour of Despair and Peripheral Control Monocle
   act: 3
   description: >-
     When wearer is able to perfrom AoO, they gain 1 stack of vengance. Wearer's AoO deal additional AGI bonus * vengance
     stacks dmg
 - name: Exoskeleton gloves
   slot: gloves
-  location: 'Comorragh: Trade with Tervantias'
+  location: "Comorragh: Trade with Tervantias"
   act: 3
   description: Gain +10 STR and +5 TGH
 - name: Pain Grip
@@ -412,7 +414,7 @@
     critical damage to all attacks against that creature
 - name: The Hand of Avolius
   slot: gloves
-  location: null
+  location: "Contract: Lugnalia's Crusade"
   act: null
   description: >-
     After a successful melee attack this gauntlets grant wearer's WS chance to apply Bleeding effect on enemies that
