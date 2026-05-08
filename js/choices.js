@@ -118,7 +118,7 @@ function renderChoiceSection(rawPick, charName, atLevel, targetEl, isExtra) {
     const btn = document.createElement('button');
     if (isTaken) {
       btn.className = 'choice-btn choice-btn-untake';
-      btn.textContent = '✓ Taken — unmark';
+      btn.textContent = '✓ Taken - unmark';
       btn.addEventListener('click', () => { unmarkChoice(charName, part); renderTracker(); _renderTopOfStack(true); });
     } else {
       btn.className = 'choice-btn choice-btn-take';

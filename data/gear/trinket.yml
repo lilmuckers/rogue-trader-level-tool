@@ -1,6 +1,6 @@
 - name: Theodora's Rosary
   slot: trinket
-  location: Prologue — chest to the right of the desk in Theodora's quarters (By the Right of Blood)
+  location: Prologue - chest to the right of the desk in Theodora's quarters (By the Right of Blood)
   act: 0
   description: Grants +10 to Commerce and Lore (Imperium)
 - name: Blood Drinker
@@ -326,7 +326,7 @@
   act: 2
   description: >-
     The Imperium's symbol gleams proudly beneath a crust of purple psychic ice. Fingerprints are barely visible on the
-    frosty carapace—marks left by Choirmaster Weiss during his desperate struggle with the warp. When a character
+    frosty carapace-marks left by Choirmaster Weiss during his desperate struggle with the warp. When a character
     suffers a critical hit, the attacker immediately suffers (WP bonus) warp damage.
 - name: Secrets of the Forerunner
   slot: trinket
@@ -463,7 +463,7 @@
   description: If wearer has 8AP start of turn, gain +30% dmg start of combat
 - name: "Haemonculus's Prism"
   slot: trinket
-  location: Anatomical Opera — found in container on platform
+  location: Anatomical Opera - found in container on platform
   act: 3
   description: "Xeno-artefact of cold black metal with no visible seams. When activated, unfurls into petal-like segments and projects holographic coordinates for an ice planet in Langrenn's Belt. Quest item: initiates the Loathsome Discovery rumour."
 - name: Iron Cape
@@ -769,7 +769,7 @@
     mechanical devices. Grants +5 to Tech-Use Tests.
 - name: Flamer Digi-Weapon
   slot: trinket
-  location: Kiava Gamma — right wing of building (two chests), also room behind cogitator bridge (Cache on Kiava Gamma rumour)
+  location: Kiava Gamma - right wing of building (two chests), also room behind cogitator bridge (Cache on Kiava Gamma rumour)
   act: null
   description: >-
     A marvellous compact weapon in a form of a ring allows to fire a stream of flame in a short range. Reloading of
@@ -783,7 +783,7 @@
     Tests.
 - name: Heart of the Nameless
   slot: trinket
-  location: Janus — possible reward for Chronicle of the Protectorated Decision quest
+  location: Janus - possible reward for Chronicle of the Protectorated Decision quest
   act: null
   description: This item increases Absorption against xeno-enemies by 10%.
 - name: Imperial Scroll
@@ -793,7 +793,7 @@
   description: This scroll contains imperial orders from the old days and grants the owner a +5 bonus to Lore (Imperium) Tests.
 - name: Instability Detonator
   slot: trinket
-  location: Kiava Gamma — after completing The Motive Force Is Life colony project
+  location: Kiava Gamma - after completing The Motive Force Is Life colony project
   act: null
   description: >-
     This item grants its wearer a +5 bonus to Tech-use tests. Once per battle: can be used to immediatly remove all
@@ -801,14 +801,14 @@
     Explosive Damage (with a Penetration of 4).
 - name: Shifting Combi-Tool
   slot: trinket
-  location: Quest reward — given by Fabricator-Censor Cubis Delphim, Flame in the Dark
+  location: Quest reward - given by Fabricator-Censor Cubis Delphim, Flame in the Dark
   act: null
   description: >-
     Commonly found in the hands of the Adeptus Mechanicus cult members, combi-tools are versatile, if somewhat bizarre,
     mechanical devices. Grants +10 to Tech-Use Tests
 - name: Stimulant Injector
   slot: trinket
-  location: Footfall Atrium — Underworld Quest reward
+  location: Footfall Atrium - Underworld Quest reward
   act: null
   description: This item reduces Wounds by 6, yet increases Righteous Fury chance by 10%.
 - name: Target Designator

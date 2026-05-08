@@ -12,7 +12,7 @@ function renderTracker() {
   if (mc) {
     rosterEl.appendChild(charCard({
       mc: true, key: 'Rogue Trader', displayName: getMCDisplayName(),
-      buildName: mc.name, arch: detectArchetype(mc.origin) || '—',
+      buildName: mc.name, arch: detectArchetype(mc.origin) || '--',
       pick: pickAt(mc, level), available: true, build: mc,
     }));
   }
@@ -455,7 +455,7 @@ function charCard({mc, key, displayName, buildName, arch, pick, available, joinL
   } else {
     const empty = document.createElement('div');
     empty.className = 'char-empty';
-    empty.textContent = '— no pick at this level —';
+    empty.textContent = '- no pick at this level -';
     body.appendChild(empty);
   }
 

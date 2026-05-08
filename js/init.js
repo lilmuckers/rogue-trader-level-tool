@@ -80,7 +80,7 @@ if (window.visualViewport) {
   toast.id = 'update-toast';
   toast.className = 'update-toast hidden';
   toast.innerHTML = `
-    <div class="update-toast-text">Update ready — close and reload to apply changes.</div>
+    <div class="update-toast-text">Update ready - close and reload to apply changes.</div>
     <button class="update-toast-reload" id="update-reload-btn">Reload Now</button>`;
 
   document.body.append(badge, toast);
@@ -136,7 +136,7 @@ if (window.visualViewport) {
         </p>
         <p class="about-blurb">
           If you find it useful, great. If you're also still on your first playthrough two
-          years in because you kept respeccing — you're not alone.
+          years in because you kept respeccing - you're not alone.
         </p>
 
         <div class="about-section-heading">Build Data</div>
@@ -145,7 +145,7 @@ if (window.visualViewport) {
           <a class="about-link" href="https://docs.google.com/spreadsheets/d/1rskX4sYcNm6Wqt4rtm8EQqRR4__yrEuxCEzjwoKlHOY/" target="_blank" rel="noopener">
             Revan619's community build sheet
           </a>
-          — an exhaustive community resource covering optimal builds for every character
+          - an exhaustive community resource covering optimal builds for every character
           in the game. All credit for the build theory goes there.
         </p>
 

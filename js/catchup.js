@@ -41,7 +41,7 @@ function buildCatchupContent(ctx) {
     const updatePartyBtn = () => {
       const inP = inParty(displayName);
       partyBtn.className = 'party-toggle-btn' + (inP ? ' in-party' : '');
-      partyBtn.textContent = inP ? '★ In Party — Remove' : `☆ Add to Party${getParty().length >= MAX_PARTY ? ' (party full)' : ''}`;
+      partyBtn.textContent = inP ? '★ In Party - Remove' : `☆ Add to Party${getParty().length >= MAX_PARTY ? ' (party full)' : ''}`;
       partyBtn.disabled = !inP && getParty().length >= MAX_PARTY;
     };
     updatePartyBtn();
@@ -345,7 +345,7 @@ function buildSinglePickContent(rawPick, displayName, atLevel) {
         block.className = 'desc-block';
         const nm = document.createElement('div');
         nm.className = 'desc-name';
-        nm.textContent = hit.name + (hit.tierStripped ? ` — ${rawPick}` : '');
+        nm.textContent = hit.name + (hit.tierStripped ? ` - ${rawPick}` : '');
         const src = document.createElement('div');
         src.className = 'desc-source';
         src.textContent = hit.kind;

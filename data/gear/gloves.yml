@@ -1,6 +1,6 @@
 - name: Operator's gloves
   slot: gloves
-  location: Von Valancius Flagship — storeroom accessed via locked door left of mess hall, during By the Right of Blood
+  location: Von Valancius Flagship - storeroom accessed via locked door left of mess hall, during By the Right of Blood
   act: 0
   description: Grants +3 Tech-Use
 - name: Gloves of Endurance
@@ -251,7 +251,7 @@
   description: First crit in combat +50% crit dmg. This effect resets after they or ally perform heroic/desperate action
 - name: Avenger Tactical Gloves
   slot: gloves
-  location: Commorragh, Outer Spire Halls — same hidden container as Armour of Despair and Peripheral Control Monocle
+  location: Commorragh, Outer Spire Halls - same hidden container as Armour of Despair and Peripheral Control Monocle
   act: 3
   description: >-
     When wearer is able to perfrom AoO, they gain 1 stack of vengance. Wearer's AoO deal additional AGI bonus * vengance

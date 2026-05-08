@@ -48,7 +48,7 @@
   location: Kibellah starting gear
   act: 1
   description: >-
-    The wearer of this armor is completely devoted to the Undying One—as evidenced by the dark oaths on the seals of
+    The wearer of this armor is completely devoted to the Undying One-as evidenced by the dark oaths on the seals of
     purity and the dried bloodstains of countless enemies. world property: +(AGI bonus)% to dodge and parry in melee
     combat Additional property: +5 to Agility
 - name: Spinner's Ritual Vestments
@@ -290,7 +290,7 @@
 - name: Armour of Despair
   slot: armour
   location: >-
-    Commorragh, Outer Spire Halls — after 3rd arena fight, pass Athletics/Demolition/Awareness checks to reach hidden
+    Commorragh, Outer Spire Halls - after 3rd arena fight, pass Athletics/Demolition/Awareness checks to reach hidden
     container
   act: 3
   description: All enemies in combat suffer -10 WS and BS, +15 armour against human enemies

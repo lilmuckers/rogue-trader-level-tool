@@ -492,104 +492,104 @@ Psyker Origin: >-
   Various origin abilities depending on your psyker school. Taking new schools opens new abilities to take from that
   school
 Iron Arm: >-
-  Iron Arm is a Sanctioned Psyker — Biomancer Ability, The target gains +(10 + 4 × psyker's psy rating) Strength and
+  Iron Arm is a Sanctioned Psyker - Biomancer Ability, The target gains +(10 + 4 × psyker's psy rating) Strength and
   Toughness until the end of combat.
 Enfeeble: >-
-  Enfeeble is a Sanctioned Psyker — Biomancer Ability, Until the end of combat, all targets within the area suffer a −(5
+  Enfeeble is a Sanctioned Psyker - Biomancer Ability, Until the end of combat, all targets within the area suffer a −(5
   + 3 × psy rating) penalty to Strength and Agility and +(3 + 2 × psy rating)% increase to all incoming damage.
 Invigorate: >-
-  Invigorate is a Sanctioned Psyker — Biomancer Ability, Restores (2 × psyker's psy rating + WP bonus) wounds to the
+  Invigorate is a Sanctioned Psyker - Biomancer Ability, Restores (2 × psyker's psy rating + WP bonus) wounds to the
   target. If this ability brings the target to full wounds, this power also removes all stunned, bleeding, fatigued,
   blinded, immobilised, staggered, and fresh injury effects from the target
 Warp Speed: >-
-  Warp Speed is a Sanctioned Psyker — Biomancer Ability, Until the end of combat, the target ally increases their MP by
+  Warp Speed is a Sanctioned Psyker - Biomancer Ability, Until the end of combat, the target ally increases their MP by
   +(3 + psyker's psy rating), their Agility by +(5 + 2 × psyker's psy rating), and their AP by +1.
 Regeneration: >-
-  Regeneration is a Sanctioned Psyker — Biomancer Ability, Until the end of combat, the target recovers +(psyker's psy
+  Regeneration is a Sanctioned Psyker - Biomancer Ability, Until the end of combat, the target recovers +(psyker's psy
   rating + WP bonus / 2) wounds at the beginning of each of their turns and removes one toxin, stunned, immobilised,
   bleeding, blinded, staggered, or fatigued effect. If the target has several effects, the removed effect is selected
   randomly.
 Metabolic Overcharge: >-
-  Metabolic Overcharge is a Sanctioned Psyker — Biomancer Ability, The target ally immediately gains an extra turn with
+  Metabolic Overcharge is a Sanctioned Psyker - Biomancer Ability, The target ally immediately gains an extra turn with
   twice the number of their normal MP and Psyker's psy rating AP, but their body is subjected to severe stress, making
   them suffer 5% of their maximum wounds damage at the end of each turn until the end of combat. Every action the target
   makes during this extra turn will also trigger this damage.
 Forewarning (Ability): >-
-  Forewarning is a Sanctioned Psyker — Diviner Ability, The psyker increases the target's dodge and parry by +(3 +
+  Forewarning is a Sanctioned Psyker - Diviner Ability, The psyker increases the target's dodge and parry by +(3 +
   psyker's PER bonus + 3 × psy rating)% until the end of combat
 Foreboding: >-
-  Foreboding is a Sanctioned Psyker — Diviner Ability, Creates an area that lasts until the start of the psyker's next
+  Foreboding is a Sanctioned Psyker - Diviner Ability, Creates an area that lasts until the start of the psyker's next
   turn. All allies within that area gain +(4 + 2 × psyker's psy rating)% dodge. Their dodge chance cannot be less than
   (psyker's PER bonus + WP bonus)%.
 Prescience: >-
-  Prescience is a Sanctioned Psyker — Diviner Ability, The target gains +(4 + 2 × psy rating) Intelligence, Perception,
+  Prescience is a Sanctioned Psyker - Diviner Ability, The target gains +(4 + 2 × psy rating) Intelligence, Perception,
   Fellowship, and Willpower until the end of combat.
 Perfect Timing: >-
-  Perfect Timing is a Sanctioned Psyker — Diviner Ability, All allies that are currently affected by any of the psyker's
+  Perfect Timing is a Sanctioned Psyker - Diviner Ability, All allies that are currently affected by any of the psyker's
   powers gain the perfect timing effect. Perfect Timing: when an ally under this effect dodges or parries an attack, if
   this ally has a weapon capable of reaching the attacker and has an attack that costs 1 or less AP, that ally
   immediately counter-attacks with this weapon, and the perfect timing effect fades.
 Precognition: >-
-  Precognition Intervention is a Sanctioned Psyker — Diviner Ability, Once per round, the psyker's next turn is moved up
+  Precognition Intervention is a Sanctioned Psyker - Diviner Ability, Once per round, the psyker's next turn is moved up
   by 2 turns in the round initiative sequence. This ability may allow the psyker to have 2 turns during one round.
 Prophetic Intervention: >-
-  Prophetic Intervention is a Sanctioned Psyker — Diviner Ability, Whenever an ally suffers damage that would make them
+  Prophetic Intervention is a Sanctioned Psyker - Diviner Ability, Whenever an ally suffers damage that would make them
   fall unconscious, the psyker immediately gains an extra turn. During that turn, the psyker can only use Prophetic
   Intervention. This power can only be used under these conditions. Prophetic Intervention restores the ally's wounds to
   the amount they had before the attack that triggered the intervention. However, the psyker's psy rating is reduced by
   −1 until the end of combat. ! This power can only be used by psykers with a psy rating of 3 or higher.
 Ignite: >-
-  Ignite is a Sanctioned Psyker — Pyromancer Ability, The target suffers (from (1 + psyker's WP bonus + 6 × psy rating)
+  Ignite is a Sanctioned Psyker - Pyromancer Ability, The target suffers (from (1 + psyker's WP bonus + 6 × psy rating)
   to (2 × psyker's WP bonus + 10 × psy rating)) damage and suffers the warp burn effect. This attack has (5 × psy
   rating)% armour penetration. The psyker can move after using Ignite. Warp Burn: deals (3 + psyker's WP bonus + 3 × psy
   rating) damage to the target at the end of their turn with (5 × psy rating)% armour penetration. The target creature
   must pass an Agility resistance test with a −(5 × psyker's psy rating) penalty to stop burning.
 Orchestrate Flames: >-
-  Orchestrate Flames is a Sanctioned Psyker — Pyromancer Ability, The target does not stop burning and no longer makes
+  Orchestrate Flames is a Sanctioned Psyker - Pyromancer Ability, The target does not stop burning and no longer makes
   tests to stop burning. Additionally, if the target is an ally, every melee attack that ally makes inflicts full
   burning damage on targets of their attack, while they themselves now only suffer half burning damage from now on.
 Firestorm: >-
-  Firestorm is a Sanctioned Psyker — Pyromancer Ability, This psychic power can only target creatures suffering from
+  Firestorm is a Sanctioned Psyker - Pyromancer Ability, This psychic power can only target creatures suffering from
   warp burn or burning. If the target is an ally, this psychic power deals no damage to it. Everyone adjacent to the
   target (both allies and enemies) suffers the effects of the Ignite psychic power.
 Inflame: >-
-  Inflame is a Sanctioned Psyker — Pyromancer Ability, Until the end of combat, all burning effects will deal +(2 ×
+  Inflame is a Sanctioned Psyker - Pyromancer Ability, Until the end of combat, all burning effects will deal +(2 ×
   psyker's WP bonus) more damage. Every burning creature in combat immediately suffers damage.
 Molten Beam: >-
-  Molten Beam is a Sanctioned Psyker — Pyromancer Ability, Deals double the damage of Ignite to all creatures in a
+  Molten Beam is a Sanctioned Psyker - Pyromancer Ability, Deals double the damage of Ignite to all creatures in a
   12-cell line and reduces their armour by −(10 + 2 × psy rating) until the end of combat. If the enemy's armour falls
   to 0, it gains the warp burn effect. Warp Burn: deals (3 + psyker's WP bonus + 3 × psy rating) damage to the target at
   the end of their turn, with (5 × psy rating)% armour penetration. The target creature must pass an Agility resistance
   test with a −(5 × psyker's psy rating) penalty to stop burning.
 Incinerate: >-
-  Incinerate is a Sanctioned Psyker — Pyromancer Ability, The target suffers double the damage of the Ignite psychic
+  Incinerate is a Sanctioned Psyker - Pyromancer Ability, The target suffers double the damage of the Ignite psychic
   power and half the fire damage of all the burning creatures within line of sight of the target.
 Word of the Emperor: >-
-  Word of the Emperor is a Sanctioned Psyker — Sanctic Ability, All allies in a circle with a 5-cell radius gain +(1 +
+  Word of the Emperor is a Sanctioned Psyker - Sanctic Ability, All allies in a circle with a 5-cell radius gain +(1 +
   psy rating / 2) resolve until the end of combat. Every additional stack of this effect increases the resolve bonus by
   +2.
 Light of the Emperor: >-
-  Light of the Emperor is a Sanctioned Psyker — Sanctic Ability, All allies affected by Word of the Emperor are healed
+  Light of the Emperor is a Sanctioned Psyker - Sanctic Ability, All allies affected by Word of the Emperor are healed
   for (from (1 + psyker's psy rating + ally's resolve / 2) to (10 + psyker's psy rating + ally's resolve / 2)) wounds. !
   This psychic power can only be used while there is at least one ally affected by Word of the Emperor.
 Shield of the Emperor: >-
-  Shield of the Emperor is a Sanctioned Psyker — Sanctic Ability, Until the start of the psyker's next turn, all allies
+  Shield of the Emperor is a Sanctioned Psyker - Sanctic Ability, Until the start of the psyker's next turn, all allies
   affected by Word of the Emperor increase their deflection by +(psyker's psy rating / 2) (minimum +1) and armour by
   +(10 + ally's resolve / 2)%. ! This psychic power can only be used while there is at least one ally affected by Word
   of the Emperor.
 Hammer of the Emperor: >-
-  Hammer of the Emperor is a Sanctioned Psyker — Sanctic Ability, All allies affected by Word of the Emperor gain the
+  Hammer of the Emperor is a Sanctioned Psyker - Sanctic Ability, All allies affected by Word of the Emperor gain the
   hammer of the Emperor effect. Next time they deal damage, this damage is increased by +(5 × psyker's psy rating +
   ally's resolve / 2), and the effect is removed. ! This psychic power can only be used while there is at least one ally
   affected by Word of the Emperor.
 Purge Soul: >-
-  Purge Soul is a Sanctioned Psyker — Sanctic Ability, Deals (from (1 + (psyker's psy rating + 1) × resolve / 4) to (4 +
+  Purge Soul is a Sanctioned Psyker - Sanctic Ability, Deals (from (1 + (psyker's psy rating + 1) × resolve / 4) to (4 +
   (psyker's psy rating + 1) × resolve / 4)) direct damage. This damage is increased by +50% against xenos, by +100%
   against Chaos worshippers or Drukhari, by +150% against daemons, and by +50% if the enemy has already damaged the
   psyker or any of the psyker's allies this combat. These damage bonuses also affect any damage bonuses from other
   sources. ! This power does not affect targets that lack souls.
 Sword of Faith: >-
-  Sword of Faith is a Sanctioned Psyker — Sanctic Ability, This psychic power costs 50 momentum and can only be used
+  Sword of Faith is a Sanctioned Psyker - Sanctic Ability, This psychic power costs 50 momentum and can only be used
   when momentum is 175 or higher. Until the end of combat, the weapon in the psyker's hand is replaced by a sword made
   of sheer will. This sword has a single-target attack and an area attack (like a two-handed sword) and can be used to
   release a cone of fire or a line of fire (like a flamer). The damage of this sword is the same as that of Purge Soul
@@ -597,29 +597,29 @@ Sword of Faith: >-
   For the purposes of talents and other bonuses, the Sword of Faith counts as a force weapon. This power can be used
   again, increasing the damage of the sword by +Psyker's resolve.
 Psychic Shriek: >-
-  Psychic Shriek is a Sanctioned Psyker — Telepath Ability, Deals (from (1 + psyker's WP bonus × psy rating) to (4 +
+  Psychic Shriek is a Sanctioned Psyker - Telepath Ability, Deals (from (1 + psyker's WP bonus × psy rating) to (4 +
   psyker's WP bonus × (1 + psy rating))) damage to the target.
 Sensory Deprivation: >-
-  Sensory Deprivation is a Sanctioned Psyker — Telepath Ability, The target makes a Willpower resistance test. If it
+  Sensory Deprivation is a Sanctioned Psyker - Telepath Ability, The target makes a Willpower resistance test. If it
   succeeds, the target is merely blinded until the start of the psyker's next turn. If the target fails the test, they
   become blinded and suffer an additional −(5 × psy rating) penalty to all characteristics reduced by blindness and must
   make a Willpower resistance test at the end of each turn. The first success makes them just blinded, and second
   success removes the blinded effect.
 Psychic Assault: >-
-  Psychic Assault is a Sanctioned Psyker — Telepath Ability, Everyone within a 7-cell cone in front of the psyker
+  Psychic Assault is a Sanctioned Psyker - Telepath Ability, Everyone within a 7-cell cone in front of the psyker
   suffers Psychic Shriek damage and is forced to make a Willpower resistance test. All targets that fail that test are
   stunned until the psyker's next turn.
 Dominate: >-
-  Dominate is a Sanctioned Psyker — Telepath Ability, The target must pass a Willpower resistance test with a −(5 × psy
+  Dominate is a Sanctioned Psyker - Telepath Ability, The target must pass a Willpower resistance test with a −(5 × psy
   rating) penalty, or on their next turn they will spend all their movement points to move as close as possible toward
   the psyker. They can act as normal, but all their MP are spent on moving toward the psyker. At the end of their turn,
   the target must make the Willpower resistance test again, otherwise they remain under this effect.
 Mind Bond: >-
-  Mind Bond is a Sanctioned Psyker — Telepath Ability, At any time until the end of combat, the target of Mind Bond
+  Mind Bond is a Sanctioned Psyker - Telepath Ability, At any time until the end of combat, the target of Mind Bond
   makes Perception, Intelligence, Willpower, or Fellowship tests using either theirs or the psyker's stats, whichever is
   higher at the moment
 Mind Rupture: >-
-  Mind Rupture is a Sanctioned Psyker — Telepath Ability, The target makes a Willpower resistance test. If that test
+  Mind Rupture is a Sanctioned Psyker - Telepath Ability, The target makes a Willpower resistance test. If that test
   fails, the target immediately attacks its allies. After, the target suffers Psychic Shriek damage, and their Willpower
   is reduced by −(10 + 2 × psyker's psy rating) until the end of combat. If the test succeeds, the target just suffers
   Psychic Shriek damage, and their Willpower is reduced by −(10 + 2 × psyker's psy rating) until the end of combat.

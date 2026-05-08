@@ -1,7 +1,7 @@
 - name: Grace of the Oblivious
   slot: neck
   location: >-
-    Von Valancius Flagship — looted from heretics who ambush as you exit toward voidship bridge, during By the Right of
+    Von Valancius Flagship - looted from heretics who ambush as you exit toward voidship bridge, during By the Right of
     Blood
   act: 0
   description: Grants +5 Toughness if the wearer has less than 35 Intelligence
@@ -229,7 +229,7 @@
   description: When wearer gains stack of versatility, they gain 3 momentum
 - name: The Last Flash
   slot: neck
-  location: Commorragh, Outer Spire Halls — chest by entrance to area after 3rd arena fight
+  location: Commorragh, Outer Spire Halls - chest by entrance to area after 3rd arena fight
   act: 3
   description: When wearer is a target of AoO, the attacker becomes blinded for 1 turn
 - name: Honour Insignia

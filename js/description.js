@@ -15,11 +15,11 @@ function buildDescriptionContent(ctx) {
   const meta = document.createElement('div');
   meta.className = 'desc-context';
   if (!available) {
-    meta.textContent = `${displayName} — joins at level ${joinLevel}.`;
+    meta.textContent = `${displayName} - joins at level ${joinLevel}.`;
     wrap.appendChild(meta);
     const empty = document.createElement('div');
     empty.className = 'desc-text-missing';
-    empty.textContent = 'No pick yet — character not in party.';
+    empty.textContent = 'No pick yet - character not in party.';
     wrap.appendChild(empty);
     return wrap;
   }
@@ -76,7 +76,7 @@ function buildDescriptionContent(ctx) {
       block.className = 'desc-block';
       const nm = document.createElement('div');
       nm.className = 'desc-name';
-      nm.textContent = (isExtra && i === 0 ? '+ ' : '') + hit.name + (hit.tierStripped ? ` — ${rawPick}` : '');
+      nm.textContent = (isExtra && i === 0 ? '+ ' : '') + hit.name + (hit.tierStripped ? ` - ${rawPick}` : '');
       const src = document.createElement('div');
       src.className = 'desc-source';
       src.textContent = hit.kind;

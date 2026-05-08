@@ -1,13 +1,13 @@
 - name: Mantle of Heroism
   slot: cloak
-  location: Kiava Gamma Manufactorum — dropped by Chaos Marine in easternmost area (unavoidable encounter)
+  location: Kiava Gamma Manufactorum - dropped by Chaos Marine in easternmost area (unavoidable encounter)
   act: 0
   description: >-
     Requires Iconoclast - Follower; Each heroic act used in battle increases the wearer's dodge by +20% until the end of
     combat (max 60%)
 - name: Rogue Trader's Cloak
   slot: cloak
-  location: Dargonus — vault next to murder scene in Lord Captain's Quarters
+  location: Dargonus - vault next to murder scene in Lord Captain's Quarters
   act: 1
   description: The wearer of this cloak gains a +5 bonus to Fellowship for each enemy in a 2 cell radius.
 - name: Blessed Cape
@@ -381,14 +381,14 @@
     of their attacks also deals 10% of the wearer's max wounds direct damage to the wearer
 - name: Noble Born Mantle
   slot: cloak
-  location: Quest reward — Jae Heydari's Celebration (end of Jae's Chapter 2 quest line)
+  location: Quest reward - Jae Heydari's Celebration (end of Jae's Chapter 2 quest line)
   act: null
   description: >-
     While in combat the wearer of this cloak gains a +15 bonus to Fellowship whenever there are no enemies in a 4 cell
     radius.
 - name: Righteous Fury Cape
   slot: cloak
-  location: Footfall Atrium — quest reward from Hieronymus Doloroso for Dreams and Stories
+  location: Footfall Atrium - quest reward from Hieronymus Doloroso for Dreams and Stories
   act: null
   description: Each kill of the wearer increases Righteous Fury chance by 5% (to a maximum of +30%) untill the end of the combat.
 - name: Xeno-Pelt Cloak

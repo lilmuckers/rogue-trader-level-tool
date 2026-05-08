@@ -1045,10 +1045,10 @@ Does it Hurt?: >-
   all bonuses to critical hit chance.
 Everlasting Agony: >-
   The duration of negative effects inflicted by Pain Resonance is increased by +1 round, and the penalty to the
-  corresponding resistance tests is increased to — (20 + medicae/5).
+  corresponding resistance tests is increased to - (20 + medicae/5).
 Fragile Playthings: >-
   The first instance of damage dealt by the Executioner's damage-over-time effects in around reduces the inflicted
-  enemy's armour by — (10 + INT bonus)% until the end of combat. This effect can be inflicted on multiple enemies per
+  enemy's armour by - (10 + INT bonus)% until the end of combat. This effect can be inflicted on multiple enemies per
   round, but only once per enemy. Stacks.
 Hardened Body: >-
   Whenever the Executioner or their party members are suffering from any damage-over-time effects, these effects deal
@@ -1074,7 +1074,7 @@ Sickening Pain: >-
   Whenever a single instance of damage from any of the Executioner's damage-over-time effects deals damage equal to or
   more than 10% of the enemy's maximum wounds, that enemy gains +1 stack of fatigued.
 Sower of Distress: >-
-  Enemies suffering from any damage-over-time effect inflicted by the Executioner also suffer a — (5 + Medicae/20)
+  Enemies suffering from any damage-over-time effect inflicted by the Executioner also suffer a - (5 + Medicae/20)
   penalty to their resistance tests.
 Tormenting Sprain: >-
   Whenever an enemy suffering from any of the Executioner's damage-over-time effects dodges the Executioner's attack,

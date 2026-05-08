@@ -285,7 +285,7 @@ function buildNoteCard(note, isArchived) {
       if (Math.abs(dx) < 5 && Math.abs(dy) < 5) return;
       if (Math.abs(dy) >= Math.abs(dx)) { intentDecided = true; return; } // vertical
       intentDecided = true;
-      if (dx > 0 && !isArchived) return; // right swipe on active note — ignore
+      if (dx > 0 && !isArchived) return; // right swipe on active note - ignore
       active = true;
     }
     if (!active) return;
@@ -375,7 +375,7 @@ function buildNoteEditorContent(note, startInEdit = false) {
     { label: 'H2', title: 'Heading 2',   prefix: '## ' },
     { label: '•',  title: 'List item',   prefix: '- ' },
     { label: '☐',  title: 'Todo item',   prefix: '- [ ] ' },
-    { label: '—',  title: 'Divider',     insert: '\n---\n' },
+    { label: '--', title: 'Divider',     insert: '\n---\n' },
   ];
 
   const textarea = document.createElement('textarea');
@@ -467,7 +467,7 @@ function buildNoteEditorContent(note, startInEdit = false) {
     const newPrefix  = indent + (rawPrefix.match(/- \[/) ? '- [ ] ' : rawPrefix);
 
     if (content === '') {
-      // Empty item — strip prefix, leave blank line (exit list)
+      // Empty item - strip prefix, leave blank line (exit list)
       const newVal = val.slice(0, lineStart) + val.slice(lineStart + m[0].length);
       textarea.value = newVal;
       textarea.setSelectionRange(lineStart, lineStart);
