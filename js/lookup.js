@@ -145,7 +145,7 @@ function lookupPick(pick) {
 
 function pickHasInfo(pick) {
   if (!pick) return false;
-  if (isSkillStatPick(pick)) return false;
+  if (isSkillStatPick(pick)) return lookupStatPick(pick) !== null;
   return lookupPick(pick).length > 0;
 }
 
