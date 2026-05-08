@@ -289,7 +289,9 @@
   description: grants 15% dodge against non-Aeldari enemies
 - name: Armour of Despair
   slot: armour
-  location: null
+  location: >-
+    Commorragh, Outer Spire Halls — after 3rd arena fight, pass Athletics/Demolition/Awareness checks to reach hidden
+    container
   act: 3
   description: All enemies in combat suffer -10 WS and BS, +15 armour against human enemies
 - name: Commissar Flak Breatplate

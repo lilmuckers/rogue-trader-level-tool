@@ -864,7 +864,7 @@
   slot: weapon
   location: Explorators 36 pf 156
   act: 4
-  description: "Mars-pattern meltagun. High armour penetration (85). Melta weapons are most effective at short range."
+  description: Mars-pattern meltagun. High armour penetration (85). Melta weapons are most effective at short range.
   category: Meltas (High Armor Pen, High cost to shoot usually, Usually AoE)
 - name: Fusion Gun 'Spark'
   slot: weapon
@@ -1904,7 +1904,7 @@
   category: Melee 1H
 - name: Duelling Sword
   slot: weapon
-  location: null
+  location: Commorragh, The Pit — purchased from the Commissar
   act: 3
   description: >-
     After scoring a critical hit with this swords, if the wieldier hasa weapon in the other hand they immediately attack
@@ -2375,7 +2375,9 @@
   category: Melee 2H
 - name: Bloodseeker Klaive
   slot: weapon
-  location: null
+  location: >-
+    Jae Heydari gift — speak to Jae on voidship after completing Wanted on Footfall, select the business discussion
+    option
   act: 3
   description: >-
     gives +10% parry and - 10WS to enemy on hit, When it hits bleeding enemy, removes the bleed and inflicts toxin of

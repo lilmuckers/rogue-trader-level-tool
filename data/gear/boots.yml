@@ -47,7 +47,7 @@
   description: Whenever wearer moves through cell occupied by enemy, gain 15% dodge vs that enemy until next turn
 - name: Caligae of Saint Keefe
   slot: boots
-  location: 'Dargonus Proj.3: Adeptus Arbites'
+  location: "Dargonus Proj.3: Adeptus Arbites"
   act: 2
   description: Whenever wearer use heroic/desperate action, recover all HP and gain 2AP
 - name: Commisar Boots
@@ -111,7 +111,7 @@
   description: All allies 2 cell away from VG gets 40% resolve bonus from Unyielding Guard vs regular 20%
 - name: Reinforced Boots
   slot: boots
-  location: 'Lapidus Mortus: Curio ->Loot the Corpse'
+  location: "Lapidus Mortus: Curio ->Loot the Corpse"
   act: 2
   description: Grant +5 TGH. Collision Based dmg + TGHb/2
 - name: Tactical Boots
@@ -156,7 +156,7 @@
     for each attack.
 - name: Wear Resist Boots
   slot: boots
-  location: 'Commoragh: Bike by Killed runaway 3 patrol'
+  location: "Commoragh: Bike by Killed runaway 3 patrol"
   act: 3
   description: Grants + 5 AGI and ( 4 (AGIb + Dogmatic Rank)) Dodge
 - name: Tracking Boots
@@ -213,12 +213,12 @@
     burst attack. Also the range of wearer's Dash and Charge abilities is increased by +1 cell
 - name: Freerunner boots
   slot: boots
-  location: 'Comorragh: Trade with Tervantias'
+  location: "Comorragh: Trade with Tervantias"
   act: 3
   description: Become Immune to immobilise and slow
 - name: Spiked Boots
   slot: boots
-  location: 'Comorragh: Tervantias'
+  location: "Comorragh: Tervantias"
   act: 3
   description: >-
     At start of combat inflict (4) bleed on self. Whenever wearer perform area melee attack, inflict (4) bleed on every
@@ -375,7 +375,7 @@
     allyy within 2 cell radius from the wearer
 - name: Death World Warboots
   slot: boots
-  location: null
+  location: Purchased from Hieronymus Doloroso
   act: null
   description: These boots grant their wearer a +15% Dodge Penetration bonus on attacks with melee weapons.
 - name: Disciple's Boots

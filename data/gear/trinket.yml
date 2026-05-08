@@ -1,6 +1,6 @@
 - name: Theodora's Rosary
   slot: trinket
-  location: null
+  location: Prologue — chest to the right of the desk in Theodora's quarters (By the Right of Blood)
   act: 0
   description: Grants +10 to Commerce and Lore (Imperium)
 - name: Blood Drinker
@@ -77,19 +77,19 @@
     bonus) MP on their next turn.
 - name: Ring of Iron Will
   slot: trinket
-  location: '(Lex Imperialis DLC) Rykad Minoris. Star Haven. In the shuttle with the Knowledge: Imperium test.'
+  location: "(Lex Imperialis DLC) Rykad Minoris. Star Haven. In the shuttle with the Knowledge: Imperium test."
   act: 1
   description: >-
     When hitting a target with Shield Bash, Double Shot, Lightning Shot, or Stern Verdict, the character makes a Charge
     check with a -40 penalty. If successful, the target is immobilized.
 - name: Acuser of Sin
   slot: trinket
-  location: 'Foulstone Proj.3: In Drusus Footsteps'
+  location: "Foulstone Proj.3: In Drusus Footsteps"
   act: 2
   description: Grants Wearer's WPb base dmg to Charge against Demons and Xenos
 - name: Anatomy Tome
   slot: trinket
-  location: 'Cradle of Khepri System: Distress Signal Bunker Awareness Check'
+  location: "Cradle of Khepri System: Distress Signal Bunker Awareness Check"
   act: 2
   description: STR + INT bonus to base dmg for single attacks vs humans. +5 to Medicae
 - name: Auspex
@@ -173,10 +173,10 @@
   slot: trinket
   location: Mu-Rho 79 system - Rocky World
   act: 2
-  description: '-10 to all skills, wearer can reroll any failed skill test once for each test'
+  description: "-10 to all skills, wearer can reroll any failed skill test once for each test"
 - name: Ice covered Acquilla
   slot: trinket
-  location: 'Astropathic Choir Quest: Abulation in Blood'
+  location: "Astropathic Choir Quest: Abulation in Blood"
   act: 2
   description: Whenever wearer suffered a crit, attacker suffer wearer's WPb warp dmg
 - name: Imperial Scroll
@@ -216,7 +216,7 @@
   description: Once per turn when wearer crits with pister, next attack with a pistol cost 0AP.
 - name: Peculiar Trinket
   slot: trinket
-  location: 'Vheabos Proj event 1: Side with Jae'
+  location: "Vheabos Proj event 1: Side with Jae"
   act: 2
   description: >-
     At start of wearer's turn gain 2 x equiped Deflection temp wounds. When wear wounds fall to 0, fall prone instead
@@ -225,7 +225,7 @@
     mechanic
 - name: Portable Coagitator
   slot: trinket
-  location: 'Kiava Gama: Killing Dementz'
+  location: "Kiava Gama: Killing Dementz"
   act: 2
   description: Logic + 10
 - name: Portative Manipulator
@@ -250,7 +250,7 @@
   description: Whenever wearer kill enemy with Blade Dance, other enemy adj. to wearer becomes staggered for 1 round
 - name: Seeker of the Weak
   slot: trinket
-  location: 'Janus Proj. 3: Xenodefence'
+  location: "Janus Proj. 3: Xenodefence"
   act: 2
   description: Enemy suffering from Bleed,Toxin, Burning - 30 Dodge
 - name: Shifting Combi Tool
@@ -285,7 +285,7 @@
   description: Whenever wearer deadeye shot hit, reduce enemy deflection -1 and inflict +1 exploit until end of combat. Stacks
 - name: Tarnished Breacher's Acquilla
   slot: trinket
-  location: 'Plasma Chambers: Servitor Puzzle'
+  location: "Plasma Chambers: Servitor Puzzle"
   act: 2
   description: Enemies in area of attack suffer (2 x INTb) dodge and allies gain 2 x INTb to dodge
 - name: Tome of Excess
@@ -312,7 +312,7 @@
     gain additionally +10TGH. Stacks
 - name: Secrets of the Forerunner
   slot: trinket
-  location: 'Ship Crypt: Abulation in Blood hidden room'
+  location: "Ship Crypt: Abulation in Blood hidden room"
   act: 2
   description: If any of the wearers characteristics is 100 or more all characteristics lower than 100 gain +10
 - name: White/Red/Black ring of inquisition
@@ -473,7 +473,7 @@
   description: FEL & AGI + 10. Whenever should be decreased to 0 first time in combat, regain 50% max wounds instead
 - name: Long Range Aim Lens
   slot: trinket
-  location: 'Comorragh: Tervantias'
+  location: "Comorragh: Tervantias"
   act: 3
   description: Increase Range attack Effective range by BSb / 2
 - name: Soldier Acquila Pendant
@@ -492,7 +492,7 @@
     bonuses for killing it
 - name: Provocative Emitter
   slot: trinket
-  location: 'Comorragh: Tervantias'
+  location: "Comorragh: Tervantias"
   act: 3
   description: Whenever wearer dodges an attack, wearer becomes priority target of attacker's attack until next turn
 - name: Untuning Combi-Tool
@@ -615,7 +615,7 @@
   description: Enemies targeted by the wearer's Psychi abilities must pass WP -15 test or suffer (10) bleed and blind
 - name: Cogni-Simulacrum EF Ultima-Octodecimum
   slot: trinket
-  location: 'Kiava Gama event 6: BIG LOGIC CHECK'
+  location: "Kiava Gama event 6: BIG LOGIC CHECK"
   act: 4
   description: >-
     Grant +25 Logic Wearer gain Solve Simulacrum ability that cost 3AP and trigger logic test with -167 penalty. On
@@ -762,14 +762,14 @@
   description: Wearer has a unyielding beacon stack% chance to ignore any incoming damage
 - name: Combi-Tool
   slot: trinket
-  location: null
+  location: Ancient Bunker, Oasis V, Nameless Star system
   act: null
   description: >-
     Commonly found in the hands of the Adeptus Mechanicus cult members, combi-tools are versatile, if somewhat bizarre,
     mechanical devices. Grants +5 to Tech-Use Tests.
 - name: Flamer Digi-Weapon
   slot: trinket
-  location: null
+  location: Kiava Gamma — right wing of building (two chests), also room behind cogitator bridge (Cache on Kiava Gamma rumour)
   act: null
   description: >-
     A marvellous compact weapon in a form of a ring allows to fire a stream of flame in a short range. Reloading of
@@ -783,17 +783,17 @@
     Tests.
 - name: Heart of the Nameless
   slot: trinket
-  location: null
+  location: Janus — possible reward for Chronicle of the Protectorated Decision quest
   act: null
   description: This item increases Absorption against xeno-enemies by 10%.
 - name: Imperial Scroll
   slot: trinket
-  location: null
+  location: Purchased from Hieronymus Doloroso
   act: null
   description: This scroll contains imperial orders from the old days and grants the owner a +5 bonus to Lore (Imperium) Tests.
 - name: Instability Detonator
   slot: trinket
-  location: null
+  location: Kiava Gamma — after completing The Motive Force Is Life colony project
   act: null
   description: >-
     This item grants its wearer a +5 bonus to Tech-use tests. Once per battle: can be used to immediatly remove all
@@ -801,19 +801,19 @@
     Explosive Damage (with a Penetration of 4).
 - name: Shifting Combi-Tool
   slot: trinket
-  location: null
+  location: Quest reward — given by Fabricator-Censor Cubis Delphim, Flame in the Dark
   act: null
   description: >-
     Commonly found in the hands of the Adeptus Mechanicus cult members, combi-tools are versatile, if somewhat bizarre,
     mechanical devices. Grants +10 to Tech-Use Tests
 - name: Stimulant Injector
   slot: trinket
-  location: null
+  location: Footfall Atrium — Underworld Quest reward
   act: null
   description: This item reduces Wounds by 6, yet increases Righteous Fury chance by 10%.
 - name: Target Designator
   slot: trinket
-  location: null
+  location: Purchased from Opticon-22
   act: null
   description: Whenever wearer hits target with Deadeye Shot, reduce Enemy deflection -1 and stack +1 exploit. Stacks up to 3 times
 - name: Unholy Object

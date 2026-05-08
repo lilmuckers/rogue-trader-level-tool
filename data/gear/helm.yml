@@ -1,6 +1,6 @@
 - name: Deck Officer's Helmet
   slot: helm
-  location: null
+  location: Prologue — looted from dead body in Navigator's Sanctum level 3 (By the Right of Blood)
   act: 0
   description: Grants +5% armour
 - name: Helmet of Devoted Protector
@@ -10,7 +10,7 @@
   description: Req. Dogmatic 15. Grants immunity to crits for first 3 rounds
 - name: Lexmechanic's Goggles
   slot: helm
-  location: null
+  location: Von Valancius Flagship — crate after bridge before Theodora's Chambers entrance, during By the Right of Blood
   act: 0
   description: Grants 3 Logic
 - name: Analyst's helmet
@@ -89,7 +89,7 @@
   slot: helm
   location: Idira Side quest with pink horror
   act: 2
-  description: 'Grants +10 TGH Once per combat: Whenever the wearer''s Wounds drop below 35%, the wearer gains 3xTGH Wounds.'
+  description: "Grants +10 TGH Once per combat: Whenever the wearer's Wounds drop below 35%, the wearer gains 3xTGH Wounds."
 - name: Foulsight Veil
   slot: helm
   location: Latotian Passage system - Unidentified Ruins puzzle
@@ -242,7 +242,7 @@
   description: Grant's +10 Fellowship. Grants whole party (+wearer's FELb %) critical hit chance
 - name: Peripheral Control Monocle
   slot: helm
-  location: null
+  location: Commorragh, Outer Spire Halls — hidden container after 3rd arena fight (Athletics/Demolition/Awareness checks)
   act: 3
   description: Using non attack ability grants wearer +5% dodge and parry for each enemy adjacent to the wearer for 1 round. Stacks
 - name: Tactical Genius
