@@ -27,6 +27,9 @@ jobs:
 
       - run: npm run build
 
+      - name: Unblock built artifacts from .gitignore
+        run: sed -i '/^app\.js$/d; /^data\.js$/d' .gitignore
+
       - name: Deploy to gh-pages (root)
         uses: peaceiris/actions-gh-pages@v4
         with:
