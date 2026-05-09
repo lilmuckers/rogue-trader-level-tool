@@ -2745,10 +2745,14 @@ function buildNoteEditorContent(note, startInEdit = false) {
   toolbar.className = 'note-toolbar';
 
   let previewMode = !startInEdit;
+  let drawMode = false;
 
-  // Floating preview/edit toggle FAB
   const previewFab = document.createElement('button');
   previewFab.className = 'note-preview-fab';
+
+  const drawFab = document.createElement('button');
+  drawFab.className = 'note-preview-fab note-draw-fab';
+  drawFab.textContent = '✏ Draw';
 
   const fmtButtons = [
     { label: 'B',  title: 'Bold',        wrap: ['**','**'] },
@@ -2771,6 +2775,181 @@ function buildNoteEditorContent(note, startInEdit = false) {
 
   const preview = document.createElement('div');
   preview.className = 'note-preview';
+
+  // ── Doodle canvas ───────────────────────────────────────────────────────────
+  const canvas = document.createElement('canvas');
+  canvas.className = 'note-doodle-canvas';
+  const ctx = canvas.getContext('2d');
+
+  let isDrawing = false, lastX = 0, lastY = 0;
+  let drawColor = '#e63946';
+  let brushSize = 5;
+  let eraserActive = false;
+  let doodleChanged = false;
+
+  // Doodle toolbar
+  const doodleToolbar = document.createElement('div');
+  doodleToolbar.className = 'note-doodle-toolbar hidden';
+
+  const COLORS = ['#1a1a1a','#e63946','#f4a261','#f9c74f','#43aa8b','#4361ee','#9b59b6','#ff6b9d','#8d6748','#ffffff'];
+  const colorRow = document.createElement('div');
+  colorRow.className = 'doodle-colors';
+  COLORS.forEach(color => {
+    const sw = document.createElement('button');
+    sw.className = 'doodle-swatch' + (color === drawColor ? ' active' : '');
+    sw.style.background = color;
+    sw.title = color;
+    sw.addEventListener('click', () => {
+      drawColor = color;
+      eraserActive = false;
+      doodleToolbar.querySelectorAll('.doodle-swatch').forEach(s => s.classList.remove('active'));
+      sw.classList.add('active');
+      eraserBtn.classList.remove('active');
+    });
+    colorRow.appendChild(sw);
+  });
+
+  const sizeRow = document.createElement('div');
+  sizeRow.className = 'doodle-sizes';
+  [{ l: 'S', v: 3 }, { l: 'M', v: 7 }, { l: 'L', v: 16 }].forEach(({ l, v }) => {
+    const btn = document.createElement('button');
+    btn.className = 'doodle-size-btn' + (v === brushSize ? ' active' : '');
+    btn.textContent = l;
+    btn.addEventListener('click', () => {
+      brushSize = v;
+      sizeRow.querySelectorAll('.doodle-size-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+    });
+    sizeRow.appendChild(btn);
+  });
+
+  const eraserBtn = document.createElement('button');
+  eraserBtn.className = 'doodle-tool-btn';
+  eraserBtn.textContent = '◻ Eraser';
+  eraserBtn.addEventListener('click', () => {
+    eraserActive = !eraserActive;
+    eraserBtn.classList.toggle('active', eraserActive);
+    doodleToolbar.querySelectorAll('.doodle-swatch').forEach(s => s.classList.toggle('active', false));
+    if (!eraserActive) {
+      const sw = colorRow.querySelector(`.doodle-swatch[style*="${drawColor}"]`);
+      if (sw) sw.classList.add('active');
+    }
+  });
+
+  const clearBtn = document.createElement('button');
+  clearBtn.className = 'doodle-tool-btn doodle-clear-btn';
+  clearBtn.textContent = '🗑 Clear';
+  clearBtn.addEventListener('click', () => {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    note.doodle = null;
+    const notes = getNotes();
+    const idx = notes.findIndex(n => n.id === note.id);
+    if (idx >= 0) { notes[idx] = note; setNotes(notes); }
+    doodleChanged = false;
+  });
+
+  doodleToolbar.append(colorRow, sizeRow, eraserBtn, clearBtn);
+
+  // Canvas helpers
+  const resizeCanvas = () => {
+    const area = editorArea;
+    const w = area.clientWidth || 300;
+    const h = area.clientHeight || 400;
+    // Preserve existing pixels
+    let saved = null;
+    if (canvas.width > 0 && canvas.height > 0) {
+      try { saved = ctx.getImageData(0, 0, canvas.width, canvas.height); } catch (_) {}
+    }
+    canvas.width = w;
+    canvas.height = h;
+    if (saved) ctx.putImageData(saved, 0, 0);
+  };
+
+  const loadDoodle = () => {
+    if (!note.doodle) return;
+    const img = new Image();
+    img.onload = () => ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+    img.src = note.doodle;
+  };
+
+  const saveDoodle = () => {
+    if (!doodleChanged) return;
+    const px = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
+    const empty = !Array.from(px).some((v, i) => i % 4 === 3 && v > 0);
+    note.doodle = empty ? null : canvas.toDataURL('image/png');
+    const notes = getNotes();
+    const idx = notes.findIndex(n => n.id === note.id);
+    if (idx >= 0) { notes[idx] = note; setNotes(notes); }
+    doodleChanged = false;
+  };
+
+  const getPos = (e) => {
+    const rect = canvas.getBoundingClientRect();
+    const src = e.touches ? e.touches[0] : e;
+    return {
+      x: (src.clientX - rect.left) * (canvas.width / rect.width),
+      y: (src.clientY - rect.top)  * (canvas.height / rect.height),
+    };
+  };
+
+  const startStroke = (e) => {
+    e.preventDefault();
+    isDrawing = true;
+    const { x, y } = getPos(e);
+    lastX = x; lastY = y;
+    ctx.save();
+    if (eraserActive) {
+      ctx.globalCompositeOperation = 'destination-out';
+      ctx.strokeStyle = 'rgba(0,0,0,1)';
+    } else {
+      ctx.globalCompositeOperation = 'source-over';
+      ctx.strokeStyle = drawColor;
+    }
+    ctx.lineWidth = eraserActive ? brushSize * 3 : brushSize;
+    ctx.lineCap = 'round';
+    ctx.lineJoin = 'round';
+    ctx.beginPath();
+    ctx.arc(x, y, (eraserActive ? brushSize * 1.5 : brushSize / 2), 0, Math.PI * 2);
+    ctx.fill();
+    ctx.restore();
+    doodleChanged = true;
+  };
+
+  const continueStroke = (e) => {
+    if (!isDrawing) return;
+    e.preventDefault();
+    const { x, y } = getPos(e);
+    ctx.save();
+    if (eraserActive) {
+      ctx.globalCompositeOperation = 'destination-out';
+      ctx.strokeStyle = 'rgba(0,0,0,1)';
+    } else {
+      ctx.globalCompositeOperation = 'source-over';
+      ctx.strokeStyle = drawColor;
+    }
+    ctx.lineWidth = eraserActive ? brushSize * 3 : brushSize;
+    ctx.lineCap = 'round';
+    ctx.lineJoin = 'round';
+    ctx.beginPath();
+    ctx.moveTo(lastX, lastY);
+    ctx.lineTo(x, y);
+    ctx.stroke();
+    ctx.restore();
+    lastX = x; lastY = y;
+    doodleChanged = true;
+  };
+
+  const endStroke = () => { isDrawing = false; };
+
+  canvas.addEventListener('mousedown',  startStroke);
+  canvas.addEventListener('mousemove',  continueStroke);
+  canvas.addEventListener('mouseup',    endStroke);
+  canvas.addEventListener('mouseleave', endStroke);
+  canvas.addEventListener('touchstart', startStroke,    { passive: false });
+  canvas.addEventListener('touchmove',  continueStroke, { passive: false });
+  canvas.addEventListener('touchend',   endStroke);
+  canvas.addEventListener('touchcancel',endStroke);
+  // ── End doodle canvas ───────────────────────────────────────────────────────
 
   // Save indicator
   const saveIndicator = document.createElement('span');
@@ -2809,13 +2988,11 @@ function buildNoteEditorContent(note, startInEdit = false) {
     $('sheet-title').textContent = noteTitle(note.content) || 'New Note';
     flashSaved();
     updateHistoryBtns();
-    // Refresh list behind the sheet so card titles/previews stay in sync
     if (_activeSection === 'notes') renderNotesSection();
   };
   const save = () => { clearTimeout(saveTimer); saveTimer = setTimeout(commitSave, 600); };
 
   textarea.addEventListener('input', () => {
-    // Snapshot current persisted state before new edit; clears redo (new branch)
     historyPushEdit(note.id, note.content);
     updateHistoryBtns();
     save();
@@ -2825,42 +3002,31 @@ function buildNoteEditorContent(note, startInEdit = false) {
     if (textarea.value !== note.content) commitSave();
   });
 
-  // Auto-continue list / checklist on Enter; double-Enter on empty item exits list
   textarea.addEventListener('keydown', (e) => {
     if (e.key !== 'Enter' || e.shiftKey) return;
-    if (textarea.selectionStart !== textarea.selectionEnd) return; // selection → default
-
+    if (textarea.selectionStart !== textarea.selectionEnd) return;
     const val = textarea.value;
     const pos = textarea.selectionStart;
     const lineStart = val.lastIndexOf('\n', pos - 1) + 1;
     const lineEnd   = val.indexOf('\n', pos);
     const fullLine  = val.slice(lineStart, lineEnd === -1 ? undefined : lineEnd);
-
-    // Match: optional indent + (checkbox or bullet)
     const m = fullLine.match(/^(\s*)(- \[[ xX]\] |- |\* )/);
     if (!m) return;
-
     e.preventDefault();
-
-    const indent     = m[1];
-    const rawPrefix  = m[2];
-    const content    = fullLine.slice(m[0].length).trim();
-    // Always start new checklist items unchecked
-    const newPrefix  = indent + (rawPrefix.match(/- \[/) ? '- [ ] ' : rawPrefix);
-
+    const indent    = m[1];
+    const rawPrefix = m[2];
+    const content   = fullLine.slice(m[0].length).trim();
+    const newPrefix = indent + (rawPrefix.match(/- \[/) ? '- [ ] ' : rawPrefix);
     if (content === '') {
-      // Empty item - strip prefix, leave blank line (exit list)
       const newVal = val.slice(0, lineStart) + val.slice(lineStart + m[0].length);
       textarea.value = newVal;
       textarea.setSelectionRange(lineStart, lineStart);
     } else {
-      // Continue list
       const insert = '\n' + newPrefix;
       const newVal = val.slice(0, pos) + insert + val.slice(pos);
       textarea.value = newVal;
       textarea.setSelectionRange(pos + insert.length, pos + insert.length);
     }
-
     historyPushEdit(note.id, note.content);
     save();
   });
@@ -2873,7 +3039,6 @@ function buildNoteEditorContent(note, startInEdit = false) {
     commitSave();
     if (previewMode) refreshPreview();
   });
-
   redoBtn.addEventListener('click', () => {
     clearTimeout(saveTimer);
     const next = historyRedo(note.id, note.content);
@@ -2883,7 +3048,15 @@ function buildNoteEditorContent(note, startInEdit = false) {
     if (previewMode) refreshPreview();
   });
 
-  const refreshPreview = () => { preview.innerHTML = renderMarkdown(textarea.value); };
+  const refreshPreview = () => {
+    preview.innerHTML = renderMarkdown(textarea.value);
+    if (note.doodle) {
+      const img = document.createElement('img');
+      img.className = 'note-doodle-preview';
+      img.src = note.doodle;
+      preview.appendChild(img);
+    }
+  };
 
   const applyMode = () => {
     const sh = document.getElementById('sheet');
@@ -2891,17 +3064,43 @@ function buildNoteEditorContent(note, startInEdit = false) {
       refreshPreview();
       preview.classList.remove('hidden');
       textarea.classList.add('hidden');
-      // Hide format buttons in preview mode
+      canvas.classList.add('hidden');
+      doodleToolbar.classList.add('hidden');
       toolbar.querySelectorAll('.note-fmt-btn, .note-undo-btn').forEach(b => b.classList.add('hidden'));
       previewFab.textContent = '✎ Edit';
       previewFab.classList.add('active');
+      drawFab.classList.remove('active');
       sh.classList.remove('note-editing');
-    } else {
+    } else if (drawMode) {
       preview.classList.add('hidden');
       textarea.classList.remove('hidden');
+      textarea.style.pointerEvents = 'none';
+      canvas.classList.remove('hidden');
+      canvas.style.pointerEvents = 'auto';
+      doodleToolbar.classList.remove('hidden');
+      toolbar.querySelectorAll('.note-fmt-btn, .note-undo-btn').forEach(b => b.classList.add('hidden'));
+      previewFab.textContent = '👁 Preview';
+      previewFab.classList.remove('active');
+      drawFab.textContent = '✎ Text';
+      drawFab.classList.add('active');
+      sh.classList.add('note-editing');
+      requestAnimationFrame(() => {
+        resizeCanvas();
+        if (note.doodle && canvas.width > 0) loadDoodle();
+      });
+    } else {
+      // Text mode
+      preview.classList.add('hidden');
+      textarea.classList.remove('hidden');
+      textarea.style.pointerEvents = '';
+      canvas.classList.remove('hidden');
+      canvas.style.pointerEvents = 'none';
+      doodleToolbar.classList.add('hidden');
       toolbar.querySelectorAll('.note-fmt-btn, .note-undo-btn').forEach(b => b.classList.remove('hidden'));
       previewFab.textContent = '👁 Preview';
       previewFab.classList.remove('active');
+      drawFab.textContent = '✏ Draw';
+      drawFab.classList.remove('active');
       sh.classList.add('note-editing');
       requestAnimationFrame(() => textarea.focus());
     }
@@ -2914,7 +3113,7 @@ function buildNoteEditorContent(note, startInEdit = false) {
     btn.title = title;
     btn.addEventListener('click', () => {
       const start = textarea.selectionStart;
-      const end = textarea.selectionEnd;
+      const end   = textarea.selectionEnd;
       const selected = textarea.value.slice(start, end);
       let newText, newStart, newEnd;
       if (insert) {
@@ -2945,7 +3144,6 @@ function buildNoteEditorContent(note, startInEdit = false) {
   toolbar.appendChild(redoBtn);
   toolbar.appendChild(saveIndicator);
 
-  // Todo tap in preview
   preview.addEventListener('click', (e) => {
     const item = e.target.closest('.todo-item');
     if (!item) return;
@@ -2955,25 +3153,39 @@ function buildNoteEditorContent(note, startInEdit = false) {
     if (/^- \[x\] /i.test(line)) lines[lineIdx] = line.replace(/^- \[x\] /i, '- [ ] ');
     else if (/^- \[ \] /.test(line)) lines[lineIdx] = line.replace(/^- \[ \] /, '- [x] ');
     textarea.value = lines.join('\n');
-    historyPushEdit(note.id, note.content); // snapshot before commit (clears redo)
+    historyPushEdit(note.id, note.content);
     clearTimeout(saveTimer);
     commitSave();
     refreshPreview();
   });
 
   previewFab.addEventListener('click', () => {
+    if (drawMode) { saveDoodle(); drawMode = false; }
     previewMode = !previewMode;
+    applyMode();
+  });
+
+  drawFab.addEventListener('click', () => {
+    if (previewMode) previewMode = false;
+    drawMode = !drawMode;
+    if (!drawMode) saveDoodle();
     applyMode();
   });
 
   const editorArea = document.createElement('div');
   editorArea.className = 'note-editor-area';
-  editorArea.append(textarea, preview, previewFab);
+  editorArea.append(textarea, canvas, preview, previewFab, drawFab);
 
-  wrap.append(toolbar, editorArea);
+  wrap.append(toolbar, doodleToolbar, editorArea);
 
-  // Initialise mode after elements are in DOM (via requestAnimationFrame post-openSheet)
-  requestAnimationFrame(applyMode);
+  // Init: load doodle onto canvas after layout settles, then apply mode
+  requestAnimationFrame(() => {
+    applyMode();
+    if (note.doodle && !drawMode && !previewMode) {
+      resizeCanvas();
+      loadDoodle();
+    }
+  });
   return wrap;
 }
 
