@@ -1,0 +1,174 @@
+name: Abelard the Assassin
+archetypes:
+  t1: Warrior
+  t2: Assassin
+  t3: Exemplar
+extras:
+  skills: Athletics / Carouse
+  gear:
+    - slot: Helm
+      options: Vivisector's Visor / The Guardian Crown / Tactical Genius
+    - slot: Armour
+      options: Invincible Onsalught Armour / Sanguine Judgement / Adherent of Mainkind
+    - slot: Cloak
+      options: Malpain Shroud / Swiftshroud cloak / Swashbuckler cloak
+    - slot: Neck
+      options: Invigorating Resolve / Slicing Symbol
+    - slot: Accessory 1
+      options: Notes on Weaknesses
+    - slot: Accessory 2
+      options: Bead of Might / Hellbrute Horn Trophy / Iron Cape
+    - slot: Gloves
+      options: Adaptive Gloves / Metal Claw Gloves / Riposte Gauntlets
+    - slot: Boots
+      options: stalking boots / Void Veteran Boots / Enforcer's Light boots
+    - slot: Weapon Set 1
+      options: Coffinmaker's Sledge / Auto-Striking Power Sword / Tearing Vengence / Bonebreaker Maul / Tarvanna's Last Stand
+    - slot: Weapon Set 2
+      options: Well-Maintained Rocksaw
+levels:
+  '1':
+    m: Charge
+  '2':
+    m: Medicae
+  '3':
+    m: Endure
+  '4':
+    m: Daring Breach
+    e: Thick skin
+  '5':
+    m: Rigorous Training
+    e: Weapon Skill
+  '6':
+    m: Break Through
+    e: Athletics
+  '7':
+    m: Weapon Skill
+    e: Fleet Combat Training
+  '8':
+    m: Athletics
+    e: Shearing Strikes
+  '9':
+    m: Daring Breach II
+  '10':
+    m: Desolation
+    e: Toughness / Agility
+  '11':
+    m: Reckless Strike
+    e: Defensive Manuevre
+  '12':
+    m: Toughness / Agility
+    e: Carouse
+  '13':
+    m: Blade Flurry
+    e: Carouse
+  '14':
+    m: Strength
+    e: Get off Me!
+  '15':
+    m: Daring Breach IV
+  '16':
+    m: Seek the Opening
+  '17':
+    m: Danse Macarbe
+  '18':
+    m: Morbid Pirouette
+  '19':
+    m: Dispatch
+  '20':
+    m: AP +1
+    e: Weapon Skill
+  '21':
+    m: Create an Opening*
+    e: Weapon Skill
+  '22':
+    m: Athletics
+    e: Killing Edge
+  '23':
+    m: Deadly Calculation
+  '24':
+    m: Toughness / Agility
+    e: Dual-Weapon Combat
+  '25':
+    m: Lethality Heightens
+  '26':
+    m: Toughness / Agility
+    e: Athletics
+  '27':
+    m: Dispatch II
+  '28':
+    m: Melee Weapon Specialist
+    e: Disarray
+  '29':
+    m: Perception
+    e: Awareness
+  '31':
+    m: Dual-Weapon Specialist
+    e: Seize the Advantage
+  '32':
+    m: Awareness
+  '33':
+    m: Bringer of Doom
+    e: Perception
+  '34':
+    m: Power Armour Proficiency
+  '35':
+    m: Dispatch III
+  '36':
+    m: Degraded Defence*
+    e: Easy Target
+  '37':
+    m: Athletics
+    e: Lethal Concentration
+  '38':
+    m: Weapon Skill
+    e: Stentorian Voice
+  '39':
+    m: Sworn Enemy
+    e: Athletics
+  '40':
+    m: Destroyer*
+    e: Imminent Demise*
+  '41':
+    m: Weapon Skill
+    e: Crowd Kill
+  '42':
+    m: Poised to Strike
+    e: Toughness / Agility
+  '43':
+    m: Flawless Lunge
+    e: Know No Heresy
+  '44':
+    m: Awareness
+    e: Peak Condition
+  '45':
+    m: AP +1
+  '46':
+    m: Open Engagement
+    e: Awareness
+  '47':
+    m: Cautious Disengage
+    e: Awareness
+  '48':
+    m: Lone Killer
+    e: Toughness / Agility
+  '49':
+    m: Perception
+    e: Medicae
+  '50':
+    m: Extermination / Malign Influence
+    e: Impetus
+  '51':
+    m: Perfect Opening
+    e: Medicae
+  '52':
+    m: Outsmart
+    e: Ready To Serve / Doing My Part
+  '53':
+    m: Forceful Strike
+    e: Perception
+  '54':
+    m: Eager for Battle
+    e: Killing Spree
+  '55':
+    m: AP +1

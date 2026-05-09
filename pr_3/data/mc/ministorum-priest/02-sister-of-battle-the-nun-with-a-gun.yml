@@ -1,0 +1,180 @@
+name: Sister of Battle - The Nun with a Gun
+theme: Ministorum Priest
+origin: Fortress World - Ministorum Priest - Soldier - Ballistic Skill +2 / Agility +2 / Perception +1 / Willpower +1
+archetypes:
+  t1: Soldier
+  t2: Arch-Militant
+  t3: Exemplar
+extras:
+  skills: Awareness / Demolition
+  gear:
+    - slot: Helm
+      options: Gunslinger's Helm
+    - slot: Armour
+      options: '[Hive world Origin] Voidsmen Armour'
+    - slot: Cloak
+      options: Tactical Backpack / Tempestus Carapace Elite Backpack
+    - slot: Neck
+      options: Fury Incarnate / Ruby Splash Necklace (drop close quarters training)
+    - slot: Accessory 1
+      options: Chains of Domination / Demolition Instructions / Echo of Victory
+    - slot: Accessory 2
+      options: Bead of might / Book of war prayers / Saint Cognacius Scriptures
+    - slot: Gloves
+      options: Compensator Gloves / Marksman Bracers
+    - slot: Boots
+      options: Caligae of saint keefe / Heavy Breacher Boots / Sororitas Boots
+    - slot: Weapon Set 1
+      options: They Shall Weep / Hymn of Vehemence
+    - slot: Weapon Set 2
+      options: Purging Fury
+levels:
+  '1':
+    m: Run and Gun
+  '2':
+    m: Medicae
+  '3':
+    m: Revel in Slaughter
+  '4':
+    m: Firearm Mastery
+    e: Muzzle Velocity
+  '5':
+    m: Ballistic Skill
+    e: Rapid Reload
+  '6':
+    m: Ballistic Skill
+    e: Rapid Fire
+  '7':
+    m: Agility
+    e: Litany of Hatred
+  '8':
+    m: Unfaltering Fire
+    e: Awareness
+  '9':
+    m: Firearm Mastery II
+  '10':
+    m: Fired Up
+    e: Agility
+  '11':
+    m: Concentrated Fire
+    e: Awareness
+  '12':
+    m: Perception
+    e: Never Stop Believing
+  '13':
+    m: Swift Slaughter
+    e: Bolt weapon Proficiency
+  '14':
+    m: Tenets of Retribution
+    e: Demolition
+  '15':
+    m: Firearm Mastery III
+  '16':
+    m: Versatility
+  '17':
+    m: Wild Fire
+  '18':
+    m: Always Ready
+  '19':
+    m: Steady Superiority
+  '20':
+    m: Ap +1
+    e: Ballistic Skill
+  '21':
+    m: Flashfire
+    e: Ballistic Skill
+  '22':
+    m: Reckless Rush
+    e: Hail of Steel
+  '23':
+    m: Demolition
+    e: All out
+  '24':
+    m: Agility
+    e: Familiar Kickback
+  '25':
+    m: Adaptability
+  '26':
+    m: Demolition
+    e: Agility
+  '27':
+    m: Steady Superiority IV
+  '28':
+    m: Awareness
+    e: Critical Versatility
+  '29':
+    m: Perception
+    e: Flame Weapon Proficiency / Grenadier
+  '30':
+    m: Devestating Attack
+  '31':
+    m: Breaking Attack
+  '32':
+    m: Perception
+    e: Awareness
+  '33':
+    m: Dismantle
+    e: Perception
+  '34':
+    m: Willpower
+    e: Litany of Purification
+  '35':
+    m: Steady Superiority II
+  '36':
+    m: Eagar for Battle / Degraded Defence
+    e: Point-Blank
+  '37':
+    m: Awareness
+    e: Exploit Weakness
+  '38':
+    m: Ballistic Skill
+    e: Flame Weapon Expert / Bolt Exp
+  '39':
+    m: Entrench
+    e: Demolition
+  '40':
+    m: Degraded Defence / Peak Condition
+    e: Distract
+  '41':
+    m: Ballistic Skill
+    e: Demolition Engineer
+  '42':
+    m: Kick
+    e: Agility
+  '43':
+    m: Ingenious
+    e: Grenadier / Power Armour Proficiency
+  '44':
+    m: Demolition
+    e: Deadly Aim * / Eager for Battle
+  '45':
+    m: AP +1
+  '46':
+    m: Rack and Ruin
+    e: Demolition
+  '47':
+    m: Enough Bullets for Everyone
+    e: Awareness
+  '48':
+    m: Contempt for the weak
+    e: Agility
+  '49':
+    m: Perception
+    e: Medicae
+  '50':
+    m: Extermination *
+    e: Second Skin / Fortress
+  '51':
+    m: Preferred Targets
+    e: Medicae
+  '52':
+    m: Accustomed to Glory
+    e: Bolt Weapon Expert / Combat Addict
+  '53':
+    m: Controlled Shot
+    e: Perception
+  '54':
+    m: Vital Points / Deadly Aim
+    e: Intregrity
+  '55':
+    m: AP +1

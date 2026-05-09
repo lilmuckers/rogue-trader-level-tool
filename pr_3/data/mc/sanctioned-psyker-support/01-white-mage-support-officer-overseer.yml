@@ -1,0 +1,180 @@
+name: White Mage - Support Officer Overseer
+theme: Sanctioned Psyker (Support)
+origin: Forge World (Subskin Armour) - Sanctioned Psyker (Biomancer) - +2 Fel / +2 WP / +2 TGH
+archetypes:
+  t1: Officer
+  t2: Overseer
+  t3: Exemplar
+extras:
+  skills: Persuasion, Coercion, Commerce, Lore Imperium
+  gear:
+    - slot: Helm
+      options: Eyes of Joyeuse / Ghost Helm / Ethereal Visor / Thassertium Mask
+    - slot: Armour
+      options: Psyker's Breastplate
+    - slot: Cloak
+      options: Singed Cape / Xenopelt Cloak / Von Calacius Cloak
+    - slot: Neck
+      options: Chartist Pendant / Vortex Pendant / Starmist Scarf / Thassertium Necklace
+    - slot: Accessory 1
+      options: Spirit Drape / Warp Surge Brooch
+    - slot: Accessory 2
+      options: Warp Surge Brooch / Experimental Psy-Amplifier / Chains of Domination
+    - slot: Gloves
+      options: Abyssal Conduit
+    - slot: Boots
+      options: Boots of Decay / Pneumo Boots / Fencing Boots
+    - slot: Weapon Set 1
+      options: Bloodrinker Staff
+    - slot: Weapon Set 2
+      options: Sanctified Staff
+    - slot: Pet
+      options: Grave Chill / Life Emanations
+levels:
+  '1':
+    m: Voice Of Command
+  '2':
+    m: Persuasion
+  '3':
+    m: Bring it Down !
+  '4':
+    m: Finest Hour
+    e: Lasting Impression
+  '5':
+    m: Fellowship
+    e: Psyker Minoris
+  '6':
+    m: Decisive Response
+    e: Fellowship
+  '7':
+    m: Invigorate / Enfeeble
+    e: Still Mind
+  '8':
+    m: Focus!
+    e: Persuasion
+  '9':
+    m: Finest Hour IV
+  '10':
+    m: Lore Imperium / Coercion
+    e: Willpower
+  '11':
+    m: Steel Resolve
+    e: Willpower
+  '12':
+    m: Air of Authority
+    e: Second Sight
+  '13':
+    m: Inspiring speech
+    e: Lore Imperium / Coercion
+  '14':
+    m: Toughness
+    e: Psyker Majoris
+  '15':
+    m: Finest Hour I
+  '16':
+    m: Psyber-Raven
+  '17':
+    m: Warp Speed
+  '18':
+    m: Rite of Calibration
+  '19':
+    m: Overcharge
+  '20':
+    m: AP +1
+    e: Fellowship
+  '21':
+    m: Sacrificial Penance
+    e: Fellowship
+  '22':
+    m: Sanctic Powers
+    e: Lore Imperium / Coercion
+  '23':
+    m: Warp Buffer
+  '24':
+    m: Willpower
+    e: Psyker Terminus
+  '25':
+    m: Psy-Resonator
+  '26':
+    m: Willpower
+    e: Lore Imperium / Coercion
+  '27':
+    m: Overcharge III
+  '28':
+    m: Castigating Echoes
+    e: Adrenaline Surge
+  '29':
+    m: Toughness
+    e: Persuasion
+  '30':
+    m: Strategic Adaptation
+  '31':
+    m: Brother-In-Arms
+    e: Warp Saturation
+  '32':
+    m: Toughness
+    e: Persuasion
+  '33':
+    m: Master's Patronage
+  '34':
+    m: Psyker Extremis
+  '35':
+    m: Overcharge I
+  '36':
+    m: Peak Condition
+    e: Be Vigilant!
+  '37':
+    m: Lore Imperium / Coercion
+    e: Psalms of Heroes
+  '38':
+    m: Fellowship
+    e: Heavy Armour Proficiency
+  '39':
+    m: Metabolic Overcharge
+    e: Lore Imperium / Coercion
+  '40':
+    m: Firebrand
+    e: Pulse of Life
+  '41':
+    m: Fellowship
+    e: Inspire Courage
+  '42':
+    m: Shield of the Emperor
+    e: Willpower
+  '43':
+    m: Confer Immunity
+    e: Destined
+  '44':
+    m: Persuasion
+    e: Eager Subordinates
+  '45':
+    m: Ap +1
+  '46':
+    m: No Respite
+    e: Persuasion
+  '47':
+    m: Blood of Martyrs
+    e: Medicae
+  '48':
+    m: Edge of Dawn
+    e: Willpower
+  '49':
+    m: Toughness
+    e: Medicae
+  '50':
+    m: Eager for Battle
+    e: Iron Discipline
+  '51':
+    m: Subtle Manipulation
+    e: Medicae
+  '52':
+    m: Leader's Assault
+    e: Corpus Conversion
+  '53':
+    m: Hammer of the Emperor
+    e: Toughness
+  '54':
+    m: Degraded Defence
+    e: Deterioration
+  '55':
+    m: Ap +1

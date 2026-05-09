@@ -1,0 +1,413 @@
+- name: Mantle of Heroism
+  slot: cloak
+  location: Kiava Gamma Manufactorum - dropped by Chaos Marine in easternmost area (unavoidable encounter)
+  act: 0
+  description: >-
+    Requires Iconoclast - Follower; Each heroic act used in battle increases the wearer's dodge by +20% until the end of
+    combat (max 60%)
+- name: Rogue Trader's Cloak
+  slot: cloak
+  location: Dargonus - vault next to murder scene in Lord Captain's Quarters
+  act: 1
+  description: The wearer of this cloak gains a +5 bonus to Fellowship for each enemy in a 2 cell radius.
+- name: Blessed Cape
+  slot: cloak
+  location: Rykad Minoris
+  act: 1
+  description: Increase melee dmg vs daemons by 2. +4 for Dogmatic Conviction
+- name: Camouflage Robe
+  slot: cloak
+  location: Fellowship of the Void
+  act: 1
+  description: Wearer's range attack decrease target dodge -5%. Does Not Stack
+- name: Commander Cloak
+  slot: cloak
+  location: Rykad Minoris
+  act: 1
+  description: Increase Officer's ability range by 1
+- name: Emergency Injector
+  slot: cloak
+  location: Rykad Minoris
+  act: 1
+  description: >-
+    When the wearer must fall unconscious, recovers Toughness bonus wounds instead. The wearer loses all MP but gains
+    +30% dodge for 1 round (can only be used once per combat)
+- name: Hypnotising Pendant
+  slot: cloak
+  location: Rykad Minoris
+  act: 1
+  description: Wearer's single-shot attack inflicts slow on target til wearer's next turn
+- name: Phantom Cloak
+  slot: cloak
+  location: Rykad Minoris
+  act: 1
+  description: Grants +15% armour against warp damage
+- name: Reaper Cape
+  slot: cloak
+  location: Fellowship of the Void
+  act: 1
+  description: .+12% dodge reduction for wearer's melee area attack
+- name: Saturated Cape
+  slot: cloak
+  location: Rykadi Philia Prison
+  act: 1
+  description: "When wearer use Endure, weaerer removes 1 condition in order: Burning, Toxin, Bleeding"
+- name: Fireproof Cape
+  slot: cloak
+  location: Footfall Atrium
+  act: null
+  description: Wearer immune to burning. End turn removes burn from adj. allies
+- name: Arch-Strategist's Mantle
+  slot: cloak
+  location: Kiava Gama
+  act: 2
+  description: Combat tactic area bonus +5% for 1 round if used different strategem than before, doesn't stack
+- name: Backpack with Armour-Piercing Ammo
+  slot: cloak
+  location: "Plasma Chamber: (Abulation in Blood or Abberation Quest, servitors puzzle)"
+  act: 2
+  description: Wearer's ranged attack inflicts (armour pentration /5 bleed on) target
+- name: Battle Scarred Cape
+  slot: cloak
+  location: Jae's Dargonus Quest reward
+  act: 2
+  description: When end turn, remove burning, bleeding, and toxin and then add TGHb / 2 Temp. wound per effect
+- name: BladeDancer's Mantle
+  slot: cloak
+  location: kasballica 12. pf 56
+  act: 2
+  description: DfA deals +(3 x Wearer's Resolve) mental dmg
+- name: Cameleoline Cloak
+  slot: cloak
+  location: Adermatt II system - Recoiligers's Plot Safe
+  act: 2
+  description: Grants +10% dodge
+- name: Cape of Righteous Fury
+  slot: cloak
+  location: "Footfall: Dreams and Stories quest"
+  act: 2
+  description: Every Kill increase Crit Chance +5% until the end of combat
+- name: Cloak of Hatred
+  slot: cloak
+  location: drusian 6. pf 23
+  act: 2
+  description: Each enemy killed by wearer's area attack increase wearer's dmg by 3% until end of combat
+- name: cloak of retribution
+  slot: cloak
+  location: drusian 1. pf26
+  act: 2
+  description: Wearer gain 15% dmg bonus to enemy that deal dmg to wearer this round
+- name: Cloak of Shadows
+  slot: cloak
+  location: "Last Chance of Cyrene: Yrliet quest end"
+  act: 2
+  description: >-
+    When wearer deals dmg with AoO they gain shrouded effect (doesnt stack). Shrouded - when becoming target of an
+    attack auto dodge, after that the effect is removed
+- name: Distraction Cape
+  slot: cloak
+  location: Pulvis Platinum system, Gutted Voidship
+  act: 2
+  description: This cape lowers enemy Perception by the wearer's FEL Bonus within a 5 cell radius.
+- name: Embroidered Cloak
+  slot: cloak
+  location: Palatium Stellos system - Governors camp
+  act: 2
+  description: >-
+    This cloak grants the wearer a +5 bonus on Persuasion. When wearer affected by allies'abilities, gain 3% dodge until
+    end of combat. Stacks
+- name: Grenadier's Cloak
+  slot: cloak
+  location: Footfall Docks
+  act: 2
+  description: Wearer and allies are immune to wearer's nade dmg
+- name: Malpian Shroud
+  slot: cloak
+  location: Foulstone, 1st project event choices
+  act: 2
+  description: >-
+    Whenever wearer deals dmg with melee attack, gain ( TGHb + 3x Icono Rank ) Temp wounds. Wielder melee attack deal (
+    Temp Wounds / 2 ) more dmg
+- name: Mercy's Gift
+  slot: cloak
+  location: Jae's personal quest celebration
+  act: 2
+  description: While in combat and no enemies within 4 cells wearer gains +15FEL
+- name: Militant's Cloak
+  slot: cloak
+  location: drusian rep1. pf 20
+  act: 2
+  description: Wearer's first melee attack cannot be parried or dodge
+- name: Navy Swashbuckler's Coat
+  slot: cloak
+  location: Pirate Rep 0. PF 18
+  act: 2
+  description: Parry Reduc +10%. AR Pen +5% for melee
+- name: Pack of Reagents
+  slot: cloak
+  location: "Footfall: Mutant Hideout"
+  act: 2
+  description: >-
+    This set of chemical reagents increases Damage of all Burning, Poison or Bleeding effects applied by the wearer by
+    +2.
+- name: Strange Shard
+  slot: cloak
+  location: Janus Event 3
+  act: 2
+  description: Lore Warp + 10 Lore Xenos + 15
+- name: Tactical Backpack
+  slot: cloak
+  location: Pirate Rep10. Pf 36
+  act: 2
+  description: Grant +1 ROF
+- name: Zealot Cloak
+  slot: cloak
+  location: Dargonus Palace Bedroom Secret
+  act: 2
+  description: Whenever weaer hits ally with area attack. gain zealot effect until end of combat(10% dmg increase / stack)
+- name: Bladedancer's Mantle
+  slot: cloak
+  location: (Void Shadows DLC) Kasballica Mission
+  act: 2
+  description: Death from Above deals (3 x Resolve) additional psychic damage
+- name: Backpack With Armor-Piercing Ammo
+  slot: cloak
+  location: (Void Shadows DLC) Plasma Engine Chamber, chest on the elevator
+  act: 2
+  description: Ranged attacks apply (Armor Penetration / 5) levels of Bleeding to targets
+- name: Singed Cape
+  slot: cloak
+  location: (Lex Imperialis DLC) Tenebris Aquae, Sargon's Cache Tech check required on the Heartless' bridge
+  act: 2
+  description: Damage taken by the character is reduced by (veil thinning)%
+- name: Synth-Feed
+  slot: cloak
+  location: (Lex Imperialis DLC) Tassera
+  act: 2
+  description: >-
+    If a character ends their turn in an adjacent space to any familiar, the familiar recovers (2 x the familiar's CON
+    bonus) health.
+- name: Battle-Scarred Mantle
+  slot: cloak
+  location: null
+  act: 3
+  description: >-
+    When end turn, remove burning, bleeding, and toxin from all adjacent allies. Then the wearer inflicts 10+2*numer of
+    effects removed levels of bleeding on all adjacent enemies
+- name: Assault Cloak
+  slot: cloak
+  location: Farseer Rescue Area
+  act: 3
+  description: >-
+    Wearer gains +5% parry reduction and dodge reduction for their melee area attacks for each creature targeted by that
+    area attack
+- name: Mon-Keigh Hide Cape
+  slot: cloak
+  location: Yremeryss loot
+  act: 3
+  description: Decreases all incoming damage except direct by -1+versatility stacks%
+- name: Sworddancer Cloak
+  slot: cloak
+  location: Commisar / Malice Trade, Looting Shrieker Arsenal post taking over Den
+  act: 3
+  description: Every time wearer dodges a melee attack, gain (5 + AGIb) until end of their next turn. Stacks
+- name: Xeno Emitter
+  slot: cloak
+  location: Third Arena From the body of Kikeross
+  act: 3
+  description: >-
+    When a character applies the Burning effect to an enemy, this effect gains an additional 6 levels. This enemy is
+    also affected by Psi-Suppression until the character's next turn.
+- name: Intigator's Mantle
+  slot: cloak
+  location: Gertafal's Calamity system - Heinrix's quest location
+  act: 4
+  description: Taunting Scream targets do need to fail WP resistance test to be affected
+- name: Swiftshroud Cloak
+  slot: cloak
+  location: Gertafal's Calamity system - Heinrix's quest location
+  act: 4
+  description: >-
+    When wearer is targeted by AoO they gain +1 stack of swiftshroud and + 2 * (AGIb + PRb). They gain +(AGIb+PR)/2 MP
+    every time they are targeted by AoO. At the end of their turn the wearer expends all their swiftshroud stacks and
+    grants all allies +(stacks * 5)% bonus to dodge until wearer's next turn
+- name: Grenadier's Backpack
+  slot: cloak
+  location: Cassia's personal quest location
+  act: 4
+  description: >-
+    Wearer and allies are immune to damage from wearer;s grenades. First time the wearer uses a grenade during their
+    turn theu have 50% chance to not expend it
+- name: trapper's Furs
+  slot: cloak
+  location: Emperor's Plan system - Eufrates II
+  act: 4
+  description: >-
+    Astartes Equipment. Each time wearer deals damage to an enemy with a ranged attack from a range of 5+ cells the
+    wearer becomes priority target for this enemy until the wearer's next turn
+- name: voltagheist Field Emitter
+  slot: cloak
+  location: Pasqal personal quest location
+  act: 4
+  description: >-
+    The wearer suffers -(2*(5+INTb))% less impact and energy damage. When wearer suffers impact or energy damage, the
+    attacking enemy suffers INTb+5 power damage
+- name: Shroud of Dauntlessness
+  slot: cloak
+  location: Mundus Nullius system - Ruined Palace
+  act: 4
+  description: >-
+    Adeptus Astartes Equipment. When wielder performs heroic act or deperate measure they gain +2 AP +6MP and 2*TGHb
+    temp wounds
+- name: Arch-Militant's Cape
+  slot: cloak
+  location: Quetza Temer
+  act: 4
+  description: >-
+    Each of the wearer's critical hits made with ranged weapon increases their melee weapon crit dmg by +STR until the
+    end of combat
+- name: Tempestus Carapace Elite Backpack
+  slot: cloak
+  location: Quetza Temer
+  act: 4
+  description: >-
+    If wearer;s weapon has base fire rate or strike count 2-4 the parameter is encreased by BSb/3. If it affects ranged
+    weapon recoil is doubled. /// While the wearer's weapon has 5 or more base rof/strike count, hit chance with the
+    burst attacks is increased by 3*BSb. If its a ranged weapon, recoil is negated
+- name: Mantle of Extermination
+  slot: cloak
+  location: Drusian rep 26. pf92
+  act: 4
+  description: Whenever wearer kills an enemy, allies gain 5% crit chance until wearer's next turn
+- name: Cloak of Bloodthirst
+  slot: cloak
+  location: Kasballica 18 pf76
+  act: 4
+  description: If target is bleeding, wearer's melee attack deals 2 x AGI % more dmg
+- name: Mantle of Extermination
+  slot: cloak
+  location: (Void Shadows DLC) Drusians
+  act: 4
+  description: >-
+    When a character kills an enemy with an area-of-effect attack, that character's allies gain a +5% critical hit
+    chance until their next turn. This effect stacks.
+- name: Bag with Stimulants
+  slot: cloak
+  location: (Void Shadows DLC) Explorators
+  act: 4
+  description: When using Carnival of Suffering, the character immediately fully restores health.
+- name: Cloak of Bloodthirst
+  slot: cloak
+  location: (Void Shadows DLC) Kasballica Mission
+  act: 4
+  description: When attacking a target affected by bleeding in melee combat, the character deals (2 x DEX bonus)% more damage.
+- name: Emergency Vox-Casters
+  slot: cloak
+  location: (Void Shadows DLC) Fellowship of the void
+  act: 4
+  description: >-
+    When a character is injured, their allies, if able, immediately make the attack that costs the fewest AP against
+    their closest enemy.
+- name: Cloak of Mercy
+  slot: cloak
+  location: (Lex Imperialis DLC) Quetza Temer, in the ruined temple before meeting the Aeldari Explosives check required
+  act: 4
+  description: Lidless Stare no longer damages allies; they gain Fellowship Bonus temporary wounds instead.
+- name: Sensory-Motor Modulator
+  slot: cloak
+  location: (Lex Imperialis DLC) Lethus, in the back crate in the arena with the ambull
+  act: 4
+  description: >-
+    When using Dash, Dance of Death, Sprint, or Death from Above, the character gains +(DEX bonus + PER bonus)% armor
+    penetration and evasion reduction for the rest of their turn. Stacks up to 3 times.
+- name: Reactivator Pack
+  slot: cloak
+  location: (Lex Imperialis DLC) Leetus From the body of Proctor Adriana Yeager
+  act: 4
+  description: >-
+    Restarting does not cost any AP. The targeted familiar gains (4 x FEL bonus) temporary health and a +(4 x FEL bonus)
+    bonus to all stats until the end of the round.
+- name: Lady Theodora's Mantle
+  slot: cloak
+  location: (Lex Imperialis DLC) Leethus
+  act: 4
+  description: >-
+    A robe of xenos hide that once draped Lady Theodora's shoulders. No one remembered it for years, nor the station
+    where it was abandoned. If there are more enemies than allies in combat at the start of a character's turn, the
+    character deals 20% more damage with melee weapons.
+- name: Shadowguide cloak
+  slot: cloak
+  location: Kasballica 31. pf126
+  act: 4
+  description: Wearer becomes least priority target as long as no adj enemy (don't really work/finicky)
+- name: Emergency Vox Caster
+  slot: cloak
+  location: Void 29. pf100
+  act: 4
+  description: >-
+    Whenever wearer suffer trauma, if possible, all allies immediately attack nearest enemy for with least costing AP
+    attack
+- name: Bag with Stimulants
+  slot: cloak
+  location: Explorators 32 pf 143
+  act: 4
+  description: Whenever wearer use Carnival of Misery, heal to full
+- name: Dark Reaver
+  slot: cloak
+  location: AN#8954no01-KT system -Dead World Drukhari Camp (Marazhai required)
+  act: 5
+  description: >-
+    Drukhari Equipment. When wearer dodges and enemy ranged attack they immediately perform single attack with equipped
+    melee weapon on a random adjacent enemy. This attack has +35% armor pen and parry reduction and can only be
+    performed three times in a single round
+- name: Holo-Field Emitter
+  slot: cloak
+  location: Sanctum of Taaphetus system - Lifeless world
+  act: 5
+  description: >-
+    Wielder gains 3 charges of holo-field. When wielder suffers damage 1 charge is removed to prevent dmg. If there are
+    no charges left, damage is not prevented and the wielder becomes staggered until the end of combat
+- name: Cloaking field Emitter
+  slot: cloak
+  location: Neos Charoitus system - Desert World surface
+  act: 5
+  description: When wearer moves one of their comabt tactic areas, the bonuses granted by this area are doubled
+- name: Bloody Fury Cloak
+  slot: cloak
+  location: Tomb world Epitaph
+  act: 5
+  description: >-
+    When wearer kills enemy with melee attack, their attack limit is removed until the end of their turn, but every one
+    of their attacks also deals 10% of the wearer's max wounds direct damage to the wearer
+- name: Noble Born Mantle
+  slot: cloak
+  location: Quest reward - Jae Heydari's Celebration (end of Jae's Chapter 2 quest line)
+  act: null
+  description: >-
+    While in combat the wearer of this cloak gains a +15 bonus to Fellowship whenever there are no enemies in a 4 cell
+    radius.
+- name: Righteous Fury Cape
+  slot: cloak
+  location: Footfall Atrium - quest reward from Hieronymus Doloroso for Dreams and Stories
+  act: null
+  description: Each kill of the wearer increases Righteous Fury chance by 5% (to a maximum of +30%) untill the end of the combat.
+- name: Xeno-Pelt Cloak
+  slot: cloak
+  location: null
+  act: null
+  description: Wearer takes −5 less damage from critical hits. +10 Coercion.
+- name: Von Valancius Cloak
+  slot: cloak
+  location: Loot on Voidship Bridge
+  act: 1
+  description: While the wearer is at full wounds, they gain +5 to all characteristics.
+- name: Swashbuckler Coat
+  slot: cloak
+  location: Ryzza vendor
+  act: 2
+  description: Whenever the wearer has two melee weapons equipped, they gain +10 Weapon Skill and +15% critical damage.
+- name: Swashbuckler Cloak
+  slot: cloak
+  location: Ryzza vendor
+  act: 2
+  description: Whenever the wearer has two melee weapons equipped, they gain +10 Weapon Skill and +15% critical damage.

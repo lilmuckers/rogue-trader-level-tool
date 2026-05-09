@@ -1,0 +1,177 @@
+name: Noble Skill Monkey
+theme: Noble
+origin: Voidborn - Noble - Officer - Ballistic Skill + 2 / Intelligence + 2 / Perception + 2
+archetypes:
+  t1: Officer
+  t2: Grand Strategist
+  t3: Exemplar
+extras:
+  skills: Commerce / Coercion / Persuastion / Lore Imperium (Chartist Pendant)
+  gear:
+    - slot: Helm
+      options: Great Librarian Glasses / Steel Guidance
+    - slot: Armour
+      options: Warrior Armour / Breacher Armour
+    - slot: Neck
+      options: Synaptic Coagulator
+    - slot: Accessory 1
+      options: '<Character>: Item Description / Hadd-Pattern Data-Loom / Black Ring of the Inquisition'
+    - slot: Accessory 2
+      options: Hadd-Pattern Data-Loom / Heart of the Nameless / Saint Cognatius's Scriptures
+    - slot: Gloves
+      options: Abyss Spinner Gloves / Plasmashaper Gloves
+    - slot: Boots
+      options: Commissar Boots / Adrenaline Warboots
+    - slot: Weapon Set 1
+      options: Hot Shot Lasgun / Necrontech Hot Shot Lasgun
+    - slot: Weapon Set 2
+      options: Corpuscarii Oath / Arc Rifle Mindstrom / Gorenov's Masterpiece
+levels:
+  '1':
+    m: Voice Of Command
+  '2':
+    m: Persuasion
+  '3':
+    m: Bring it Down !
+  '4':
+    m: Finest Hour
+    e: Lasting Impression
+  '5':
+    m: Ballistic Skill
+    e: Be Smart
+  '6':
+    m: Decisive Response
+    e: Ballistic Skill
+  '7':
+    m: Move, Move, Move!
+    e: 'Base Skill: Tech-Use'
+  '8':
+    m: Focus!
+    e: Persuasion
+  '9':
+    m: Finest Hour IV
+  '10':
+    m: Lore Imperium / Coercion
+    e: Intelligence
+  '11':
+    m: Steel Resolve
+    e: Intelligence
+  '12':
+    m: Air of Authority
+    e: 'Base Skill: Logic'
+  '13':
+    m: Inspiring Speech
+    e: Lore Imperium / Coercion
+  '14':
+    m: Willpower
+    e: 'Base Skill: Xenos'
+  '15':
+    m: Finest Hour I
+  '16':
+    m: Combat Tactics
+  '17':
+    m: Combat Locus Stratagem
+  '18':
+    m: Improvised Strategy
+  '19':
+    m: Take and Hold
+  '20':
+    m: Ap +1
+    e: Ballistic Skill
+  '21':
+    m: Blurred Locus
+    e: Ballistic Skill
+  '22':
+    m: Blitz Stratagem
+  '23':
+    m: Persuasion
+    e: Fire at Will
+  '24':
+    m: Intelligence
+    e: 'Advanced Skill: Tech-Use'
+  '25':
+    m: Personal Combat Zone
+  '26':
+    m: Intelligence
+    e: Persuasion
+  '27':
+    m: Take and Hold IV
+  '28':
+    m: Opening Strategy
+    e: Perception
+  '29':
+    m: Perception
+    e: Lore Imperium / Coercion
+  '30':
+    m: Overwhelming Stratagem
+  '31':
+    m: Daunting Zone
+    e: 'Advanced Skill: Logic'
+  '32':
+    m: Lore Imperium / Coercion
+    e: Perception
+  '33':
+    m: Perception
+    e: Critical Zone
+  '34':
+    m: 'Advanced Skill: Xenos'
+  '35':
+    m: Take and Hold II
+  '36':
+    m: Firebrand
+    e: Seize the Initiative
+  '37':
+    m: Persuasion
+    e: Personal Zone
+  '38':
+    m: Intelligence
+    e: 'Base Skill: Lore Warp'
+  '39':
+    m: Break Their Ranks!
+    e: Persuasion
+  '40':
+    m: Eager Subordinates
+    e: Adjusting Frontline
+  '41':
+    m: Intelligence
+    e: Prepare for an Assault!
+  '42':
+    m: Killzone Stratagem
+    e: Toughness
+  '43':
+    m: Inescapable Zone
+    e: 'Advanced Skill: Lore Warp'
+  '44':
+    m: Lore Imperium / Coercion
+    e: Eager for Battle
+  '45':
+    m: AP +1
+  '46':
+    m: No Respite
+    e: Lore Imperium / Coercion
+  '47':
+    m: Be Vigilant!
+    e: Tech-Use
+  '48':
+    m: Strategic Offence
+    e: Toughness
+  '49':
+    m: Toughness
+    e: Tech-Use
+  '50':
+    m: Degraded Defence
+    e: Personal Oversight
+  '51':
+    m: Sniping Zone
+    e: Tech-Use
+  '52':
+    m: Disputed Zone
+    e: 'Base Skill: Lore Imperium'
+  '53':
+    m: Take Aim!
+    e: Toughness
+  '54':
+    m: Attention!
+    e: Steady!
+  '55':
+    m: AP +1

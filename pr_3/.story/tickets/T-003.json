@@ -1,0 +1,14 @@
+{
+  "blockedBy": [
+    "T-001"
+  ],
+  "completedDate": null,
+  "createdDate": "2026-05-07",
+  "description": "One-shot migration IIFE: if no profiles exist but old rt.config.v2 key exists, copy all existing flat keys into a 'Default' profile namespace. Idempotent — skips if profiles list already exists.",
+  "id": "T-003",
+  "order": 30,
+  "phase": "multi-profile",
+  "status": "open",
+  "title": "Migrate existing flat data to default profile on first run",
+  "type": "task"
+}

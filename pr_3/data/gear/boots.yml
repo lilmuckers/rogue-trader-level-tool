@@ -1,0 +1,397 @@
+- name: Pneumo Boots
+  slot: boots
+  location: Fellowship of the Void
+  act: 1
+  description: Use Charge cost -1 AP
+- name: Skirmisher Boots
+  slot: boots
+  location: Rykad Minoris
+  act: 1
+  description: When dealing dmg the wearer has 25% chance to gain 2MP
+- name: Warmonger Boots
+  slot: boots
+  location: Rykad Minoris
+  act: 1
+  description: When the wearer kills 2 or more enemies with a single attack, the attack doesn't spend all of the wearer's MP
+- name: Adrenaline Warboots
+  slot: boots
+  location: Footfall Shadow Quarters - Dark Hideout
+  act: 2
+  description: At start of wearer's turn, gain +20% dodge until end of the round
+- name: Arch-Militant's Boot
+  slot: boots
+  location: Pirate mer rep13. pf 44
+  act: 2
+  description: When wearer perform melee after range attack, target must pass TGH bonus at -15 penalty or knock prone
+- name: Battle-Psyker Boots
+  slot: boots
+  location: Idira Quest 1 Random encounter
+  act: 2
+  description: Wearer gain PERb% dodge until start of next turn for each enemy affected by psy-power or staff attacks. Stacks
+- name: Bladed Boots
+  slot: boots
+  location: kasballica 1. pf20
+  act: 2
+  description: Whenever wearer hit opening with Charge, Slash, or Danse Macabre, inflict 10 bleeding on target
+- name: Breacher's Boot
+  slot: boots
+  location: pirate mer rep16. pf49
+  act: 2
+  description: >-
+    Whenever wearer's area attack damages at least 2 enemies in 2 cell radius, weaer can use kick ability for 0AP to use
+    until end of turn
+- name: Breezecatcher Boots
+  slot: boots
+  location: Dargonus Palace
+  act: 2
+  description: Whenever wearer moves through cell occupied by enemy, gain 15% dodge vs that enemy until next turn
+- name: Caligae of Saint Keefe
+  slot: boots
+  location: "Dargonus Proj.3: Adeptus Arbites"
+  act: 2
+  description: Whenever wearer use heroic/desperate action, recover all HP and gain 2AP
+- name: Commisar Boots
+  slot: boots
+  location: kasballica 0. pf50
+  act: 2
+  description: >-
+    Whenever weaer choose ally as target of ability, immediate gain wearer's FEL bonus/2 MP. Target gain this for their
+    next turn
+- name: Cursed Boots
+  slot: boots
+  location: Kiava Proj.1 Restoration
+  act: 2
+  description: Wherever wearer end turn, deal +1 / creature warp dmg to all adj. creatures. Also deal +1 warp dmg to enemies
+- name: Dynamo Boots
+  slot: boots
+  location: Footfall Shadow Quarters Warehouse - Jae's Quest
+  act: 2
+  description: Increase Movement Points of the wearer by 3
+- name: Ergo Boots
+  slot: boots
+  location: Janus Forest
+  act: 2
+  description: Increase AGI +5, Athletics +10
+- name: Expeditionary Footwear
+  slot: boots
+  location: Pulvis Platinum system, Gutted Voidship
+  act: 2
+  description: When use Navigator power, gain +15% dodge until end of the round. Stacks
+- name: Psyker's Footwear
+  slot: boots
+  location: Footfall Docks Box. Password 3541
+  act: 2
+  description: Grant 3% dodge until end of combat for each psy power wearer used. Stacks
+- name: Pyromaniac Boots
+  slot: boots
+  location: Footfall Shadow Quarters Quarantine Area
+  act: 2
+  description: >-
+    Can not be affected by burning when standing on burning cell. Inflicts +3 stacks of burning when standing on burning
+    cell
+- name: Sororitas Boots
+  slot: boots
+  location: Footfall. Shadow Quarters Argenta Quest Cultists Lair
+  act: 2
+  description: Momentum raise to 175 after 5 kills in one turn
+- name: Swift Shadows
+  slot: boots
+  location: pirate mer rep17. pf51
+  act: 2
+  description: Once per turn, after using Blood Oath or Oath of Vengeance, they gain 1 use of Dash for 0AP until end of turn
+- name: Tactical Boots
+  slot: boots
+  location: kasballica 7. pf35
+  act: 2
+  description: Whenever enemy attempt AoO against wearer, immediately push back by 1 cell before attack hit wearer
+- name: Unyielding Vanguard Boots
+  slot: boots
+  location: Footfall Atrium Coagitator Check
+  act: 2
+  description: All allies 2 cell away from VG gets 40% resolve bonus from Unyielding Guard vs regular 20%
+- name: Reinforced Boots
+  slot: boots
+  location: "Lapidus Mortus: Curio ->Loot the Corpse"
+  act: 2
+  description: Grant +5 TGH. Collision Based dmg + TGHb/2
+- name: Tactical Boots
+  slot: boots
+  location: (Void Shadows DLC) Kasballica Mission
+  act: 2
+  description: >-
+    When an opponent attempts to make an attack of opportunity against a character, the character pushes that opponent
+    back 1 square before they can strike.
+- name: Swift Shadows
+  slot: boots
+  location: (Void Shadows DLC) Fellowship of the void
+  act: 2
+  description: >-
+    Once per turn, after using Blood Vow or Oath of Vengeance, the character gains 1 use of Run, which does not cost any
+    AP, until the end of the turn.
+- name: Bladedancer's Greaves
+  slot: boots
+  location: (Void Shadows DLC) Foulstone, Kibellah decision
+  act: 2
+  description: Moving through cells covered in blood from Blood Rain or Blood Vial requires half the character's MP.
+- name: Inertia Boots
+  slot: boots
+  location: (Lex Imperialis DLC) Explorators
+  act: 2
+  description: >-
+    If a character's melee attack is parried, dodged, or critically hit, the character regains +(DEX bonus) MP and does
+    not provoke attacks of opportunity for the rest of their turn.
+- name: Impulse Boots
+  slot: boots
+  location: (Lex Imperialis DLC) Fellowship of the void
+  act: 2
+  description: >-
+    After performing an area-of-effect melee attack, the character restores 2 MP and gains +(DEX bonus + PER bonus)% to
+    critical hit chance. This effect stacks and lasts until the end of the round.
+- name: Bruiser Boot
+  slot: boots
+  location: Comorragh
+  act: 3
+  description: >-
+    Whenever wearer use AoE attack / ability, provoke Attack of Opportunity from all adj. enemy. Gain TGHb temp wound
+    for each attack.
+- name: Wear Resist Boots
+  slot: boots
+  location: "Commoragh: Bike by Killed runaway 3 patrol"
+  act: 3
+  description: Grants + 5 AGI and ( 4 (AGIb + Dogmatic Rank)) Dodge
+- name: Tracking Boots
+  slot: boots
+  location: >-
+    Chasm - After meeting Malice BS check to shoot down the body near the place where we spawned in originally in
+    commoragh
+  act: 3
+  description: Hot on the Trail extra turn gives +1AP and +AGI bonus MP for this extra turn
+- name: Defensive Boots
+  slot: boots
+  location: Mangled Sector - Safe
+  act: 3
+  description: >-
+    If wearer didnt spend MP during their turn, theu double their cover efficiency in half cover until the end of the
+    wearer's next turn
+- name: Bruiser Boots
+  slot: boots
+  location: Chasm
+  act: 3
+  description: >-
+    When the wearer performs an area attack they instantly provoke AoO from all adjacent enemies. The weaerrer gains
+    +TGH bonus temp wound for each AoO provoked
+- name: Fencing Boots
+  slot: boots
+  location: Mangled Sector - skill check behin demolition check near Commissar
+  act: 3
+  description: >-
+    Grans AGI bonus * 2 parry when using swords. When user parries with this sword they counter attack causing attacking
+    enemy to become staggered. If the attacker is taggered the wearer's parry is increased by AGI bonus * 5
+- name: Recoil Warboots
+  slot: boots
+  location: The Spyre, Farseer side
+  act: 3
+  description: >-
+    When wearer attacks an enemy from behind cover with ranged attack, cover efficiency is decreased by -40% for that
+    attack. -15 recoil
+- name: Intendant Boots
+  slot: boots
+  location: Commisar Trade, Looting Shrieker Arsenal post taking over Den
+  act: 3
+  description: When wearer uses consumable they gain +2MP and +20% dodge until the start of their next turn
+- name: Sharpshooter Boots
+  slot: boots
+  location: Malice / Commoragh Trade, Looting Shrieker Arsenal post taking over Den
+  act: 3
+  description: When wearer performs single-shot rnaged attack from any cover, this attack gains +Awareness/4 armor pen
+- name: Blitz Boots
+  slot: boots
+  location: Spyre Peak next to Tervantias
+  act: 3
+  description: >-
+    Wearer gains +4 dmg against enemies who have no adjacent allies. Only applies to the first strike or projectile in a
+    burst attack. Also the range of wearer's Dash and Charge abilities is increased by +1 cell
+- name: Freerunner boots
+  slot: boots
+  location: "Comorragh: Trade with Tervantias"
+  act: 3
+  description: Become Immune to immobilise and slow
+- name: Spiked Boots
+  slot: boots
+  location: "Comorragh: Tervantias"
+  act: 3
+  description: >-
+    At start of combat inflict (4) bleed on self. Whenever wearer perform area melee attack, inflict (4) bleed on every
+    target hit. Area melee attack deals + (5 x wearer's bleeding level) dmg
+- name: Heavy Breacher's Boots
+  slot: boots
+  location: Sire loot DLC quest
+  act: 4
+  description: After the wearer makes an area attack, they gain +4MP and can continue their movement
+- name: Enforcer Light Boots
+  slot: boots
+  location: Mundus Nullius system - Ruined Palace
+  act: 4
+  description: >-
+    When werarer parries an attack the immediately strike back. If this attack deals dmg the wearer performs Kick to
+    push the enemy away
+- name: Boots of Decay
+  slot: boots
+  location: Frozen Prince system - Shard of the holy world
+  act: 4
+  description: >-
+    Each time wearer uses major psychic power, all enemies in their line of sight lose 30% of their deflection until the
+    start of the wearer's next turn
+- name: Cursed Boots (2)
+  slot: boots
+  location: Drusian rep 21. pf 79
+  act: 4
+  description: If wearer didn't spend MP, doubles cover eff and gain immunity to forced movements effects til next turn
+- name: Void Veteran Boots
+  slot: boots
+  location: Drusian rep 22. 84
+  act: 4
+  description: Whenever wearer kills a target with melee attack, wearer gain +1 use of Charge! costing 0AP
+- name: Boots of Karskin
+  slot: boots
+  location: Drusian rep27. pf 93
+  act: 4
+  description: >-
+    When in cover, wearer gain 100% cover eff vs aoe attacks (vs previously no) but never dodges them. Suffer -50% dmg
+    from AoE attacks. Whenever wearer use nades and hit 3 enemies for first time in combat, does not spend AP
+- name: Stalking Boots
+  slot: boots
+  location: Kasballica 18. pf78
+  act: 4
+  description: >-
+    If wearer has melee weapon equipped both hands, their Slash attack makes an addition melee attack with secondary
+    weapon
+- name: Acrobat's Greaves
+  slot: boots
+  location: Kasballica 27. pf108
+  act: 4
+  description: At start of combat, gain stacks of acrobat trick = MP. Use stacks to reroll attack or avoid attack
+- name: Deadly Dancer's Boots
+  slot: boots
+  location: Kasballica 29. pf118
+  act: 4
+  description: Whenever wearer's MP reach 0, deals MP impact dmg to all adj target (prolly doesn't work this way)
+- name: Chirugeon Boots
+  slot: boots
+  location: Void 26. pf 84
+  act: 4
+  description: Start of combat, wearer gain use of onslaught and medikit ability for 0AP. Only used once per combat
+- name: Navy Breacher's Boot
+  slot: boots
+  location: Void 30. pf105
+  act: 4
+  description: >-
+    When wearer's AoE attack hits 2 targets for first time in a round. Wearer gain 2AP and attack not contribute to
+    attack limit. Wearer is immobilized until start of next turn
+- name: Dancing on Blood
+  slot: boots
+  location: Void 32. pf113
+  act: 4
+  description: >-
+    Once per turn, after using Blood Oath or Oath of Vengeance, they gain 1 use of Dash for 0AP until end of turn. Once
+    Dash was used, wearer regain MP = Resolve
+- name: Hungering Mind
+  slot: boots
+  location: Heretic colony event reward
+  act: 4
+  description: >-
+    The power of burning effects inflicted by the wearer is increased by +1 for each enemy affected by the wearer's area
+    attacks until the end of combat. This bonus stacks.
+- name: Improved Lightweight Boots
+  slot: boots
+  location: Mechanicus 24. pf 88
+  act: 4
+  description: Wearer gain 2 x STRb to parry and re-roll dodge test
+- name: Void Veteran Boots
+  slot: boots
+  location: (Void Shadows DLC) Drusians
+  act: 4
+  description: >-
+    Upon killing an enemy in melee combat, the character immediately gains 1 use of Dash, which does not require the
+    expenditure of AP (even if the character does not have this ability)
+- name: Acrobat's Greaves
+  slot: boots
+  location: (Void Shadows DLC) Kasballica Mission
+  act: 4
+  description: >-
+    At the beginning of combat, a character gains a number of Acrobatic Stunt levels equal to their Attack Power. These
+    levels can be used until the end of combat. A character can spend an Acrobatic Stunt level to reroll after an
+    unsuccessful attack (miss, dodge, or parry) or when attempting to avoid a hit.
+- name: Dancing on Blood
+  slot: boots
+  location: (Void Shadows DLC) Fellowship of the void
+  act: 4
+  description: >-
+    Once per turn, after using Blood Vow or Oath of Vengeance, the character gains one use of Run, which costs no AP,
+    until the end of the turn. After using this Run, the character regains a number of AP equal to their resolve.
+- name: Heavy Breacher's Boots
+  slot: boots
+  location: (Void Shadows DLC) sire fight
+  act: 4
+  description: After performing an area attack, the character gains +4 MP and can continue moving.
+- name: Elite Synth-Leather Boots
+  slot: boots
+  location: (Lex Imperialis DLC) Drusians
+  act: 4
+  description: When a character blocks an attack with a shield for the first time in a round, they gain +2 AP on their next turn.
+- name: Shield-Bearer's Boots
+  slot: boots
+  location: (Lex Imperialis DLC) Requires not to bring solomorne to act 3, vheabos 6
+  act: 4
+  description: A character can use the Assault Charge ability twice per turn.
+- name: The Slow March of Death
+  slot: boots
+  location: (Lex Imperialis DLC) Leetus
+  act: 4
+  description: >-
+    When using Dash, Dance of Death, Sprint, or Death from Above, the character's damage is increased by ((DEX bonus +
+    PER bonus) / 2) until the end of their turn. Stacks up to 3 times.
+- name: Meragon Boots
+  slot: boots
+  location: (Lex Imperialis DLC) Palace of Justice,
+  act: 4
+  description: >-
+    While under the effect of Merciless Suppression, the character gains immunity to slowing, immobilization, and
+    knockdowns. The sole is carefully engraved: "His tread was thunderous, and his name, Meragon, inspired fear in
+    everyone and meant only one thing to his enemies: death."
+- name: Astral Currents
+  slot: boots
+  location: Tomb world Epitaph
+  act: 5
+  description: >-
+    Wearer gains +20 MP in the first round of combat. Their movement cost is not reduced by threatened areas. Also, the
+    wearer's movement does not trigger AoO during this round
+- name: Rallying Boots
+  slot: boots
+  location: Tomb world Epitaph
+  act: 5
+  description: >-
+    After wearer uses Following!, the wearer's allies gain +33% dodge bonud to damage on their next attack for each
+    allyy within 2 cell radius from the wearer
+- name: Death World Warboots
+  slot: boots
+  location: Purchased from Hieronymus Doloroso
+  act: null
+  description: These boots grant their wearer a +15% Dodge Penetration bonus on attacks with melee weapons.
+- name: Disciple's Boots
+  slot: boots
+  location: null
+  act: null
+  description: These boots grant their wearer a +50% bonus to Dodge against Attacks of Opportunity from studied enemies.
+- name: Lightweight Boots
+  slot: boots
+  location: null
+  act: null
+  description: The wearer of these boots receives double their STR Bonus to Parry while wearing a light armour.
+- name: Commissar Boots
+  slot: boots
+  location: Kasballica Mission vendor (PF 50)
+  act: 2
+  description: >-
+    Whenever the wearer chooses an ally as the target of their ability, the wearer immediately gains +(FEL bonus / 2)
+    MP. The targeted ally gains +(FEL bonus / 2) MP at the start of their next turn.

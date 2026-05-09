@@ -1,0 +1,40 @@
+{
+  "blockers": [],
+  "date": "2026-05-07",
+  "phases": [
+    {
+      "description": "Level tracker, character cards, party roster, bottom sheet with descriptions and catch-up timeline",
+      "id": "core",
+      "label": "P1",
+      "name": "Core PWA",
+      "status": "complete"
+    },
+    {
+      "description": "Colonies, traders/vendors, resources, gear DB, notes section",
+      "id": "content",
+      "label": "P2",
+      "name": "Extended Content",
+      "status": "complete"
+    },
+    {
+      "description": "Swipe gestures, drag reorder, portraits, SW versioning, analytics, splash screen",
+      "id": "ux-polish",
+      "label": "P3",
+      "name": "UX Polish",
+      "status": "complete"
+    },
+    {
+      "description": "Multiple concurrent playthroughs tracked in a single app installation",
+      "id": "multi-profile",
+      "label": "P4",
+      "name": "Multi-Profile"
+    },
+    {
+      "description": "Open-ended backlog for improvements discovered during play",
+      "id": "future",
+      "label": "P5",
+      "name": "Future"
+    }
+  ],
+  "title": "Roguer Trader - Tracker"
+}

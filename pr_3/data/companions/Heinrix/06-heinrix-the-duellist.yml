@@ -1,0 +1,180 @@
+name: Heinrix the Duellist
+archetypes:
+  t1: Warrior
+  t2: Arch-Militant
+  t3: Exemplar
+extras:
+  skills: Athletics / Carouse / Medicae / Demolitions
+  gear:
+    - slot: Helm
+      options: Eyes of Joyeuse / Ghost Helm
+    - slot: Armour
+      options: >-
+        Armour of Hidden Promise / Psychic Bodyglove / [Death World Origin] Enforcer's Light carapace / Psyker's
+        Breastplate
+    - slot: Cloak
+      options: Swashbuckler Cloak / Cloak of Bloodthirst / Lady Theodora's Mantle
+    - slot: Neck
+      options: Starmist scarf / Requiemator / Psy Focus
+    - slot: Accessory 1
+      options: Warp Surge Brooch / Warp Reflex Ring / Anatomy Tome
+    - slot: Accessory 2
+      options: Hand of Offence / Chirugen's manuel / Knuckle Guard / Chains of Domination
+    - slot: Gloves
+      options: Augmented Gloves / Executioner's Gloves /Gloves of Rapid Desolation / Metal claw gloves
+    - slot: Boots
+      options: Stalking boots / Inertia Boots / Void Veteran Boots / Pneumo Boots / Fencing Boots
+    - slot: Weapon Set 1
+      options: Immaterium's Channeller / Sacrifice / Veilrender / The Distortion / Incinerator
+    - slot: Weapon Set 2
+      options: Sanctified Staff / Bloodrinker Staff
+levels:
+  '1':
+    m: Charge
+  '2':
+    m: Coercion
+  '3':
+    m: Endure
+  '4':
+    m: Daring Breach
+    e: Rigorous Training
+  '5':
+    m: Thick Skin
+    e: Weapon Skill
+  '6':
+    m: Break Through
+    e: Medicae
+  '7':
+    m: Weapon Skill
+    e: Psyker Minoris
+  '8':
+    m: Athletics
+    e: Shearing Strikes
+  '9':
+    m: Daring breach II
+  '10':
+    m: Desolation
+    e: Agility
+  '11':
+    m: Enfeeble
+    e: Blade of Light
+  '12':
+    m: Agility
+    e: Athletics
+  '13':
+    m: Easy Target
+    e: Carouse / Lore Xenos
+  '14':
+    m: Toughness
+    e: Psyker Majoris
+  '15':
+    m: Daring Breach IV
+  '16':
+    m: Versitility
+  '17':
+    m: Reckless Rush
+  '18':
+    m: Always Ready
+  '19':
+    m: Steady Superiority
+  '20':
+    m: AP +1
+    e: Weapon Skill
+  '21':
+    m: Allout
+    e: Weapon Skill
+  '22':
+    m: Wildfire
+    e: Deterioration
+  '23':
+    m: Athletics
+    e: Flash Fire
+  '24':
+    m: Agility
+    e: Psyker Terminus
+  '25':
+    m: Adaptability
+  '26':
+    m: Athletics
+    e: Agility
+  '27':
+    m: Steady Superiority IV
+  '28':
+    m: Carouse / Lore Xenos
+    e: Critical Versatility
+  '29':
+    m: Toughness
+    e: 'Characteristic Training: PER'
+  '30':
+    m: Warp Speed
+  '31':
+    m: Dismantle
+  '32':
+    m: Perception
+    e: Carouse / Lore Xenos
+  '33':
+    m: Distract
+    e: Perception
+  '34':
+    m: Perception
+    e: Psyker Extremis
+  '35':
+    m: Steady Superiority II
+  '36':
+    m: Eagar For Battle *
+    e: Crowd Kill
+  '37':
+    m: Athletics
+    e: Exploit Weakness
+  '38':
+    m: Weapon Skill
+    e: Hymns of Hatred
+  '39':
+    m: Reckless Strike
+    e: Athletics
+  '40':
+    m: Degraded Defence
+    e: Preferred Targets
+  '41':
+    m: Weapon Skill
+    e: Impetus
+  '42':
+    m: Devestating Attack
+    e: Agility
+  '43':
+    m: Breaking Attack
+    e: Psalms of Heroes
+  '44':
+    m: Carouse / Lore Xenos
+    e: Destroyer *
+  '45':
+    m: AP +1
+  '46':
+    m: Open Engagement
+    e: Carouse / Lore Xenos
+  '47':
+    m: Ramming Speed
+    e: Carouse / Lore Xenos
+  '48':
+    m: Contempt for the Weak
+    e: Agility
+  '49':
+    m: Perception
+    e: Medicae
+  '50':
+    m: Peak Condition
+    e: Edge of Dawn
+  '51':
+    m: Ingenious
+    e: Medicae
+  '52':
+    m: Warp Saturation
+    e: Still Mind
+  '53':
+    m: Kick
+    e: Perception
+  '54':
+    m: Extermination
+    e: Accustomed to Glory
+  '55':
+    m: AP +1

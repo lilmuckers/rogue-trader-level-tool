@@ -1,0 +1,182 @@
+name: Marching of the War Hymn
+theme: Ministorum Priest
+origin: Forge World (Subskin Armour) / Death World - Ministorum Priest - Warrior - WS +2 / Strength +2 / Toughness +2
+archetypes:
+  t1: Warrior
+  t2: Arch-Militant
+  t3: Exemplar
+extras:
+  skills: Athletics / Carouse / Awareness
+  gear:
+    - slot: Helm
+      options: The Guardian Crown / Tactical Genius / Retinal analyser
+    - slot: Armour
+      options: '[War World Origin] Tempestus Carapace / Sanguine Judgement / Adherent of Mankind'
+    - slot: Cloak
+      options: Malpain Shroud / Swashbuckler cloak
+    - slot: Neck
+      options: Invigorating Resolve / Dog Tag / Aquila Pendant / Fury Incarnate
+    - slot: Accessory 1
+      options: Bead of Might / Peculiar Trinket
+    - slot: Accessory 2
+      options: Chains of Domination / Empyrean Transceiver / Hellbrute Horn Trophy
+    - slot: Gloves
+      options: Augmented Gloves / Adaptive Gloves / Relish Anguish / Metal Claw Gloves
+    - slot: Boots
+      options: Pneumo Boots / Void Veteran Boots / Enforcer Light boots
+    - slot: Weapon Set 1
+      options: >-
+        Heavy Maul / Auto-striking power sword / Bonebreaker Maul / Tearing Vengence / coffinmaker sledge / Death Hymn /
+        Carnage / Tearing vengence
+    - slot: Weapon Set 2
+      options: Well-Maintained Rocksaw
+levels:
+  '1':
+    m: Charge
+  '2':
+    m: Medicae
+  '3':
+    m: Endure
+  '4':
+    m: Daring Breach
+    e: Thick skin
+  '5':
+    m: Hardened Scars
+    e: Weapon Skill
+  '6':
+    m: Taunting Scream
+    e: Athletics
+  '7':
+    m: Weapon Skill
+    e: Litany of Hatred
+  '8':
+    m: Athletics
+    e: Impetus
+  '9':
+    m: Daring Breach II
+  '10':
+    m: Ramming Speed
+    e: Toughness
+  '11':
+    m: Forceful Strike
+    e: Duelling Mastery
+  '12':
+    m: Toughness
+    e: Carouse
+  '13':
+    m: Open Engagement
+    e: Carouse
+  '14':
+    m: Strength
+    e: Heavy Armour Proficiency
+  '15':
+    m: Daring Breach IV
+  '16':
+    m: Versitility
+  '17':
+    m: Wildfire
+  '18':
+    m: Always Ready
+  '19':
+    m: Steady Superiority
+  '20':
+    m: AP +1
+    e: Weapon Skill
+  '21':
+    m: Dependable
+    e: Weapon Skill
+  '22':
+    m: Reckless Rush
+    e: Melee Weapon Specialist
+  '23':
+    m: Athletics
+    e: Allout
+  '24':
+    m: Toughness
+    e: Dual-Weapon Combat
+  '25':
+    m: Flashfire
+  '26':
+    m: Athletics
+    e: Toughness
+  '27':
+    m: Steady Superiority IV
+  '28':
+    m: Carouse
+    e: Adaptability
+  '29':
+    m: Strength
+    e: 'Characteristic Training: PER'
+  '30':
+    m: Devestating Attack
+  '31':
+    m: Breaking Attack
+  '32':
+    m: Perception
+    e: Carouse
+  '33':
+    m: Critical Versatility
+    e: Perception
+  '34':
+    m: Perception
+    e: Flensing Faith
+  '35':
+    m: Steady Superiority II
+  '36':
+    m: Eagar for battle *
+    e: Easy Target
+  '37':
+    m: Athletics
+    e: Dismantle
+  '38':
+    m: Weapon Skill
+    e: Power Armour Proficiency
+  '39':
+    m: Reckless Strike
+    e: Athletics
+  '40':
+    m: Degraded Defence
+    e: Exploit Weakness
+  '41':
+    m: Weapon Skill
+    e: Crowd Kill
+  '42':
+    m: Kick
+    e: Toughness
+  '43':
+    m: Martial Art
+    e: Dual-Weapon Specialist
+  '44':
+    m: Carouse
+    e: Destroyer *
+  '45':
+    m: AP +1
+  '46':
+    m: Steel of the Forge / Brutal Hunter
+    e: Carouse
+  '47':
+    m: Desolation
+    e: Medicae
+  '48':
+    m: Contempt for the Weak
+    e: Toughness
+  '49':
+    m: Willpower
+    e: Medicae
+  '50':
+    m: Peak Condition
+    e: Contempt
+  '51':
+    m: Distract
+    e: Medicae
+  '52':
+    m: Preferred Targets
+    e: Litany of Purification
+  '53':
+    m: Sworn Enemy
+    e: Willpower
+  '54':
+    m: Extermination
+    e: Accustomed to Glory
+  '55':
+    m: AP +1

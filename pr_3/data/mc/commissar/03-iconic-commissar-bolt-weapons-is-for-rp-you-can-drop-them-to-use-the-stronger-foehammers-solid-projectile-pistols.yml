@@ -1,0 +1,187 @@
+name: Iconic Commissar (Bolt weapons is for RP, you can drop them to use the stronger foehammers / solid projectile pistols)
+theme: Commissar
+origin: Hive World - Commissar - Warrior - Weapon Skill +2 / Strength +1 / Toughness +2 / Agi +1
+archetypes:
+  t1: Warrior
+  t2: Arch-Militant
+  t3: Exemplar
+extras:
+  skills: Coercion / Demolition / Awareness / Lore Imperium (Chartist Pendant)
+  gear:
+    - slot: Helm
+      options: Commissar's Cap / Tactical Genius / The Guardian Crown
+    - slot: Armour
+      options: '[Death World Origin] Enforcer Light Carapace / [Hive World Origin] Voidsmen Armour'
+    - slot: Cloak
+      options: >-
+        Malpain Shroud / Arch-Militant's Cape / Von Valancies Cloak / Tactical Backpack / Temperus Elite Carapace
+        Backpack
+    - slot: Neck
+      options: Invigorating Resolve / The Vial of Falstow / Blessed Bolter Casing / Dog Tag
+    - slot: Accessory 1
+      options: Knuckle Guard / Portative Manipulator / Bead of Might
+    - slot: Accessory 2
+      options: Bayonet Chain Knife / Pair Holster / Iron Cape
+    - slot: Gloves
+      options: >-
+        Augmented Gloves / Inevietable Demise / Master Duellist's Gloves / Adaptive Gloves / Metal Claw Gloves / Gloves
+        of Rapid Desolation
+    - slot: Boots
+      options: Void Veteran Boots / Enforcer Light Boots / Fencing Boots / Pneumo Boots
+    - slot: Weapon Set 1
+      options: >-
+        [Mars-Pattern] Bolt Pistol / Deadly Precision / [Mezoa-Pattern] Bolt Pistol / Anti-Vehicle Revolver / Daredevil
+        Pistol / Bone-Shatterer / Triumph of Faith / Watcher From Above / Auto-Striking Powersword / Tearing Vengence /
+        [Sol] Elite Power Sword
+    - slot: Weapon Set 2
+      options: '[Mars-Pattern] Thunder Hammer / They Shall Weep / Restless Absolution / Well-Maintained Rocksaw'
+levels:
+  '1':
+    m: Charge
+  '2':
+    m: Medicae
+  '3':
+    m: Endure
+  '4':
+    m: Daring Breach
+    e: Thick Skin
+  '5':
+    m: Crowd Kill
+    e: Weapon Skill
+  '6':
+    m: Forceful Strike
+    e: Athletics
+  '7':
+    m: Weapon Skill
+    e: Duelling Mastery / Bolter Weapon Proficiency
+  '8':
+    m: Athletics
+    e: Impetus
+  '9':
+    m: Daring Breach II
+  '10':
+    m: Opening Strike
+    e: Strength
+  '11':
+    m: Reckless Strike
+    e: Weapon Personalisation
+  '12':
+    m: Toughness
+    e: Coercion
+  '13':
+    m: Ramming Speed
+    e: Coercion
+  '14':
+    m: Toughness
+    e: Summary Execution
+  '15':
+    m: Daring Breach IV
+  '16':
+    m: Versitility
+  '17':
+    m: Reckless Rush
+  '18':
+    m: Always Ready
+  '19':
+    m: Steady Superiority
+  '20':
+    m: AP +1
+    e: Weapon Skill
+  '21':
+    m: Broad Expertise
+    e: Weapon Skill
+  '22':
+    m: Wildfire
+    e: Dual-Weapon Combat
+  '23':
+    m: Athletics
+    e: All Out
+  '24':
+    m: Toughness
+    e: Power Weapon Expert
+  '25':
+    m: Flashfire
+  '26':
+    m: Athletics
+    e: Toughness
+  '27':
+    m: Steady Superiority IV
+  '28':
+    m: Coercion
+    e: Armsmaster
+  '29':
+    m: Strength
+    e: 'Characteristic Training: Per'
+  '30':
+    m: Kick
+  '31':
+    m: Martial Art
+  '32':
+    m: Perception
+    e: Coercion
+  '33':
+    m: Adaptability
+    e: Perception
+  '34':
+    m: Perception
+    e: Comradery
+  '35':
+    m: Steady Superiority II
+  '36':
+    m: Peak Condition
+    e: Easy Target
+  '37':
+    m: Athletics
+    e: Critical Versatility
+  '38':
+    m: Weapon Skill
+    e: Power Armour Proficiency
+  '39':
+    m: Sworn Enemy
+    e: Athletics
+  '40':
+    m: Degraded Defence
+    e: Dismantle
+  '41':
+    m: Weapon Skill
+    e: Open Engagement
+  '42':
+    m: Devestating Attack
+    e: Toughness
+  '43':
+    m: Breaking Attack
+    e: Let Them Know Fear!
+  '44':
+    m: Coercion
+    e: Destroyer *
+  '45':
+    m: AP +1
+  '46':
+    m: Contempt
+    e: Coercion
+  '47':
+    m: Living Shield
+    e: Medicae
+  '48':
+    m: Exploit Weakness
+    e: Toughness
+  '49':
+    m: Fellowship
+    e: Medicae
+  '50':
+    m: Eager for battle *
+    e: Desolation
+  '51':
+    m: Contempt for the Weak
+    e: Medicae
+  '52':
+    m: Preferred Targets
+    e: Motivation
+  '53':
+    m: Break Through
+    e: Fellowship
+  '54':
+    m: Extermination
+    e: Blade Flurry
+  '55':
+    m: AP +1

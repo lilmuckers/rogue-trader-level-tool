@@ -1,0 +1,177 @@
+name: Cassia the Gaze
+archetypes:
+  t1: Officer
+  t2: Master Tactician
+  t3: Exemplar
+extras:
+  skills: Lore Warp / Persuasion / Coercion / Commerce / Awareness
+  gear:
+    - slot: Helm
+      options: Commander's Monocle / Peripheral Visor
+    - slot: Armour
+      options: Slick Bodyglove
+    - slot: Cloak
+      options: Mercy's Gift / Cloak of Mercy
+    - slot: Neck
+      options: Medal of Alacrity / Daemon Tool / Aquila Pendant
+    - slot: Accessory 1
+      options: Black Signet of the Inquisition / Battle Plan
+    - slot: Accessory 2
+      options: Precint Vox Relay / Commander's Chrono
+    - slot: Gloves
+      options: Noble Silk Gloves / Thrice Pioneers Bracers / Grenadier's Gloves
+    - slot: Boots
+      options: Adrenaline Warboots / Sororitas Boots
+    - slot: Weapon Set 1
+      options: Warp Guide Staff / Astronomican Regalia
+    - slot: Weapon Set 2
+      options: Red Crystal Staff / Staff of Orsellio Novator
+levels:
+  '1':
+    m: Voice Of Command
+  '2':
+    m: Persuasion
+  '3':
+    m: Bring it Down !
+  '4':
+    m: Finest Hour
+    e: Lasting Impression
+  '5':
+    m: Willpower
+    e: Mastery of Time
+  '6':
+    m: Decisive Response
+    e: Willpower
+  '7':
+    m: Held in my Gaze
+    e: Blood Augury
+  '8':
+    m: Pass Unscathed
+    e: Persuasion
+  '9':
+    m: Finest Hour IV
+  '10':
+    m: Lore Warp / Awareness
+    e: Perception
+  '11':
+    m: Steel Resolve
+    e: Perception
+  '12':
+    m: Air of Authority
+    e: Strange Vitality
+  '13':
+    m: Inspiring Speech
+    e: Lore Warp / Awareness
+  '14':
+    m: Fellowship
+    e: Eye of Oblivion
+  '15':
+    m: Finest Hour I
+  '16':
+    m: Tactical Advantage
+    e: Press The Advantage
+  '17':
+    m: Linchpin
+  '18':
+    m: Reliance
+  '19':
+    m: Orchestrated Firestorm
+  '20':
+    m: Ap +1
+    e: Willpower
+  '21':
+    m: Willpower
+    e: Personal Involvement
+  '22':
+    m: Inspire
+  '23':
+    m: Unwavering Motivation
+    e: Persuasion
+  '24':
+    m: Perception
+    e: Undam the Sea of Souls
+  '25':
+    m: Hidden Advantage
+  '26':
+    m: Persuasion
+    e: Perception
+  '27':
+    m: Orchestrated Firestorm II
+  '28':
+    m: Against All Odds
+  '29':
+    m: Lore Warp / Awareness
+    e: Fellowship
+  '30':
+    m: Mind Over Matter
+    e: Fervour
+  '31':
+    m: Brink of Death
+  '32':
+    m: Fellowship
+    e: Lore Warp / Awareness
+  '33':
+    m: In The Hero's Footsteps
+  '34':
+    m: Fellowship
+    e: Unnatural Allure
+  '35':
+    m: Orchestrated Firestorm III
+  '36':
+    m: Eager for Battle
+    e: Focus!
+  '37':
+    m: Lore Warp / Awareness
+    e: Tonicity
+  '38':
+    m: Willpower
+    e: Ebb and Flow
+  '39':
+    m: Reveal the Light
+    e: Lore Warp / Awareness
+  '40':
+    m: Firebrand
+    e: Veil of Protection
+  '41':
+    m: Willpower
+    e: Be Vigilant!
+  '42':
+    m: Mend Reality
+    e: Perception
+  '43':
+    m: Guide of Souls
+    e: 'Grenadier / Base Skill: Lore Warp'
+  '44':
+    m: Persuasion
+    e: Degraded Defence
+  '45':
+    m: AP +1
+  '46':
+    m: Leader's Assault
+    e: Persuasion
+  '47':
+    m: Seize the Initiative
+    e: Lore Warp / Awareness
+  '48':
+    m: Comfort in Conformity
+    e: Perception
+  '49':
+    m: Fellowship
+    e: Lore Warp / Awareness
+  '50':
+    m: Eager Subordanates
+    e: Armour of Contempt
+  '51':
+    m: Stand Resolute
+    e: Lore Warp / Awareness
+  '52':
+    m: Personal Oversight
+    e: 'Stable Routes / Advanced Skill: Lore Warp'
+  '53':
+    m: Immolate the Soul
+    e: Fellowship
+  '54':
+    m: Extermination
+    e: Inspire Courage
+  '55':
+    m: AP +1

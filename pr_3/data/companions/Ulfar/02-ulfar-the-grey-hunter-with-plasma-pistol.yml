@@ -1,0 +1,182 @@
+name: Ulfar the Grey Hunter with Plasma Pistol
+archetypes:
+  t1: Soldier
+  t2: Arch-Militant
+  t3: Exemplar
+extras:
+  skills: Athletics / Carouse / Demolitions / Awareness
+  gear:
+    - slot: Helm
+      options: Red Wolf Skull / Emperor's Justice
+    - slot: Armour
+      options: Might of Fenris Armour / Holy Power Armour / Bloodcraver
+    - slot: Cloak
+      options: Wolf Pelt Cloak / Shroud of Dauntlessness
+    - slot: Neck
+      options: >-
+        Invigorating Resolve / Slicing Symbol / Fury Incarnate / Wolf Tooth Necklace / Ruby Splash / Laughing God's
+        Pendant
+    - slot: Accessory 1
+      options: Hellbrute Horn Trophy / Echo of Victory / Litany of Exhaustion / Secrets of the forerunner / Bead of Might
+    - slot: Accessory 2
+      options: Pair Holster / Secrets of the forerunner / Bead of Might
+    - slot: Gloves
+      options: Blood Ice Gauntlets
+    - slot: Boots
+      options: Icebreaker Sabatons
+    - slot: Weapon Set 1
+      options: >-
+        Massive Astartes Plasma Pistol / Astartes Plasma Pistol / Grin of the Iron Wolf / Mjodlner / Astartes Power
+        Sword
+    - slot: Weapon Set 2
+      options: The Pyre / Annihilating Astartes Bolter / Typhoon / Storm Bolter
+levels:
+  '1':
+    m: Run and Gun
+  '2':
+    m: Athletics
+  '3':
+    m: Revel in Slaughter
+  '4':
+    m: Firearm Mastery
+    e: Fired Up
+  '5':
+    m: Agility
+    e: Rapid Reload
+  '6':
+    m: Agility
+    e: Controlled Shot
+  '7':
+    m: Ballistic Skill
+    e: Duelling Mastery
+  '8':
+    m: Rack and Ruin
+    e: Awareness
+  '9':
+    m: Firearm Mastery II
+  '10':
+    m: Alacrity
+    e: Ballistic Skill
+  '11':
+    m: Rapid Fire
+    e: Demolition
+  '12':
+    m: Perception
+    e: Dual-Weapon Combat
+  '13':
+    m: Unfaltering Fire
+    e: It Will not Die
+  '14':
+    m: Chain Weapon Expert
+    e: Demolition
+  '15':
+    m: Firearm Mastery III
+  '16':
+    m: Versatility
+  '17':
+    m: Kick
+  '18':
+    m: Martial Art
+  '19':
+    m: Steady Superiority
+  '20':
+    m: Ap +1
+    e: Ballistic Skill
+  '21':
+    m: Always Ready
+    e: Toughness
+  '22':
+    m: Wild Fire
+    e: External Power Block
+  '23':
+    m: Athletics
+    e: Broad expertise
+  '24':
+    m: Perception
+    e: Safety Training
+  '25':
+    m: Armsmaster
+  '26':
+    m: Athletics
+    e: Agility
+  '27':
+    m: Steady Superiority IV
+  '28':
+    m: Demolitions
+    e: Flashfire
+  '29':
+    m: Ballistic Skill
+    e: Enhanced Splash Area
+  '30':
+    m: Reckless Rush
+  '31':
+    m: Dependable
+  '32':
+    m: Toughness
+    e: Demolitions
+  '33':
+    m: Adaptability
+    e: Toughhness
+  '34':
+    m: Perception
+    e: Plasma Bank
+  '35':
+    m: Steady Superiority II
+  '36':
+    m: Eager for battle *
+    e: Swift slaughter
+  '37':
+    m: Demolitions
+    e: Critical Versatility
+  '38':
+    m: Ballistic Skill
+    e: Grenadier
+  '39':
+    m: Concentrated Fire
+    e: Demolitions
+  '40':
+    m: Degraded defence
+    e: Contempt for the Weak
+  '41':
+    m: Ballistic Skill
+    e: Demolition Engineer
+  '42':
+    m: Devestating Attack
+    e: Agility
+  '43':
+    m: Breaking Attack
+    e: Flame Weapon Expert
+  '44':
+    m: Athletics
+    e: Destroyer *
+  '45':
+    m: AP +1
+  '46':
+    m: tenderise
+    e: Awareness
+  '47':
+    m: Point-Blank
+    e: Awareness
+  '48':
+    m: Exploit Weakness
+    e: Agility
+  '49':
+    m: Toughness
+    e: Awareness
+  '50':
+    m: Peak Condition
+    e: Enough bullets for everyone
+  '51':
+    m: Distract
+    e: Awareness
+  '52':
+    m: Preferred Targets
+    e: Power Weapon Expert
+  '53':
+    m: Dash / Entrench
+    e: Toughness
+  '54':
+    m: Extermination
+    e: Accustomed to Glory
+  '55':
+    m: AP +1

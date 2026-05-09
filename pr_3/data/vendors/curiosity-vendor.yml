@@ -1,0 +1,99 @@
+name: Curiosity Vendor
+alignment_vendor: true
+neutral_items:
+  - name: Domination and Elimination
+    act: 2
+    pf: 15
+  - name: Inanimate Shield
+    act: 2
+    pf: 35
+  - name: Death Grip
+    act: 2
+    pf: 35
+  - name: Synergy
+    act: 2
+    pf: 45
+  - name: Winged Delusion
+    act: 2
+    pf: 35
+  - name: Familiar Maintenance Station Upgrade Kit I
+    act: 2
+    pf: 50
+  - name: Grave Chill
+    act: 2
+    pf: 55
+  - name: Air Support
+    act: 2
+    pf: 65
+  - name: Familiar Maintenance Station Upgrade Kit II
+    act: 2
+    pf: 70
+  - name: Analytics Module
+    act: 2
+    pf: 15
+  - name: Familiar Maintenance Station Upgrade Kit III
+    act: 4
+    pf: 90
+  - name: Step into the Abyss
+    act: 4
+    pf: 100
+  - name: Phasing Radiation
+    act: 4
+    pf: 103
+  - name: Blood Feast
+    act: 4
+    pf: 106
+  - name: Pack Hunting
+    act: 4
+    pf: 110
+dogmatic_items:
+  - name: Undefiled Aquila
+    rank: 3
+    act: 4
+    pf: 130
+  - name: Consecrated Fangs
+    rank: 3
+    act: 4
+    pf: 130
+  - name: His Light Bearer
+    rank: 3
+    act: 4
+    pf: 130
+  - name: No Mercy for the Unclean
+    rank: 3
+    act: 4
+    pf: 130
+iconoclast_items:
+  - name: Model of Loyalty
+    rank: 3
+    act: 4
+    pf: 130
+  - name: Immaterium Catalyst
+    rank: 3
+    act: 4
+    pf: 130
+  - name: Devotion of the Aquila
+    rank: 3
+    act: 4
+    pf: 130
+  - name: Vigil Unending
+    rank: 3
+    act: 4
+    pf: 130
+heretic_items:
+  - name: Unholy Idol
+    rank: 3
+    act: 4
+    pf: 130
+  - name: Maddening Winds
+    rank: 3
+    act: 4
+    pf: 130
+  - name: Feast of Suffering
+    rank: 3
+    act: 4
+    pf: 130
+  - name: Dog of War
+    rank: 3
+    act: 4
+    pf: 130

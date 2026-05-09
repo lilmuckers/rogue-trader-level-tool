@@ -1,0 +1,177 @@
+name: Abelard the Executioner
+archetypes:
+  t1: Warrior
+  t2: Executioner
+  t3: Exemplar
+extras:
+  skills: Medicae / Athletics / Carouse
+  gear:
+    - slot: Helm
+      options: Carmine Crown / Mechanicus Respirator / The Guardian Crown / Tactical Genius
+    - slot: Armour
+      options: Invincible Onsalught Armour / Sanguine Judgement / Adherent of Mainkind
+    - slot: Cloak
+      options: Malpain Shroud / Swashbuckler cloak
+    - slot: Neck
+      options: Invigorating Resolve
+    - slot: Accessory 1
+      options: Hellbrute Horn Trophy / Harlequin Trinket / Diagnostor / Litany of Exhaustion / Hadd-Pattern-Data-Loom
+    - slot: Accessory 2
+      options: Bead of Might / Cruciatum Litany / Voidborn's Pride / Knuckle Guard
+    - slot: Gloves
+      options: Augmented Gloves / Hand of Avolius / Metal Claw Gloves / Inevietable Demise
+    - slot: Boots
+      options: Inertia Boots / Pneumo Boots / Void Veteran Boots / Enforcer's Light boots
+    - slot: Weapon Set 1
+      options: Imminent Torment / Blade of the Blood Hunter / Symphony of Pain / Virulent Slicer
+    - slot: Weapon Set 2
+      options: Well-Maintained Rock Saw
+levels:
+  '1':
+    m: Charge
+  '2':
+    m: Medicae
+  '3':
+    m: Endure
+  '4':
+    m: Daring Breach
+    e: Thick skin
+  '5':
+    m: Hardened Scars
+    e: Weapon Skill
+  '6':
+    m: Break Through
+    e: Medicae
+  '7':
+    m: Weapon Skill
+    e: Fleet Combat Training
+  '8':
+    m: Athletics
+    e: Rigorous Training
+  '9':
+    m: Daring Breach II
+  '10':
+    m: Shearing Strikes
+    e: Agility
+  '11':
+    m: Reckless Strike
+    e: Get off me!
+  '12':
+    m: Agility
+    e: Athletics
+  '13':
+    m: Desolation
+    e: Carouse
+  '14':
+    m: Perception
+    e: Evasive Manoeuvres
+  '15':
+    m: Daring Breach IV
+  '16':
+    m: Forced Repentance
+    e: Scourging Strike + Where it hurts
+  '17':
+    m: Pain Resonance
+  '18':
+    m: Anatomy Expert
+  '19':
+    m: Carnival of Misery
+  '20':
+    m: AP +1
+    e: Weapon Skill
+  '21':
+    m: Weapon Skill
+    e: Does it Hurt?
+  '22':
+    m: Exsanguination
+  '23':
+    m: Sower of Distress
+    e: Lore Xenos
+  '24':
+    m: Agility
+    e: Drukhari Weapon Proficiency
+  '25':
+    m: Master of Torture
+  '26':
+    m: Agility
+    e: Medicae
+  '27':
+    m: Carnival of Misery III
+  '28':
+    m: Perfect Anatomy
+  '29':
+    m: Perception
+    e: Medicae
+  '30':
+    m: Reckless Abandon
+    e: Finesse
+  '31':
+    m: Deep Laceration
+  '32':
+    m: Perception
+    e: Athletics
+  '33':
+    m: Fragile Playthings
+  '34':
+    m: Strength
+    e: Power Armour Proficiency
+  '35':
+    m: Carnival of Misery IV
+  '36':
+    m: Eagar for battle *
+    e: Easy Target
+  '37':
+    m: Medicae
+    e: All-Encompassing Agony
+  '38':
+    m: Weapon Skill
+    e: Get off Me!
+  '39':
+    m: Sworn Enemy
+    e: Medicae
+  '40':
+    m: Degraded Defence
+    e: Racking Weakness
+  '41':
+    m: Weapon Skill
+    e: Impetus
+  '42':
+    m: Gift of Torment
+    e: Agility
+  '43':
+    m: Internal Bleeding
+    e: Stentorian Voice
+  '44':
+    m: Athletics
+    e: Destroyer *
+  '45':
+    m: AP +1
+  '46':
+    m: Ramming Speed
+    e: Athletics
+  '47':
+    m: Open Engagement
+    e: Athletics
+  '48':
+    m: Acute Pain
+    e: Agility
+  '49':
+    m: Strength
+    e: Carouse
+  '50':
+    m: Peak Condition
+    e: Blade Flurry
+  '51':
+    m: Revelling in Suffering
+    e: Carouse
+  '52':
+    m: Crowd Kill
+    e: It Will Not Die
+  '53':
+    m: Forceful Strike
+    e: Strength
+  '54':
+    m: Extermination
+    e: Sickening Pain
+  '55':
+    m: AP +1
