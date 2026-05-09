@@ -1,0 +1,16 @@
+{
+  "name": "rogue-trader-characters",
+  "version": "1.2.5",
+  "private": true,
+  "scripts": {
+    "extract": "node scripts/extract.js",
+    "extract-xlsx": "python3 scripts/extract-xlsx.py",
+    "build": "node scripts/build.js",
+    "release:patch": "npm version patch --no-git-tag-version && npm run build",
+    "release:minor": "npm version minor --no-git-tag-version && npm run build",
+    "release:major": "npm version major --no-git-tag-version && npm run build"
+  },
+  "devDependencies": {
+    "js-yaml": "^4.1.0"
+  }
+}

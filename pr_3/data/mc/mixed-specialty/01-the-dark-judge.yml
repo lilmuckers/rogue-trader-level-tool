@@ -1,0 +1,186 @@
+name: The Dark Judge
+theme: Mixed/Specialty
+origin: >-
+  Fortress World - Arbitrator (Vigilant) - Warrior - Weapon Skill +2 / Strength +2 / Toughness +2 (Heretic In Prologue
+  Gives Corrupted Inferno Pistol, Useful until foehammers and shotguns)
+archetypes:
+  t1: Warrior
+  t2: Arch-Militant
+  t3: Exemplar
+extras:
+  skills: Athletics / Coercion / Carouse
+  gear:
+    - slot: Helm
+      options: Adeptus Arbites Helmet / Steel Guidance / Commissar Cap
+    - slot: Armour
+      options: >-
+        Arbitrator Solomon Vhyr's Armour / Marshal's Armour of the Koronus Expanse / Adherent of Mankind / Invincible
+        Onsalught Armour
+    - slot: Cloak
+      options: Malpain Shroud / Swashbuckler Cloak / Arch-Militan Cape / Dimensional Traveller Cloak / Von Valancius Cloak
+    - slot: Neck
+      options: Invigorating Resolve / Fury Incarnate / Aquila Pendant
+    - slot: Accessory 1
+      options: Echo of Victory / Hellbrute Horn Trophy / Iron Cape
+    - slot: Accessory 2
+      options: Bead of Might / Bayonet Chain Knife / Knuckle Guard
+    - slot: Gloves
+      options: Relished Anquish / Augmented Gloves / Metal Claw Gloves
+    - slot: Boots
+      options: Enforcer Light Boots / Inertia Boots / Void Veteran Boots / Pneumo Boots
+    - slot: Weapon Set 1
+      options: >-
+        Coffinmaker's Sledge / Torturer / Bonebreaker Maul / Advanced Adeptus Arbites Shotgun / Scoped Shotgun /
+        [Sol-Pattern] Shotgun / Double Barrel Shotgun
+    - slot: Weapon Set 2
+      options: Bonecracker / Well-Maintaned Rocksaw / Restless Absolution / [Mars-Pattern] Thunder Hammer / Piety's Charge
+levels:
+  '1':
+    m: Charge
+  '2':
+    m: Medicae
+  '3':
+    m: Endure
+  '4':
+    m: Daring Breach
+    e: Crowd Kill
+  '5':
+    m: Thick Skin
+    e: Weapon Skill
+  '6':
+    m: Forceful Strike
+    e: Coercion
+  '7':
+    m: Weapon Skill
+    e: Never Stop Believing
+  '8':
+    m: Coercion
+    e: Hardened Scars
+  '9':
+    m: Daring Breach II
+  '10':
+    m: Opening Strike
+    e: Strength
+  '11':
+    m: Reckless Strike
+    e: Heavy Armour Proficiency
+  '12':
+    m: Toughness
+    e: Athletics
+  '13':
+    m: Impetus
+    e: Athletics
+  '14':
+    m: Toughness
+    e: Law and Order
+  '15':
+    m: Daring Breach IV
+  '16':
+    m: Versitility
+  '17':
+    m: Wildfire
+  '18':
+    m: Always Ready
+  '19':
+    m: Steady Superiority
+  '20':
+    m: AP +1
+    e: Weapon Skill
+  '21':
+    m: Broad Expertise
+    e: Weapon Skill
+  '22':
+    m: Reckless Rush
+    e: Dual-Weapon Combat
+  '23':
+    m: Coercion
+    e: Allout
+  '24':
+    m: Toughness
+    e: Shotgun Mastery
+  '25':
+    m: Flashfire
+  '26':
+    m: Coercion
+    e: Toughness
+  '27':
+    m: Steady Superiority IV
+  '28':
+    m: Athletics
+    e: Adaptability
+  '29':
+    m: Strength
+    e: 'Characteristic Training: PER'
+  '30':
+    m: Devestating Attack
+  '31':
+    m: Breaking Attack
+  '32':
+    m: Perception
+    e: Athletics
+  '33':
+    m: Critical Versatility
+    e: Perception
+  '34':
+    m: Perception
+    e: Public Sentencing
+  '35':
+    m: Steady Superiority II
+  '36':
+    m: Eagar for battle *
+    e: Easy Target
+  '37':
+    m: Coercion
+    e: Armsmaster
+  '38':
+    m: Weapon Skill
+    e: The Steady Hand of Justice
+  '39':
+    m: Grisly Adjudication
+    e: Coercion
+  '40':
+    m: Degraded Defence
+    e: Contempt for the weak
+  '41':
+    m: Weapon Skill
+    e: Open Engagement
+  '42':
+    m: Kick
+    e: Toughness
+  '43':
+    m: Martial Art
+    e: Familiar Kickback
+  '44':
+    m: Athletics
+    e: Destroyer *
+  '45':
+    m: AP +1
+  '46':
+    m: Armour-Piercing
+    e: Athletics
+  '47':
+    m: Desolation
+    e: Medicae
+  '48':
+    m: Exploit Weakness
+    e: Toughness
+  '49':
+    m: Strength
+    e: Medicae
+  '50':
+    m: Peak Condition
+    e: Ramming Speed
+  '51':
+    m: Distract
+    e: Medicae
+  '52':
+    m: Preferred Targets
+    e: Mob Justice / Power Armour
+  '53':
+    m: Sworn Enemy
+    e: Strength
+  '54':
+    m: Extermination
+    e: Accustomed to Glory
+  '55':
+    m: AP +1

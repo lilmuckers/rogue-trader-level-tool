@@ -1,0 +1,177 @@
+name: Argenta the Inspiring Saint
+archetypes:
+  t1: Soldier
+  t2: Master Tactician
+  t3: Exemplar
+extras:
+  skills: Awareness / Demolition
+  gear:
+    - slot: Helm
+      options: Corruption Eradicator Helmet / Gunslinger's Helm
+    - slot: Armour
+      options: '[Hive world ] Voidsmen Armour / Armour of the one star'
+    - slot: Cloak
+      options: Tactical Backpack
+    - slot: Neck
+      options: Aquila Pendant / Dog Tags / Onslaught Amulet / Focus Incense / Ruby Splash
+    - slot: Accessory 1
+      options: Chains of Domination / Demolition Instructions / Echo of Victory
+    - slot: Accessory 2
+      options: Demolition Instructions / Bead of might / Book of war prayers / Saint Cognacius Scriptures
+    - slot: Gloves
+      options: Compensator Gloves / Marksman Bracers
+    - slot: Boots
+      options: Inertia Boots / Caligae of saint keefe / Heavy Breacher Boots
+    - slot: Weapon Set 1
+      options: They Shall Weep / Hymn of Vehemence
+    - slot: Weapon Set 2
+      options: Purging Fury / Double-Barrel Shotgun
+levels:
+  '1':
+    m: Run and Gun
+  '2':
+    m: Demolition
+  '3':
+    m: Revel in Slaughter
+  '4':
+    m: Firearm Mastery
+    e: Muzzle Velocity
+  '5':
+    m: Ballistic Skill
+    e: Rapid Reload
+  '6':
+    m: Ballistic Skill
+    e: Rapid Fire
+  '7':
+    m: Agility
+    e: Litany of Hatred
+  '8':
+    m: Unfaltering Fire
+    e: Awareness
+  '9':
+    m: Firearm Mastery II
+  '10':
+    m: Fired Up
+    e: Agility
+  '11':
+    m: Controlled Shot
+    e: Awareness
+  '12':
+    m: Perception
+    e: Bolt Weapon Expert
+  '13':
+    m: Swift Slaughter
+    e: Tenets of Retribution
+  '14':
+    m: Flame Weapon Expert
+    e: Demolition
+  '15':
+    m: Firearm Mastery III
+  '16':
+    m: Tactical Advantage
+    e: Press The Advantage
+  '17':
+    m: Linchpin
+  '18':
+    m: Reliance
+  '19':
+    m: Orchestrated Firestorm
+  '20':
+    m: Ap +1
+    e: Ballistic Skill
+  '21':
+    m: Ballistic Skill
+    e: Joint Offensive
+  '22':
+    m: Inspire
+  '23':
+    m: Unwavering Motivation
+    e: Demolition
+  '24':
+    m: Agility
+    e: Grenadier
+  '25':
+    m: Against All Odds
+  '26':
+    m: Demolition
+    e: Agility
+  '27':
+    m: Orchestrated Firestorm II
+  '28':
+    m: Dawn of Victory
+  '29':
+    m: Awareness / Lore Imperium
+    e: Perception
+  '30':
+    m: Know No Heresy
+    e: Fervour
+  '31':
+    m: Stacking the Deck
+  '32':
+    m: Perception
+    e: Awareness / Lore Imperium
+  '33':
+    m: Brink of Death
+  '34':
+    m: Perception
+    e: Litany of Purification
+  '35':
+    m: Orchestrated Firestorm III
+  '36':
+    m: Eagar for Battle
+    e: Rack and Ruin
+  '37':
+    m: Demolition
+    e: Personal Involvement
+  '38':
+    m: Ballistic Skill
+    e: Better to die for the Emperor
+  '39':
+    m: Concentrated Fire
+    e: Demolition
+  '40':
+    m: Degraded Defence
+    e: Undisputed Advantage
+  '41':
+    m: Ballistic Skill
+    e: Demolition Engineer
+  '42':
+    m: Finish the Job
+    e: Agility
+  '43':
+    m: Perfect Finish
+    e: Doing My Part
+  '44':
+    m: Awareness / Lore Imperium
+    e: Deadly Aim *
+  '45':
+    m: AP +1
+  '46':
+    m: Point-Blank
+    e: Awareness / Lore Imperium
+  '47':
+    m: Enough Bullets for Everyone
+    e: Medicae
+  '48':
+    m: Logistical Superiority
+    e: Agility
+  '49':
+    m: Perception
+    e: Medicae
+  '50':
+    m: Extermination *
+    e: Camraderie
+  '51':
+    m: Tactical Respite
+    e: Medicae
+  '52':
+    m: Integrity
+    e: Stronger Together
+  '53':
+    m: Entrench
+    e: Perception
+  '54':
+    m: Vital Points / Pinpoint Accuracy / Masterful Display
+    e: Support the Advance / Comfort in Conformity
+  '55':
+    m: AP +1

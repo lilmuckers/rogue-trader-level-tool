@@ -1,0 +1,182 @@
+name: Judge Death
+theme: Mixed/Specialty
+origin: >-
+  Fortress World - Arbitrator (Castigator) - Operative - Ballistic Skill +2 / Agillity +2 / Intelligence +1 / Perception
+  +1
+archetypes:
+  t1: Operative
+  t2: Bounty Hunter
+  t3: Exemplar
+extras:
+  skills: Awareness / Logic / Tech-Use / Lore Impeium / Lore Xenos / Medicae
+  gear:
+    - slot: Helm
+      options: >-
+        Lingering Whisper / Steel Guidance / Commissar Cap / Meragon Helmet / Self-Calibrating Goggles /
+        Self-Calibrating Helm
+    - slot: Armour
+      options: Commissar Flak Breastplate / [Hive world Origin] Voidsmen Armour
+    - slot: Cloak
+      options: Shadowguide Cloak / Von Valancius Cloak
+    - slot: Neck
+      options: Synaptic Coagulator
+    - slot: Accessory 1
+      options: Long Range Lens / Vid-Capture Relay / Armour-Piercing Ammo / Meragon Ring
+    - slot: Accessory 2
+      options: Bead of Might / Portative Manipulator / Prey Scanner / Target Designator / Armour-Piercing Ammo
+    - slot: Gloves
+      options: Marksman Bracers / Inevitable Demise / Deflection Gloves
+    - slot: Boots
+      options: Sharpshooter Boots
+    - slot: Weapon Set 1
+      options: Corpuscarii Oath / Arc Rifle Mindstorm
+    - slot: Weapon Set 2
+      options: Advanced Adeptus Arbites Shotgun / Scoped Shotgun / [Sol-Pattern] Shotgun / Double Barrel Shotgun
+levels:
+  '1':
+    m: Analyse Enemies
+  '2':
+    m: Medicae
+  '3':
+    m: Expose Weakness
+  '4':
+    m: Dismantling
+    e: Uncanny Sight
+  '5':
+    m: Ballistic Skill
+    e: Never Stop Believing
+  '6':
+    m: Tide of Excellence
+    e: Ballistic Skill
+  '7':
+    m: That's an Order!
+    e: Awareness
+  '8':
+    m: Sharpshooter
+    e: Liturgy of Insulation
+  '9':
+    m: Dismantling III
+    e: Awareness
+  '10':
+    m: Coercion
+    e: Intelligence
+  '11':
+    m: Fresh Target
+    e: Coercion
+  '12':
+    m: Perfect Spot
+    e: Overclocking Module
+  '13':
+    m: Sniper Expertise
+    e: Perception
+  '14':
+    m: Perception
+    e: Residual Charge
+  '15':
+    m: Dismantling II
+  '16':
+    m: Hunt Down The Prey
+  '17':
+    m: Claim the Bounty
+  '18':
+    m: Hunter's Ambush
+  '19':
+    m: Wild Hunt
+  '20':
+    m: AP +1 - Ballistic Skill
+    e: Lawful Intervention
+  '21':
+    m: Ballistic Skill
+    e: Hunting Surge
+  '22':
+    m: Cull the bold
+  '23':
+    m: Flay the bold
+    e: Awareness
+  '24':
+    m: Perception
+    e: Law and Order
+  '25':
+    m: Heightened Concentration
+  '26':
+    m: Awareness
+    e: Perception
+  '27':
+    m: Wild Hunt II
+  '28':
+    m: Savour the kill
+  '29':
+    m: Coercion
+    e: Intelligence
+  '30':
+    m: Spare Magazine
+    e: Hot on the trail
+  '31':
+    m: Trail and Shatter
+  '32':
+    m: Intelligence
+    e: Coercion
+  '33':
+    m: Expert Finesse
+  '34':
+    m: Armour-Peircing
+  '35':
+    m: Wild Hunt III
+  '36':
+    m: Eager for Battle
+    e: Passive Learning
+  '37':
+    m: Awareness
+    e: Withdraw
+  '38':
+    m: Ballistic Skill
+    e: Grenadier
+  '39':
+    m: Joint Analysis
+    e: Awareness
+  '40':
+    m: Degraded Defence
+    e: Inspiring Trophy
+  '41':
+    m: Ballistic Skill
+    e: Ballistics Calculation
+  '42':
+    m: In the Name of the Lex Imperialis!
+    e: Perception
+  '43':
+    m: Pierce the Armour
+    e: Public Sentencing
+  '44':
+    m: Coercion
+    e: Deathdealer
+  '45':
+    m: AP +1
+  '46':
+    m: Combat Insight
+    e: Coercion
+  '47':
+    m: Familiar Kickback
+    e: Lore Imperium
+  '48':
+    m: Guidance
+    e: Perception
+  '49':
+    m: Intelligence
+    e: Lore Imperium
+  '50':
+    m: Masterful Display / Vital Points
+    e: Weak Body, Weak Soul
+  '51':
+    m: Guresome Kill
+    e: Lore Imperium
+  '52':
+    m: Pillar of the Law
+    e: Mob Justice
+  '53':
+    m: Piercing Shot
+    e: Intelligence
+  '54':
+    m: Deadly Aim / Extermination
+    e: Pierce and Ruin
+  '55':
+    m: AP +1

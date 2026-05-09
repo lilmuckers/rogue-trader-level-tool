@@ -1,0 +1,177 @@
+name: Heinrix the Chainsaw Interrogator
+archetypes:
+  t1: Warrior
+  t2: Executioner
+  t3: Exemplar
+extras:
+  skills: Athletics / Carouse / Medicae / Demolitions
+  gear:
+    - slot: Helm
+      options: Eyes of Joyeuse / Mechanicus Respirator
+    - slot: Armour
+      options: Armour of Hidden Promise / Psychic Bodyglove
+    - slot: Cloak
+      options: Temperus Carapace Elite Backpack / Pack of Reagents / Cloak of Bloodthirst / Lady Theodora's Mantle
+    - slot: Neck
+      options: Starmist scarf / Requiemator / Psy Focus
+    - slot: Accessory 1
+      options: Warp Surge Brooch / Warp Reflex Ring / Anatomy Tome
+    - slot: Accessory 2
+      options: Hand of Offence / Chirugen's manuel / Knuckle Guard
+    - slot: Gloves
+      options: Augmented Gloves / Executioner's Gloves / The Hand of Avolius / Metal claw gloves
+    - slot: Boots
+      options: Inertia Boots / Void Veteran Boots / Pneumo Boots
+    - slot: Weapon Set 1
+      options: Well-Maintained Rocksaw / [LD-Pattern] rock saw
+    - slot: Weapon Set 2
+      options: Sanctified Staff / Bloodrinker Staff
+levels:
+  '1':
+    m: Charge
+  '2':
+    m: Coercion
+  '3':
+    m: Endure
+  '4':
+    m: Daring Breach
+    e: Rigorous Training
+  '5':
+    m: Thick Skin
+    e: Weapon Skill
+  '6':
+    m: Pyromancy
+    e: Medicae
+  '7':
+    m: Weapon Skill
+    e: Psyker Minoris
+  '8':
+    m: Medicae
+    e: Hardened Scars
+  '9':
+    m: Daring breach II
+  '10':
+    m: Impetus
+    e: Toughness
+  '11':
+    m: Orchestrate Flame
+    e: Body of Flames
+  '12':
+    m: Agility
+    e: Athletics / Lore Xenos
+  '13':
+    m: Desolation
+    e: Athletics / Lore Xenos
+  '14':
+    m: Agility
+    e: Psyker Majoris
+  '15':
+    m: Daring Breach IV
+  '16':
+    m: Forced Repentance
+    e: Scourging Strike + Where it hurts
+  '17':
+    m: Firestorm
+  '18':
+    m: Anatomy Expert
+  '19':
+    m: Carnival of Misery
+  '20':
+    m: AP +1
+    e: Weapon Skill
+  '21':
+    m: Weapon Skill
+    e: Sparks of the greater flame
+  '22':
+    m: Inflame
+  '23':
+    m: Invigorating Screams *
+    e: Medicae
+  '24':
+    m: Agility
+    e: Biophysical Distortion
+  '25':
+    m: Master of Torture *
+  '26':
+    m: Agility
+    e: Medicae
+  '27':
+    m: Carnival of Misery III
+  '28':
+    m: Sower of Distress
+  '29':
+    m: Willpower
+    e: Athletics / Lore Xenos
+  '30':
+    m: Reckless Abandon
+    e: 'Characteristic Training: Per'
+  '31':
+    m: Fragile Playthings
+  '32':
+    m: Perception
+    e: Athletics / Lore Xenos
+  '33':
+    m: Racking Weakness
+  '34':
+    m: Perception
+    e: Psyker Terminus
+  '35':
+    m: Carnival of Misery IV
+  '36':
+    m: Eagar For Battle *
+    e: Psyker Extremis
+  '37':
+    m: Medicae
+    e: Perfect Anatomy
+  '38':
+    m: Weapon Skill
+    e: Hymns of Hatred
+  '39':
+    m: Shield of the Emperor
+    e: Medicae
+  '40':
+    m: Degraded Defence
+    e: All-Encomposing Agony
+  '41':
+    m: Weapon Skill
+    e: Easy Target
+  '42':
+    m: Hammer of the Emperor
+    e: Agility
+  '43':
+    m: Pslam of heroes
+    e: Fire Within
+  '44':
+    m: Athletics / Lore Xenos
+    e: Destroyer *
+  '45':
+    m: AP +1
+  '46':
+    m: Ramming Speed
+    e: Athletics / Lore Xenos
+  '47':
+    m: Crowd Kill
+    e: Coercion
+  '48':
+    m: Deep Laceration
+    e: Agility
+  '49':
+    m: Willpower
+    e: Coercion
+  '50':
+    m: Peak Condition
+    e: Open Engagement
+  '51':
+    m: Edge of Dawn
+    e: Coercion
+  '52':
+    m: Warp Saturation / Still Mind
+    e: Sanctified Slayer
+  '53':
+    m: Molten Beam
+    e: Willpower
+  '54':
+    m: Extermination
+    e: Backdraft
+  '55':
+    m: AP +1

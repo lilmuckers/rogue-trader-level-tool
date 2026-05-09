@@ -1,0 +1,448 @@
+- name: Deck Officer's Helmet
+  slot: helm
+  location: Prologue - looted from dead body in Navigator's Sanctum level 3 (By the Right of Blood)
+  act: 0
+  description: Grants +5% armour
+- name: Helmet of Devoted Protector
+  slot: helm
+  location: Prologue Captain's Quarter
+  act: 0
+  description: Req. Dogmatic 15. Grants immunity to crits for first 3 rounds
+- name: Lexmechanic's Goggles
+  slot: helm
+  location: Von Valancius Flagship - crate after bridge before Theodora's Chambers entrance, during By the Right of Blood
+  act: 0
+  description: Grants 3 Logic
+- name: Analyst's helmet
+  slot: helm
+  location: Rykad Minoris
+  act: 1
+  description: Kill target with exploit with single/deadeye shot, nearest enemy gain +1 exploit
+- name: Ancient Terra Monocle
+  slot: helm
+  location: Rykad Minoris
+  act: 1
+  description: Lore Imperium depends on FEL instead of INT and + 3
+- name: Helm of Determination
+  slot: helm
+  location: Rykad Minoris
+  act: 1
+  description: Requires Iconoclast Conviction. Wearer gains 2x FEL Bonus Armor. Gain + Iconoclast rank FEL
+- name: Noise Suppresion Helm
+  slot: helm
+  location: Pirate
+  act: 1
+  description: Wearer kill in 1 cell radius with a shot, gain 1 resolve
+- name: Pinpointing Visor
+  slot: helm
+  location: Rykad Minoris Tech Temple
+  act: 1
+  description: Crit Chance +15% against enemies with less than 50% HP
+- name: Warp Seer's Goggles
+  slot: helm
+  location: Eurac V
+  act: 1
+  description: Grants +WP bonus Lore (warp)
+- name: Tactical Goggles
+  slot: helm
+  location: Eurac V
+  act: 1
+  description: Grants +5% to hit chance and +3% to critical hit chance
+- name: Bloodspinner's Mask
+  slot: helm
+  location: (Void Shadows DLC) Kibellah Starting Gear
+  act: 1
+  description: >-
+    A mask, as tattered as a corpse's shroud, is the messenger of death. The gaze of its impassive, skeletal face
+    carries an inexorable promise-every life is destined to end one day. If a character is affected by 10 or more levels
+    of Crimson Blessing, their Resolve increases by 1.
+- name: Chartist's Monocle
+  slot: helm
+  location: Sotto's Tomb System - Hulk
+  act: 2
+  description: This monocle grants the wearer a +15 bonus to Commerce Tests.
+- name: Commander's Monocle
+  slot: helm
+  location: Footfall Atrium Atheltics Check
+  act: 2
+  description: Ally under the effect of wearer's Voice of Command gain + (3 x FEL Bonus)% dmg for attacks during extra turns
+- name: Cultist Hood
+  slot: helm
+  location: Footfall. Shadow Quarters Argenta quest Cutists Lair
+  act: 2
+  description: Heretic rank 2 req. When wearer use attack psychic power, 50% restore 2ap or take 10 warp dmg
+- name: Dark Visionary Hood
+  slot: helm
+  location: drusian rep7. pf 29
+  act: 2
+  description: >-
+    This hood grants the wearer a +10 bonus to Willpower and +15% dmg to psychic and navigator power for a -10 penalty
+    to WS and BS.
+- name: Enforcer Helmet
+  slot: helm
+  location: Drusian rep 0. pf16
+  act: 2
+  description: >-
+    All targets of Taunting Scream suffer a (2 x (STR Bonus + TGH Bonus)) penalty to their Willpower Test against this
+    ability.
+- name: The Guardian Crown
+  slot: helm
+  location: Idira Side quest with pink horror
+  act: 2
+  description: "Grants +10 TGH Once per combat: Whenever the wearer's Wounds drop below 35%, the wearer gains 3xTGH Wounds."
+- name: Foulsight Veil
+  slot: helm
+  location: Latotian Passage system - Unidentified Ruins puzzle
+  act: 2
+  description: PER + 15. -5 WP, Aeldari Equipment
+- name: Gunslinger's Helmet
+  slot: helm
+  location: Langrenns Belt system - Plundered Station
+  act: 2
+  description: Give Wearer ranged attack 2 x ROF% more dmg
+- name: Interrogation Goggles
+  slot: helm
+  location: Footfall Docks
+  act: 2
+  description: These goggles grant the wearer a +5 bonus to Lore (Xenos) Tests. They also grant a +10% to Hit Chance against xenos.
+- name: Outcast's Visor
+  slot: helm
+  location: Kasballica 5. pf66
+  act: 2
+  description: >-
+    Aeldari. Whenever wearer kill a target with a single ranged attack first time in combat, gain another attack this
+    round
+- name: Peripheral Visor
+  slot: helm
+  location: Kasballica 0. pf58
+  act: 2
+  description: Each time wearer spend 10 tact advantage stacks. Gain 1 resolve
+- name: Pirate's Eyepatch
+  slot: helm
+  location: Footfall Shadow Quarters Dark Hideout
+  act: 2
+  description: Coercion +20. Awareness - 5
+- name: Poet's Grace
+  slot: helm
+  location: Void rep19. pf54
+  act: 2
+  description: Aeldari. Wearer gain +25 Commerce & Persuasion
+- name: Provocateur Helmet
+  slot: helm
+  location: Aviorus System - Drifting Voidship
+  act: 2
+  description: Applies -10 PER to all attacks against the wearer and to all enemies in with 2 cell radius for 2 rounds
+- name: Self Calibrating Goggles
+  slot: helm
+  location: kasballica 8. pf43
+  act: 2
+  description: Wearer's successful single attacks inflict stun for 1 round on target that fails WP -5 penalty test
+- name: Ranger's Visor
+  slot: helm
+  location: Langrenns Belt system - Plundered Void Station
+  act: 2
+  description: Grant +10 BS. Aeldari Only
+- name: Sniper's Bravado
+  slot: helm
+  location: Mu-Rho 79 system - Space Combat (Allied with Pirates)
+  act: 2
+  description: >-
+    If wearer's single shot ranged attack deals dmg => 25% if the targets max wounds, this attack randomly inflicts
+    blind, stagger or slow to the target for 1 round
+- name: Tamer of the empyrean
+  slot: helm
+  location: Void shadows DLC - Bath Investigation puzzle solved -> Pelium Solitas System-> Savannah World
+  act: 2
+  description: If psychic phenomena or perils are triggered the wearer gains +1 psy rating during their next turn
+- name: Targeting Visor
+  slot: helm
+  location: Explorators Rep10. PF32
+  act: 2
+  description: Aeldari. Increase chance to hit at 10+ range by 20%
+- name: Visor of inevitability
+  slot: helm
+  location: Explorators Rep 17. PF44
+  act: 2
+  description: >-
+    Gain 1 stack of inevitability whenever inflict DoT. At 10 stacks, deal Medicae/10 Direct damage to all target
+    inflicted with DoT and remove all inevitability stacks
+- name: Coordinate Oracle
+  slot: helm
+  location: Gift during Magnae Accensio
+  act: 2
+  description: Grants +15 awareness
+- name: Visor of Inevitability
+  slot: helm
+  location: (Void Shadows DLC) Explorators
+  act: 2
+  description: >-
+    When applying a damage-over-time effect, the character gains +1 level of inevitability. Once the character reaches
+    10 levels of inevitability, they deal (Medicae / 10) direct damage to all enemies affected by damage-over-time
+    effects, after which all levels of inevitability are removed.
+- name: Taner if the Empyrean
+  slot: helm
+  location: (Void Shadows DLC) Stars Will Lead the Way
+  act: 2
+  description: When perils of the warp is triggered, the next turn, the character's Psy-rating increases by 1
+- name: Sniper bravado
+  slot: helm
+  location: (Void Shadows DLC) Mu-Ro 79 System, join the pirates in space combat
+  act: 2
+  description: >-
+    When a character's single ranged attack deals damage equal to or greater than 25% of the target's maximum health,
+    the attack blinds, stuns, or slows the target for 1 round (the effect is random).
+- name: Adeptus Arbites Helmet
+  slot: helm
+  location: (Lex Imperialis DLC) Footfall docks
+  act: 2
+  description: >-
+    The rim of the helmet is inscribed with ornate letters: "He was keen-sighted: not a single vice of his rotten soul,
+    not a single shadow in the pitch darkness of lawlessness, escaped the all-seeing gaze of Severius Meragon." The
+    character gains +15 to Coercion. If they are an Arbiter, the increase to Coercion is +20.
+- name: Wrathful Mask
+  slot: helm
+  location: (Lex Imperialis DLC) Thassera
+  act: 2
+  description: >-
+    An unusual mask made of red metal: its mouth is distorted into a snarl, and its lips are torn into fangs. The
+    character gains +10 Attack Power. Damage taken by the character is reduced by (Attack Power / 10) if the attacker
+    does not have melee advantage.
+- name: Thassertium mask
+  slot: helm
+  location: >-
+    (Lex Imperialis DLC) Thassera- Awarded by the Governor for placing all four info seals (whether you didn't guess all
+    the hypocrites or not is irrelevant).
+  act: 2
+  description: >-
+    A mask completely covered in glittering Thassertiumtium. The character gains +1 to their Psyonic rating and +15 to
+    their Persuasion. If warp threats result in a daemon manifesting, that daemon attacks the nearest non-daemon target.
+- name: The Unsleeping Eye
+  slot: helm
+  location: Govenor's Camp after Drukhari ambush
+  act: 2
+  description: >-
+    When the wearer kills an enemy with finish the job, the wearer gains a 20% bonus to damage for 1 round and removes
+    the cooldown on their orchestrated firestorm and last volley abilities
+- name: Tactical Vox Transmitter
+  slot: helm
+  location: (Lex Imperialis DLC) Heartless
+  act: 2
+  description: >-
+    If the character is an Arbiter with the Accuser specialization, the range of their Accuser abilities is increased by
+    1 cell.
+- name: Swashbuckler's Goggles
+  slot: helm
+  location: Tervintas Trade
+  act: 3
+  description: Wearer's shot in melee range gain +20 Dodge Reduc
+- name: Commissar Cap
+  slot: helm
+  location: Commisar Reward as well as killing Commisar, Commisar Stash
+  act: 3
+  description: Grant's +10 Fellowship. Grants whole party (+wearer's FELb %) critical hit chance
+- name: Peripheral Control Monocle
+  slot: helm
+  location: Commorragh, Outer Spire Halls - hidden container after 3rd arena fight (Athletics/Demolition/Awareness checks)
+  act: 3
+  description: Using non attack ability grants wearer +5% dodge and parry for each enemy adjacent to the wearer for 1 round. Stacks
+- name: Tactical Genius
+  slot: helm
+  location: Mangled Sector - skill check behin demolition check near Commissar
+  act: 3
+  description: When wearer successfully dodges or parries incoming attack, they gain +10 momentum
+- name: Carmine Crown
+  slot: helm
+  location: Yremeryss loot
+  act: 3
+  description: >-
+    When bleeding, burning or toxin effect inflicted by the wearer deals damage, the eemy suffers -5%armour penalty
+    against only yhr wearer's attacks and the wearer gains +5% crit chance against that enemy. Stacks
+- name: Mark 8B3-5 Filter Gas Mask
+  slot: helm
+  location: Yremeryss loot, Pasqal personal quest location behind hidden door
+  act: null
+  description: Wearer is immune to toxin and gains +25 Athletics
+- name: Corruption Eradicator Helm
+  slot: helm
+  location: (Lex Imperialis DLC) Commissar's Arsenal
+  act: 3
+  description: >-
+    Judging by the neat, fine nicks, the owner of this helmet kept track of the undead he slew. Judging by the number,
+    his service was righteous. Doubles the character's critical damage bonus against xenos, daemons, and psykers.
+- name: Eyes of Joyeuse
+  slot: helm
+  location: Janus Proj. 2
+  act: 4
+  description: Gain +1 PR against Daemons and for Each rank of Dogmatic
+- name: Enhanced Data-tether Mask
+  slot: helm
+  location: Pasqal personal quest location
+  act: 4
+  description: >-
+    Required reject the flesh rank1. When wearer uses Machine Spirit Communion, their INT is increased by +5 for each
+    affected target until the end of combat
+- name: Tiara of the Immaterium
+  slot: helm
+  location: Quetza Temer - Tervantias Lab Idira quest
+  act: 4
+  description: Wearer gains +10 WP and suffers -50% warp damage
+- name: Commander's Visor
+  slot: helm
+  location: Explorators 26. pf 108
+  act: 4
+  description: Ally under effect of wearer's break their ranks! gain +1 Deflection for each adj. enemy
+- name: Lingering Whisper
+  slot: helm
+  location: Kibellah final quest reward
+  act: 4
+  description: Wearer deals 10+PERb more dmg to targets with less than 50% wounds
+- name: Crusade Plate Helmet
+  slot: helm
+  location: Drusian rep 24. pf 85
+  act: 4
+  description: >-
+    Asrtartes eq. Wearer's heavy weapon attack gain +50% dmg but never critically hit (except it does with confident
+    approach)
+- name: Demolitionist's goggles
+  slot: helm
+  location: Kasballica 24. pf 100
+  act: 4
+  description: When fail Demolition check, reroll the check with AGI for pass
+- name: Ghost Helm
+  slot: helm
+  location: Explorators 38 pf 164
+  act: 4
+  description: Use WP for Dodge stat instead of AGI. Each dodge increase wearer's PR by +1 until end of next turn. Stacks
+- name: Mechanicus Respirator
+  slot: helm
+  location: null
+  act: null
+  description: This respirator grants the wearer a +15 bonus to Medicae Tests.
+- name: Archmachinator's Deceit
+  slot: helm
+  location: Quetza Temer - Tervantias Lab
+  act: 4
+  description: >-
+    Drukhari eq. When wearer uses an attack of a different type than the previous one, they gain momentum equal to their
+    resolve
+- name: Great Librarian Glasses
+  slot: helm
+  location: Emperor's Plan system - Eufrates II
+  act: 4
+  description: Grants +20 to all lore skills
+- name: Saboteur's Helmet
+  slot: helm
+  location: Kasballica 25. pf102
+  act: 4
+  description: Drukhari only. Wearer suffer -35% aoe dmg. First grenade use in a turn does not count towards attack limit
+- name: Self Calibrating Helmet
+  slot: helm
+  location: Void 28. pf96
+  act: 4
+  description: >-
+    Wearer's single shot attack inflict stun if target fails WP -5 check. If wearer attack stunned enemy, next nearest
+    enemy is stunned
+- name: Steel Guidance
+  slot: helm
+  location: Void 24. pf75
+  act: 4
+  description: Coercion +25. Whenever wearer targets an ally with ability, ally gain +10% melee dmg until end of the round
+- name: Hunter's Focus
+  slot: helm
+  location: Cradle of Khepri system rumour
+  act: 4
+  description: Aeldari Equipment. +25 Awareness and +20% critical damage on single shot attacks
+- name: Virtue of Contempt
+  slot: helm
+  location: Drusian rep 22. pf 81
+  act: 4
+  description: Req. Astartes. Each time inflict burning with flamers, inflict double the effect
+- name: Visor of Inevitable Retribution
+  slot: helm
+  location: Explorators 29. pf 127
+  act: 4
+  description: >-
+    Whenever wearer inflict DoT or kills a target, gain 1 stack of inevitablity. Gaining 6 stacks of inevitability
+    inflict Medicae / 10 direct dmg to all target suffering from DoT and all charges are spent
+- name: Vivisector's Visor
+  slot: helm
+  location: Explorators 30. pf 132
+  act: 4
+  description: >-
+    Wearer's single [gunshot] on target opening deals addition [20% of target max wound]% dmg. Deadeye shot on opening
+    deals [+30% of target max wound]% dmg
+- name: Arch-Strategist's Visor
+  slot: helm
+  location: Marazhai going mad during warp travel event
+  act: 4
+  description: >-
+    Wearer gains an addictional stratagem ability: all allies in the Combat Area, instantly reload their weapons after
+    each attack made by them until the start of the wearer's next turn.
+- name: Victim's Sorrow
+  slot: helm
+  location: Cradle of Khepri system rumour
+  act: 4
+  description: Drukhari eq. When wearer hits a target that is in cover with ranged attack this attack always crits.
+- name: The visor of inevitable retribution
+  slot: helm
+  location: (Void Shadows DLC) Explorators
+  act: 4
+  description: >-
+    When applying a damage-over-time effect, the character gains +1 level of inevitability. Once the character reaches 6
+    levels of inevitability, they deal (Medicae / 10) direct damage to all enemies affected by damage-over-time effects,
+    after which all levels of inevitability are removed.
+- name: Demolitionist glasses
+  slot: helm
+  location: (Void Shadows DLC) Kasballica Mission
+  act: 4
+  description: >-
+    When a character fails a Demolitions skill check, they can immediately make another attempt using their Dexterity
+    score.
+- name: Lingering Whisper
+  slot: helm
+  location: (Void Shadows DLC) Kibellah Questline
+  act: 4
+  description: The character deals (10 + PER bonus) more damage to targets with less than 50% health.
+- name: Purifying Flame Helmet
+  slot: helm
+  location: (Lex Imperialis DLC) Tervantias' Laboratory, on the table in the corner in front of the grotesques
+  act: 4
+  description: >-
+    Judging by the molten metal, the helmet's former owner feared neither fire nor death. Attacks with melta weapons
+    cost 1 less AP, and the range of such weapons is increased by 2 cells.
+- name: Retinal analyzer
+  slot: helm
+  location: (Lex Imperialis DLC) Leethus, in a container near the Arbiter base,
+  act: 4
+  description: >-
+    When a character hits a target with a shield, the target makes a Stamina check to resist and on a failed save is
+    knocked down.
+- name: Helmet of Marshal of the Koronus Expanse
+  slot: helm
+  location: (Lex Imperialis DLC) Palace of Justice
+  act: 4
+  description: >-
+    When a character hits an enemy with a shield, each ally within a 3-point radius gains +5 resolve for the rest of the
+    battle. This does not stack.
+- name: Meragon's Helmet
+  slot: helm
+  location: (Lex Imperialis DLC) Palace of Justice
+  act: 4
+  description: >-
+    The rim of his helmet is inscribed with ornate letters: "He was keen-sighted: not a single vice of his rotten soul,
+    not a single shadow in the pitch darkness of lawlessness, escaped the all-seeing gaze of Severius Meragon." If the
+    character is an Arbiter with the Accuser specialization, their Accuser abilities cost no AP.
+- name: Mind Assemble Circlet
+  slot: helm
+  location: Tomb world Epitaph
+  act: 5
+  description: >-
+    When wearer uses psychic power they can trigger one of the following: 50% to reduce the AP cost and veil degradation
+    by -2; 25% chance to perform psychic power as usual; 25% chance to increase veil ddegradation by +3 and reset the
+    cooldown of their attack. If veil is increased to 15 or beyond, this effect triggers perils even when using minor
+    psy powers
+- name: Retinal Analyser
+  slot: helm
+  location: Loot in Leethus
+  act: 4
+  description: When the wearer hits an opponent with a shield, the target must pass a Toughness resistance test or fall prone.

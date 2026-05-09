@@ -1,0 +1,180 @@
+name: Marazhai the Bringer of Pain
+archetypes:
+  t1: Warrior
+  t2: Assassin
+  t3: Exemplar
+extras:
+  skills: Athletics / Carouse / Demolitions / Medicae
+  gear:
+    - slot: Helm
+      options: Self Calibrating Goggles / Weakness Detector
+    - slot: Armour
+      options: Ghostplate Armour / [Black Heart] Kabalite Armour / Wytch's Last Cry
+    - slot: Cloak
+      options: Swishshroud Cloak
+    - slot: Neck
+      options: Slicing Symbol
+    - slot: Accessory 1
+      options: Notes on Weakness
+    - slot: Accessory 2
+      options: Iron Cape
+    - slot: Gloves
+      options: Undying Rage / Riposte Gloves / Claws of the Black Hunt
+    - slot: Boots
+      options: Blitz Boots / Enforcer's Light Boots / Skirmisher Boots / Spiked Boots
+    - slot: Weapon Set 1
+      options: >-
+        Interrogator Knife / Serrated Glimmersteel Blade / Hekatarii Blade of Bloodthirst / Heart Piercer / Serrated
+        Glimmersteel Blade / Heart Piercer / Blood Hunter
+    - slot: Weapon Set 2
+      options: >-
+        Bloodseeker Klaive / Carnivorous Blade / Suffering Collector / Hekatarii Blade of Bloodthirst / Slithering
+        Slaughter
+levels:
+  '1':
+    m: Charge
+  '2':
+    m: Athletics
+  '3':
+    m: Endure
+  '4':
+    m: Daring Breach
+    e: Defensive Manoeuvres
+  '5':
+    m: Easy Target
+    e: Weapon Skill
+  '6':
+    m: Break Through
+    e: Athletics
+  '7':
+    m: Weapon Skill
+    e: Nimble
+  '8':
+    m: Carouse
+    e: Rigorous Training
+  '9':
+    m: Daring Breach I
+  '10':
+    m: Blade Flurry
+    e: Agility
+  '11':
+    m: Reckless Strike
+    e: Duelling Mastery
+  '12':
+    m: Agility
+    e: Carouse
+  '13':
+    m: Desolation
+    e: Coercion
+  '14':
+    m: Strength
+    e: Combat Master
+  '15':
+    m: Daring Breach II
+  '16':
+    m: Seek the Opening
+  '17':
+    m: Danse Macabre
+  '18':
+    m: An Eye for the Unscathed
+  '19':
+    m: Dispatch
+  '20':
+    m: AP +1
+    e: Agility
+  '21':
+    m: Lone Killer
+    e: Agility
+  '22':
+    m: Athletics
+    e: Death Whisper
+  '23':
+    m: Lethality Heightens
+  '24':
+    m: Weapon Skill
+    e: Dual Weapon Combat
+  '25':
+    m: Deadly Calculations
+  '26':
+    m: Weapon Skill
+    e: Athletics
+  '27':
+    m: Dispatch II
+  '28':
+    m: 'Characteristic Training: AGL'
+    e: Ambush
+  '29':
+    m: Perception
+    e: Lore Xenos
+  '30':
+    m: Killing Edge
+  '31':
+    m: Finesse
+    e: Disarray
+  '32':
+    m: Medicae
+  '33':
+    m: Seize the Advantage
+    e: Perception
+  '34':
+    m: Trueborn Superiority
+  '35':
+    m: Dispatch III
+  '36':
+    m: Destroyer *
+    e: Shearing Strikes
+  '37':
+    m: Coercion
+    e: Imminent Demise
+  '38':
+    m: Weapon Skill
+    e: Prey on the Weak
+  '39':
+    m: Taunting Scream
+    e: Coercion
+  '40':
+    m: Degraded Defence
+    e: Lethal Concentration
+  '41':
+    m: Weapon Skill
+    e: Open Engagement
+  '42':
+    m: Elusive Shadow
+    e: Agility
+  '43':
+    m: Morbid Pirouette
+    e: Mantle of Agony
+  '44':
+    m: Coercion
+    e: Malign influence
+  '45':
+    m: AP + 1
+  '46':
+    m: Thick Skin
+    e: Coercion
+  '47':
+    m: Impetus
+    e: Coercion
+  '48':
+    m: Create an Opening
+    e: Agility
+  '49':
+    m: Perception
+    e: Athletics
+  '50':
+    m: Lethal Threat
+    e: Crowd Kill
+  '51':
+    m: Perfect Opening
+    e: Athletics
+  '52':
+    m: Killing Spree
+    e: Emboldened by Bloodshed
+  '53':
+    m: Sworn Enemy
+    e: Perception
+  '54':
+    m: Eager for Battle *
+    e: Esquive
+  '55':
+    m: AP + 1

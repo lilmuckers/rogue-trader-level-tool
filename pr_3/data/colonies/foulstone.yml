@@ -1,0 +1,79 @@
+name: Foulstone
+levels:
+  1:
+    - name: Dominion of the Hammer
+      cost: None
+      benefit: 'Weapon: Hammer of Epiphany / Security +2 / Drusian Reputation +2500'
+    - name: High Throne
+      cost: None
+      benefit: 'Ship Trait: Emperor''s Retribution / Holy Gifts: x5 / Effeciency: +2'
+    - name: A Celestial Protector
+      cost: None
+      benefit: 'Trait: Benevolent Protection / Profit factor: +2 / Complacency: +2'
+  2:
+    - name: Touched by Holiness
+      cost: 'Profit factor: ≥ 20'
+      benefit: 'Ship Trait: Shield of Faith / Effeciency: +2 / Drusian Rep: +2500'
+    - name: Dirty bureaucracy
+      cost: 'Profit factor: ≥ 25 / Drusian Reputation: ≥15810 (Level 3)'
+      benefit: 'Profit factor: +3 / Mechanisms +3 / Weapons +3 / Unquenchable Greed'
+    - name: Indulgence for sale
+      cost: None
+      benefit: 'Profit factor: +3 / Fellowship of the Void +2500 / Heretical +30'
+    - name: Hallowed Railway
+      cost: 'Explorator Reputation: ≥11675 (level 8) / Plasteel: 1 / Mechanisms: 1 / Adamantium: 1'
+      benefit: 'Item: Requiemator / Reputation Explorators: +2500 / Complacency: +2'
+    - name: Cemetery of the Faithful
+      cost: 'Drusian Reputation: ≥22060 (Level 6)'
+      benefit: 'Ship Trait: Blessing of the Fallen / Drusian Reputation: +2500 / Complacency: +1 (for all colonies)'
+    - name: Thousand-faced relic
+      cost: Chemicals 1 / People 3 / Promethium 1
+      benefit: Drusians +2500 / Complacency +2 / Efficiency +2 / Drusians +2500
+    - name: Bonfires of Righteousness
+      cost: 'Contentment: ≥4 / Efficiency: ≥4 / Promethium: 1 / People: 3 / Weapons: 1 / Xenotech: 1'
+      benefit: 'Weapon: Infernical / Profit factor: +2 / Security: +2'
+    - name: Good Tidings
+      cost: 'Flogiston: 2 / Adamantium: 2'
+      benefit: 'Character Trait: Frequency of Faith / Profit Factor +2 / Complacency: +2'
+  3:
+    - name: In Drusus' Footsteps
+      cost: 'One of the projects: "Bonfires of Righteousness"/ "Good News" / Imperial Navy Reputation: ≥6500 (Level 3) / Promethium: 2 / Plasteel: 6 / Provisions: 2 / People: 9 / Mechanisms: 2 / Adamantium: 2'
+      benefit: 'Subject: Accuser of Sin / Profit factor: +5 / Complacency: +2 (for all colonies)'
+    - name: Crusade
+      cost: 'Project "Bonfires of Righteousness" / Provisions: 3 / Weapons: 3 / People: 9'
+      benefit: 'Trait of the Retinue: Accusation of Heresy / Character Trait: Accusation of Heresy / Profit factor: +5 / Security: +2 (for all colonies)'
+    - name: Shrine
+      cost: 'Project "Good News" / Profit factor: ≥ 50 / Adamantium: 4 / Flogiston: 4'
+      benefit: 'Weapon: Epiphany / Drusians +5000 / Complacency: +3 / Efficiency: +3'
+  4:
+    - name: False Wonders
+      cost: Any level 3 project
+      benefit: 'Item Caligae of Saint Keefe / People: +6 / Effeciency +2 / Complacency +2'
+    - name: Missionaries
+      cost: 'Completed: In Drusus''s footsteps, Crusade or Shrine'
+      benefit: 'Feature: Light of Faith / Profit Factor +3 / Security +2 (Global)'
+    - name: Holy Ammunition
+      cost: 'Completed: In Drusus''s footsteps, Crusade or Shrine / Reputation with Drusians >= 35600'
+      benefit: 'Feature: Sanctified Projects / Weapons 3 / Promethium 3 / Security +2 (Global)'
+    - name: Lightbearers
+      cost: Any level 3 project & Warp Guides / Promethium 4 / Plasteel 4 / People 2
+      benefit: 'Imperial Navy Reputation: +5000 / Security: +2'
+    - name: Gracious Priests
+      cost: Praisng the Muses / Provisions 3 / Chemicals 3 / Plasteel 4
+      benefit: 'Replenishable item: Hospitalist''s medical kit x5 / Dogmatic +40 / Complacency +3 Global'
+    - name: Holy Prey
+      cost: Reputation with Drusians >= 35600
+      benefit: 'Weapon: Lamp of Blessed Petrakara / Heretic: +40 points / Effeciency +3 / Safety -1 (Global)'
+    - name: Crucible
+      cost: Any level 3 project / Chemicals 2 / Flogiston 3 / Promethium 5
+      benefit: 'Character Trait: Holy Man / Holy Gifts 10 / Profit Factor 5 / Complacency +3 (Global)'
+  5:
+    - name: Holy Defenders
+      cost: Project "Crucible" / Project "Praise of the Muses" (Dargonus) / Plasteel 6 / People 3
+      benefit: 'Armor: Arbiter Solomon Vir''s Armor / Profit factor: +5 / Drusians +5000 Security 2 / Adamantine 3'
+    - name: Sacred Comet
+      cost: Project "Crucible" / Project "Orbital Shipyard" (Keiva Gamma) / Flogiston 6 / Weapons 3 / Mechanisms
+      benefit: 'Profit factor 5 / Drusians 2500 / Explorators 2500 / Security: +2 (for all colonies) / Complacency: +4 (for all colonies)'
+    - name: Reliquary
+      cost: 'Project "Crucible" / Adamantium: 5'
+      benefit: 'Character Trait: Blessing of Saint Cognatius / Profit factor: +5'

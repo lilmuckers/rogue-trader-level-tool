@@ -1,0 +1,14 @@
+{
+  "blockedBy": [
+    "T-001"
+  ],
+  "completedDate": null,
+  "createdDate": "2026-05-07",
+  "description": "Ensure all user-generated data (current level, roster, pick choices, notes, profit factor, vendor rep levels) reads/writes through the profile-scoped store. Verify no cross-profile bleed.",
+  "id": "T-004",
+  "order": 40,
+  "phase": "multi-profile",
+  "status": "open",
+  "title": "Profile-scoped data: level, roster, choices, notes, PF",
+  "type": "task"
+}

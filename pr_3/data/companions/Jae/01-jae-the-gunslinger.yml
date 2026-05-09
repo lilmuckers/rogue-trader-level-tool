@@ -1,0 +1,181 @@
+name: Jae the Gunslinger
+archetypes:
+  t1: Officer
+  t2: Master Tactician
+  t3: Exemplar
+extras:
+  skills: All Fellowship / All Intelligence
+  gear:
+    - slot: Helm
+      options: Helm of Determination / Commissar Cap / Gunslinger's helm
+    - slot: Armour
+      options: Breacher Armour / Duellist Uniform
+    - slot: Cloak
+      options: Rogue Trader's Cloak / Tactical Backpack / Tempestus elite carapace backpack
+    - slot: Neck
+      options: Medal of Alacrity / Omnissiah Holy Symbol / Soldier aquila Pendant
+    - slot: Accessory 1
+      options: Saint Cognatius Scriptures / Pair Holster
+    - slot: Accessory 2
+      options: Commander's Chrono / Heart of the Nameless / Tactica Imperialis Exerpt
+    - slot: Gloves
+      options: >-
+        Thrice-Pioneer's Bracers / Gloves of Rapid Desolation / Freedom and Vengeance / Compensator Gloves / Abyss
+        Spinner Gloves
+    - slot: Boots
+      options: Commissar Boots / Recoil Warboots
+    - slot: Weapon Set 1
+      options: >-
+        Upgraded Shuriken Pistol / Quick-firing laspistol / Desolation Blast Pistol / [Sol Pattern] Laspistol /
+        Anti-Vehicle Revolver
+    - slot: Weapon Set 2
+      options: Chorus of Battle / Blessing of Death / Gift of Kurnous
+levels:
+  '1':
+    m: Voice Of Command
+  '2':
+    m: Commerce
+  '3':
+    m: Bring it Down !
+  '4':
+    m: Finest Hour
+    e: Commanding Voice
+  '5':
+    m: Fellowship
+    e: Nimble
+  '6':
+    m: Lasting Impression
+    e: Fellowship
+  '7':
+    m: Move, Move, Move
+    e: Swift Movements
+  '8':
+    m: March
+    e: Commerce
+  '9':
+    m: Finest Hour I
+  '10':
+    m: Lore Imperium
+    e: Ballistic Skill
+  '11':
+    m: leader Assault
+    e: Ballistic Skill
+  '12':
+    m: Take Aim!
+    e: 'Characteristic Training : BS'
+  '13':
+    m: Heroism
+    e: Lore Imperium
+  '14':
+    m: Willpower
+    e: 'Characteristic Training : FEL'
+  '15':
+    m: Finest Hour IV
+  '16':
+    m: Tactical Advantage
+    e: Press The Advantage
+  '17':
+    m: Linchpin
+  '18':
+    m: Reliance
+  '19':
+    m: Orchestrated Firestorm
+  '20':
+    m: Ap +1
+    e: Ballistic Skill
+  '21':
+    m: Ballistic Skill
+    e: Joint Offensive
+  '22':
+    m: Inspire
+  '23':
+    m: Unwavering Motivation
+    e: Lore Imperium
+  '24':
+    m: Fellowship
+    e: 'Base Skill: Logic'
+  '25':
+    m: Hidden Advantage
+  '26':
+    m: Logic
+    e: Fellowship
+  '27':
+    m: Orchestrated Firestorm II
+  '28':
+    m: Against All Odds
+  '29':
+    m: Logic
+    e: Agility
+  '30':
+    m: 'Characteristic Training: Perception'
+    e: Strongpoint
+  '31':
+    m: Stronghold
+  '32':
+    m: Perception
+    e: Logic
+  '33':
+    m: Dawn of Victory
+  '34':
+    m: Perception
+    e: Grenadier
+  '35':
+    m: Orchestrated Firestorm III
+  '36':
+    m: Eager for Battle *
+    e: Decisive Response
+  '37':
+    m: Logic
+    e: Stacking the Deck
+  '38':
+    m: Ballistic Skill
+    e: 'Base Skill: Lore Xenos'
+  '39':
+    m: Air Of Authority
+    e: Logic
+  '40':
+    m: Firebrand *
+    e: Undisputed Advantage
+  '41':
+    m: Ballistic Skill
+    e: Inspiring Speech
+  '42':
+    m: Fervour
+    e: Fellowship
+  '43':
+    m: Logistical Superiority *
+    e: 'Advanced Skill: Logic'
+  '44':
+    m: Lore Xenos
+    e: Degraded Defence
+  '45':
+    m: Ap +1
+  '46':
+    m: Focus!
+    e: Lore Xenos
+  '47':
+    m: Steel Resolve
+    e: Lore Xenos
+  '48':
+    m: In the hero's footsteps
+    e: Fellowship
+  '49':
+    m: Perception
+    e: Lore Xenos
+  '50':
+    m: Eager Subordinates
+    e: Steady!
+  '51':
+    m: Support The Advance *
+    e: Lore Xenos
+  '52':
+    m: Be Vigilant!
+    e: Ready to Serve
+  '53':
+    m: Assign Objective / Finish the job
+    e: Perception
+  '54':
+    m: Attention!
+    e: Primary Objective
+  '55':
+    m: Ap +1

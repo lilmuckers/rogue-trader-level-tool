@@ -1,0 +1,394 @@
+name: Fellowship of the Void
+items:
+  - name: Heavy Leather Armour
+    rep: 0
+    act: 1
+    pf: 3
+  - name: Flamer
+    rep: 0
+    act: 1
+    pf: 4
+  - name: Camoflage Robe
+    rep: 0
+    act: 1
+    pf: 6
+  - name: Melta Charge x 5
+    rep: 0
+    act: 1
+    pf: 8
+  - name: Force Grenade x4
+    rep: 1
+    act: 1
+    pf: 11
+  - name: '[War World Origin] Fencing Bodyglove'
+    rep: 1
+    act: 1
+    pf: 13
+  - name: Stalker Gloves
+    rep: 1
+    act: 1
+    pf: 6
+  - name: Medikit x9
+    rep: 1
+    act: 1
+    pf: 10
+  - name: Noise Suppression Helmet
+    rep: 1
+    act: 1
+    pf: 16
+  - name: '[Mezoa-Pattern] Autogun'
+    rep: 1
+    act: 1
+    pf: 9
+  - name: Power Maul
+    rep: 1
+    act: 1
+    pf: 12
+  - name: '[Sol Pattern] Chainsword'
+    rep: 1
+    act: 1
+    pf: 10
+  - name: '[Mars Pattern] Axe'
+    rep: 2
+    act: 1
+    pf: 14
+  - name: Reaper Cape
+    rep: 2
+    act: 1
+    pf: 11
+  - name: Blinding Grenade x4
+    rep: 2
+    act: 1
+    pf: 12
+  - name: Veilrender
+    rep: 2
+    act: 1
+    pf: 9
+  - name: '[Retobi-Pattern] Greatsword'
+    rep: 3
+    act: 1
+    pf: 17
+  - name: Pneumo Boots
+    rep: 3
+    act: 1
+    pf: 11
+  - name: '[War World Origin] Flak Chestplate'
+    rep: 3
+    act: 1
+    pf: 16
+  - name: Fire Grenade x5
+    rep: 3
+    act: 1
+    pf: 13
+  - name: Medal of Alacrity
+    rep: 3
+    act: 1
+    pf: 20
+  - name: Reflective Shield
+    rep: 4
+    act: 1
+    pf: 21
+  - name: Navy Swashbuckler's Coat
+    rep: 0
+    act: 2
+    pf: 18 / 13
+  - name: Medikit x2
+    rep: 0
+    act: 2
+    pf: 16 / 11
+  - name: Intoxicating Elixir x5
+    rep: 0
+    act: 2
+    pf: 20 / 15
+  - name: Bayonet Knife
+    rep: 0
+    act: 2
+    pf: 22 / 17
+  - name: Serrated Great Sword
+    rep: 0
+    act: 2
+    pf: 10 / 5
+  - name: Monofilament Grenade x5
+    rep: 4
+    act: 2
+    pf: 24 / 19
+  - name: Pirate Chainmail
+    rep: 4
+    act: 2
+    pf: 25 / 20
+  - name: Impulse Boots
+    rep: 4
+    act: 2
+    pf: 26 / 21
+  - name: '[Mezoa-Pattern] Autopistol'
+    rep: 5
+    act: 2
+    pf: 27 / 22
+  - name: Industrial Hammer
+    rep: 5
+    act: 2
+    pf: 20 / 15
+  - name: Brinkwalker Pendant
+    rep: 6
+    act: 2
+    pf: 29 / 24
+  - name: Acid Spitter
+    rep: 6
+    act: 2
+    pf: 30 / 25
+  - name: Staff of Endless Flame
+    rep: 7
+    act: 2
+    pf: 30 / 25
+  - name: Apex Predator's Gloves
+    rep: 8
+    act: 2
+    pf: 32 / 27
+  - name: Needle Pistol
+    rep: 9
+    act: 2
+    pf: 34 / 29
+  - name: Melta Charge x3
+    rep: 9
+    act: 2
+    pf: 25 / 30
+  - name: Old Shield
+    rep: 9
+    act: 2
+    pf: 36 / 31
+  - name: Tactical Backpack
+    rep: 10
+    act: 2
+    pf: 36 / 31
+  - name: '[Retobi-Pattern] Foehammer'
+    rep: 11
+    act: 2
+    pf: 38 / 33
+  - name: Swashbuckler Cloak
+    rep: 12
+    act: 2
+    pf: 40 / 35
+  - name: Modified Splinter Pistol
+    rep: 12
+    act: 2
+    pf: 42 / 37
+  - name: Arch-Militant's Boots
+    rep: 13
+    act: 2
+    pf: 44 / 39
+  - name: '[Death World Origin] Armoured Bodyglove'
+    rep: 14
+    act: 2
+    pf: 45 / 40
+  - name: Large Medikit x2
+    rep: 14
+    act: 2
+    pf: 46 / 41
+  - name: '[Drusus Prime Pattern] Shotgun'
+    rep: 15
+    act: 2
+    pf: 47 / 42
+  - name: Breacher Boots
+    rep: 16
+    act: 2
+    pf: 49 / 44
+  - name: Awakened Nightmare
+    rep: 16
+    act: 2
+    pf: 49 / 44
+  - name: Earthbreaker
+    rep: 17
+    act: 2
+    pf: 51 / 46
+  - name: Swift Shadows
+    rep: 17
+    act: 2
+    pf: 51 / 46
+  - name: Grimoire of the Void
+    rep: 18
+    act: 2
+    pf: 52 / 47
+  - name: '[LD-Pattern] Industrial Hammer'
+    rep: 18
+    act: 2
+    pf: 53 / 48
+  - name: Poet's Grace
+    rep: 19
+    act: 2
+    pf: 54 / 49
+  - name: Precinct Vox-Relay
+    rep: 20
+    act: 2
+    pf: 55 / 50
+  - name: Carnage
+    rep: 21
+    act: 2
+    pf: 56 / 51
+  - name: Ynnealith
+    rep: 21
+    act: 2
+    pf: 56 / 51
+  - name: Pain Blocker x5
+    rep: 22
+    act: 4
+    pf: 60 / 55
+  - name: Bone-Shatterer
+    rep: 22
+    act: 4
+    pf: 63 / 58
+  - name: Modified Krak Grenade x4
+    rep: 23
+    act: 4
+    pf: 66 / 61
+  - name: Demolition Instructions
+    rep: 23
+    act: 4
+    pf: 69 / 64
+  - name: Torturer
+    rep: 23
+    act: 4
+    pf: 70 / 65
+  - name: '[Reaving Tempest Kabal Origin] Incubus Armour'
+    rep: 24
+    act: 4
+    pf: 72 / 67
+  - name: Steel Guidance
+    rep: 24
+    act: 4
+    pf: 75 / 70
+  - name: Advanced Medikit x3
+    rep: 28
+    act: 4
+    pf: 78 / 73
+  - name: Astronomican Regalia
+    rep: 28
+    act: 4
+    pf: 81 / 76
+  - name: Chirurgeon's Boots
+    rep: 26
+    act: 4
+    pf: 84 / 79
+  - name: Anti-Vehicle Revolver
+    rep: 26
+    act: 4
+    pf: 87 / 82
+  - name: Onsalught Amulet
+    rep: 27
+    act: 4
+    pf: 90 / 85
+  - name: Immobilising Grenade x3
+    rep: 27
+    act: 4
+    pf: 93 / 88
+  - name: Thought Guide
+    rep: 27
+    act: 4
+    pf: 90 / 85
+  - name: Self-Calibrating Helmet
+    rep: 28
+    act: 4
+    pf: 96 / 91
+  - name: Double-Barreled Shotgun
+    rep: 28
+    act: 4
+    pf: 99 / 94
+  - name: Enchanted Smuggler's Armour
+    rep: 28
+    act: 4
+    pf: 96 / 91
+  - name: Emergency Vox-Casters
+    rep: 29
+    act: 4
+    pf: 100 / 95
+  - name: Efficient Breacher's Armour
+    rep: 29
+    act: 4
+    pf: 101 / 96
+  - name: Eroding Autogun
+    rep: 29
+    act: 4
+    pf: 101 / 96
+  - name: Defender
+    rep: 29
+    act: 4
+    pf: 100 / 95
+  - name: Insatiable Djin Blade
+    rep: 29
+    act: 4
+    pf: 101 / 96
+  - name: Abyss Spinner Gloves
+    rep: 30
+    act: 4
+    pf: 102 / 97
+  - name: Navy Breacher Boots
+    rep: 30
+    act: 4
+    pf: 105 / 100
+  - name: Battle Stimulator Medikit x3
+    rep: 31
+    act: 4
+    pf: 108 / 103
+  - name: Slicing Symbol
+    rep: 31
+    act: 4
+    pf: 111 / 106
+  - name: Cultist Armour Plates
+    rep: 31
+    act: 4
+    pf: 101 / 96
+  - name: Immaterium's Channeller
+    rep: 31
+    act: 4
+    pf: 106 / 101
+  - name: Well-Maintained Webber
+    rep: 32
+    act: 4
+    pf: 112 / 107
+  - name: Dancing on Blood
+    rep: 32
+    act: 4
+    pf: 113 / 108
+  - name: Sturdy Shield Straps
+    rep: 32
+    act: 4
+    pf: 113 / 108
+  - name: Blades Clone Field
+    rep: 33
+    act: 4
+    pf: 114 / 109
+  - name: Warp Grenade x2
+    rep: 33
+    act: 4
+    pf: 117 / 112
+  - name: Gunnery Shield
+    rep: 33
+    act: 4
+    pf: 115 / 110
+  - name: Panoply of the Assassin
+    rep: 34
+    act: 4
+    pf: 120 / 120
+  - name: Final Chord
+    rep: 34
+    act: 4
+    pf: 122 / 117
+  - name: Starmist Scarf
+    rep: 35
+    act: 4
+    pf: 123 / 118
+  - name: Thunder Bearer
+    rep: 35
+    act: 4
+    pf: 123 / 118
+  - name: Compensator Gloves
+    rep: 36
+    act: 4
+    pf: 126 / 121
+  - name: Improved Heavy Bolter
+    rep: 37
+    act: 4
+    pf: 129 / 124
+  - name: Bedlam x6
+    rep: 37
+    act: 4
+    pf: 127 / 122

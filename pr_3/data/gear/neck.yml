@@ -1,0 +1,403 @@
+- name: Grace of the Oblivious
+  slot: neck
+  location: >-
+    Von Valancius Flagship - looted from heretics who ambush as you exit toward voidship bridge, during By the Right of
+    Blood
+  act: 0
+  description: Grants +5 Toughness if the wearer has less than 35 Intelligence
+- name: Daemon Tool
+  slot: neck
+  location: Rykad Minoris underground puzzle
+  act: 1
+  description: >-
+    When weaer inflict warp dmg, target suffers burning (3) burning effects inflicted by the wearer scale with veil
+    degregation
+- name: Denial of Nightmares
+  slot: neck
+  location: Astropathic Station VX-02-537
+  act: 1
+  description: Worn by Psykers, gain immunity to Horrors of the Warp
+- name: Gem of Dark Vitality
+  slot: neck
+  location: Rykad Minoris after parade (i think Aurora drop)
+  act: 1
+  description: >-
+    Requires Heretical. +4 max wounds. If veil degradation is above 15: +10 toughness and the wearer regenerates heretic
+    level wounds each round
+- name: Hypnotising Pendant
+  slot: neck
+  location: Rykad Minoris
+  act: 1
+  description: When the wearer hits with shingle-shot attack, the tarhet suffers slowed until the wearer's next turn.
+- name: Martyr's Bone Charm
+  slot: neck
+  location: Freight Line
+  act: 1
+  description: Equip by Blood Cult Assassin, when affected by blood, gain 10 TGH for 2 rounds, DOES NOT STACK
+- name: Medal of Alacrity
+  slot: neck
+  location: Fellowship of the Void
+  act: 1
+  description: Wearer's Bring It Down! first time in combat on ally gives + 1 AP
+- name: Missionary Oath
+  slot: neck
+  location: Voidship Shrine
+  act: 1
+  description: >-
+    Once per combat, if the wearer does not use any abilities during their turn, they can endtheir turn to immediately
+    grant all adjacent allies an extra turn with 1AP
+- name: Amulet of Indomitable Spirit
+  slot: neck
+  location: A reward for completing the "Grim Darkness" mode for subsequent playthroughs. In the Lord Captain's Vault.
+  act: 1
+  description: Once per battle, when a character's health drops to 0, they recover 20% of their maximum health.
+- name: Denial of nightmares
+  slot: neck
+  location: "(Void Shadows DLC) Astropathic Station in the Rykad System Knowledge: Warp check required"
+  act: 1
+  description: >-
+    An amulet that belonged to an astropath who steadfastly resisted the horrors of the warp. The previous owner met a
+    terrible end, but his unbending will lives on in this icy relic. If the character is a psyker, they gain immunity to
+    the horrors of the warp.
+- name: Amulet made from the bone of a martyr
+  slot: neck
+  location: (Void Shadows DLC) freight line, chest behind tripwires near Eden
+  act: 1
+  description: >-
+    If the character is a Death Cult Assassin and is affected by the Blood Vial, they gain +10 Stamina for 2 rounds.
+    This effect does not stack.
+- name: Missionary Oath
+  slot: neck
+  location: (Void Shadows DLC) Ship Shrine, Orb Puzzle
+  act: 1
+  description: >-
+    An ancient scroll containing a solemn vow of service to the Emperor. Written by an unknown missionary from the words
+    of the great Nadine Aleinikov. Once per battle, while a character hasn't used any abilities during their turn, they
+    can end that turn to immediately grant all allies on adjacent squares an extra turn with 1 AP.
+- name: Anatomist Necklace
+  slot: neck
+  location: kasballica 4. pf58
+  act: 2
+  description: If wearer inflict bleeding, burning, toxin then wearer inflict +2 more stacks
+- name: Blessing of the Warp Spider
+  slot: neck
+  location: Janus Proj. 2 Event
+  act: 2
+  description: Whenever the owner kills an enemy or crit, they gain +2 to MP for their next turn.
+- name: Charitist's Pendant
+  slot: neck
+  location: Janus Awareness check by the sea
+  act: 2
+  description: >-
+    Grants +5 FEL and +10 commerce. If dogmatic rank2+, their Lore Imperium will depend on FEL instead of INT and gain
+    +10 Lore Imperium
+- name: Chirugeon's Vow
+  slot: neck
+  location: Mu-Rho 79 system - Space Combat (Allied with Navy)
+  act: 2
+  description: TGH increase by Medicae/10
+- name: Focus Incense
+  slot: neck
+  location: "Footfall: Dreams and Stories Puzzle"
+  act: 2
+  description: Each use of Revel in Slaughter increase PER +10 until the end of combat. Stacks
+- name: Heart of the Nameless
+  slot: neck
+  location: Janus Porj.1
+  act: 2
+  description: Lore Xenos +10. If Iconoclast 45, +10 to all skills
+- name: Princess of Efreet
+  slot: neck
+  location: Pick necklace for Jae
+  act: 2
+  description: Add + FEL bonus to all skills.
+- name: Psychic Ward
+  slot: neck
+  location: Dargonus Proj. 3 event
+  act: 2
+  description: While Veil Deg >= 10, wearer deal (WPb + PERb) % more bonus dmg with all psyker power. Unsanctioned only
+- name: Relics of Unknown Saints
+  slot: neck
+  location: Nemesite Confrontation loot
+  act: 2
+  description: If wearer has lass than 50% wounds, every second attack is auto dodged, lasts for up to 2 rounds
+- name: Requiemator
+  slot: neck
+  location: Foulstone Proj.2 Hallowed Railway
+  act: 2
+  description: >-
+    Whenever wearer kills a target with melee attack, enemies in 2 cell radius around wearer suffer wearer's WP bonus
+    mental damage
+- name: Unholy Shard
+  slot: neck
+  location: Pillars of Viridice - Inquisition Shipwreck
+  act: 2
+  description: >-
+    Reduces all toxic dmg suffered by wearer by 50%. If wearer is Heretical rank 3 they heal "heretical rank" wounds
+    each time they suffer toxic damage
+- name: Aquila Pendant
+  slot: neck
+  location: Gutted Voidship - Pulvis Platinum
+  act: 2
+  description: Grants +10 Willpower, If Dogmatic +5 Fellowship
+- name: Vortex Pendant
+  slot: neck
+  location: kasballica 10. pf67
+  act: 2
+  description: Wearer gain +5WP each time they use an abillity on an ally. Stacks until end of combat
+- name: Wraithbone Necklace
+  slot: neck
+  location: Janus Forest
+  act: 2
+  description: PER & AGI + 10
+- name: Lady theodora's Immaculacy
+  slot: neck
+  location: "Ship Crypt: Abulation in Blood"
+  act: 2
+  description: Commers/5 + Persuasion
+- name: Blessed Bolter Casing
+  slot: neck
+  location: Dead World of the Omicron system
+  act: 2
+  description: This amulet grants its wearer a +1 MP. It also grants a +5 bonus on Initiative rolls.
+- name: The Flawlessness of Lady Theodora
+  slot: neck
+  location: (Void Shadows DLC) crypt, take Theodora's ashes after the battle
+  act: 2
+  description: >-
+    Lady Theodora's ashes, transformed under immense Coercion into a magnificent diamond and interred in the ship's
+    vault. The stone shimmers with sapphire hues veined with gold and violet, reminiscent of the von Valantius family
+    colors. The character's Persuasion increases by (Commerce / 5)
+- name: Relics of unnamed saints
+  slot: neck
+  location: (Void Shadows DLC) From the body of a kelermorph
+  act: 2
+  description: >-
+    While the character's health is below 50%, they automatically dodge every other attack. The effect lasts no longer
+    than 2 rounds.
+- name: The Surgeon's Vow
+  slot: neck
+  location: (Void Shadows DLC) Star Battle in the Muro 79 system, side with the admiral
+  act: 2
+  description: The character's stamina is increased by (Medicae / 10)
+- name: Dog ​​tags
+  slot: neck
+  location: >-
+    (Lex Imperialis DLC) "Heartless," you must successfully restore power to the Drukhari machine, then pass all the
+    checks and open the sphere.
+  act: 2
+  description: >-
+    Upon killing a target for the first time in a round, the character receives +10 to all stats until the end of the
+    round.
+- name: Necklace with tassercium
+  slot: neck
+  location: (Lex Imperialis DLC) Tassera, in dialogue with Maeve, take the necklace for yourself
+  act: 2
+  description: >-
+    A luxurious gold necklace adorned with finely polished, glittering tassertium. When summoning warp threats, the
+    character gains (5 x their WP bonus) temporary health and does not provoke attacks of opportunity for the rest of
+    their turn. Warp threats always manifest as the summoning of a daemon.
+- name: Vox beacon
+  slot: neck
+  location: (Lex Imperialis DLC) Explorators
+  act: 2
+  description: If a character is an Overseer, using the archetype's first ability in a round does not cost any AP.
+- name: Solid Shield Enarmes
+  slot: neck
+  location: Drusians vendor (Rep 9, PF 40)
+  act: 2
+  description: The wearer can use Shield Swing with their shield against multiple enemies in an area. Shield attacks deal an additional +(TGH bonus) damage.
+- name: An ironclad argument
+  slot: neck
+  location: (Lex Imperialis DLC) Kasballica Mission
+  act: 2
+  description: The character gains +(4 x BS Bonus) to Coercion
+- name: Mystic Ward
+  slot: neck
+  location: Comorragh
+  act: 3
+  description: >-
+    At start of combat, all alies gain (3 x Psyker's PR) deflection. If psyker take any actual wound dmg, benefit go
+    away
+- name: For the Defence of Cadia
+  slot: neck
+  location: Mangled Sector - Safe
+  act: 3
+  description: When wearer gains stack of versatility, they gain 3 momentum
+- name: The Last Flash
+  slot: neck
+  location: Commorragh, Outer Spire Halls - chest by entrance to area after 3rd arena fight
+  act: 3
+  description: When wearer is a target of AoO, the attacker becomes blinded for 1 turn
+- name: Honour Insignia
+  slot: neck
+  location: Looting Commisar Arsenal post Kill
+  act: 3
+  description: If only one of the Wearer's combat area is active, Wearer gain +20 FEL and INT
+- name: Warlord's Amulet
+  slot: neck
+  location: Yremeryss loot
+  act: 3
+  description: Grants +wearer INT bonus% dodge to the wearer and their allies
+- name: Unholy Relics
+  slot: neck
+  location: Omicron system rumour - Artificial object
+  act: 4
+  description: Grants wearer +20 Coercrion and +5 penalty to Intelligence
+- name: Cassia's Girft
+  slot: neck
+  location: Cassia gift after coming back from act 3
+  act: 4
+  description: >-
+    REQ: Cassia romance active and Cassia didnt go to act 3 //// RT ITEM ONLY /// As long as Cassia remains the in the
+    party this amulent grants RT and Cassia + Cassia WP bonus to all their characteristics
+- name: Saint's Bone Charm
+  slot: neck
+  location: Gift from Viszier when arriving to the Temple after the train ambush
+  act: 4
+  description: Equip by Death Cult Assassin, when affected by blood, gain 20 TGH for 2 rounds, DOES NOT STACK
+- name: Sire's Patternronage
+  slot: neck
+  location: Sire Loot DLC quest
+  act: 4
+  description: >-
+    Wearer can skip their turn to make an ally of their choice immune to all damage until the start of the wearer's next
+    turn. Once per combat
+- name: Amulet of the Pauper Princes
+  slot: neck
+  location: Omicron system rumour - Finger of Sorrow
+  act: 4
+  description: REQ Dogmatic rank 1. In the first round of combat wearer's MP is doubled
+- name: Dashing Aquila
+  slot: neck
+  location: Argenta quest location
+  act: 4
+  description: >-
+    Wearer gains dash ability that costs 0AP, and can be performed twice per round. When wearer uses Dash, all adjacent
+    enemies suffer -30 Perception until the start of the wearer's next turn. doesn't stack
+- name: Flashlight Emitter
+  slot: neck
+  location: Footfall - fellowship max rank reward
+  act: 4
+  description: >-
+    When wearer is a target of AoO, the attacker becomes blinded for 1 turn. The wearer will perform their lowest cost
+    AP attack against this enemy (including attacks with ranged weapon)
+- name: Laurels of Command
+  slot: neck
+  location: Drusian Rep 17, pf 60
+  act: 4
+  description: Wearer gains Move!Move!Move! ability costing 0AP. Wearer and target of ability are immune to slow until end of round
+- name: Psy Focus
+  slot: neck
+  location: Drusian Rep 18, pf 67
+  act: 4
+  description: >-
+    Wearer deals 5 x PR warp dmg with melee attacks.Whenever wearer suffers critical hit, dodge and armour -30% until
+    end of combat
+- name: Laughing God's Pendant.
+  slot: neck
+  location: Kasballica 19. pf 82
+  act: 4
+  description: Wearer gain Assassin Danse Macabre ability. Basically 2 dashes that can go through target, provoke AoO
+- name: Onslaught Amulet
+  slot: neck
+  location: Void 27. pf90
+  act: 4
+  description: >-
+    After using Press the Advantage, effects depends on how much Tact stacks have left. > 5: next attack ignores
+    deflection. >10 next attack ignores cover. >15: Next attack ignores dodge. If wearer has undisputed advantage
+    talent, press the advantage only cost 1/4 tact stacks
+- name: Slicing Symbol
+  slot: neck
+  location: Void 31. pf111
+  act: 4
+  description: Whenever use, Slash, Dash, Kick, gain +AGIb MP and (wearer's resolve / 2 + 1) momentum
+- name: Starmist Scarf
+  slot: neck
+  location: Void 35. pf123
+  act: 4
+  description: Gain +2 PR. If not wearing armor, gain 20 + 4 x WP bonus dodge
+- name: Ommisiah Holy Symbol
+  slot: neck
+  location: Mechanicus 22. pf 76
+  act: 4
+  description: Tech Use & Logic +20. Reroll failed Tech Use and Logic Test once per test
+- name: Amulet made from the bone of a saint
+  slot: neck
+  location: (Void Shadows DLC) Death Cult Temple, Gift from Visir
+  act: 4
+  description: >-
+    If the character is a Death Cult Assassin and is affected by the Blood Vial, they gain +20 Stamina for 2 rounds.
+    This effect does not stack.
+- name: Patronage of the Ancestor
+  slot: neck
+  location: (Void Shadows DLC) sire fight
+  act: 4
+  description: >-
+    A character can skip their turn to grant immunity to all damage to a target ally until their next turn. Can only be
+    used once per battle.
+- name: Amulet of the Predatory Star
+  slot: neck
+  location: (Void Shadows DLC) Omicron, Finger of Death ship
+  act: 4
+  description: >-
+    An amulet in the shape of a fanged serpent with a sharp tail and three clawed legs, belonging to a Magus of the
+    Pauper Princes Genescult. In the first round of combat, the character has double the AP.
+- name: Adrenaline injector
+  slot: neck
+  location: (Lex Imperialis DLC) Explorators
+  act: 4
+  description: >-
+    When a character's health drops below 50% for the first time in a battle, they immediately gain temporary health
+    equal to the missing health.
+- name: Synaptic coagulator
+  slot: neck
+  location: (Lex Imperialis DLC) Janus, Colony Stage 4 Solomon Required
+  act: 4
+  description: >-
+    A mysterious device gifted by Lady Xue. It significantly enhances mental abilities if the owner can endure the pain
+    associated with being connected to the mechanism. The character gains +15 Intelligence. At the start of their turn,
+    they take 1 direct damage.
+- name: Ruby splashes
+  slot: neck
+  location: (Lex Imperialis DLC) - only available if you did not bring solomorne to act 3 - Vheabos 6, near Solomon
+  act: 4
+  description: >-
+    The character can use ranged weapons in melee combat. Ranged attacks against targets in adjacent squares gain +(3 x
+    PER bonus)% to critical hit chance.
+- name: Insignia of Fiery Faith
+  slot: neck
+  location: (Lex Imperialis DLC) Futfall. "The Martyr's Fortitude." In a safe on the wall in the back room.
+  act: 4
+  description: >-
+    A character's first melta weapon reload of the round does not cost any AP. Their first melta weapon attack of the
+    battle does not count toward their attack limit per turn.
+- name: Hope Pendant
+  slot: neck
+  location: Arebennian gift
+  act: 5
+  description: >-
+    Requires iconoclast rank 3. At the start of each turn (except extra turns), wearer gains +resolve momentum for each
+    ally (including themselves) with 50% or less wounds
+- name: Withering Shard
+  slot: neck
+  location: AN#8954no01-KT system - Rocky World
+  act: 5
+  description: >-
+    The wearers STR, TGH and AGI are decreased by -15. The wearer can use heroic acts at 125 momentum instead of 175 and
+    desperate measures at +50 momentum higher (capped at 100). the wearer is considered heretical rank2 if they dont
+    have it yet
+- name: Fury Incarnate
+  slot: neck
+  location: Sanctum of Taaphetus system - Rocky world Surface
+  act: 5
+  description: >-
+    When wearer is under the effect of Reckless Rush: all attacks gain +50%crit chance, wearer gains +50% critical
+    damage, all attacks against the wearer gain +50% crit chance and 50% crit dmg
+- name: Precinct Vox-Relay
+  slot: neck
+  location: Fellowship of the Void vendor (Rep 20, PF 55)
+  act: 3
+  description: >-
+    When an ally affected by the wearer's Bring It Down! ability successfully hits or targets an enemy, the wearer
+    gains +1 Fellowship and Willpower until the end of combat for each different enemy hit or targeted.

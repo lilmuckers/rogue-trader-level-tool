@@ -1,0 +1,178 @@
+name: Heinrix the Channeller of the Golden Throne
+archetypes:
+  t1: Warrior
+  t2: Overseer
+  t3: Exemplar
+extras:
+  skills: Athletics / Carouse / Coercion / Demolitions
+  gear:
+    - slot: Helm
+      options: Eyes of Joyeuse / Ghost Helm / Ethereal Visor / Thassertium Mask
+    - slot: Armour
+      options: Psyker's Breastplate
+    - slot: Cloak
+      options: Singed Cape / Xenopelt Cloak / Lady Theodora's Mantle
+    - slot: Neck
+      options: Vortex Pendant / Starmist Scarf / Thassertium Necklace
+    - slot: Accessory 1
+      options: Spirit Drape / Warp Surge Brooch / Hand of Offence
+    - slot: Accessory 2
+      options: Warp Surge Brooch / Experimental Psy-Amplifier / Chains of Domination / Hand of Offence
+    - slot: Gloves
+      options: Abyssal Conduit / Augmented Gloves / metal claw gloves
+    - slot: Boots
+      options: Boots of Decay / Pneumo Boots / Fencing Boots
+    - slot: Weapon Set 1
+      options: Veilrender / The Distortion / Sacrifice / Meragon Shield / Advanced Shield
+    - slot: Weapon Set 2
+      options: Sanctified Staff / Bloodrinker Staff
+    - slot: Pet
+      options: Grave Chill / Life Emanations
+levels:
+  '1':
+    m: Charge
+  '2':
+    m: Coercion
+  '3':
+    m: Endure
+  '4':
+    m: Daring Breach
+    e: Rigorous Training
+  '5':
+    m: Thick Skin
+    e: Weapon Skill
+  '6':
+    m: Enfeeble
+    e: Medicae
+  '7':
+    m: Weapon Skill
+    e: Psyker Minoris
+  '8':
+    m: Athletics
+    e: Hardened Scars
+  '9':
+    m: Daring breach II
+  '10':
+    m: Impetus
+    e: Toughness
+  '11':
+    m: Shield of the Emperor
+    e: Shield Mastery
+  '12':
+    m: Toughness
+    e: Athletics
+  '13':
+    m: Ramming Speed
+    e: Carouse / Lore Xenos
+  '14':
+    m: Strength
+    e: Heavy Armour Proficiency
+  '15':
+    m: Daring Breach IV
+  '16':
+    m: Psyber-Raven Proficiency
+  '17':
+    m: Stabilise
+  '18':
+    m: Psyker Majoris
+  '19':
+    m: Overcharge
+  '20':
+    m: Ap +1
+    e: Weapon Skill
+  '21':
+    m: Sacrificial Penance
+    e: Weapon Skill
+  '22':
+    m: Warp Speed
+    e: Athletics
+  '23':
+    m: Rite of Calibration
+  '24':
+    m: Toughness
+    e: Psyker Terminus
+  '25':
+    m: Warp Buffer
+  '26':
+    m: Toughness
+    e: Athletics
+  '27':
+    m: Overcharge II
+  '28':
+    m: Castigating Echoes
+    e: Warp Saturation
+  '29':
+    m: Perception
+    e: Carouse / Lore Xenos
+  '30':
+    m: Hammer of the Emperor
+  '31':
+    m: Psy-Resonator
+    e: Blade of Light / Destined
+  '32':
+    m: Perception
+    e: Carouse / Lore Xenos
+  '33':
+    m: Enhanced Augmentics
+  '34':
+    m: Psyker Extremis
+  '35':
+    m: Overcharge I
+  '36':
+    m: Eagar For Battle *
+    e: Crowd Kill
+  '37':
+    m: Athletics
+    e: Edge of Dawn
+  '38':
+    m: Weapon Skill
+    e: Deterioration
+  '39':
+    m: Pyromancy
+    e: Athletics
+  '40':
+    m: Degraded Defence
+    e: Backdraft
+  '41':
+    m: Weapon Skill
+    e: Desolation
+  '42':
+    m: Strategic Adaptation
+    e: Toughness
+  '43':
+    m: Melting Armour
+    e: Psalms of Heroes
+  '44':
+    m: Carouse / Lore Xenos
+    e: Destroyer *
+  '45':
+    m: AP +1
+  '46':
+    m: Fire Within
+    e: Carouse / Lore Xenos
+  '47':
+    m: Open Engagement
+    e: Carouse / Lore Xenos
+  '48':
+    m: Brother-In-Arms
+    e: Toughness
+  '49':
+    m: Willpower
+    e: Medicae
+  '50':
+    m: Peak Condition
+    e: Easy Target
+  '51':
+    m: Sanctified Slayer
+    e: Medicae
+  '52':
+    m: Hymns of Hatred
+    e: Corpus Conversion / Still Mind
+  '53':
+    m: Metabolic Overcharge
+    e: Willpower
+  '54':
+    m: Extermination
+    e: Eternal Glory
+  '55':
+    m: AP +1

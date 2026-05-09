@@ -1,0 +1,6 @@
+node_modules/
+revan619-builds.xlsx
+.claude
+.story/snapshots/
+.story/sessions/
+.story/status.json

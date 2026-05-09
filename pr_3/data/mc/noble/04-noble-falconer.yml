@@ -1,0 +1,180 @@
+name: Noble Falconer
+theme: Noble
+origin: >-
+  Imperial World (Fel) - Noble - Officer - Ballistic Skill + 2 / Agility +2 / Fel +2 (Dont worry about this being
+  Unoptimised, it is purely for RP)
+archetypes:
+  t1: Officer
+  t2: Overseer
+  t3: Exemplar
+extras:
+  skills: Persuasion, Commerce, Coercion, Lore Imperium
+  gear:
+    - slot: Helm
+      options: Commander's Monocle / Helm of Determination / Commissar Cap
+    - slot: Armour
+      options: '[Death World Origin] Enforcer''s Light Carapace / [Hive World Origin] Voidsmen Armour'
+    - slot: Cloak
+      options: Mercy's Gift / Von Valacius Cloak / Grenadier's Backpack
+    - slot: Neck
+      options: Medal of Alacrity / Vox-Beacon / Chartist Pendant
+    - slot: Accessory 1
+      options: >-
+        Iron Cape / Precinct Vox Relay / Portable Motive Force Storage / Saint Cognacius' Scriptures / <Rogue Trader>
+        Item Description
+    - slot: Accessory 2
+      options: Black Signet Ring of the Inquisition / Emerald Cherub Ring / Overseer's Aquila
+    - slot: Gloves
+      options: Deflection Gloves / Grenadier's Gloves / Thrice=Pioneer's Bracers / Abyss Spinner Gloves
+    - slot: Boots
+      options: Commissar Boots / Sharpshooter Boots / Tactical Boots / Wear-Resistant Boots
+    - slot: Weapon Set 1
+      options: Las Rifle / Sniper
+    - slot: Weapon Set 2
+      options: Shotgun
+levels:
+  '1':
+    m: Voice Of Command
+  '2':
+    m: Persuasion
+  '3':
+    m: Bring it Down !
+  '4':
+    m: Finest Hour
+    e: Lasting Impression
+  '5':
+    m: Ballistic Skill
+    e: You. Do Something.
+  '6':
+    m: Decisive Response
+    e: Ballistic Skill
+  '7':
+    m: Move, Move, Move!
+    e: Grenadier
+  '8':
+    m: Focus!
+    e: Commerce
+  '9':
+    m: Finest Hour IV
+  '10':
+    m: Commerce
+    e: Fellowship
+  '11':
+    m: Steel Resolve
+    e: Fellowship
+  '12':
+    m: Air of Authority
+    e: 'Characteristic Training: Agility'
+  '13':
+    m: Inspiring Speech
+    e: Persuasion
+  '14':
+    m: Agility
+    e: Ready to Serve
+  '15':
+    m: Finest Hour I
+  '16':
+    m: Cyber-Eagle Proficiency
+  '17':
+    m: Blinding Strike
+  '18':
+    m: Promise of Death
+  '19':
+    m: Overcharge
+  '20':
+    m: Ap +1
+    e: Ballistic Skill
+  '21':
+    m: Enhanced Augmetics
+    e: Ballistic Skill
+  '22':
+    m: Live Bait
+    e: Persuasion
+  '23':
+    m: Dependable Ally
+  '24':
+    m: Fellowship
+    e: Las Weapon Expert
+  '25':
+    m: Rite of Calibration
+  '26':
+    m: Fellowship
+    e: Persuasion
+  '27':
+    m: Overcharge II
+  '28':
+    m: Sharpened Talons
+    e: 'Base Skill: Persuasion'
+  '29':
+    m: Agility
+    e: Commerce
+  '30':
+    m: Strafe
+  '31':
+    m: Suppression Factor
+    e: 'Advanced Skill: Persuasion'
+  '32':
+    m: Agility
+    e: Commerce
+  '33':
+    m: Tenacious Talons
+  '34':
+    m: 'Characteristic Training: Per'
+  '35':
+    m: Overcharge I
+  '36':
+    m: Firebrand
+    e: Be Vigilant!
+  '37':
+    m: Persuasion
+    e: Swift Shadow
+  '38':
+    m: Ballistic Skill
+    e: Nimble / You. Kill It.
+  '39':
+    m: Break Their Ranks!
+    e: Persuasion
+  '40':
+    m: Eager Subordinates
+    e: Wind Currents
+  '41':
+    m: Ballistic Skill
+    e: Prepare for An Assault!
+  '42':
+    m: Strategic Adaptation
+    e: Fellowship
+  '43':
+    m: Bloody Mark
+    e: Know No Heresy / You. Are Next.
+  '44':
+    m: Commerce
+    e: Degraded Defence
+  '46':
+    m: Personal Oversight
+    e: Commerce
+  '47':
+    m: Leader's Assault
+    e: Lore Imperium
+  '48':
+    m: Brother-In-Arms
+    e: Fellowship
+  '49':
+    m: Agility / Perception
+    e: Lore Imperium
+  '50':
+    m: Attention!
+    e: No Respite
+  '51':
+    m: Emergency Protocol
+    e: Lore Imperium
+  '52':
+    m: Seize the Initiative
+    e: 'Characteristic Training: Fel'
+  '53':
+    m: Take Aim!
+    e: Agility / Perception
+  '54':
+    m: Eager for Battle
+    e: Steady!
+  '55':
+    m: AP +1
