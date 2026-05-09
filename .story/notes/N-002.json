@@ -1,0 +1,11 @@
+{
+  "content": "# ADR: Cross-device data sync strategy\n\n## Status\nOPEN — decision needed before any sync implementation begins\n\n## Context\nApp stores all data in localStorage (single device). Users want data available across desktop browser, iOS PWA, and other browsers without the developer providing backend infrastructure.\n\n## Options\n\n### A — GitHub Gist\n- User provides a GitHub PAT (gist scope), stored in localStorage\n- Pull on open, push on save. Private Gist as JSON blob\n- Pro: zero infra, no new accounts if user has GitHub\n- Con: last-write-wins clobbers offline edits; PAT in localStorage; no real-time\n\n### B — Firebase Realtime Database (free tier)\n- User creates Firebase project, pastes 4 config values into app settings\n- Real-time listener — changes appear on all devices instantly\n- Pro: true live sync, offline-first SDK, free tier sufficient for personal use\n- Con: Google dependency; Firebase project setup required; pairs cleanly with multi-profile\n\n### C — File System Access API + Dropbox/Google Drive desktop client\n- User picks a JSON file once (showSaveFilePicker); handle persists in IndexedDB\n- File lives in Dropbox/Drive folder; desktop sync client handles cross-machine sync\n- Desktop Chrome/Edge/Android Chrome: fully automatic read/write\n- iOS Safari/PWA: FSAA not supported — manual export/import only (share sheet → Files app)\n- Pro: no accounts, no API keys, leverages existing sync infrastructure\n- Con: iOS is always manual; not real-time; desktop-first story\n\n### D — Manual export/import only\n- Export button downloads JSON; import reads it back\n- User manages file placement in Dropbox/Drive/iCloud manually\n- Pro: zero complexity, works everywhere including iOS\n- Con: fully manual, no automation\n\n## Constraints\n- No developer-hosted backend\n- Must work on iOS PWA (even if degraded)\n- Should survive multi-profile feature (whichever option chosen, needs to sync profile-namespaced data)\n\n## Dependencies\n- Should be decided AFTER multi-profile (T-001–T-005) — sync data model is simpler once profile structure is settled\n\n## Decision\nTBD",
+  "createdDate": "2026-05-07",
+  "id": "N-002",
+  "status": "active",
+  "tags": [
+    "decisionsyncarchitecture"
+  ],
+  "title": "ADR: Cross-device data sync strategy",
+  "updatedDate": "2026-05-07"
+}

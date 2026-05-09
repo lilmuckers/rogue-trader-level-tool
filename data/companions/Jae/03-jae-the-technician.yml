@@ -1,0 +1,180 @@
+name: Jae the Technician
+archetypes:
+  t1: Officer
+  t2: Overseer
+  t3: Exemplar
+extras:
+  skills: All Fellowship / All Intelligence
+  gear:
+    - slot: Helm
+      options: Helm of Determination / Commissar Cap / Gunslinger's helm
+    - slot: Armour
+      options: Breacher Armour / Duellist Uniform
+    - slot: Cloak
+      options: Rogue Trader's Cloak / Tactical Backpack / Tempestus elite carapace backpack
+    - slot: Neck
+      options: Medal of Alacrity / Omnissiah Holy Symbol / Soldier aquila Pendant
+    - slot: Accessory 1
+      options: Saint Cognatius Scriptures / Pair Holster
+    - slot: Accessory 2
+      options: Commander's Chrono / Heart of the Nameless / Tactica Imperialis Exerpt
+    - slot: Gloves
+      options: >-
+        Thrice-Pioneer's Bracers / Gloves of Rapid Desolation / Freedom and Vengeance / Compensator Gloves / Abyss
+        Spinner Gloves
+    - slot: Boots
+      options: Commissar Boots / Recoil Warboots
+    - slot: Weapon Set 1
+      options: Upgraded Shuriken Pistol / quick-firing laspistol / Desolation Blast Pistol / [Sol Pattern] Laspistol
+    - slot: Weapon Set 2
+      options: Chorus of Battle / Blessing of Death / Chant of Stagnation / Deadshot Splinter Rifle
+    - slot: Pet
+      options: Computation Module FI-DR-Alpha / Beta / Stimulation Prot / Enhanced Radio Signal
+levels:
+  '1':
+    m: Voice Of Command
+  '2':
+    m: Commerce
+  '3':
+    m: Bring it Down !
+  '4':
+    m: Finest Hour
+    e: Commanding Voice
+  '5':
+    m: Fellowship
+    e: Nimble
+  '6':
+    m: Lasting Impression
+    e: Fellowship
+  '7':
+    m: Move, Move, Move
+    e: Swift Movements
+  '8':
+    m: March
+    e: Commerce
+  '9':
+    m: Finest Hour I
+  '10':
+    m: Lore Imperium
+    e: Ballistic Skill
+  '11':
+    m: leader Assault
+    e: Ballistic Skill
+  '12':
+    m: Take Aim!
+    e: 'Characteristic Training: BS'
+  '13':
+    m: Heroism
+    e: Lore Imperium
+  '14':
+    m: Willpower
+    e: 'Characteristic Training: FEL'
+  '15':
+    m: Finest Hour IV
+  '16':
+    m: Servo-Skull Swarm
+  '17':
+    m: Medicae Signal
+  '18':
+    m: Kinetic Module
+  '19':
+    m: Overcharge
+  '20':
+    m: AP +1
+    e: Ballistic Skill
+  '21':
+    m: Emergency Stimulation
+    e: Ballistic Skill
+  '22':
+    m: Priority Signal
+    e: Lore Imperium
+  '23':
+    m: Safe Shelter
+  '24':
+    m: Fellowship
+    e: 'Base Skill: Logic'
+  '25':
+    m: Symbiosis
+  '26':
+    m: Fellowship
+    e: Logic
+  '27':
+    m: Overcharge III
+  '28':
+    m: Unseen Support
+    e: Deadly Accuracy / las weapon expert
+  '29':
+    m: Perception
+    e: Logic
+  '30':
+    m: Strategic Adaptation
+  '31':
+    m: Master's Patronage
+    e: Ready to Serve
+  '32':
+    m: Perception
+    e: Logic
+  '33':
+    m: Rite of Calibration
+  '34':
+    m: Grenadier
+  '35':
+    m: Overcharge I
+  '36':
+    m: Firebrand
+    e: Decisive Response
+  '37':
+    m: Logic
+    e: Brother-In-Arms
+  '38':
+    m: Ballistic Skill
+    e: 'Base Skill: Lore Xenos'
+  '39':
+    m: Air of Authority
+    e: Logic
+  '40':
+    m: Adamantium Alloys
+    e: Energy Multiplier
+  '41':
+    m: Ballistic Skill
+    e: Inspiring Speech
+  '42':
+    m: Provocation Signal
+    e: Fellowship
+  '43':
+    m: Enhanced Augmetics
+    e: 'Advanced Skill: Logic'
+  '44':
+    m: Lore Xenos
+    e: Eager Subordinates
+  '45':
+    m: AP +1
+  '46':
+    m: Focus!
+    e: Lore Xenos
+  '47':
+    m: Steel Resolve
+    e: Lore Xenos
+  '48':
+    m: Impure Force
+    e: Fellowship
+  '49':
+    m: Perception
+    e: Lore Xenos
+  '50':
+    m: Eager for Battle
+    e: Seize the Initiative
+  '51':
+    m: Armoured Hide
+    e: Lore Xenos
+  '52':
+    m: Steady!
+    e: 'Base Skill: Lore Imperium'
+  '53':
+    m: Break Their Ranks!
+    e: Perception
+  '54':
+    m: Degraded Defence
+    e: Be Vigilant!
+  '55':
+    m: AP +1

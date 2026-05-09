@@ -1,0 +1,181 @@
+name: Fire Tsunami
+theme: Sanctioned Psyker (Offensive)
+origin: >-
+  Death World - Sanctioned Psyker Pyromancer - +2 WS / +2 AGL / +2 PER ((Early iconoclast for Malpain Shroud with
+  Invigorating resolve will be a big damage carry in act 2) Great for shimmering Emulsion)
+archetypes:
+  t1: Blade Dancer
+  t2: Executioner
+  t3: Exemplar
+extras:
+  skills: Medicae / Demolition
+  gear:
+    - slot: Helm
+      options: Eyes of Joyeuse / Carmine Crown / Mechanicus Respirator
+    - slot: Armour
+      options: Armour of Hidden Promise / Psychic Bodyglove
+    - slot: Cloak
+      options: Swashbuckler Cloak / Malpain Shroud / Von Valancius Cloak / Pack of Reagents
+    - slot: Neck
+      options: Starmist Scarf / Psy Focus / Invigorating Resolve
+    - slot: Accessory 1
+      options: Hand of Offence / Chains of Domination / Voidborn's pride / Diagnostor
+    - slot: Accessory 2
+      options: Warp Surge Brooch
+    - slot: Gloves
+      options: Augmented Gloves / Executioner Gauntlets / Inevietable Demise / The Hand of Avolius / Metal Claw Gloves
+    - slot: Boots
+      options: Inertia Boots / Impulse Boots / Fencing Boots / Void Veteran Boots
+    - slot: Weapon Set 1
+      options: Incinerator / Cursebringer
+    - slot: Weapon Set 2
+      options: Well-Maintained Rocksaw / Edge of the Irrevocable
+levels:
+  '1':
+    m: Blade Dance
+  '2':
+    m: Medicae
+  '3':
+    m: Death From Above
+  '4':
+    m: Death Waltz
+    e: Death Warden
+  '5':
+    m: Wounded Beast
+    e: Weapon Skill
+  '6':
+    m: Blood Oath
+    e: Medicae
+  '7':
+    m: Weapon Skill
+    e: Blood Rush
+  '8':
+    m: Demolition
+    e: Body of Flames
+  '9':
+    m: Death Waltz II
+  '10':
+    m: Facing the End
+    e: Agility
+  '11':
+    m: Acrobatic Artistry
+    e: Dance Partners
+  '12':
+    m: Agility
+    e: Demolition
+  '13':
+    m: Psyker Minoris
+    e: Carouse
+  '14':
+    m: Willpower
+    e: Balancing on the edge
+  '15':
+    m: Death Waltz III
+  '16':
+    m: Forced Repentance
+    e: Scourging Strike + Where it hurts
+  '17':
+    m: Orchestrate Flame
+  '18':
+    m: Anatomy Expert
+  '19':
+    m: Carnival of Misery
+  '20':
+    m: AP +1
+    e: Weapon Skill
+  '21':
+    m: Weapon Skill
+    e: Sparks of the Greater Flame
+  '22':
+    m: Biomancy
+  '23':
+    m: Biophysical Distortion
+    e: Medicae
+  '24':
+    m: Agility
+    e: Psyker Majoris
+  '25':
+    m: Sower of Distress
+  '26':
+    m: Agility
+    e: Medicae
+  '27':
+    m: Carnival of Misery III
+  '28':
+    m: Master of Torture
+  '29':
+    m: Willpower
+    e: Demolition
+  '30':
+    m: Firestorm / Inflame
+    e: 'Characteristic Training: PER'
+  '31':
+    m: Invigorating Screams / Perfect Anatomy
+  '32':
+    m: Perception
+    e: Demolition
+  '33':
+    m: Fragile Playthings
+  '34':
+    m: Perception
+    e: Psyker Terminus
+  '35':
+    m: Carnival of Misery IV
+  '36':
+    m: Eager for Battle *
+    e: Guillotine
+  '37':
+    m: Medicae
+    e: Racking Weakness
+  '38':
+    m: Weapon Skill
+    e: Blade of Light
+  '39':
+    m: Sanctic Powers
+    e: Medicae
+  '40':
+    m: Degraded Defence
+    e: All-Encompassing Agony
+  '41':
+    m: Weapon Skill
+    e: Edge of Dawn
+  '42':
+    m: Reckless Abandon
+    e: Agility
+  '43':
+    m: Hymns of Hatred
+    e: 'Fire Within / Base Skill: Medicae'
+  '44':
+    m: Demolition
+    e: Destroyer *
+  '45':
+    m: AP +1
+  '46':
+    m: Rising Tempo
+    e: Demolition
+  '47':
+    m: Race Against Death
+    e: Awareness
+  '48':
+    m: Pysker Extremis
+    e: Agility
+  '49':
+    m: Perception
+    e: Awareness
+  '50':
+    m: Peak Condtion
+    e: Pslam of Heroes
+  '51':
+    m: Deterioration
+    e: Awareness
+  '52':
+    m: Blade In His Hands
+    e: 'Sanctified Slayer / Advanced Skill: Medicae'
+  '53':
+    m: Inflame / Firestrom
+    e: Perception
+  '54':
+    m: Extermination
+    e: Duellist
+  '55':
+    m: AP +1

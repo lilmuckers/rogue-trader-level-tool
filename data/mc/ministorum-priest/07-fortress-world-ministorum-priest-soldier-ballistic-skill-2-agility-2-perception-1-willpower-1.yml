@@ -1,0 +1,173 @@
+name: Fortress World - Ministorum Priest - Soldier - Ballistic Skill +2 / Agility +2 / Perception +1 / Willpower +1
+theme: Ministorum Priest
+origin: Soldier
+archetypes:
+  t1: Soldier
+  t2: Arch-Militant
+  t3: Exemplar
+extras:
+  skills: Awareness / Demolition
+  gear:
+    - slot: Helm
+      options: Gunslinger's Helm
+    - slot: Armour
+      options: Artificer Power Armour
+    - slot: Cloak
+      options: Tactical Backpack
+    - slot: Neck
+      options: Fury Incarnate / Ruby Splash Necklace
+    - slot: Accessory 1
+      options: Chains of Domination / Demolition Instructions / Echo of Victory
+    - slot: Accessory 2
+      options: Bead of might / Book of war prayers / Saint Cognacius Scriptures
+    - slot: Gloves
+      options: Compensator Gloves
+    - slot: Boots
+      options: Inertia Boots / Caligae of saint keefe / Sororitas Boots
+    - slot: Weapon Set 1
+      options: Improved Heavy Bolter
+    - slot: Weapon Set 2
+      options: '[Sol Pattern] Shotgun / Scoped Shotgun'
+levels:
+  '2':
+    m: Medicae
+  '3':
+    m: Revel in Slaughter
+  '4':
+    m: Firearm Mastery
+    e: Point-Blank
+  '5':
+    m: Ballistic Skill
+    e: Demolition Engineer
+  '6':
+    m: Ballistic Skill
+    e: Concentrated Fire
+  '7':
+    m: Agility
+    e: Litany of Hatred
+  '8':
+    m: Rack and Ruin
+    e: Demolition
+  '9':
+    m: Firearm Mastery IV
+  '10':
+    m: Enought Bullets for Everyone
+    e: Agility
+  '11':
+    m: Dash
+    e: Demolition
+  '12':
+    m: Perception
+    e: Never Stop Believing
+  '13':
+    m: Swift Slaughter
+    e: Plasma Proficiency
+  '14':
+    m: Plasma Bank
+    e: Awareness
+  '15':
+    m: Firearm Mastery III
+  '17':
+    m: Wild Fire
+  '18':
+    m: Always Ready
+  '19':
+    m: Steady Superiority
+  '20':
+    m: Ap +1
+    e: Ballistic Skill
+  '21':
+    m: Flashfire
+    e: Ballistic Skill
+  '22':
+    m: Reckless Rush
+    e: External Power Block
+  '23':
+    m: Demolition
+    e: All out
+  '24':
+    m: Agility
+    e: Safety Training
+  '25':
+    m: Adaptability
+  '26':
+    m: Demolition
+    e: Agility
+  '27':
+    m: Steady Superiority IV
+  '28':
+    m: Awareness
+    e: Critical Versatility
+  '29':
+    m: Perception
+    e: Familiar Kickback
+  '30':
+    m: Devestating Attack
+  '31':
+    m: Breaking Attack
+  '32':
+    m: Perception
+    e: Awareness
+  '33':
+    m: Dismantle
+    e: Perception
+  '34':
+    m: Willpower
+    e: Enhanced Splash Area
+  '35':
+    m: Steady Superiority II
+  '37':
+    m: Awareness
+    e: Exploit Weakness
+  '38':
+    m: Ballistic Skill
+    e: Litany of Purification
+  '39':
+    m: Entrench
+    e: Awareness
+  '40':
+    m: Degraded Defence
+    e: Contempt for the weak
+  '41':
+    m: Ballistic Skill
+    e: Tenderise
+  '42':
+    m: Kick
+    e: Agility
+  '43':
+    m: Ingenious
+    e: Combat Addict
+  '44':
+    m: Demolition
+    e: Deadly Aim *
+  '45':
+    m: AP +1
+  '46':
+    m: Fortress
+    e: Demolition
+  '47':
+    m: Integrity
+    e: Awareness
+  '48':
+    m: Preferred Targets
+    e: Agility
+  '49':
+    m: Perception
+    e: Medicae
+  '50':
+    m: Extermination *
+    e: Camraderie
+  '51':
+    m: Accustomed to Glory
+    e: Medicae
+  '52':
+    m: Focal Point
+    e: Plasma Weapon Expert / Spare Magazine
+  '53':
+    m: Controlled Shot
+    e: Perception
+  '54':
+    m: Vital Points / Critical Velocity
+    e: Discipline
+  '55':
+    m: AP +1

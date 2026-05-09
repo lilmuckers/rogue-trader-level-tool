@@ -1,0 +1,181 @@
+name: Shells and Prayers
+theme: Navigator/Psyker Hybrid
+origin: >-
+  Fortress World - Sanctioned Psyker (Sanctic) - Soldier - Ballistic Skill +2 / Agility +2 / Perception +1 / Fellowship
+  +1
+archetypes:
+  t1: Soldier
+  t2: Master Tactician
+  t3: Exemplar
+extras:
+  skills: Awareness / Demolition
+  gear:
+    - slot: Helm
+      options: Eyes of Joyeuse / Ghost Helm / Commissar Cap
+    - slot: Armour
+      options: '[Hive World Origin] Voidsmen Armour / [Death World Origin] Enforcer''s light carapace'
+    - slot: Cloak
+      options: Tempestus Carapace Elite Backpack / Tactical Backpack / Mercy's Gift
+    - slot: Neck
+      options: Onslaught Amulet / Starmist Scarf / Aquila Pendant / The Vial of Falstow
+    - slot: Accessory 1
+      options: Warp Surge Brooch
+    - slot: Accessory 2
+      options: Chains of Domination / Iron Cape
+    - slot: Gloves
+      options: Compensator Gloves
+    - slot: Boots
+      options: Inertia Boots / Caligae of Saint Keefe / Sororitas Boots
+    - slot: Weapon Set 1
+      options: Implacable Tempest / Sworn Protector / Necrontech Host Shot Lasgun
+    - slot: Weapon Set 2
+      options: Sanctified Staff
+levels:
+  '1':
+    m: Run and Gun
+  '2':
+    m: Medicae
+  '3':
+    m: Revel in Slaughter
+  '4':
+    m: Firearm Mastery
+    e: Muzzle Velocity
+  '5':
+    m: Ballistic Skill
+    e: Rapid Reload
+  '6':
+    m: Ballistic Skill
+    e: Rapid Fire
+  '7':
+    m: Agility
+    e: Never Stop Believing
+  '8':
+    m: Unfaltering Fire
+    e: Awareness
+  '9':
+    m: Firearm Mastery II
+  '10':
+    m: Fired Up
+    e: Agility
+  '11':
+    m: Shield of the Emperor
+    e: Awareness
+  '12':
+    m: Willpower
+    e: Familiar Kickback
+  '13':
+    m: Swift Slaughter
+    e: Psyker Minoris
+  '14':
+    m: Psyker Majoris
+    e: Demolition
+  '15':
+    m: Firearm Mastery I
+  '16':
+    m: Tactical Advantage
+    e: Press The Advantage
+  '17':
+    m: Linchpin
+  '18':
+    m: Reliance
+  '19':
+    m: Orchestrated Firestorm
+  '20':
+    m: Ap +1
+    e: Ballistic Skill
+  '21':
+    m: Ballistic Skill
+    e: Joint Offensive
+  '22':
+    m: Inspire
+  '23':
+    m: Unwavering Motivation
+    e: Awareness
+  '24':
+    m: Agility
+    e: Psyker Terminus
+  '25':
+    m: Against All Odds
+  '26':
+    m: Awareness
+    e: Agility
+  '27':
+    m: Orchestrated Firestorm II
+  '28':
+    m: Dawn of Victory
+  '29':
+    m: Demolition
+    e: Willpower
+  '30':
+    m: Hymns of Hatred
+    e: Hammer of the Emperor
+  '31':
+    m: Stacking the Deck
+  '32':
+    m: Perception
+    e: Demolition
+  '33':
+    m: Brink of Death
+  '34':
+    m: Perception
+    e: Psyker Extremis
+  '35':
+    m: Orchestrated Firestorm III
+  '36':
+    m: Eagar for Battle
+    e: Rack and Ruin
+  '37':
+    m: Awareness
+    e: Undisputed Advantage
+  '38':
+    m: Ballistic Skill
+    e: Hail of Steel
+  '39':
+    m: Telepathy
+    e: Awareness
+  '40':
+    m: Degraded Defence
+    e: Pain Channelling
+  '41':
+    m: Ballistic Skill
+    e: Enough Bullets for Everyone
+  '42':
+    m: Fervour
+    e: Agility
+  '43':
+    m: Personal Involvement
+    e: Psalms of Heroes
+  '44':
+    m: Demolition
+    e: Extermination *
+  '45':
+    m: AP +1
+  '46':
+    m: Camraderie
+    e: Demolition
+  '47':
+    m: Fortress
+    e: Medicae
+  '48':
+    m: Support the Advance
+    e: Agility
+  '49':
+    m: Willpower
+    e: Medicae
+  '50':
+    m: Combat Meditation
+    e: Integrity
+  '51':
+    m: Logistical Superiority
+    e: Medicae
+  '52':
+    m: Eternal Glory
+    e: Psychic Barrage
+  '53':
+    m: Pyromancy
+    e: Willpower
+  '54':
+    m: Deadly Aim * / VItal Points
+    e: Backdraft
+  '55':
+    m: AP +1

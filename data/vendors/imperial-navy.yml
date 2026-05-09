@@ -1,0 +1,170 @@
+name: Imperial Navy
+items:
+  - name: Voss-Pattern Torpedo Tubes [Plasma]
+    rep: 0
+    act: 2
+    pf: 18
+  - name: Mezoa Lance Weapon
+    rep: 0
+    act: 2
+    pf: 19
+  - name: Mars-Pattern Prow Battery
+    rep: 0
+    act: 2
+    pf: 20
+  - name: Military Ceramite Voidship Plating
+    rep: 1
+    act: 2
+    pf: 22
+  - name: Glimmer-Pattern Void Shield Array [Prototype]
+    rep: 1
+    act: 2
+    pf: 24
+  - name: Scrap Box x3
+    rep: 1
+    act: 2
+  - name: Fortis-Pattern Torpedo Tubes [Plasma]
+    rep: 2
+    act: 2
+    pf: 27
+  - name: Repulsor Shield
+    rep: 2
+    act: 2
+    pf: 19
+  - name: Lathe-Pattern 2b Engine
+    rep: 3
+    act: 2
+    pf: 32
+  - name: Ryza-Pattern Plasma Battery
+    rep: 3
+    act: 2
+    pf: 34
+  - name: Mark-201.b Augur Array
+    rep: 4
+    act: 2
+    pf: 36
+  - name: Flak Ammo Arsenal
+    rep: 4
+    act: 2
+    pf: 38
+  - name: Assault Ceramite Voidship Plating
+    rep: 4
+    act: 2
+    pf: 39
+  - name: Sunhammer Lance Battery
+    rep: 5
+    act: 2
+    pf: 42
+  - name: Gryphonne-Pattern Torpedo Tubes [Plasma]
+    rep: 5
+    act: 2
+    pf: 44
+  - name: Thunderstrike Macro-Cannons
+    rep: 5
+    act: 2
+    pf: 45
+  - name: Glimmer-Pattern Void Shield Array
+    rep: 6
+    act: 2
+    pf: 46
+  - name: Stygie-Pattern Macro-Battery
+    rep: 6
+    act: 2
+    pf: 48
+  - name: Jovian-Pattern CLass 1 Drive
+    rep: 6
+    act: 2
+    pf: 49
+  - name: Power Shield Amplifier
+    rep: 7
+    act: 2
+    pf: 54
+  - name: Scrap Box x5
+    rep: 7
+    act: 2
+  - name: Bomber Deck [Starhawk Bombers]
+    rep: 7
+    act: 2
+    pf: 59
+  - name: Fortis-Pattern Torpedo Tubes [Melta]
+    rep: 8
+    act: 2
+    pf: 63
+  - name: Stygie-Pattern Dual-Module Macro-Battery
+    rep: 8
+    act: 2
+    pf: 65
+  - name: x-470 Ultimo Array
+    rep: 8
+    act: 2
+    pf: 68
+  - name: Compound Void Shield Array
+    rep: 9
+    act: 2
+    pf: 72
+  - name: Galleon Adamantine Voidship Plating
+    rep: 9
+    act: 2
+    pf: 76
+  - name: Small Plasma Macro-Cannon
+    rep: 9
+    act: 2
+    pf: 79
+  - name: R-50 Auspex Multi-Band
+    rep: 10
+    act: 2
+    pf: 84
+  - name: Fighters Deck [Wrath Starfighters]
+    rep: 10
+    act: 2
+    pf: 87
+  - name: Voidsunder Lance Battery
+    rep: 10
+    act: 2
+    pf: 88
+  - name: Gyphonne-Pattern Torpedo Tubes [Melta Torpedoes]
+    rep: 11
+    act: 2
+    pf: 95
+  - name: Hecutor-Pattern Plasma Battery
+    rep: 11
+    act: 2
+    pf: 99
+  - name: Scrap Container x4
+    rep: 11
+    act: 2
+  - name: Mars-Pattern Class 3 "Typhoon" Engine
+    rep: 12
+    act: 2
+    pf: 103
+  - name: Triple Void Shield Array
+    rep: 12
+    act: 2
+    pf: 105
+  - name: Flak Ammo Arsenal [Upgrade]
+    rep: 12
+    act: 2
+    pf: 107
+  - name: Archeotech Macro Battery
+    rep: 13
+    act: 2
+    pf: 115
+  - name: Meltabomb Mortar
+    rep: 13
+    act: 2
+    pf: 119
+  - name: Jovian-Pattern Class 4.5 Drive
+    rep: 14
+    act: 2
+    pf: 124
+  - name: Military Adamantine Voidship Plating
+    rep: 14
+    act: 2
+    pf: 126
+  - name: Archeotech Plasma Battery x2
+    rep: 14
+    act: 2
+    pf: 127
+  - name: Scrap Container x5
+    rep: 14
+    act: 2

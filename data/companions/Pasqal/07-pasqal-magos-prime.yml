@@ -1,0 +1,178 @@
+name: Pasqal Magos Prime
+archetypes:
+  t1: Operative
+  t2: Grand Strategist
+  t3: Exemplar
+extras:
+  skills: Tech-Use / Logic / Lore Imperium / Lore Xenos / Medicae / Awareness
+  gear:
+    - slot: Helm
+      options: Enhanced Data-Tether Mask / Arch-Strategist's Visor
+    - slot: Armour
+      options: '[Hiveworld] Voidsman Armour'
+    - slot: Cloak
+      options: Von Valancius Cloak / Cloaking Field Emitter
+    - slot: Neck
+      options: Synaptic Coagulator / Warlord's Amulet / Hypnotising Pendant
+    - slot: Accessory 1
+      options: Untuning combi-tool
+    - slot: Accessory 2
+      options: Commander's Notes
+    - slot: Gloves
+      options: Overcharge Gloves / Marksman Bracers / Grenadier's Gloves / Plasmashapers gloves
+    - slot: Boots
+      options: Sharpshooter Boots
+    - slot: Weapon Set 1
+      options: Omnissiah's Providence
+    - slot: Weapon Set 2
+      options: Ragefire Plasma Gun
+levels:
+  '1':
+    m: Analyse Enemies
+  '2':
+    m: Tech-Use
+  '3':
+    m: Expose Weakness
+  '4':
+    m: Dismantling
+    e: Passive learning
+  '5':
+    m: Ballistic Skill
+    e: Aiming Protocols
+  '6':
+    m: Uncanny Sight
+    e: Intelligence
+  '7':
+    m: Tactical Knowledge
+    e: Tech-Use
+  '8':
+    m: Tide of Excellence
+    e: External Power Block
+  '9':
+    m: Dismantling III
+    e: Medicae
+  '10':
+    m: Logic
+    e: Perception
+  '11':
+    m: Improved Tactics
+    e: Logic
+  '12':
+    m: Joint Analysis
+    e: Plasma Bank
+  '13':
+    m: Fresh Target
+    e: Perception
+  '14':
+    m: Intelligence
+    e: Overcharge Protocols
+  '15':
+    m: Dismantling II
+  '16':
+    m: Combat Tactics
+  '17':
+    m: Combat Locus Stratagem
+  '18':
+    m: Improvised Strategy
+  '19':
+    m: Take and Hold
+  '20':
+    m: Ap +1
+    e: Ballistic Skill
+  '21':
+    m: Blurred Locus
+    e: Ballistic Skill
+  '22':
+    m: Blitz Stratagem
+  '23':
+    m: Tech-Use
+    e: Fire at Will
+  '24':
+    m: Intelligence
+    e: Scanner Mechadendrite
+  '25':
+    m: Personal Combat Zone
+  '26':
+    m: Intelligence
+    e: Tech-Use
+  '27':
+    m: Take and Hold IV
+  '28':
+    m: Strategic Offensive
+    e: Perception
+  '29':
+    m: Perception
+    e: Logic
+  '30':
+    m: Overwhelming Stratagem
+  '31':
+    m: Daunting Zone
+    e: Machine Spirit Scan Protocols
+  '32':
+    m: Logic
+    e: Fellowship
+  '33':
+    m: Fellowship
+    e: Adjusting Frontline
+  '34':
+    m: Safety Training / Grenadier
+  '35':
+    m: Take and Hold III
+  '36':
+    m: Degraded Defence
+    e: Ballistics Calculation
+  '37':
+    m: Tech-Use
+    e: Opening Strategy
+  '38':
+    m: Ballistic Skill
+    e: 'Base Skill: Lore Xenos'
+  '39':
+    m: Perfect Spot
+    e: Tech-Use
+  '40':
+    m: Deathdealer
+    e: Critical Zone
+  '41':
+    m: Ballistic Skill
+    e: Sniper Expertise
+  '42':
+    m: Killzone Stratagem
+    e: Intelligence
+  '43':
+    m: Inescapable Zone
+    e: 'Advanced Skill: Lore Xenos'
+  '44':
+    m: Logic
+    e: Extermination
+  '45':
+    m: Ap +1
+  '46':
+    m: Sharpshooter
+    e: Logic
+  '47':
+    m: Weak Body, Weak Soul
+    e: Lore Xenos
+  '48':
+    m: Personal Zone
+    e: Intelligence
+  '49':
+    m: Perception
+    e: Lore Xenos
+  '50':
+    m: Eager for Battle
+    e: Joint Offence
+  '51':
+    m: Sniping Zone
+    e: Lore Xenos
+  '52':
+    m: Combat Insight
+    e: Pinnacle of Weaponry
+  '53':
+    m: Stronghold Stratagem
+    e: Perception
+  '54':
+    m: Know-It-All
+    e: Overcoming Zone
+  '55':
+    m: Ap +1

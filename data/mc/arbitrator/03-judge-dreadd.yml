@@ -1,0 +1,180 @@
+name: Judge Dreadd
+theme: Arbitrator
+origin: Double Shotgun pet build - Fortress world - Arbitrator (Vigilant) - Soldier - BS +2 / Agility +2 / Perception +2
+archetypes:
+  t1: Soldier
+  t2: Overseer
+  t3: Exemplar
+extras:
+  skills: Demolitions / Awareness / Coercion
+  gear:
+    - slot: Helm
+      options: Steel guidance / Arbites helmet / Commissar Cap
+    - slot: Armour
+      options: '[Hive world Origin] Voidsmen Armour / Warrior Armour'
+    - slot: Cloak
+      options: Cloak of Hatred / Sensory-motor Modulator
+    - slot: Neck
+      options: Vial of Falstow / Ironclad Argument
+    - slot: Accessory 1
+      options: Demolition Instructions / Bayonet Chain Knife
+    - slot: Accessory 2
+      options: Bead of Might / Portable Motive Force Storage / Seal of the Purifier / Iron Cape
+    - slot: Gloves
+      options: Elastic Gloves / Inevietable Demise / Marksman Bracers
+    - slot: Boots
+      options: Navy Breacher Boots / Heavy Breacher Boots
+    - slot: Weapon Set 1
+      options: Double-Barreled Shotgun / Gunnery Shield
+    - slot: Weapon Set 2
+      options: Scoped Shotgun / [Sol-Pattern] Shotgun / The Rack / Crescendo / The Ruin
+    - slot: Pet
+      options: Pack Hunting / Heel! Protocol
+levels:
+  '1':
+    m: Run and Gun
+  '2':
+    m: Demolition
+  '3':
+    m: Revel in Slaughter
+  '4':
+    m: Firearm Mastery
+    e: Point-Blank
+  '5':
+    m: Ballistic Skill
+    e: Demolition Engineer
+  '6':
+    m: Ballistic Skill
+    e: Concentrated fire
+  '7':
+    m: Perception
+    e: Lawful Intervention
+  '8':
+    m: Fired up
+    e: Demolition
+  '9':
+    m: Firearm Mastery I
+  '10':
+    m: Enough Bullets for Everyone
+    e: Perception
+  '11':
+    m: Dash
+    e: Coercion
+  '12':
+    m: Agility
+    e: Never Stop Believing
+  '13':
+    m: Swift Slaughter
+    e: Familiar Kickback
+  '14':
+    m: Shotgun Mastery
+    e: Coercion
+  '15':
+    m: Firearm Mastery IV
+  '16':
+    m: Cyber-Mastiff Proficiency
+  '17':
+    m: Strategic Adaptation
+  '18':
+    m: Rite of Calibration
+  '19':
+    m: Overcharge
+  '20':
+    m: Ap +1
+    e: Ballistic Skill
+  '21':
+    m: Enhanced Augmetics
+    e: Ballistic Skill
+  '22':
+    m: Advanced Tracking
+    e: Demolition
+  '23':
+    m: Armour-Piercing
+  '24':
+    m: Agility
+    e: Dual-Weapon Combat
+  '25':
+    m: Chain-Maw
+  '26':
+    m: Agility
+    e: Demolition
+  '27':
+    m: Overcharge II
+  '28':
+    m: Law and Order
+    e: Public Sentencing
+  '29':
+    m: Agility
+    e: Coercion
+  '30':
+    m: Consolidation
+  '31':
+    m: Perimeter Defence
+    e: Mob Justice
+  '32':
+    m: Perception
+    e: Coercion
+  '33':
+    m: Suppressive Factor
+  '34':
+    m: Shield Mastery
+  '35':
+    m: Overcharge I / III
+  '36':
+    m: Eager for Battle
+    e: Camaraderie
+  '37':
+    m: Demolition
+    e: Brother-In-Arms / Side by Side
+  '38':
+    m: Ballistic Skill
+    e: Spare Magazine
+  '39':
+    m: Entrench
+    e: Demolition
+  '40':
+    m: Degraded Defence
+    e: Relentless Pursuit
+  '41':
+    m: Ballistic Skill
+    e: Rapid Reload
+  '42':
+    m: Bite!
+    e: Agility
+  '43':
+    m: Prepared Prosecution
+    e: Grenadier
+  '44':
+    m: Coercion
+    e: Extermination
+  '45':
+    m: AP +1
+  '46':
+    m: Rack and Ruin
+    e: Coercion
+  '47':
+    m: Integrity
+    e: Medicae
+  '48':
+    m: Autonomous Medikit
+    e: Agility
+  '49':
+    m: Perception
+    e: Medicae
+  '50':
+    m: Eager Surbordinates
+    e: Second Skin
+  '51':
+    m: Binding Purpose / Pillar of the Law
+    e: Medicae
+  '52':
+    m: Unpredictable / Fortress
+    e: Solid Projectile Weap Exp
+  '53':
+    m: Double slug / Grisly Adjudication
+    e: Perception
+  '54':
+    m: Vital Points
+    e: Dependable Ally
+  '55':
+    m: AP +1

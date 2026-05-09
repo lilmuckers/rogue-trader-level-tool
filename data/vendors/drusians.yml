@@ -1,0 +1,298 @@
+name: Drusians
+items:
+  - name: Medikit x5
+    rep: 0
+    act: 2
+    pf: 14
+  - name: Enforcer Helmet
+    rep: 0
+    act: 2
+    pf: 16
+  - name: Onsalught x 5
+    rep: 0
+    act: 2
+    pf: 17
+  - name: Imperial Scroll
+    rep: 0
+    act: 2
+    pf: 20
+  - name: Bloodhound Staff
+    rep: 0
+    act: 2
+    pf: 15
+  - name: Elite Chainsword
+    rep: 1
+    act: 2
+    pf: 21
+  - name: Sanctified Staff
+    rep: 1
+    act: 2
+    pf: 20
+  - name: Excruciator Maul
+    rep: 1
+    act: 2
+    pf: 20
+  - name: Militant Cloak
+    rep: 2
+    act: 2
+    pf: 23
+  - name: Cloak of Retribution
+    rep: 3
+    act: 2
+    pf: 26
+  - name: Krak Grenade x5
+    rep: 3
+    act: 2
+    pf: 29
+  - name: Heavy Bolter
+    rep: 3
+    act: 2
+    pf: 25
+  - name: Power Claymore
+    rep: 4
+    act: 2
+    pf: 32
+  - name: Camaraderie Badge
+    rep: 5
+    act: 2
+    pf: 38
+  - name: '[Death World Orign] Enforcer Light Carapace'
+    rep: 5
+    act: 2
+    pf: 41
+  - name: Multikey x3
+    rep: 6
+    act: 2
+    pf: 20
+  - name: Cloak of Hatred
+    rep: 6
+    act: 2
+    pf: 23
+  - name: Armour of the final threshold
+    rep: 6
+    act: 2
+    pf: 42
+  - name: Dark Visionary Hood
+    rep: 7
+    act: 2
+    pf: 29
+  - name: Rusty Heavy Rock Saw
+    rep: 7
+    act: 2
+    pf: 27
+  - name: Reconstructed Flamer Pistol
+    rep: 8
+    act: 2
+    pf: 35
+  - name: Spinner's Breastplate
+    rep: 8
+    act: 2
+    pf: 32
+  - name: Large Medikit x4
+    rep: 9
+    act: 2
+    pf: 38
+  - name: '[War World Origin] Enforcer Carapace'
+    rep: 9
+    act: 2
+    pf: 41
+  - name: Solid Shield Enarmes
+    rep: 9
+    act: 2
+    pf: 40
+  - name: Death World Warboots
+    rep: 10
+    act: 2
+    pf: 20
+  - name: Radiant Gloves
+    rep: 10
+    act: 2
+    pf: 26
+  - name: Heavy Flamer
+    rep: 11
+    act: 2
+    pf: 32
+  - name: Silent Death
+    rep: 11
+    act: 2
+    pf: 32
+  - name: Martyr's Penance
+    rep: 12
+    act: 2
+    pf: 38
+  - name: Triumph of Retribution
+    rep: 12
+    act: 2
+    pf: 36
+  - name: Executioner's Gauntlets
+    rep: 13
+    act: 2
+    pf: 43
+  - name: Roaring Thunder
+    rep: 14
+    act: 2
+    pf: 47
+  - name: Seal of Death
+    rep: 14
+    act: 2
+    pf: 46
+  - name: Condensed Carapace
+    rep: 15
+    act: 2
+    pf: 53
+  - name: Flashbang x6
+    rep: 16
+    act: 4
+    pf: 57
+  - name: Advanced Medikit x6
+    rep: 16
+    act: 4
+    pf: 59
+  - name: Astartes Flamer
+    rep: 16
+    act: 4
+    pf: 58
+  - name: Laurels of Command
+    rep: 17
+    act: 4
+    pf: 60
+  - name: Military Combi-Tool
+    rep: 17
+    act: 4
+    pf: 63
+  - name: Overcharged Plasma Gun
+    rep: 18
+    act: 4
+    pf: 65
+  - name: Psy Focus
+    rep: 18
+    act: 4
+    pf: 67
+  - name: Auto Stimulant
+    rep: 19
+    act: 4
+    pf: 69
+  - name: Battle Stimulator Medikit x2
+    rep: 19
+    act: 4
+    pf: 71
+  - name: Elite Synth-Leather Boots
+    rep: 19
+    act: 4
+    pf: 70
+  - name: Notes on Weaknesses
+    rep: 20
+    act: 4
+    pf: 73
+  - name: Scout Armour
+    rep: 20
+    act: 4
+    pf: 75
+  - name: '[Sol-Pattern] Power Maul'
+    rep: 21
+    act: 4
+    pf: 77
+  - name: Boots of SIlence
+    rep: 21
+    act: 4
+    pf: 79
+  - name: Virtue of Contempt
+    rep: 22
+    act: 4
+    pf: 81
+  - name: Fireproof x5
+    rep: 22
+    act: 4
+    pf: 83
+  - name: Improved Heavy Rock Saw
+    rep: 22
+    act: 4
+    pf: 84
+  - name: Void Veteran Boots
+    rep: 22
+    act: 4
+    pf: 84
+  - name: '[Sol-Pattern] Meltagun'
+    rep: 22
+    act: 4
+    pf: 85
+  - name: Crusade Plate Helmet
+    rep: 24
+    act: 4
+    pf: 85
+  - name: Triumph of Faith
+    rep: 24
+    act: 4
+    pf: 87
+  - name: Sacrifice
+    rep: 24
+    act: 4
+    pf: 86
+  - name: Bladewings
+    rep: 25
+    act: 4
+    pf: 89
+  - name: Commander's Chrono
+    rep: 25
+    act: 4
+    pf: 91
+  - name: Improved Power Pick
+    rep: 26
+    act: 4
+    pf: 92
+  - name: Mantle of Extermination
+    rep: 26
+    act: 4
+    pf: 92
+  - name: Iron Grip
+    rep: 26
+    act: 4
+    pf: 93
+  - name: Boots of Kasrkin
+    rep: 27
+    act: 4
+    pf: 93
+  - name: Cadian Castellan Carapace
+    rep: 27
+    act: 4
+    pf: 105
+  - name: High Spinner Armour
+    rep: 27
+    act: 4
+    pf: 92
+  - name: Judex
+    rep: 28
+    act: 4
+    pf: 95
+  - name: Righteous Justice
+    rep: 28
+    act: 4
+    pf: 72
+  - name: Partner in death
+    rep: 28
+    act: 4
+    pf: 95
+  - name: Staff of the Righteous Pyre
+    rep: 29
+    act: 4
+    pf: 97
+  - name: Modfified Artificer Armour
+    rep: 29
+    act: 4
+    pf: 105
+  - name: Cold Blooded
+    rep: 29
+    act: 4
+    pf: 97
+  - name: Hymn of Vehemence
+    rep: 30
+    act: 4
+    pf: 99
+  - name: Undertaker
+    rep: 30
+    act: 4
+    pf: 100
+  - name: Dragon Scale Power Armour
+    rep: 31
+    act: 4
+    pf: 101

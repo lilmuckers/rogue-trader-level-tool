@@ -1,0 +1,184 @@
+name: >-
+  Lord Admiral - The what everyone wanted to play since launch roleplay build (Melee with offhand gun - Heretic in
+  prologue gets a very nice inferno pistol)
+theme: Imperial Navy Officer
+origin: Forge World (Subskin armour) - Navy Officer - Warrior - Weapon Skill +2 / Strength +2 / Toughness +2
+archetypes:
+  t1: Warrior
+  t2: Arch-Militant
+  t3: Exemplar
+extras:
+  skills: Athletics / Carouse / Awareness
+  gear:
+    - slot: Helm
+      options: The Guardian Crown / Tactical Genius / Retinal analyser
+    - slot: Armour
+      options: '[Fortress World Origin] Tempestus Carapace / [War World Origin] Tempestus Elite Carapace'
+    - slot: Cloak
+      options: Arch-Militant Cape / Malpain Shroud / Swashbuckler cloak
+    - slot: Neck
+      options: Invigorating Resolve
+    - slot: Accessory 1
+      options: Peculiar Trinket / Bead of Might
+    - slot: Accessory 2
+      options: Empyrean Transceiver / Hellbrute Horn Trophy
+    - slot: Gloves
+      options: Augmented Gloves / Adaptive Gloves / Relish Anguish / Metal Claw Gloves
+    - slot: Boots
+      options: Pneumo Boots / Void Veteran Boots / Enforcer Light boots
+    - slot: Weapon Set 1
+      options: >-
+        Coffinmaker Sledge / Auto-striking power sword / Bonebreaker Maul / Tearing Vengence / Carnage / Blade Of Sorrow
+        / Bone-Shatterer / Quick-Fire Las Pistol / [Sol Pattern] Las Pistol
+    - slot: Weapon Set 2
+      options: Well-Maintained Rocksaw / Bonecracker
+levels:
+  '1':
+    m: Charge
+  '2':
+    m: Medicae
+  '3':
+    m: Endure
+  '4':
+    m: Daring Breach
+    e: Thick skin
+  '5':
+    m: Crowd Kill / Hardened Scars
+    e: Weapon Skill
+  '6':
+    m: Taunting Scream / Sworn Enemy
+    e: Athletics
+  '7':
+    m: Weapon Skill
+    e: Fleet Combat Training
+  '8':
+    m: Athletics
+    e: Opening Strike / Crowd Kill
+  '9':
+    m: Daring Breach II
+  '10':
+    m: Impetus
+    e: Strength
+  '11':
+    m: Reckless Strike
+    e: Heavy Armour Proficiency
+  '12':
+    m: Toughness
+    e: Carouse
+  '13':
+    m: Reckless Fury
+    e: Carouse
+  '14':
+    m: Toughness
+    e: Steel of the Forge
+  '15':
+    m: Daring Breach IV
+  '16':
+    m: Versitility
+  '17':
+    m: Wildfire
+  '18':
+    m: Always Ready
+  '19':
+    m: Steady Superiority
+  '20':
+    m: AP +1
+    e: Weapon Skill
+  '21':
+    m: Broad Expertise
+    e: Weapon Skill
+  '22':
+    m: Reckless Rush
+    e: Melee Weapon Specialist
+  '23':
+    m: Athletics
+    e: Dependable
+  '24':
+    m: Toughness
+    e: Dual-Weapon Combat
+  '25':
+    m: All out
+  '26':
+    m: Athletics
+    e: Toughness
+  '27':
+    m: Steady Superiority IV
+  '28':
+    m: Carouse
+    e: Flashfire
+  '29':
+    m: Perception
+    e: Get off Me!
+  '30':
+    m: Kick
+  '31':
+    m: Adaptability
+  '32':
+    m: Perception
+    e: Carouse
+  '33':
+    m: Critical Versatility
+    e: Perception
+  '34':
+    m: Perception
+    e: Dual Weapon Specialist
+  '35':
+    m: Steady Superiority II
+  '36':
+    m: Eagar for battle *
+    e: Easy Target
+  '37':
+    m: Athletics
+    e: Armsmaster
+  '38':
+    m: Weapon Skill
+    e: Power Armour Profeciency
+  '39':
+    m: Sworn Enemy
+    e: Athletics
+  '40':
+    m: Degraded Defence
+    e: Dismantle
+  '41':
+    m: Weapon Skill
+    e: Opening Strike
+  '42':
+    m: Devestating Attack
+    e: Toughness
+  '43':
+    m: Breaking Attack
+    e: Stentorian Voice
+  '44':
+    m: Carouse
+    e: Destroyer *
+  '45':
+    m: AP +1
+  '46':
+    m: Ramming Speed
+    e: Carouse
+  '47':
+    m: Desolation
+    e: Medicae
+  '48':
+    m: Exploit Weakness
+    e: Toughness
+  '49':
+    m: Perception
+    e: Medicae
+  '50':
+    m: Peak Condition
+    e: Open Engagement
+  '51':
+    m: Contempt for the Weak
+    e: Medicae
+  '52':
+    m: Preferred Targets
+    e: Power Weapon Expert
+  '53':
+    m: Forceful Strike
+    e: Strength
+  '54':
+    m: Extermination
+    e: Accustomed to Glory
+  '55':
+    m: AP +1

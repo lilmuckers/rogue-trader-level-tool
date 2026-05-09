@@ -1,0 +1,179 @@
+name: Pasqal the Discontinuer.... of Life
+archetypes:
+  t1: Operative
+  t2: Assassin
+  t3: Exemplar
+extras:
+  skills: Tech-Use / Logic / Lore Imperium / Lore Xenos / Medicae / Awareness
+  gear:
+    - slot: Helm
+      options: Self-Calibrating Goggles / Helm / Enhanced Data-Tether Mask
+    - slot: Armour
+      options: '[Hiveworld] Voidsman Armour / Adaptive Flak Vest / Skiitaari Ranger Armour'
+    - slot: Cloak
+      options: >-
+        Shadowguide Cloak / Cape of Righteous Fury / Zealot Cloak / Von Valancius Cloak (might be a bug not being RT
+        restricted)
+    - slot: Neck
+      options: Synaptic Coagulator / Warlord's Amulet / Hypnotising Pendant
+    - slot: Accessory 1
+      options: Long-Range Aim Lens / Untuning combi-tool
+    - slot: Accessory 2
+      options: Prey Scanner / Vid-Capture Relay / Untuning combi-tool
+    - slot: Gloves
+      options: Plasmashaper Gloves / Overcharge Gloves
+    - slot: Boots
+      options: Sharpshooter Boots / Tracking Boots
+    - slot: Weapon Set 1
+      options: Omnissiah's Providence
+    - slot: Weapon Set 2
+      options: Ancient Plasma Rifle / Incandecent Storm
+levels:
+  '1':
+    m: Analyse Enemies
+  '2':
+    m: Tech-Use
+  '3':
+    m: Expose Weakness
+  '4':
+    m: Dismantling
+    e: Passive learning
+  '5':
+    m: Ballistic Skill
+    e: Scanner Mechadendrite
+  '6':
+    m: Uncanny Sight
+    e: Intelligence
+  '7':
+    m: Joint Analysis
+    e: Tech-Use
+  '8':
+    m: Tide of Excellence
+    e: Aiming Protocols
+  '9':
+    m: Dismantling II
+    e: Medicae
+  '10':
+    m: Logic
+    e: Perception
+  '11':
+    m: Ballistic Calculations / Sharpshooter
+    e: Logic
+  '12':
+    m: Perfect Spot
+    e: External Power Block
+  '13':
+    m: Sniper Expertise
+    e: Perception
+  '14':
+    m: Intelligence
+    e: Plasma Bank
+  '15':
+    m: Dismantling III
+  '16':
+    m: Seek the Opening
+  '17':
+    m: Death Whisper
+  '18':
+    m: Deadly Calculation
+  '19':
+    m: Dispatch
+  '20':
+    m: AP +1
+    e: Ballistic Skill
+  '21':
+    m: Imminent Demise
+    e: Ballistic Skill
+  '22':
+    m: Tech-Use
+    e: Killing Edge
+  '23':
+    m: Lethality Heightens
+  '24':
+    m: Perception
+    e: Overcharge Protocols
+  '25':
+    m: Perfect Opening
+  '26':
+    m: Perception
+    e: Tech-Use
+  '27':
+    m: Dispatch II
+  '28':
+    m: Safety Training
+    e: Disarray
+  '29':
+    m: Intelligence
+    e: Logic
+  '30':
+    m: Elusive Shadow
+  '31':
+    m: Filtering Protocols
+    e: Seize the Advantage
+  '32':
+    m: Logic
+  '33':
+    m: Lone Killer
+    e: Intelligence
+  '34':
+    m: Pinnacle of Weaponry
+  '35':
+    m: Dispatch I
+  '36':
+    m: Eager for Battle *
+    e: Fresh Target
+  '37':
+    m: Tech-Use
+    e: Lethal Concentration
+  '38':
+    m: Ballistic Skill
+    e: Grenadier
+  '39':
+    m: Tactical Knowledge
+    e: Tech-Use
+  '40':
+    m: Degraded Defence
+    e: Carmine Whisper
+  '41':
+    m: Ballistic Skill
+    e: Improved Tactics
+  '42':
+    m: Poised to Strike
+    e: Perception
+  '43':
+    m: Flawless Lunge
+    e: Enhanced Splash Area
+  '44':
+    m: Logic
+    e: DeathDealer *
+  '45':
+    m: AP +1
+  '46':
+    m: Combat Insight
+    e: Logic
+  '47':
+    m: Sharpshooter / Ballistic Calculations
+    e: Lore Xenos
+  '48':
+    m: Mortally Effective
+    e: Perception
+  '49':
+    m: Intelligence
+    e: Lore Xenos
+  '50':
+    m: Deadly Aim / Vital Points
+    e: Weak Body, Weak Soul
+  '51':
+    m: Bringer of Doom
+    e: Lore Xenos
+  '52':
+    m: Comprehensive Analysis
+    e: Machine Spirit Scan Protocols
+  '53':
+    m: Precise Attack
+    e: Intelligence
+  '54':
+    m: Extermination / Masterful Display
+    e: Insightful Precision
+  '55':
+    m: AP +1

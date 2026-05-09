@@ -1,0 +1,181 @@
+name: Gunslinger Commander
+theme: Astra Militarum Commander
+origin: Fortress World - Astra Militarum Commander - Soldier - Ballistic Skill +2 / Agility +2 / Perception +1 / Willpower +1
+archetypes:
+  t1: Soldier
+  t2: Bounty Hunter
+  t3: Exemplar
+extras:
+  skills: Awareness / Demolition
+  gear:
+    - slot: Helm
+      options: Gunslinger Helm
+    - slot: Armour
+      options: '[Death World] Enforcer''s Light carapace / [Hive World Origin] Voidsman Armour / Duellist Armour'
+    - slot: Cloak
+      options: Tactical Backpack / Tempestus Carapace Elite Backpack
+    - slot: Neck
+      options: The VIal of Falstow / Ruby Splash Necklace / Dog Tags / Focus Incense / Wolf Tooth Necklace
+    - slot: Accessory 1
+      options: Pair Holster / Echo of Victory / Litany of Exhaustion
+    - slot: Accessory 2
+      options: Bead of Might / Iron Cape / Cruciatum Litany
+    - slot: Gloves
+      options: Compensator Gloves / Gloves of Rapid Desolation / Marksman Bracers
+    - slot: Boots
+      options: Caligae of Saint Keefe / Recoil Warboots / Sororitas Boots / Inertia Boots
+    - slot: Weapon Set 1
+      options: >-
+        Quick-Firing Last Pistol / Hot Shot Las Pistol / [Sol Pattern] Last Pistol / [Mars Pattern] Hot Shot Las Pistol
+        / Hot Shot Las Pistol / [Sol Pattern] Last Pistol
+    - slot: Weapon Set 2
+      options: >-
+        Implacable Tempest / Hot Shot Lasgun / Trophy Lasgun / [Retobi-Pattern] Hot Shot Lasgun / Sworn Protector /
+        Necrontech Lasgun / Deadly Repeater / [Sol Pattern] Longlas
+levels:
+  '1':
+    m: Run and Gun
+  '2':
+    m: Medicae
+  '3':
+    m: Revel in Slaughter
+  '4':
+    m: Firearm Mastery
+    e: Muzzle Velocity
+  '5':
+    m: Ballistic Skill
+    e: Rapid Reload
+  '6':
+    m: Ballistic Skill
+    e: Rapid Fire
+  '7':
+    m: Agility
+    e: Trench Warfare
+  '8':
+    m: Unfaltering Fire
+    e: Demolition
+  '9':
+    m: Firearm Mastery I
+  '10':
+    m: Fired Up
+    e: Agility
+  '11':
+    m: Dash
+    e: Awareness
+  '12':
+    m: Perception
+    e: Never Stop Believing
+  '13':
+    m: Swift Slaughter
+    e: Hail of Steel
+  '14':
+    m: Familiar Kickback
+    e: Awareness
+  '15':
+    m: Firearm Mastery II
+  '16':
+    m: Hunt Down The Prey
+  '17':
+    m: Claim the Bounty
+  '18':
+    m: Cut to the Chase
+  '19':
+    m: Wild Hunt
+  '20':
+    m: AP +1 - Ballistic Skill
+    e: Dual-Weapon Combat
+  '21':
+    m: Ballistic Skill
+    e: Heightened Concentration
+  '22':
+    m: Cull the bold
+  '23':
+    m: Flay the bold
+    e: Demolition
+  '24':
+    m: Agility
+    e: Field of Fire
+  '25':
+    m: Hunting Surge
+  '26':
+    m: Demolition
+    e: Agility
+  '27':
+    m: Wild Hunt II
+  '28':
+    m: Inspiring Trophy
+  '29':
+    m: Awareness
+    e: Perception
+  '30':
+    m: Unflinching Heroism
+    e: Ensnare the Prey
+  '31':
+    m: Expert Finesse
+  '32':
+    m: Perception
+    e: Awareness
+  '33':
+    m: Pierce the Armour
+  '34':
+    m: Suppression FIre!
+  '35':
+    m: Wild Hunt I
+  '36':
+    m: Eager for Battle
+    e: Rack and Ruin
+  '37':
+    m: Awareness
+    e: Withdraw
+  '38':
+    m: Ballistic Skill
+    e: Grenadier
+  '39':
+    m: Entrench
+    e: Demolition
+  '40':
+    m: Degraded Defence
+    e: Gruesome Kill
+  '41':
+    m: Ballistic Skill
+    e: Enough Bullets for Everyone
+  '42':
+    m: Hot on the trail
+    e: Agility
+  '43':
+    m: Trail and Shatter
+    e: Combat Addict
+  '44':
+    m: Awareness
+    e: Extermination
+  '45':
+    m: AP +1
+  '46':
+    m: Alacrity
+    e: Demolition
+  '47':
+    m: Fortress / Camraderie
+    e: Demolition
+  '48':
+    m: Savour the Kill
+    e: Agility
+  '49':
+    m: Perception
+    e: Medicae
+  '50':
+    m: Deadly Aim
+    e: Second Skin
+  '51':
+    m: Share the Spoils
+    e: Medicae
+  '52':
+    m: Hunter's Ambush
+    e: Fix Bayonets!
+  '53':
+    m: Controlled Shot
+    e: Perception
+  '54':
+    m: Vital Points
+    e: Integrity
+  '55':
+    m: AP +1

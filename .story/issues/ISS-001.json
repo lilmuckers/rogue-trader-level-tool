@@ -1,0 +1,14 @@
+{
+  "components": [],
+  "discoveredDate": "2026-05-07",
+  "id": "ISS-001",
+  "impact": "Visual artifact: dark bg-1 bleeds through below the note textarea when soft keyboard is visible in note edit mode. Likely due to overflow:visible on sheet + timing of visualViewport resize event.",
+  "location": [],
+  "phase": null,
+  "relatedTickets": [],
+  "resolution": "Added overflow:hidden to .sheet.note-editing in style.css. Previously overflow:visible allowed bg-1 to bleed through unfilled flex space. Textarea keeps own overflow-y:scroll so iOS scrolling unaffected. Also added explicit background:bg-2 to sheet-body in note-editing mode. Ships in v1.1.6.",
+  "resolvedDate": "2026-05-07",
+  "severity": "medium",
+  "status": "resolved",
+  "title": "Black gap below textarea when keyboard opens on iOS"
+}
