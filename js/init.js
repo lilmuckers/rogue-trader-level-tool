@@ -231,6 +231,6 @@ if (window.visualViewport) {
     });
   });
 
-  el.innerHTML = `<span class="app-about-version">v${APP_VERSION}</span><span class="app-about-sep">·</span><a class="app-about-link" href="https://github.com/lilmuckers/rogue-trader-level-tool" target="_blank" rel="noopener">GitHub</a><span class="app-about-sep">·</span>`;
+  el.innerHTML = `<span class="app-about-version">v${APP_VERSION}</span><span class="app-about-sep">·</span>`;
   el.appendChild(aboutBtn);
 })();
