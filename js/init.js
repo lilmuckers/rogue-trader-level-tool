@@ -139,8 +139,8 @@ if (window.visualViewport) {
           years in because you kept respeccing - you're not alone.
         </p>
         <p class="about-blurb">
-          Built using a combination of <strong>Claude Code</strong> and <strong>ChatGPT Codex</strong>,
-          running as an autonomous delivery swarm on <strong>OpenClaw</strong>.
+          Built using a combination of <strong>Claude Code</strong>, <strong>ChatGPT Codex</strong>,
+          and <strong>Qwen3.5</strong>, running as an autonomous delivery swarm on <strong>OpenClaw</strong>.
         </p>
 
         <div class="about-section-heading">Build Data</div>
