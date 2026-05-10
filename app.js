@@ -1377,23 +1377,23 @@ function buildCatchupContent(ctx) {
 
     const pickCol = document.createElement('div');
     pickCol.className = 'timeline-pick';
+
+    const mHasInfo = entry.m && (entry.m.includes('/') || pickHasInfo(entry.m));
+    const eHasInfo = entry.e && (entry.e.includes('/') || pickHasInfo(entry.e));
+    if (mHasInfo || eHasInfo) {
+      item.classList.add('has-info');
+      item.addEventListener('click', () => pushLevelDescription(entry, displayName, n));
+    }
+
     if (entry.m) {
       const m = document.createElement('div');
-      m.className = 'timeline-main';
-      if (entry.m.includes('/') || pickHasInfo(entry.m)) {
-        m.classList.add('has-info');
-        m.addEventListener('click', () => pushSinglePickDescription(entry.m, displayName, n));
-      }
+      m.className = 'timeline-main' + (mHasInfo ? ' has-info' : '');
       renderStyledPickText(entry.m, choices, n, m);
       pickCol.appendChild(m);
     }
     if (entry.e) {
       const ex = document.createElement('div');
-      ex.className = 'timeline-extra';
-      if (entry.e.includes('/') || pickHasInfo(entry.e)) {
-        ex.classList.add('has-info');
-        ex.addEventListener('click', () => pushSinglePickDescription(entry.e, displayName, n));
-      }
+      ex.className = 'timeline-extra' + (eHasInfo ? ' has-info' : '');
       renderStyledPickText(entry.e, choices, n, ex);
       pickCol.appendChild(ex);
     }
@@ -1553,6 +1553,78 @@ function buildGearDetailContent(gearItem) {
 
   wrap.appendChild(detail);
   return wrap;
+}
+
+// Push a combined level description (all picks for one level) — mirrors the
+// main-screen description sheet so clicking a row shows everything at once.
+function pushLevelDescription(entry, displayName, atLevel) {
+  const title = `Level ${atLevel} · ${displayName}`;
+  pushSheet(title, () => {
+    const wrap = document.createElement('div');
+    const meta = document.createElement('div');
+    meta.className = 'desc-context';
+    meta.textContent = `${displayName} · level ${atLevel}`;
+    wrap.appendChild(meta);
+
+    const renderPickBlock = (rawPick, isExtra) => {
+      if (!rawPick) return;
+      if (rawPick.includes('/')) {
+        renderChoiceSection(rawPick, displayName, atLevel, wrap, isExtra);
+        return;
+      }
+      if (isSkillStatPick(rawPick)) {
+        const hit = lookupStatPick(rawPick);
+        const block = document.createElement('div');
+        block.className = 'desc-block';
+        const nm = document.createElement('div');
+        nm.className = 'desc-name';
+        nm.textContent = (isExtra ? '+ ' : '') + rawPick;
+        const src = document.createElement('div');
+        src.className = 'desc-source';
+        src.textContent = hit ? hit.kind : 'Skill / Stat allocation';
+        block.appendChild(nm); block.appendChild(src);
+        const txt = document.createElement('div');
+        txt.className = hit ? 'desc-text' : 'desc-text-missing';
+        txt.textContent = hit ? hit.desc : 'A characteristic, skill, or AP allocation.';
+        block.appendChild(txt);
+        wrap.appendChild(block);
+        return;
+      }
+      const hits = lookupPick(rawPick);
+      if (hits.length === 0) {
+        const block = document.createElement('div');
+        block.className = 'desc-block';
+        const nm = document.createElement('div');
+        nm.className = 'desc-name';
+        nm.textContent = (isExtra ? '+ ' : '') + rawPick;
+        const txt = document.createElement('div');
+        txt.className = 'desc-text-missing';
+        txt.textContent = 'No description available.';
+        block.appendChild(nm); block.appendChild(txt);
+        wrap.appendChild(block);
+        return;
+      }
+      hits.forEach((hit, i) => {
+        const block = document.createElement('div');
+        block.className = 'desc-block';
+        const nm = document.createElement('div');
+        nm.className = 'desc-name';
+        nm.textContent = (isExtra && i === 0 ? '+ ' : '') + hit.name + (hit.tierStripped ? ` - ${rawPick}` : '');
+        const src = document.createElement('div');
+        src.className = 'desc-source';
+        src.textContent = hit.kind;
+        const txt = document.createElement('div');
+        txt.className = 'desc-text';
+        txt.textContent = hit.desc;
+        block.appendChild(nm); block.appendChild(src); block.appendChild(txt);
+        wrap.appendChild(block);
+      });
+    };
+
+    renderPickBlock(entry.m, false);
+    renderPickBlock(entry.e, true);
+    return wrap;
+  });
 }
 
 // Push a single-pick description on top of whatever's currently open.
