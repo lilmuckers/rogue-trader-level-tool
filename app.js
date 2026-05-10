@@ -3524,6 +3524,10 @@ if (window.visualViewport) {
           If you find it useful, great. If you're also still on your first playthrough two
           years in because you kept respeccing - you're not alone.
         </p>
+        <p class="about-blurb">
+          Built using a combination of <strong>Claude Code</strong> and <strong>ChatGPT Codex</strong>,
+          running as an autonomous delivery swarm on <strong>OpenClaw</strong>.
+        </p>
 
         <div class="about-section-heading">Build Data</div>
         <p class="about-blurb">
