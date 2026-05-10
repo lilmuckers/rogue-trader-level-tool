@@ -512,6 +512,8 @@
     border-bottom: 1px solid var(--rule);
   }
   .timeline-item:last-child { border-bottom: none; }
+  .timeline-item.has-info { cursor: pointer; }
+  .timeline-item.has-info:active { background: rgba(201,164,76,0.05); }
   .timeline-item.is-current {
     background: linear-gradient(90deg, rgba(201,164,76,0.08) 0%, transparent 60%);
     margin-left: -18px; margin-right: -18px;
