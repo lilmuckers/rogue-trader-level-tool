@@ -90,6 +90,12 @@ function buildStatsPanel(ctx) {
     panel.appendChild(originEl);
   }
 
+  // Disclaimer
+  const disclaimer = document.createElement('div');
+  disclaimer.className = 'stats-disclaimer';
+  disclaimer.textContent = 'Shows gains from origin bonuses and training picks only — does not include homeworld, archetype starting bonuses, or gear.';
+  panel.appendChild(disclaimer);
+
   // Characteristics table — always show all 9
   {
     const heading = document.createElement('div');
