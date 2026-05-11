@@ -1805,7 +1805,7 @@ const SECTION_META = {
   tracker:   { title: 'Rogue Trader',    subtitle: 'Level Tracker & Build Companion' },
   colony:    { title: 'Colony Projects', subtitle: 'Track your colonial development' },
   traders:   { title: 'Traders',         subtitle: 'Faction reputations & available items' },
-  resources: { title: 'Resources',       subtitle: 'Star system resources' },
+  reference: { title: 'Reference',       subtitle: 'Lookup tables & reference data' },
   notes:     { title: 'Notes',           subtitle: 'Campaign notes & reminders' },
 };
 
@@ -1821,10 +1821,10 @@ function showSection(name) {
   const meta = SECTION_META[name] || {};
   $('section-title').textContent  = meta.title    || 'Rogue Trader';
   $('section-subtitle').textContent = meta.subtitle || '';
-  if (name === 'tracker')   renderTracker();
+  if (name === 'tracker')        renderTracker();
   else if (name === 'colony')    renderColonySection();
   else if (name === 'traders')   renderTradersSection();
-  else if (name === 'resources') renderResourcesSection();
+  else if (name === 'reference') renderReferenceSection();
   else if (name === 'notes')     renderNotesSection();
 }
 
@@ -3282,7 +3282,49 @@ function buildNoteEditorContent(note, startInEdit = false) {
 }
 
 
-// ============= RESOURCES =============
+// ============= REFERENCE =============
+
+let _referenceSubSection = null; // null = landing, 'resources' = star systems
+
+const REFERENCE_SECTIONS = [
+  {
+    id: 'resources',
+    title: 'Star System Resources',
+    subtitle: 'Resource deposits by system or type',
+    icon: '⬡',
+  },
+];
+
+function renderReferenceSection() {
+  const el = $('reference-content');
+  el.innerHTML = '';
+  if (_referenceSubSection) {
+    // Back button
+    const backBtn = document.createElement('button');
+    backBtn.className = 'reference-back-btn';
+    backBtn.innerHTML = '← Reference';
+    backBtn.addEventListener('click', () => { _referenceSubSection = null; renderReferenceSection(); });
+    el.appendChild(backBtn);
+
+    if (_referenceSubSection === 'resources') renderResourcesContent(el);
+  } else {
+    // Landing: cards for each sub-section
+    const grid = document.createElement('div');
+    grid.className = 'reference-grid';
+    REFERENCE_SECTIONS.forEach(({ id, title, subtitle, icon }) => {
+      const card = document.createElement('div');
+      card.className = 'reference-card';
+      card.innerHTML = `<div class="reference-card-icon">${icon}</div>
+        <div class="reference-card-title">${title}</div>
+        <div class="reference-card-sub">${subtitle}</div>`;
+      card.addEventListener('click', () => { _referenceSubSection = id; renderReferenceSection(); });
+      grid.appendChild(card);
+    });
+    el.appendChild(grid);
+  }
+}
+
+// ── Resources sub-section ─────────────────────────────────────────────────────
 
 const RESOURCE_TYPES = ['people','provisions','chemicals','plasteel','mechanisms','promethium','weapons','xenotech','adamantine','flogiston'];
 
@@ -3290,9 +3332,7 @@ let _resourceTab      = 'system';
 let _selectedSystem   = null;
 let _selectedResource = null;
 
-function renderResourcesSection() {
-  const el = $('resources-content');
-  el.innerHTML = '';
+function renderResourcesContent(el) {
   if (!DATA.resourceSystems || !DATA.resourceSystems.length) { el.textContent = 'No resource data.'; return; }
 
   // Tab bar
@@ -3302,7 +3342,7 @@ function renderResourcesSection() {
     const btn = document.createElement('button');
     btn.className = 'tab-btn' + (_resourceTab === tab ? ' active' : '');
     btn.textContent = tab === 'system' ? 'By System' : 'By Resource';
-    btn.addEventListener('click', () => { _resourceTab = tab; renderResourcesSection(); });
+    btn.addEventListener('click', () => { _resourceTab = tab; renderReferenceSection(); });
     tabBar.appendChild(btn);
   });
   el.appendChild(tabBar);
@@ -3335,7 +3375,7 @@ function renderResourcesBySystem(el) {
     }
     item.addEventListener('click', () => {
       _selectedSystem = isSelected ? null : system.name;
-      renderResourcesSection();
+      renderReferenceSection();
     });
     el.appendChild(item);
 
@@ -3383,7 +3423,7 @@ function renderResourcesByType(el) {
       <div class="selectable-item-sub">${entries.length} system${entries.length !== 1 ? 's' : ''} · best: ${entries[0].system} ×${entries[0].qtyNum}</div>`;
     item.addEventListener('click', () => {
       _selectedResource = isSelected ? null : resType;
-      renderResourcesSection();
+      renderReferenceSection();
     });
     el.appendChild(item);
 
