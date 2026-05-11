@@ -4,6 +4,12 @@ let _referenceSubSection = null; // null = landing, 'resources' = star systems
 
 const REFERENCE_SECTIONS = [
   {
+    id: 'gear',
+    title: 'Gear Browser',
+    subtitle: 'Browse all gear by slot, DLC, character, or act',
+    icon: '⚔',
+  },
+  {
     id: 'resources',
     title: 'Star System Resources',
     subtitle: 'Resource deposits by system or type',
@@ -22,7 +28,8 @@ function renderReferenceSection() {
     backBtn.addEventListener('click', () => { _referenceSubSection = null; renderReferenceSection(); });
     el.appendChild(backBtn);
 
-    if (_referenceSubSection === 'resources') renderResourcesContent(el);
+    if (_referenceSubSection === 'gear')      renderGearBrowser(el);
+    else if (_referenceSubSection === 'resources') renderResourcesContent(el);
   } else {
     // Landing: cards for each sub-section
     const grid = document.createElement('div');

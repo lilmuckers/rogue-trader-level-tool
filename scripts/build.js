@@ -209,6 +209,7 @@ const JS_FILES = [
   'js/colonies.js',
   'js/traders.js',
   'js/notes.js',
+  'js/gear-browser.js',
   'js/resources.js',
   'js/init.js',
 ];
