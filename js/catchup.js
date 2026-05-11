@@ -197,6 +197,8 @@ function buildCatchupContent(ctx) {
               loc.textContent = '· ' + actToText(found.a);
               pill.appendChild(loc);
             }
+            const gearBadge = makeDlcBadge(found.dlc);
+            if (gearBadge) { gearBadge.className = 'dlc-badge dlc-badge-pill'; pill.appendChild(gearBadge); }
             pill.addEventListener('click', () => pushGearDetail(found, opt));
           } else {
             pill.classList.add('unknown');
@@ -365,7 +367,9 @@ function pushLevelDescription(entry, displayName, atLevel) {
         const txt = document.createElement('div');
         txt.className = 'desc-text';
         txt.textContent = hit.desc;
-        block.appendChild(nm); block.appendChild(src); block.appendChild(txt);
+        block.appendChild(nm); block.appendChild(src);
+        const b1 = makeDlcBadge(hit.dlc); if (b1) block.appendChild(b1);
+        block.appendChild(txt);
         wrap.appendChild(block);
       });
     };
@@ -438,7 +442,9 @@ function buildSinglePickContent(rawPick, displayName, atLevel) {
         const txt = document.createElement('div');
         txt.className = 'desc-text';
         txt.textContent = hit.desc;
-        block.appendChild(nm); block.appendChild(src); block.appendChild(txt);
+        block.appendChild(nm); block.appendChild(src);
+        const b2 = makeDlcBadge(hit.dlc); if (b2) block.appendChild(b2);
+        block.appendChild(txt);
         wrap.appendChild(block);
       });
     }

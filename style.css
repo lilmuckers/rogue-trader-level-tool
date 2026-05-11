@@ -96,6 +96,8 @@
 }
 .dlc-badge-build { font-size: 10px; padding: 2px 8px; margin: 4px 0 0; display: block; width: fit-content; }
 .dlc-badge-gear  { margin-bottom: 8px; }
+.dlc-badge-pill  { font-size: 8px; padding: 1px 4px; vertical-align: middle; margin-left: 4px; }
+.desc-block .dlc-badge { display: inline-block; margin: 2px 0 4px; }
 
   .char-archetype-callout {
     margin-top: 8px;

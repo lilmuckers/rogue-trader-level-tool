@@ -31,19 +31,32 @@ function normalize(s) {
 }
 
 // Build a single normalized index: norm -> {kind, originalName, description}
+// Normalized DLC tag map: normalize(name) → dlc string
+const _DLC_TAGS = (() => {
+  const m = {};
+  for (const [name, dlc] of Object.entries(DEFS.dlcTags || {})) {
+    m[normalize(name)] = dlc;
+  }
+  return m;
+})();
+
 const _NORM_INDEX = (() => {
   const idx = {};
+  const tag = (name) => _DLC_TAGS[normalize(name)] || null;
   for (const [name, desc] of Object.entries(DEFS.heroic || {})) {
     const n = normalize(name);
-    if (!idx[n]) idx[n] = { kind: 'Heroic Action', name, desc };
+    const dlc = tag(name);
+    if (!idx[n]) idx[n] = { kind: 'Heroic Action', name, desc, ...(dlc ? {dlc} : {}) };
   }
   for (const [name, desc] of Object.entries(DEFS.abilities || {})) {
     const n = normalize(name);
-    if (!idx[n]) idx[n] = { kind: 'Ability', name, desc };
+    const dlc = tag(name);
+    if (!idx[n]) idx[n] = { kind: 'Ability', name, desc, ...(dlc ? {dlc} : {}) };
   }
   for (const [name, desc] of Object.entries(DEFS.talents || {})) {
     const n = normalize(name);
-    if (!idx[n]) idx[n] = { kind: 'Talent', name, desc };
+    const dlc = tag(name);
+    if (!idx[n]) idx[n] = { kind: 'Talent', name, desc, ...(dlc ? {dlc} : {}) };
   }
   for (const [name, desc] of Object.entries(DEFS.characteristics || {})) {
     const n = normalize(name);
@@ -247,6 +260,15 @@ function actToText(a) {
   if (a == null) return '';
   if (a === 0) return 'Prologue';
   return `Act ${a}`;
+}
+
+// Creates a DLC badge element, or null if no DLC.
+function makeDlcBadge(dlc) {
+  if (!dlc) return null;
+  const el = document.createElement('span');
+  el.className = 'dlc-badge';
+  el.textContent = dlc;
+  return el;
 }
 
 // Get the extras (skills + gear) for a given build name.
