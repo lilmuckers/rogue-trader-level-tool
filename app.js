@@ -1297,6 +1297,194 @@ function buildDescriptionContent(ctx) {
 
 
 // ============= CATCH-UP SHEET =============
+
+// ── Stat Calculator ───────────────────────────────────────────────────────────
+const _CHAR_MAP = {
+  'weapon skill': 'WS',  'ws': 'WS',
+  'ballistic skill': 'BS', 'bs': 'BS',
+  'strength': 'STR',     'str': 'STR',
+  'toughness': 'TGH',    'tgh': 'TGH',
+  'agility': 'AGI',      'agi': 'AGI', 'agl': 'AGI',
+  'perception': 'PER',   'per': 'PER',
+  'fellowship': 'FEL',   'fel': 'FEL',
+  'intelligence': 'INT', 'int': 'INT',
+  'willpower': 'WILL',   'will': 'WILL',
+};
+const _CHAR_FULL = { WS:'Weapon Skill', BS:'Ballistic Skill', STR:'Strength', TGH:'Toughness', AGI:'Agility', PER:'Perception', FEL:'Fellowship', INT:'Intelligence', WILL:'Willpower' };
+const _CHAR_ORDER = ['WS','BS','STR','TGH','AGI','PER','FEL','INT','WILL'];
+const _SKILL_NAMES = new Set(['medicae','commerce','lore imperium','lore xenos','lore warp','persuasion','coercion','logic','tech-use','awareness','athletics','demolition','carouse','tracking','navigate warp']);
+
+function _resolveCharAbbr(raw) {
+  const lc = raw.toLowerCase().trim();
+  // "characteristic training: X" pattern
+  const ct = lc.match(/^characteristic\s+training\s*:?\s*(.+)$/);
+  if (ct) return _CHAR_MAP[ct[1].trim()] || null;
+  return _CHAR_MAP[lc] || null;
+}
+
+function _isSkillPick(raw) {
+  const lc = raw.toLowerCase().trim();
+  if (_SKILL_NAMES.has(lc)) return true;
+  if (/^lore\s+/.test(lc)) return true;
+  if (/^base\s+skill:?/.test(lc)) return true;
+  return false;
+}
+
+function calcBuildStats(build, upToLevel) {
+  const originBonuses = {}; // abbr → bonus (from origin text)
+  const training = {};      // abbr → count of +5 picks
+  let apGained = 0;
+  const skillCounts = {};   // skill name → count
+
+  // Parse origin bonuses: "BS +2 / Agility +2 / Fellowship +2"
+  const origin = build.origin || '';
+  for (const m of origin.matchAll(/([\w][\w\s]*?)\s*\+(\d+)/g)) {
+    const abbr = _resolveCharAbbr(m[1].trim());
+    if (abbr) originBonuses[abbr] = (originBonuses[abbr] || 0) + parseInt(m[2], 10);
+  }
+
+  // Walk levels
+  for (let n = 1; n <= Math.min(upToLevel, 55); n++) {
+    const entry = build.levels && build.levels[n];
+    if (!entry) continue;
+    [entry.m, entry.e].forEach(pick => {
+      if (!pick) return;
+      // Skip slash-choice picks (can't know which was taken)
+      if (pick.includes('/')) return;
+      // AP pick
+      const apM = pick.match(/^ap\s*\+(\d+)$/i);
+      if (apM) { apGained += parseInt(apM[1], 10); return; }
+      // Characteristic
+      const abbr = _resolveCharAbbr(pick);
+      if (abbr) { training[abbr] = (training[abbr] || 0) + 1; return; }
+      // Skill
+      if (_isSkillPick(pick)) {
+        const sk = pick.toLowerCase().trim().replace(/^base\s+skill:\s*/, '');
+        skillCounts[sk] = (skillCounts[sk] || 0) + 1;
+      }
+    });
+  }
+  return { originBonuses, training, apGained, skillCounts };
+}
+
+function buildStatsPanel(ctx) {
+  const { build, buildName } = ctx;
+  const panel = document.createElement('div');
+  panel.className = 'stats-panel';
+
+  if (!build || !build.levels) {
+    panel.textContent = 'No build data.';
+    return panel;
+  }
+
+  const stats = calcBuildStats(build, level);
+
+  // Origin bonuses section
+  const hasOrigin = Object.keys(stats.originBonuses).length > 0;
+  if (build.origin) {
+    const originEl = document.createElement('div');
+    originEl.className = 'stats-origin';
+    originEl.textContent = build.origin;
+    panel.appendChild(originEl);
+  }
+
+  // Characteristics table
+  const hasCharStats = _CHAR_ORDER.some(a => stats.training[a] || stats.originBonuses[a]);
+  if (hasCharStats) {
+    const heading = document.createElement('div');
+    heading.className = 'stats-heading';
+    heading.textContent = `Characteristics at Level ${level}`;
+    panel.appendChild(heading);
+
+    const table = document.createElement('div');
+    table.className = 'stats-table';
+
+    // Header
+    const hdr = document.createElement('div');
+    hdr.className = 'stats-row stats-header';
+    ['Characteristic','Origin','Training','Total'].forEach(h => {
+      const c = document.createElement('div');
+      c.className = 'stats-cell';
+      c.textContent = h;
+      hdr.appendChild(c);
+    });
+    table.appendChild(hdr);
+
+    _CHAR_ORDER.forEach(abbr => {
+      const origin = stats.originBonuses[abbr] || 0;
+      const picks  = stats.training[abbr] || 0;
+      if (!origin && !picks) return;
+      const trainVal = picks * 5;
+      const total = origin + trainVal;
+
+      const row = document.createElement('div');
+      row.className = 'stats-row';
+
+      const nameCell = document.createElement('div');
+      nameCell.className = 'stats-cell stats-name';
+      const abbrEl = document.createElement('span');
+      abbrEl.className = 'stats-abbr';
+      abbrEl.textContent = abbr;
+      const fullEl = document.createElement('span');
+      fullEl.className = 'stats-fullname';
+      fullEl.textContent = _CHAR_FULL[abbr];
+      nameCell.appendChild(abbrEl);
+      nameCell.appendChild(fullEl);
+      row.appendChild(nameCell);
+
+      [origin ? `+${origin}` : '—', trainVal ? `+${trainVal}` : '—', `+${total}`].forEach((val, i) => {
+        const c = document.createElement('div');
+        c.className = 'stats-cell' + (i === 2 ? ' stats-total' : '');
+        c.textContent = val;
+        row.appendChild(c);
+      });
+      table.appendChild(row);
+    });
+    panel.appendChild(table);
+  }
+
+  // AP
+  if (stats.apGained > 0) {
+    const apRow = document.createElement('div');
+    apRow.className = 'stats-ap-row';
+    const apLabel = document.createElement('span');
+    apLabel.textContent = 'Action Points gained';
+    const apVal = document.createElement('span');
+    apVal.className = 'stats-ap-val';
+    apVal.textContent = `+${stats.apGained} AP`;
+    apRow.appendChild(apLabel);
+    apRow.appendChild(apVal);
+    panel.appendChild(apRow);
+  }
+
+  // Skills
+  const skillEntries = Object.entries(stats.skillCounts);
+  if (skillEntries.length > 0) {
+    const sh = document.createElement('div');
+    sh.className = 'stats-heading';
+    sh.textContent = 'Skill Picks';
+    panel.appendChild(sh);
+    const skillList = document.createElement('div');
+    skillList.className = 'stats-skill-list';
+    skillEntries.sort((a,b) => a[0].localeCompare(b[0])).forEach(([sk, cnt]) => {
+      const pill = document.createElement('span');
+      pill.className = 'stats-skill-pill';
+      const skName = sk.replace(/^(.)/, c => c.toUpperCase());
+      pill.textContent = cnt > 1 ? `${skName} ×${cnt}` : skName;
+      skillList.appendChild(pill);
+    });
+    panel.appendChild(skillList);
+  }
+
+  if (!hasCharStats && stats.apGained === 0 && skillEntries.length === 0) {
+    const none = document.createElement('div');
+    none.className = 'stats-none';
+    none.textContent = "No characteristic or skill picks found in this build's data.";
+    panel.appendChild(none);
+  }
+
+  return panel;
+}
 function openCatchupSheet(ctx) {
   const { displayName, build } = ctx;
   if (!build || !build.levels) return;
@@ -1358,39 +1546,55 @@ function buildCatchupContent(ctx) {
     wrap.appendChild(partyBtn);
   }
 
-  // Decide whether to show tabs (only when there are extras to put in the second tab)
+  // Tabs: Stats (default) | Timeline | Gear & Skills (if extras)
   const extras = getExtrasForBuildName(buildName, isCompanion);
   const hasExtras = extras && (extras.skills || (extras.gear && extras.gear.length));
 
-  let timelinePanel, gearPanel;
+  const tabBar = document.createElement('div');
+  tabBar.className = 'tab-bar';
+  const tabStats    = document.createElement('button');
+  tabStats.className = 'tab-btn active';
+  tabStats.textContent = 'Stats';
+  const tabTimeline = document.createElement('button');
+  tabTimeline.className = 'tab-btn';
+  tabTimeline.textContent = 'Timeline';
+  tabBar.appendChild(tabStats);
+  tabBar.appendChild(tabTimeline);
+
+  const statsPanel = buildStatsPanel(ctx);
+  statsPanel.classList.add('tab-panel');
+  const timelinePanel = document.createElement('div');
+  timelinePanel.classList.add('tab-panel', 'hidden');
+  let gearPanel = null;
+
   if (hasExtras) {
-    const tabBar = document.createElement('div');
-    tabBar.className = 'tab-bar';
-    const tabTimeline = document.createElement('button');
-    tabTimeline.className = 'tab-btn active';
-    tabTimeline.textContent = 'Timeline';
     const tabGear = document.createElement('button');
     tabGear.className = 'tab-btn';
     tabGear.textContent = 'Gear & Skills';
-    tabBar.appendChild(tabTimeline);
     tabBar.appendChild(tabGear);
-    wrap.appendChild(tabBar);
 
-    timelinePanel = document.createElement('div');
     gearPanel = document.createElement('div');
-    gearPanel.classList.add('hidden');
+    gearPanel.classList.add('tab-panel', 'hidden');
 
-    tabTimeline.addEventListener('click', () => {
-      tabTimeline.classList.add('active'); tabGear.classList.remove('active');
-      timelinePanel.classList.remove('hidden'); gearPanel.classList.add('hidden');
-    });
-    tabGear.addEventListener('click', () => {
-      tabGear.classList.add('active'); tabTimeline.classList.remove('active');
-      gearPanel.classList.remove('hidden'); timelinePanel.classList.add('hidden');
-    });
+    const allTabs   = [tabStats, tabTimeline, tabGear];
+    const allPanels = [statsPanel, timelinePanel, gearPanel];
+    const activate  = (i) => {
+      allTabs.forEach((t, j) => t.classList.toggle('active', j === i));
+      allPanels.forEach((p, j) => p.classList.toggle('hidden', j !== i));
+    };
+    tabStats.addEventListener('click',    () => activate(0));
+    tabTimeline.addEventListener('click', () => activate(1));
+    tabGear.addEventListener('click',     () => activate(2));
   } else {
-    timelinePanel = document.createElement('div');
+    const activate = (i) => {
+      [tabStats, tabTimeline].forEach((t, j) => t.classList.toggle('active', j === i));
+      [statsPanel, timelinePanel].forEach((p, j) => p.classList.toggle('hidden', j !== i));
+    };
+    tabStats.addEventListener('click',    () => activate(0));
+    tabTimeline.addEventListener('click', () => activate(1));
   }
+
+  wrap.appendChild(tabBar);
 
   // === Timeline panel ===
   const choices = getChoices(displayName);
@@ -1447,10 +1651,11 @@ function buildCatchupContent(ctx) {
     item.appendChild(pickCol);
     timelinePanel.appendChild(item);
   }
+  wrap.appendChild(statsPanel);
   wrap.appendChild(timelinePanel);
 
   // === Gear & Skills panel ===
-  if (hasExtras) {
+  if (hasExtras && gearPanel) {
     if (extras.skills) {
       const panel = document.createElement('div');
       panel.className = 'extras-panel';

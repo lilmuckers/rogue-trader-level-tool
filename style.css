@@ -623,6 +623,105 @@
 .tab-btn.active { color: var(--gold); border-bottom-color: var(--gold); }
 .tab-btn:active { color: var(--ink); }
 
+/* === STATS PANEL === */
+.stats-panel { padding: 4px 0 12px; }
+.stats-origin {
+  font-size: 12px;
+  color: var(--ink-dim);
+  font-style: italic;
+  margin-bottom: 14px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--rule);
+  line-height: 1.4;
+}
+.stats-heading {
+  font-family: 'Cinzel', serif;
+  font-size: 10px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--ink-dim);
+  margin: 14px 0 8px;
+}
+.stats-table {
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  overflow: hidden;
+}
+.stats-row {
+  display: grid;
+  grid-template-columns: 1fr repeat(3, 64px);
+  border-bottom: 1px solid var(--rule);
+}
+.stats-row:last-child { border-bottom: none; }
+.stats-header { background: rgba(255,255,255,0.03); }
+.stats-cell {
+  padding: 7px 8px;
+  font-size: 13px;
+  color: var(--ink-dim);
+  text-align: center;
+}
+.stats-cell:first-child { text-align: left; }
+.stats-header .stats-cell {
+  font-family: 'Cinzel', serif;
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+.stats-name { display: flex; flex-direction: column; gap: 1px; }
+.stats-abbr {
+  font-family: 'Cinzel', serif;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--gold);
+  letter-spacing: 0.05em;
+}
+.stats-fullname { font-size: 11px; color: var(--ink-faint); }
+.stats-total {
+  font-family: 'Cinzel', serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--gold-bright);
+}
+.stats-ap-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 12px;
+  padding: 8px 10px;
+  background: rgba(201,164,76,0.06);
+  border: 1px solid var(--gold-deep);
+  border-radius: 3px;
+  font-size: 13px;
+  color: var(--ink-dim);
+}
+.stats-ap-val {
+  font-family: 'Cinzel', serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--gold);
+}
+.stats-skill-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 4px;
+}
+.stats-skill-pill {
+  font-size: 12px;
+  padding: 3px 8px;
+  border: 1px solid var(--rule);
+  border-radius: 12px;
+  color: var(--ink-dim);
+  background: var(--bg-3);
+}
+.stats-none {
+  font-style: italic;
+  color: var(--ink-faint);
+  font-size: 13px;
+  margin-top: 12px;
+}
+
 /* === PICK CHOICE UI === */
 .choice-section {
   border-left: 2px solid var(--gold-deep);
