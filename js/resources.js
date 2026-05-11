@@ -21,15 +21,20 @@ function renderReferenceSection() {
   const el = $('reference-content');
   el.innerHTML = '';
   if (_referenceSubSection) {
-    // Back button
+    // Back button — lives in el; sub-content gets its own container so it can
+    // clear itself without clobbering this button
     const backBtn = document.createElement('button');
     backBtn.className = 'reference-back-btn';
     backBtn.innerHTML = '← Reference';
     backBtn.addEventListener('click', () => { _referenceSubSection = null; renderReferenceSection(); });
     el.appendChild(backBtn);
 
-    if (_referenceSubSection === 'gear')      renderGearBrowser(el);
-    else if (_referenceSubSection === 'resources') renderResourcesContent(el);
+    const subEl = document.createElement('div');
+    subEl.className = 'reference-sub-content';
+    el.appendChild(subEl);
+
+    if (_referenceSubSection === 'gear')      renderGearBrowser(subEl);
+    else if (_referenceSubSection === 'resources') renderResourcesContent(subEl);
   } else {
     // Landing: cards for each sub-section
     const grid = document.createElement('div');
