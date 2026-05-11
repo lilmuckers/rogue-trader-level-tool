@@ -395,10 +395,8 @@ function renderGearList(listEl) {
         row.appendChild(meta);
       }
 
-      if (item.l || item.a != null || item.d) {
-        row.classList.add('has-detail');
-        row.addEventListener('click', () => pushGearDetail(item, item.n));
-      }
+      row.classList.add('has-detail');
+      row.addEventListener('click', () => pushGearDetail(item, item.n));
 
       listEl.appendChild(row);
     });

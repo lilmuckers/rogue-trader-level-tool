@@ -1388,6 +1388,12 @@ function buildStatsPanel(ctx) {
     panel.appendChild(originEl);
   }
 
+  // Disclaimer
+  const disclaimer = document.createElement('div');
+  disclaimer.className = 'stats-disclaimer';
+  disclaimer.textContent = 'Shows gains from origin bonuses and training picks only — does not include homeworld, archetype starting bonuses, or gear.';
+  panel.appendChild(disclaimer);
+
   // Characteristics table — always show all 9
   {
     const heading = document.createElement('div');
@@ -3907,10 +3913,8 @@ function renderGearList(listEl) {
         row.appendChild(meta);
       }
 
-      if (item.l || item.a != null || item.d) {
-        row.classList.add('has-detail');
-        row.addEventListener('click', () => pushGearDetail(item, item.n));
-      }
+      row.classList.add('has-detail');
+      row.addEventListener('click', () => pushGearDetail(item, item.n));
 
       listEl.appendChild(row);
     });
