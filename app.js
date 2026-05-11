@@ -3500,21 +3500,79 @@ function renderGearBrowser(container) {
   renderGearList(listEl);
 }
 
+// ── Custom branded dropdown (replaces native <select>) ────────────────────────
+let _openDropdown = null; // currently open dropdown wrap
+
+function _closeOpenDropdown() {
+  if (_openDropdown) {
+    _openDropdown.classList.remove('open');
+    _openDropdown = null;
+  }
+}
+
+// Close on outside tap
+document.addEventListener('click', (e) => {
+  if (_openDropdown && !_openDropdown.contains(e.target)) _closeOpenDropdown();
+}, { capture: true });
+
 function _makeSelect(label, options, current, onChange) {
   const wrap = document.createElement('div');
   wrap.className = 'gb-select-wrap';
-  const sel = document.createElement('select');
-  sel.className = 'gb-select';
-  sel.setAttribute('aria-label', label);
+
+  const currentLabel = () => (options.find(([v]) => v === current) || options[0])[1];
+
+  const trigger = document.createElement('button');
+  trigger.className = 'gb-dd-trigger';
+  trigger.setAttribute('aria-label', label);
+  trigger.setAttribute('type', 'button');
+
+  const labelEl = document.createElement('span');
+  labelEl.className = 'gb-dd-label';
+  labelEl.textContent = currentLabel();
+
+  const arrow = document.createElement('span');
+  arrow.className = 'gb-dd-arrow';
+  arrow.textContent = '▾';
+
+  trigger.appendChild(labelEl);
+  trigger.appendChild(arrow);
+
+  const panel = document.createElement('div');
+  panel.className = 'gb-dd-panel';
+
   options.forEach(([val, lbl]) => {
-    const opt = document.createElement('option');
-    opt.value = val;
-    opt.textContent = lbl;
-    if (val === current) opt.selected = true;
-    sel.appendChild(opt);
+    const row = document.createElement('button');
+    row.className = 'gb-dd-option' + (val === current ? ' selected' : '');
+    row.setAttribute('type', 'button');
+    row.textContent = lbl;
+    row.addEventListener('click', (e) => {
+      e.stopPropagation();
+      current = val;
+      labelEl.textContent = lbl;
+      panel.querySelectorAll('.gb-dd-option').forEach(r => r.classList.remove('selected'));
+      row.classList.add('selected');
+      _closeOpenDropdown();
+      onChange(val);
+    });
+    panel.appendChild(row);
   });
-  sel.addEventListener('change', () => onChange(sel.value));
-  wrap.appendChild(sel);
+
+  trigger.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const isOpen = wrap.classList.contains('open');
+    _closeOpenDropdown();
+    if (!isOpen) {
+      wrap.classList.add('open');
+      _openDropdown = wrap;
+      // Flip panel up if too close to bottom of viewport
+      const rect = trigger.getBoundingClientRect();
+      const spaceBelow = window.innerHeight - rect.bottom;
+      panel.classList.toggle('flip-up', spaceBelow < 260);
+    }
+  });
+
+  wrap.appendChild(trigger);
+  wrap.appendChild(panel);
   return wrap;
 }
 
