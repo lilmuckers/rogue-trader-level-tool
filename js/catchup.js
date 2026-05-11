@@ -90,12 +90,11 @@ function buildStatsPanel(ctx) {
     panel.appendChild(originEl);
   }
 
-  // Characteristics table
-  const hasCharStats = _CHAR_ORDER.some(a => stats.training[a] || stats.originBonuses[a]);
-  if (hasCharStats) {
+  // Characteristics table — always show all 9
+  {
     const heading = document.createElement('div');
     heading.className = 'stats-heading';
-    heading.textContent = `Characteristics at Level ${level}`;
+    heading.textContent = `Characteristic Gains at Level ${level}`;
     panel.appendChild(heading);
 
     const table = document.createElement('div');
@@ -115,7 +114,6 @@ function buildStatsPanel(ctx) {
     _CHAR_ORDER.forEach(abbr => {
       const origin = stats.originBonuses[abbr] || 0;
       const picks  = stats.training[abbr] || 0;
-      if (!origin && !picks) return;
       const trainVal = picks * 5;
       const total = origin + trainVal;
 
@@ -133,8 +131,7 @@ function buildStatsPanel(ctx) {
       nameCell.appendChild(abbrEl);
       nameCell.appendChild(fullEl);
       row.appendChild(nameCell);
-
-      [origin ? `+${origin}` : '—', trainVal ? `+${trainVal}` : '—', `+${total}`].forEach((val, i) => {
+      [origin ? `+${origin}` : '—', trainVal ? `+${trainVal}` : '—', total ? `+${total}` : '—'].forEach((val, i) => {
         const c = document.createElement('div');
         c.className = 'stats-cell' + (i === 2 ? ' stats-total' : '');
         c.textContent = val;
@@ -248,25 +245,25 @@ function buildCatchupContent(ctx) {
     wrap.appendChild(partyBtn);
   }
 
-  // Tabs: Stats (default) | Timeline | Gear & Skills (if extras)
+  // Tabs: Timeline (default) | Stats | Gear & Skills (if extras)
   const extras = getExtrasForBuildName(buildName, isCompanion);
   const hasExtras = extras && (extras.skills || (extras.gear && extras.gear.length));
 
   const tabBar = document.createElement('div');
   tabBar.className = 'tab-bar';
-  const tabStats    = document.createElement('button');
-  tabStats.className = 'tab-btn active';
-  tabStats.textContent = 'Stats';
   const tabTimeline = document.createElement('button');
-  tabTimeline.className = 'tab-btn';
+  tabTimeline.className = 'tab-btn active';
   tabTimeline.textContent = 'Timeline';
-  tabBar.appendChild(tabStats);
+  const tabStats = document.createElement('button');
+  tabStats.className = 'tab-btn';
+  tabStats.textContent = 'Stats';
   tabBar.appendChild(tabTimeline);
+  tabBar.appendChild(tabStats);
 
-  const statsPanel = buildStatsPanel(ctx);
-  statsPanel.classList.add('tab-panel');
   const timelinePanel = document.createElement('div');
-  timelinePanel.classList.add('tab-panel', 'hidden');
+  timelinePanel.classList.add('tab-panel');
+  const statsPanel = buildStatsPanel(ctx);
+  statsPanel.classList.add('tab-panel', 'hidden');
   let gearPanel = null;
 
   if (hasExtras) {
@@ -278,22 +275,22 @@ function buildCatchupContent(ctx) {
     gearPanel = document.createElement('div');
     gearPanel.classList.add('tab-panel', 'hidden');
 
-    const allTabs   = [tabStats, tabTimeline, tabGear];
-    const allPanels = [statsPanel, timelinePanel, gearPanel];
+    const allTabs   = [tabTimeline, tabStats, tabGear];
+    const allPanels = [timelinePanel, statsPanel, gearPanel];
     const activate  = (i) => {
       allTabs.forEach((t, j) => t.classList.toggle('active', j === i));
       allPanels.forEach((p, j) => p.classList.toggle('hidden', j !== i));
     };
-    tabStats.addEventListener('click',    () => activate(0));
-    tabTimeline.addEventListener('click', () => activate(1));
+    tabTimeline.addEventListener('click', () => activate(0));
+    tabStats.addEventListener('click',    () => activate(1));
     tabGear.addEventListener('click',     () => activate(2));
   } else {
     const activate = (i) => {
-      [tabStats, tabTimeline].forEach((t, j) => t.classList.toggle('active', j === i));
-      [statsPanel, timelinePanel].forEach((p, j) => p.classList.toggle('hidden', j !== i));
+      [tabTimeline, tabStats].forEach((t, j) => t.classList.toggle('active', j === i));
+      [timelinePanel, statsPanel].forEach((p, j) => p.classList.toggle('hidden', j !== i));
     };
-    tabStats.addEventListener('click',    () => activate(0));
-    tabTimeline.addEventListener('click', () => activate(1));
+    tabTimeline.addEventListener('click', () => activate(0));
+    tabStats.addEventListener('click',    () => activate(1));
   }
 
   wrap.appendChild(tabBar);
@@ -353,8 +350,8 @@ function buildCatchupContent(ctx) {
     item.appendChild(pickCol);
     timelinePanel.appendChild(item);
   }
-  wrap.appendChild(statsPanel);
   wrap.appendChild(timelinePanel);
+  wrap.appendChild(statsPanel);
 
   // === Gear & Skills panel ===
   if (hasExtras && gearPanel) {
