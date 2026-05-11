@@ -935,7 +935,7 @@
 .gb-search-row { position: relative; margin-bottom: 8px; }
 .gb-search {
   width: 100%; background: var(--bg-3); border: 1px solid var(--rule);
-  border-radius: 4px; color: var(--ink); font-size: 14px;
+  border-radius: 4px; color: var(--ink); font-size: 16px;
   padding: 7px 32px 7px 10px; outline: none;
 }
 .gb-search:focus { border-color: var(--gold-deep); }
@@ -953,7 +953,7 @@
 .gb-select-wrap { min-width: 0; }
 .gb-select {
   width: 100%; background: var(--bg-3); border: 1px solid var(--border);
-  border-radius: 4px; color: var(--ink); font-size: 12px;
+  border-radius: 4px; color: var(--ink); font-size: 16px;
   padding: 5px 8px; outline: none; cursor: pointer;
 }
 .gb-select:focus { border-color: var(--gold-deep); }
