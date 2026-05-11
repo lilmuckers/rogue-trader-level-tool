@@ -186,7 +186,9 @@
     line-height: 1.5;
   }
   .gear-pill {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
     padding: 2px 8px;
     margin: 2px 4px 2px 0;
     background: var(--bg);
@@ -208,7 +210,6 @@
     color: var(--ink-faint);
     font-family: 'JetBrains Mono', monospace;
     letter-spacing: 0.1em;
-    margin-left: 4px;
   }
   .gear-detail {
     font-family: 'EB Garamond', serif;
