@@ -1,0 +1,152 @@
+# DLC talent/ability tags — loaded by build.js, merged into _NORM_INDEX by lookup.js
+# Format: "Exact Name As In YAML": "DLC Name"
+
+# ── Lex Imperialis — Arbitrator talents ──────────────────────────────────────
+Shotgun Mastery: Lex Imperialis
+"Armour-Piercing": Lex Imperialis
+Law and Order: Lex Imperialis
+Arbites Physical Training: Lex Imperialis
+Pacification Procedures: Lex Imperialis
+Public Sentancing: Lex Imperialis
+Mob Justice: Lex Imperialis
+Prepared Prosecution: Lex Imperialis
+Binding Purpose: Lex Imperialis
+Pillar of the Law: Lex Imperialis
+The Steady Hand of Justice: Lex Imperialis
+Instant Retribution: Lex Imperialis
+Shield Mastery: Lex Imperialis
+Defensive Manoeuvre: Lex Imperialis
+Defensive Manoeuvres: Lex Imperialis
+
+# ── Lex Imperialis — Overseer / familiar talents ─────────────────────────────
+Familiar Kickback: Lex Imperialis
+Armoured Hide: Lex Imperialis
+Autonomous Medikit: Lex Imperialis
+"Brother-in-Arms": Lex Imperialis
+Cohesion: Lex Imperialis
+Dependable Ally: Lex Imperialis
+"Master's Patronage": Lex Imperialis
+"Resistance is Futile (Suppressive Factor)": Lex Imperialis
+Rite of Calibration: Lex Imperialis
+"Rite of Solar Nourishment (Enhanced Augmetics)": Lex Imperialis
+Side by Side: Lex Imperialis
+"Auto-Regeneration": Lex Imperialis
+"Chain-Maw": Lex Imperialis
+Perimeter Defence: Lex Imperialis
+"Victimise (Relentless Pursuit)": Lex Imperialis
+Weakest Link: Lex Imperialis
+Emergency Stimulation: Lex Imperialis
+Energy Mobilisation: Lex Imperialis
+"Self-Learning Algorithms": Lex Imperialis
+Symbiosis: Lex Imperialis
+Unseen Support: Lex Imperialis
+"Psy-Resonator": Lex Imperialis
+Sacrificial Penance: Lex Imperialis
+Warp Buffer: Lex Imperialis
+Bloody Mark: Lex Imperialis
+"Eagle's Vigilance": Lex Imperialis
+Sharpened Talons: Lex Imperialis
+Swift Shadow: Lex Imperialis
+Strong Hand: Lex Imperialis
+Adamantium Alloys: Lex Imperialis
+Autonomous Protection Algorithms: Lex Imperialis
+Emergency Algorithms: Lex Imperialis
+Mercy of the Omnissiah: Lex Imperialis
+Poison Dispersal System: Lex Imperialis
+
+# ── Lex Imperialis — Overseer abilities ──────────────────────────────────────
+Pets: Lex Imperialis
+"Advanced Tracking (Cyber-Mastiff)": Lex Imperialis
+"Advanced Tracking (Psyber-Raven)": Lex Imperialis
+"Apprehend!": Lex Imperialis
+"Bite!": Lex Imperialis
+Blinding Strike: Lex Imperialis
+Consolidation: Lex Imperialis
+Evil Eye: Lex Imperialis
+"Growl!": Lex Imperialis
+Live Bait: Lex Imperialis
+Medicae Signal: Lex Imperialis
+Obstruct Vision: Lex Imperialis
+Priority Signal: Lex Imperialis
+"Protect!": Lex Imperialis
+Provocation Signal: Lex Imperialis
+Purification Discharge: Lex Imperialis
+Reactivate: Lex Imperialis
+Relocate: Lex Imperialis
+Relocation: Lex Imperialis
+"Run!": Lex Imperialis
+Stabilise: Lex Imperialis
+Strafe: Lex Imperialis
+Strategic Adaptation: Lex Imperialis
+
+# ── Void Shadows — Bladedancer talents ───────────────────────────────────────
+"Blade in his hand": Void Shadows
+"Blinding blades": Void Shadows
+Death Warden: Void Shadows
+Race Against Death: Void Shadows
+Rising Tempo: Void Shadows
+Steady Hand: Void Shadows
+Sweeping Motions: Void Shadows
+Anticipation: Void Shadows
+Balancing on the Edge: Void Shadows
+Blessed Scars: Void Shadows
+Blood Bonds: Void Shadows
+Blood Rush: Void Shadows
+Bloody Requiem: Void Shadows
+Dance Partners: Void Shadows
+Duellist: Void Shadows
+Escape Artist: Void Shadows
+Facing the End: Void Shadows
+Feel No Pain: Void Shadows
+Grand Performance: Void Shadows
+Guillotine: Void Shadows
+It Takes Two: Void Shadows
+Killing Rhythm: Void Shadows
+"Paid In blood": Void Shadows
+Shadow Dancer: Void Shadows
+Slip Away: Void Shadows
+Spinning Blades: Void Shadows
+Unforgiving: Void Shadows
+Dance of Blood: Void Shadows
+Dance of Thorns: Void Shadows
+
+# ── Void Shadows — Executioner talents ───────────────────────────────────────
+Acute Pain: Void Shadows
+"All-Encompassing Agony": Void Shadows
+Anatomy Expert: Void Shadows
+Battle of Attrition: Void Shadows
+Bloody Trail: Void Shadows
+Death in the Air: Void Shadows
+Death Warrant: Void Shadows
+Deep Laceration: Void Shadows
+"Does it Hurt?": Void Shadows
+Fragile Playthings: Void Shadows
+Hardened Body: Void Shadows
+Internal Bleeding: Void Shadows
+Invigorating Screams: Void Shadows
+Maddening Flames: Void Shadows
+Master of Torture: Void Shadows
+Perfect Anatomy: Void Shadows
+Racking Weakness: Void Shadows
+Reprieve: Void Shadows
+Sickening Pain: Void Shadows
+Sower of Distress: Void Shadows
+Tormenting Sprain: Void Shadows
+Unbearable Presence: Void Shadows
+Vivisection: Void Shadows
+
+# ── Void Shadows — Bladedancer/Executioner abilities ─────────────────────────
+Death Cult Assassin: Void Shadows
+Death from Above: Void Shadows
+Acrobatic Artistry: Void Shadows
+Oath of Vengeance: Void Shadows
+Veil of Blades: Void Shadows
+Blood Oath: Void Shadows
+Captive Audience: Void Shadows
+Scourging Strikes: Void Shadows
+Exsanguination: Void Shadows
+Pain Resonance: Void Shadows
+Gift of Torment: Void Shadows
+Reckless Abandon: Void Shadows
+Terrifying Strike: Void Shadows
+Mericiless Verdict: Void Shadows

@@ -108,6 +108,8 @@ function renderChoiceSection(rawPick, charName, atLevel, targetEl, isExtra) {
         src.className = 'desc-source';
         src.textContent = hit.kind;
         opt.appendChild(src);
+        const badge = makeDlcBadge(hit.dlc);
+        if (badge) opt.appendChild(badge);
         const txt = document.createElement('div');
         txt.className = 'desc-text';
         txt.textContent = hit.desc;

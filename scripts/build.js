@@ -35,6 +35,7 @@ const definitions = {
   abilities:       readYaml(path.join(dataDir, 'definitions', 'abilities.yml'))       || {},
   heroic:          readYaml(path.join(dataDir, 'definitions', 'heroic.yml'))          || {},
   characteristics: readYaml(path.join(dataDir, 'definitions', 'characteristics.yml')) || {},
+  dlcTags:         readYaml(path.join(dataDir, 'definitions', 'dlc-tags.yml'))        || {},
 };
 
 // ─── gear_db ─────────────────────────────────────────────────────────────────

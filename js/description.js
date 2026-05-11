@@ -83,7 +83,10 @@ function buildDescriptionContent(ctx) {
       const txt = document.createElement('div');
       txt.className = 'desc-text';
       txt.textContent = hit.desc;
-      block.appendChild(nm); block.appendChild(src); block.appendChild(txt);
+      block.appendChild(nm); block.appendChild(src);
+      const badge = makeDlcBadge(hit.dlc);
+      if (badge) block.appendChild(badge);
+      block.appendChild(txt);
       wrap.appendChild(block);
     });
   };

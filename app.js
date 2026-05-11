@@ -148,6 +148,8 @@ function renderChoiceSection(rawPick, charName, atLevel, targetEl, isExtra) {
         src.className = 'desc-source';
         src.textContent = hit.kind;
         opt.appendChild(src);
+        const badge = makeDlcBadge(hit.dlc);
+        if (badge) opt.appendChild(badge);
         const txt = document.createElement('div');
         txt.className = 'desc-text';
         txt.textContent = hit.desc;
@@ -264,19 +266,32 @@ function normalize(s) {
 }
 
 // Build a single normalized index: norm -> {kind, originalName, description}
+// Normalized DLC tag map: normalize(name) → dlc string
+const _DLC_TAGS = (() => {
+  const m = {};
+  for (const [name, dlc] of Object.entries(DEFS.dlcTags || {})) {
+    m[normalize(name)] = dlc;
+  }
+  return m;
+})();
+
 const _NORM_INDEX = (() => {
   const idx = {};
+  const tag = (name) => _DLC_TAGS[normalize(name)] || null;
   for (const [name, desc] of Object.entries(DEFS.heroic || {})) {
     const n = normalize(name);
-    if (!idx[n]) idx[n] = { kind: 'Heroic Action', name, desc };
+    const dlc = tag(name);
+    if (!idx[n]) idx[n] = { kind: 'Heroic Action', name, desc, ...(dlc ? {dlc} : {}) };
   }
   for (const [name, desc] of Object.entries(DEFS.abilities || {})) {
     const n = normalize(name);
-    if (!idx[n]) idx[n] = { kind: 'Ability', name, desc };
+    const dlc = tag(name);
+    if (!idx[n]) idx[n] = { kind: 'Ability', name, desc, ...(dlc ? {dlc} : {}) };
   }
   for (const [name, desc] of Object.entries(DEFS.talents || {})) {
     const n = normalize(name);
-    if (!idx[n]) idx[n] = { kind: 'Talent', name, desc };
+    const dlc = tag(name);
+    if (!idx[n]) idx[n] = { kind: 'Talent', name, desc, ...(dlc ? {dlc} : {}) };
   }
   for (const [name, desc] of Object.entries(DEFS.characteristics || {})) {
     const n = normalize(name);
@@ -480,6 +495,15 @@ function actToText(a) {
   if (a == null) return '';
   if (a === 0) return 'Prologue';
   return `Act ${a}`;
+}
+
+// Creates a DLC badge element, or null if no DLC.
+function makeDlcBadge(dlc) {
+  if (!dlc) return null;
+  const el = document.createElement('span');
+  el.className = 'dlc-badge';
+  el.textContent = dlc;
+  return el;
 }
 
 // Get the extras (skills + gear) for a given build name.
@@ -1247,7 +1271,10 @@ function buildDescriptionContent(ctx) {
       const txt = document.createElement('div');
       txt.className = 'desc-text';
       txt.textContent = hit.desc;
-      block.appendChild(nm); block.appendChild(src); block.appendChild(txt);
+      block.appendChild(nm); block.appendChild(src);
+      const badge = makeDlcBadge(hit.dlc);
+      if (badge) block.appendChild(badge);
+      block.appendChild(txt);
       wrap.appendChild(block);
     });
   };
@@ -1468,6 +1495,8 @@ function buildCatchupContent(ctx) {
               loc.textContent = '· ' + actToText(found.a);
               pill.appendChild(loc);
             }
+            const gearBadge = makeDlcBadge(found.dlc);
+            if (gearBadge) { gearBadge.className = 'dlc-badge dlc-badge-pill'; pill.appendChild(gearBadge); }
             pill.addEventListener('click', () => pushGearDetail(found, opt));
           } else {
             pill.classList.add('unknown');
@@ -1636,7 +1665,9 @@ function pushLevelDescription(entry, displayName, atLevel) {
         const txt = document.createElement('div');
         txt.className = 'desc-text';
         txt.textContent = hit.desc;
-        block.appendChild(nm); block.appendChild(src); block.appendChild(txt);
+        block.appendChild(nm); block.appendChild(src);
+        const b1 = makeDlcBadge(hit.dlc); if (b1) block.appendChild(b1);
+        block.appendChild(txt);
         wrap.appendChild(block);
       });
     };
@@ -1709,7 +1740,9 @@ function buildSinglePickContent(rawPick, displayName, atLevel) {
         const txt = document.createElement('div');
         txt.className = 'desc-text';
         txt.textContent = hit.desc;
-        block.appendChild(nm); block.appendChild(src); block.appendChild(txt);
+        block.appendChild(nm); block.appendChild(src);
+        const b2 = makeDlcBadge(hit.dlc); if (b2) block.appendChild(b2);
+        block.appendChild(txt);
         wrap.appendChild(block);
       });
     }
