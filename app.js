@@ -1857,7 +1857,7 @@ function showSection(name) {
   if (name === 'tracker')        renderTracker();
   else if (name === 'colony')    renderColonySection();
   else if (name === 'traders')   renderTradersSection();
-  else if (name === 'reference') renderReferenceSection();
+  else if (name === 'reference') { _referenceSubSection = null; renderReferenceSection(); }
   else if (name === 'notes')     renderNotesSection();
 }
 
@@ -3431,33 +3431,35 @@ function renderGearBrowser(container) {
   const filterBar = document.createElement('div');
   filterBar.className = 'gb-filter-bar';
 
-  // Search
+  // Search row with clear button
   const searchRow = document.createElement('div');
   searchRow.className = 'gb-search-row';
   const searchInput = document.createElement('input');
-  searchInput.type = 'search';
+  searchInput.type = 'text';
   searchInput.className = 'gb-search';
   searchInput.placeholder = 'Search gear…';
   searchInput.value = _gb.search;
-  searchInput.addEventListener('input', () => { _gb.search = searchInput.value; renderGearList(listEl); });
+  searchInput.addEventListener('input', () => { _gb.search = searchInput.value; clearBtn.style.display = _gb.search ? '' : 'none'; renderGearList(listEl); });
+  const clearBtn = document.createElement('button');
+  clearBtn.className = 'gb-search-clear';
+  clearBtn.textContent = '✕';
+  clearBtn.title = 'Clear search';
+  clearBtn.style.display = _gb.search ? '' : 'none';
+  clearBtn.addEventListener('click', () => { _gb.search = ''; searchInput.value = ''; clearBtn.style.display = 'none'; searchInput.focus(); renderGearList(listEl); });
   searchRow.appendChild(searchInput);
+  searchRow.appendChild(clearBtn);
   filterBar.appendChild(searchRow);
 
-  // Slot chips
-  const slotRow = document.createElement('div');
-  slotRow.className = 'gb-chip-row';
-  [['all', 'All'], ...SLOT_ORDER.map(s => [s, SLOT_LABEL[s]])].forEach(([val, label]) => {
-    const chip = document.createElement('button');
-    chip.className = 'gb-chip' + (_gb.slot === val ? ' active' : '');
-    chip.textContent = label;
-    chip.addEventListener('click', () => { _gb.slot = val; renderGearBrowser(container); });
-    slotRow.appendChild(chip);
-  });
-  filterBar.appendChild(slotRow);
+  // All four filter dropdowns in one row
+  const filterRow = document.createElement('div');
+  filterRow.className = 'gb-filter-row';
 
-  // Second row: DLC + Character + Act
-  const filterRow2 = document.createElement('div');
-  filterRow2.className = 'gb-filter-row';
+  // Slot select (replaces chip row)
+  const slotSel = _makeSelect('Slot', [
+    ['all', 'All slots'],
+    ...SLOT_ORDER.map(s => [s, SLOT_LABEL[s]]),
+  ], _gb.slot, v => { _gb.slot = v; renderGearList(listEl); });
+  filterRow.appendChild(slotSel);
 
   // DLC select
   const dlcSel = _makeSelect('DLC', [
@@ -3466,7 +3468,7 @@ function renderGearBrowser(container) {
     ['Lex Imperialis', 'Lex Imperialis'],
     ['Void Shadows', 'Void Shadows'],
   ], _gb.dlc, v => { _gb.dlc = v; renderGearList(listEl); });
-  filterRow2.appendChild(dlcSel);
+  filterRow.appendChild(dlcSel);
 
   // Character select
   const charOptions = [
@@ -3475,7 +3477,7 @@ function renderGearBrowser(container) {
     ...COMPANION_ORDER.map(c => [c, c]),
   ];
   const charSel = _makeSelect('Character', charOptions, _gb.char, v => { _gb.char = v; renderGearList(listEl); });
-  filterRow2.appendChild(charSel);
+  filterRow.appendChild(charSel);
 
   // Act select
   const actSel = _makeSelect('Act', [
@@ -3486,9 +3488,9 @@ function renderGearBrowser(container) {
     ['3', 'Act 3'],
     ['4', 'Act 4'],
   ], _gb.act, v => { _gb.act = v; renderGearList(listEl); });
-  filterRow2.appendChild(actSel);
+  filterRow.appendChild(actSel);
 
-  filterBar.appendChild(filterRow2);
+  filterBar.appendChild(filterRow);
   container.appendChild(filterBar);
 
   // ── Gear list ────────────────────────────────────────────────────────────
@@ -3686,15 +3688,20 @@ function renderReferenceSection() {
   const el = $('reference-content');
   el.innerHTML = '';
   if (_referenceSubSection) {
-    // Back button
+    // Back button — lives in el; sub-content gets its own container so it can
+    // clear itself without clobbering this button
     const backBtn = document.createElement('button');
     backBtn.className = 'reference-back-btn';
     backBtn.innerHTML = '← Reference';
     backBtn.addEventListener('click', () => { _referenceSubSection = null; renderReferenceSection(); });
     el.appendChild(backBtn);
 
-    if (_referenceSubSection === 'gear')      renderGearBrowser(el);
-    else if (_referenceSubSection === 'resources') renderResourcesContent(el);
+    const subEl = document.createElement('div');
+    subEl.className = 'reference-sub-content';
+    el.appendChild(subEl);
+
+    if (_referenceSubSection === 'gear')      renderGearBrowser(subEl);
+    else if (_referenceSubSection === 'resources') renderResourcesContent(subEl);
   } else {
     // Landing: cards for each sub-section
     const grid = document.createElement('div');

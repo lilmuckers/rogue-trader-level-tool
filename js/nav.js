@@ -35,7 +35,7 @@ function showSection(name) {
   if (name === 'tracker')        renderTracker();
   else if (name === 'colony')    renderColonySection();
   else if (name === 'traders')   renderTradersSection();
-  else if (name === 'reference') renderReferenceSection();
+  else if (name === 'reference') { _referenceSubSection = null; renderReferenceSection(); }
   else if (name === 'notes')     renderNotesSection();
 }
 
