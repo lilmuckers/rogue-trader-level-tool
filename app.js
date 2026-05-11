@@ -3315,11 +3315,365 @@ function buildNoteEditorContent(note, startInEdit = false) {
 }
 
 
+// ============= GEAR BROWSER =============
+
+const GEAR_SLOT_LABELS = {
+  armour:  'Armour',
+  weapon:  'Weapons',
+  helm:    'Helms',
+  cloak:   'Cloaks',
+  gloves:  'Gloves',
+  boots:   'Boots',
+  neck:    'Necklaces',
+  trinket: 'Trinkets',
+  familiar:'Familiars',
+};
+
+// Shields are weapons with category: Shield — separate group
+const SLOT_ORDER = ['armour','weapon','shield','helm','cloak','gloves','boots','neck','trinket','familiar'];
+const SLOT_LABEL = { ...GEAR_SLOT_LABELS, shield: 'Shields' };
+
+// ── Build inverted index: normalisedGearName → [{char, buildName, dlc}] ──────
+let _gearUsedByIndex = null;
+
+function _buildGearUsedByIndex() {
+  if (_gearUsedByIndex) return _gearUsedByIndex;
+  _gearUsedByIndex = new Map();
+
+  function _ng(s) {
+    if (!s) return '';
+    return s.toLowerCase()
+      .replace(/\s*\[.*?\]\s*/g, ' ')
+      .replace(/'s\b/g, '')
+      .replace(/-/g, ' ')
+      .replace(/[^a-z0-9 ]/g, '')
+      .replace(/\s+/g, ' ').trim()
+      .replace(/\bbarreled\b/g, 'barrel')
+      .replace(/\bhelmet\b/g, 'helm')
+      .replace(/\bvengeance\b/g, 'vengance')
+      .replace(/\bvengence\b/g, 'vengance');
+  }
+
+  function addEntry(normKey, entry) {
+    if (!normKey) return;
+    if (!_gearUsedByIndex.has(normKey)) _gearUsedByIndex.set(normKey, []);
+    // Deduplicate by char+buildName
+    const list = _gearUsedByIndex.get(normKey);
+    if (!list.some(e => e.char === entry.char && e.buildName === entry.buildName)) {
+      list.push(entry);
+    }
+  }
+
+  function indexExtras(extras, char, buildName, dlc) {
+    if (!extras || !extras.gear) return;
+    extras.gear.forEach(slot => {
+      slot.options.split('/').map(o => o.replace(/\s*\(.*?\)\s*$/, '').trim()).filter(Boolean).forEach(opt => {
+        const k = _ng(opt);
+        // Also add singular/plural variants
+        addEntry(k, { char, buildName, dlc });
+        if (k.endsWith('s') && k.length > 4) addEntry(k.slice(0, -1), { char, buildName, dlc });
+        addEntry(k + 's', { char, buildName, dlc });
+      });
+    });
+  }
+
+  // MC builds
+  Object.entries(DATA.extras.mc_extras || {}).forEach(([buildName, extras]) => {
+    const build = DATA.mc_builds.find(b => b.name === buildName);
+    indexExtras(extras, 'MC', buildName, build && build.dlc);
+  });
+  // Companion builds
+  Object.entries(DATA.extras.comp_extras || {}).forEach(([buildName, extras]) => {
+    let char = null;
+    Object.entries(DATA.companions).forEach(([cn, variants]) => {
+      if (variants.find(v => v.name === buildName)) char = cn;
+    });
+    const variant = char ? (DATA.companions[char] || []).find(v => v.name === buildName) : null;
+    indexExtras(extras, char || '?', buildName, variant && variant.dlc);
+  });
+
+  return _gearUsedByIndex;
+}
+
+function _getUsedBy(gearItem) {
+  const idx = _buildGearUsedByIndex();
+  function _ng(s) {
+    if (!s) return '';
+    return s.toLowerCase()
+      .replace(/\s*\[.*?\]\s*/g, ' ')
+      .replace(/'s\b/g, '')
+      .replace(/-/g, ' ')
+      .replace(/[^a-z0-9 ]/g, '')
+      .replace(/\s+/g, ' ').trim()
+      .replace(/\bbarreled\b/g, 'barrel')
+      .replace(/\bhelmet\b/g, 'helm')
+      .replace(/\bvengeance\b/g, 'vengance')
+      .replace(/\bvengence\b/g, 'vengance');
+  }
+  const k = _ng(gearItem.n);
+  return idx.get(k) || idx.get(k + 's') || idx.get(k.endsWith('s') ? k.slice(0,-1) : k) || [];
+}
+
+// ── State ─────────────────────────────────────────────────────────────────────
+const _gb = {
+  slot: 'all',
+  dlc:  'all',    // 'all' | 'base' | 'Lex Imperialis' | 'Void Shadows'
+  char: 'all',    // 'all' | 'MC' | companion name
+  act:  'all',    // 'all' | '0' | '1' | '2' | '3' | '4'
+  search: '',
+};
+
+// ── Main render ───────────────────────────────────────────────────────────────
+function renderGearBrowser(container) {
+  container.innerHTML = '';
+
+  // ── Filter bar ───────────────────────────────────────────────────────────
+  const filterBar = document.createElement('div');
+  filterBar.className = 'gb-filter-bar';
+
+  // Search
+  const searchRow = document.createElement('div');
+  searchRow.className = 'gb-search-row';
+  const searchInput = document.createElement('input');
+  searchInput.type = 'search';
+  searchInput.className = 'gb-search';
+  searchInput.placeholder = 'Search gear…';
+  searchInput.value = _gb.search;
+  searchInput.addEventListener('input', () => { _gb.search = searchInput.value; renderGearList(listEl); });
+  searchRow.appendChild(searchInput);
+  filterBar.appendChild(searchRow);
+
+  // Slot chips
+  const slotRow = document.createElement('div');
+  slotRow.className = 'gb-chip-row';
+  [['all', 'All'], ...SLOT_ORDER.map(s => [s, SLOT_LABEL[s]])].forEach(([val, label]) => {
+    const chip = document.createElement('button');
+    chip.className = 'gb-chip' + (_gb.slot === val ? ' active' : '');
+    chip.textContent = label;
+    chip.addEventListener('click', () => { _gb.slot = val; renderGearBrowser(container); });
+    slotRow.appendChild(chip);
+  });
+  filterBar.appendChild(slotRow);
+
+  // Second row: DLC + Character + Act
+  const filterRow2 = document.createElement('div');
+  filterRow2.className = 'gb-filter-row';
+
+  // DLC select
+  const dlcSel = _makeSelect('DLC', [
+    ['all', 'All DLC'],
+    ['base', 'Base game'],
+    ['Lex Imperialis', 'Lex Imperialis'],
+    ['Void Shadows', 'Void Shadows'],
+  ], _gb.dlc, v => { _gb.dlc = v; renderGearList(listEl); });
+  filterRow2.appendChild(dlcSel);
+
+  // Character select
+  const charOptions = [
+    ['all', 'Any character'],
+    ['MC', 'MC builds'],
+    ...COMPANION_ORDER.map(c => [c, c]),
+  ];
+  const charSel = _makeSelect('Character', charOptions, _gb.char, v => { _gb.char = v; renderGearList(listEl); });
+  filterRow2.appendChild(charSel);
+
+  // Act select
+  const actSel = _makeSelect('Act', [
+    ['all', 'Any act'],
+    ['0', 'Prologue'],
+    ['1', 'Act 1'],
+    ['2', 'Act 2'],
+    ['3', 'Act 3'],
+    ['4', 'Act 4'],
+  ], _gb.act, v => { _gb.act = v; renderGearList(listEl); });
+  filterRow2.appendChild(actSel);
+
+  filterBar.appendChild(filterRow2);
+  container.appendChild(filterBar);
+
+  // ── Gear list ────────────────────────────────────────────────────────────
+  const listEl = document.createElement('div');
+  listEl.className = 'gb-list';
+  container.appendChild(listEl);
+  renderGearList(listEl);
+}
+
+function _makeSelect(label, options, current, onChange) {
+  const wrap = document.createElement('div');
+  wrap.className = 'gb-select-wrap';
+  const sel = document.createElement('select');
+  sel.className = 'gb-select';
+  sel.setAttribute('aria-label', label);
+  options.forEach(([val, lbl]) => {
+    const opt = document.createElement('option');
+    opt.value = val;
+    opt.textContent = lbl;
+    if (val === current) opt.selected = true;
+    sel.appendChild(opt);
+  });
+  sel.addEventListener('change', () => onChange(sel.value));
+  wrap.appendChild(sel);
+  return wrap;
+}
+
+function _matchesFilters(item) {
+  // Slot
+  if (_gb.slot !== 'all') {
+    const isShield = item.cat === 'Shield';
+    if (_gb.slot === 'shield') { if (!isShield) return false; }
+    else if (_gb.slot === 'weapon') { if (item.s !== 'weapon' || isShield) return false; }
+    else { if (item.s !== _gb.slot) return false; }
+  }
+
+  // DLC
+  if (_gb.dlc !== 'all') {
+    if (_gb.dlc === 'base') { if (item.dlc) return false; }
+    else { if (item.dlc !== _gb.dlc) return false; }
+  }
+
+  // Act
+  if (_gb.act !== 'all') {
+    if (item.a == null) return true; // unknown act — show in all
+    if (String(item.a) !== _gb.act) return false;
+  }
+
+  // Character / used-by
+  if (_gb.char !== 'all') {
+    const usedBy = _getUsedBy(item);
+    if (!usedBy.some(e => e.char === _gb.char)) return false;
+  }
+
+  // Search
+  if (_gb.search) {
+    const q = _gb.search.toLowerCase();
+    const inName = (item.n || '').toLowerCase().includes(q);
+    const inDesc = (item.d || '').toLowerCase().includes(q);
+    const inLoc  = (item.l || '').toLowerCase().includes(q);
+    if (!inName && !inDesc && !inLoc) return false;
+  }
+
+  return true;
+}
+
+function renderGearList(listEl) {
+  listEl.innerHTML = '';
+  _buildGearUsedByIndex(); // ensure index built
+
+  // Filter
+  const filtered = (DATA.gear_db || []).filter(_matchesFilters);
+
+  if (!filtered.length) {
+    const empty = document.createElement('div');
+    empty.className = 'gb-empty';
+    empty.textContent = 'No gear matches these filters.';
+    listEl.appendChild(empty);
+    return;
+  }
+
+  // Group
+  const groups = new Map(); // groupKey → { label, items }
+  filtered.forEach(item => {
+    let groupKey;
+    if (item.cat === 'Shield') groupKey = 'shield';
+    else if (item.s === 'weapon') groupKey = 'weapon';
+    else groupKey = item.s || 'other';
+
+    if (!groups.has(groupKey)) {
+      groups.set(groupKey, { label: SLOT_LABEL[groupKey] || groupKey, items: [] });
+    }
+    groups.get(groupKey).items.push(item);
+  });
+
+  // Sort groups by SLOT_ORDER
+  const orderedGroups = SLOT_ORDER
+    .filter(k => groups.has(k))
+    .map(k => [k, groups.get(k)]);
+  // Append any remaining (shouldn't happen)
+  groups.forEach((v, k) => { if (!SLOT_ORDER.includes(k)) orderedGroups.push([k, v]); });
+
+  // Collapse single-group view (no heading needed if slot filter active and only one group)
+  const showHeadings = orderedGroups.length > 1;
+
+  orderedGroups.forEach(([, group]) => {
+    if (showHeadings) {
+      const heading = document.createElement('div');
+      heading.className = 'gb-group-heading';
+      heading.textContent = group.label + ' (' + group.items.length + ')';
+      listEl.appendChild(heading);
+    }
+
+    group.items.forEach(item => {
+      const row = document.createElement('div');
+      row.className = 'gb-item';
+
+      const nameWrap = document.createElement('div');
+      nameWrap.className = 'gb-item-name-wrap';
+
+      const name = document.createElement('span');
+      name.className = 'gb-item-name';
+      name.textContent = item.n;
+      nameWrap.appendChild(name);
+
+      if (item.dlc) {
+        const badge = makeDlcBadge(item.dlc);
+        badge.className = 'dlc-badge dlc-badge-pill';
+        nameWrap.appendChild(badge);
+      }
+
+      const meta = document.createElement('div');
+      meta.className = 'gb-item-meta';
+
+      if (item.a != null) {
+        const actBadge = document.createElement('span');
+        actBadge.className = 'gb-act-badge';
+        actBadge.textContent = actToText(item.a);
+        meta.appendChild(actBadge);
+      }
+
+      // Used-by chars (abbreviated)
+      const usedBy = _getUsedBy(item);
+      if (usedBy.length) {
+        const chars = [...new Set(usedBy.map(e => e.char))].slice(0, 4);
+        const ub = document.createElement('span');
+        ub.className = 'gb-used-by';
+        ub.textContent = chars.join(' · ');
+        meta.appendChild(ub);
+      }
+
+      if (item.d) {
+        const desc = document.createElement('div');
+        desc.className = 'gb-item-desc';
+        desc.textContent = item.d.length > 120 ? item.d.slice(0, 117) + '…' : item.d;
+        row.appendChild(nameWrap);
+        row.appendChild(meta);
+        row.appendChild(desc);
+      } else {
+        row.appendChild(nameWrap);
+        row.appendChild(meta);
+      }
+
+      if (item.l || item.a != null || item.d) {
+        row.classList.add('has-detail');
+        row.addEventListener('click', () => pushGearDetail(item, item.n));
+      }
+
+      listEl.appendChild(row);
+    });
+  });
+}
+
+
 // ============= REFERENCE =============
 
 let _referenceSubSection = null; // null = landing, 'resources' = star systems
 
 const REFERENCE_SECTIONS = [
+  {
+    id: 'gear',
+    title: 'Gear Browser',
+    subtitle: 'Browse all gear by slot, DLC, character, or act',
+    icon: '⚔',
+  },
   {
     id: 'resources',
     title: 'Star System Resources',
@@ -3339,7 +3693,8 @@ function renderReferenceSection() {
     backBtn.addEventListener('click', () => { _referenceSubSection = null; renderReferenceSection(); });
     el.appendChild(backBtn);
 
-    if (_referenceSubSection === 'resources') renderResourcesContent(el);
+    if (_referenceSubSection === 'gear')      renderGearBrowser(el);
+    else if (_referenceSubSection === 'resources') renderResourcesContent(el);
   } else {
     // Landing: cards for each sub-section
     const grid = document.createElement('div');
