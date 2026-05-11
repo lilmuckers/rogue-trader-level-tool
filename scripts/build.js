@@ -125,6 +125,13 @@ if (fs.existsSync(compRoot)) {
   }
 }
 
+// ─── companion base stats ─────────────────────────────────────────────────────
+
+const compBaseStatsFile = path.join(dataDir, 'companions', 'base_stats.yml');
+const companionBaseStats = fs.existsSync(compBaseStatsFile)
+  ? (readYaml(compBaseStatsFile) || {})
+  : {};
+
 // ─── colonies ────────────────────────────────────────────────────────────────
 
 const colonies = [];
@@ -180,6 +187,7 @@ const DATA = {
   vendors,
   questRewards,
   resourceSystems,
+  companionBaseStats,
 };
 
 // ─── write data.js ────────────────────────────────────────────────────────────

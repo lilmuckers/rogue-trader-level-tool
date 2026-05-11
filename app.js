@@ -1368,7 +1368,7 @@ function calcBuildStats(build, upToLevel) {
 }
 
 function buildStatsPanel(ctx) {
-  const { build, buildName } = ctx;
+  const { build, buildName, displayName, isCompanion } = ctx;
   const panel = document.createElement('div');
   panel.className = 'stats-panel';
 
@@ -1379,8 +1379,12 @@ function buildStatsPanel(ctx) {
 
   const stats = calcBuildStats(build, level);
 
-  // Origin bonuses section
-  const hasOrigin = Object.keys(stats.originBonuses).length > 0;
+  // Base stats for companions (when available)
+  const baseStats = isCompanion
+    ? (DATA.companionBaseStats && DATA.companionBaseStats[displayName]) || null
+    : null;
+
+  // Origin text (MC only)
   if (build.origin) {
     const originEl = document.createElement('div');
     originEl.className = 'stats-origin';
@@ -1391,23 +1395,30 @@ function buildStatsPanel(ctx) {
   // Disclaimer
   const disclaimer = document.createElement('div');
   disclaimer.className = 'stats-disclaimer';
-  disclaimer.textContent = 'Shows gains from origin bonuses and training picks only — does not include homeworld, archetype starting bonuses, or gear.';
+  disclaimer.textContent = baseStats
+    ? 'Base stats from character data. Training picks add +5 each. Gear and buffs not included.'
+    : 'Shows gains from origin bonuses and training picks only — does not include homeworld, archetype starting bonuses, or gear.';
   panel.appendChild(disclaimer);
 
   // Characteristics table — always show all 9
   {
     const heading = document.createElement('div');
     heading.className = 'stats-heading';
-    heading.textContent = `Characteristic Gains at Level ${level}`;
+    heading.textContent = baseStats
+      ? `Characteristics at Level ${level}`
+      : `Characteristic Gains at Level ${level}`;
     panel.appendChild(heading);
 
     const table = document.createElement('div');
     table.className = 'stats-table';
 
-    // Header
+    // Header — different columns depending on whether we have base data
     const hdr = document.createElement('div');
     hdr.className = 'stats-row stats-header';
-    ['Characteristic','Origin','Training','Total'].forEach(h => {
+    const headers = baseStats
+      ? ['Characteristic', 'Base', 'Training', 'Total']
+      : ['Characteristic', 'Origin', 'Training', 'Total'];
+    headers.forEach(h => {
       const c = document.createElement('div');
       c.className = 'stats-cell';
       c.textContent = h;
@@ -1416,10 +1427,13 @@ function buildStatsPanel(ctx) {
     table.appendChild(hdr);
 
     _CHAR_ORDER.forEach(abbr => {
-      const origin = stats.originBonuses[abbr] || 0;
-      const picks  = stats.training[abbr] || 0;
+      const base     = baseStats ? (baseStats[abbr] || 0) : (stats.originBonuses[abbr] || 0);
+      const picks    = stats.training[abbr] || 0;
       const trainVal = picks * 5;
-      const total = origin + trainVal;
+      const total    = base + trainVal;
+
+      // Skip rows with nothing when we don't have base stats
+      if (!baseStats && !base && !trainVal) return;
 
       const row = document.createElement('div');
       row.className = 'stats-row';
@@ -1435,7 +1449,11 @@ function buildStatsPanel(ctx) {
       nameCell.appendChild(abbrEl);
       nameCell.appendChild(fullEl);
       row.appendChild(nameCell);
-      [origin ? `+${origin}` : '—', trainVal ? `+${trainVal}` : '—', total ? `+${total}` : '—'].forEach((val, i) => {
+
+      const col1 = baseStats ? String(base) : (base ? `+${base}` : '—');
+      const col2 = trainVal ? `+${trainVal}` : '—';
+      const col3 = baseStats ? String(total) : (total ? `+${total}` : '—');
+      [col1, col2, col3].forEach((val, i) => {
         const c = document.createElement('div');
         c.className = 'stats-cell' + (i === 2 ? ' stats-total' : '');
         c.textContent = val;
