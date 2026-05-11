@@ -950,13 +950,42 @@
   grid-template-columns: repeat(2, 1fr);
   gap: 6px;
 }
-.gb-select-wrap { min-width: 0; }
-.gb-select {
-  width: 100%; background: var(--bg-3); border: 1px solid var(--border);
-  border-radius: 4px; color: var(--ink); font-size: 16px;
-  padding: 5px 8px; outline: none; cursor: pointer;
+/* ── Custom dropdown ── */
+.gb-select-wrap {
+  position: relative; min-width: 0;
 }
-.gb-select:focus { border-color: var(--gold-deep); }
+.gb-dd-trigger {
+  width: 100%; display: flex; align-items: center; justify-content: space-between;
+  background: var(--bg-3); border: 1px solid var(--rule);
+  border-radius: 4px; color: var(--ink); font-family: 'EB Garamond', serif;
+  font-size: 15px; padding: 6px 10px; cursor: pointer;
+  touch-action: manipulation; text-align: left; gap: 6px;
+}
+.gb-dd-trigger:active, .gb-select-wrap.open .gb-dd-trigger {
+  border-color: var(--gold-deep); background: var(--bg-2);
+}
+.gb-dd-label { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.gb-dd-arrow { flex-shrink: 0; font-size: 10px; color: var(--gold-deep); transition: transform 0.15s; }
+.gb-select-wrap.open .gb-dd-arrow { transform: rotate(180deg); }
+.gb-dd-panel {
+  display: none; position: absolute; top: calc(100% + 4px); left: 0; right: 0;
+  background: var(--bg-3); border: 1px solid var(--gold-deep); border-radius: 4px;
+  z-index: 50; max-height: 260px; overflow-y: auto;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.6);
+  -webkit-overflow-scrolling: touch;
+}
+.gb-dd-panel.flip-up { top: auto; bottom: calc(100% + 4px); }
+.gb-select-wrap.open .gb-dd-panel { display: block; }
+.gb-dd-option {
+  width: 100%; text-align: left; padding: 10px 12px;
+  background: none; border: none; border-bottom: 1px solid var(--rule);
+  color: var(--ink-dim); font-family: 'EB Garamond', serif; font-size: 15px;
+  cursor: pointer; touch-action: manipulation; display: block;
+}
+.gb-dd-option:last-child { border-bottom: none; }
+.gb-dd-option:active { background: var(--bg-2); }
+.gb-dd-option.selected { color: var(--gold-bright); background: rgba(201,164,76,0.08); }
+.gb-dd-option.selected::after { content: ' ✓'; }
 .gb-list { padding-top: 8px; }
 .gb-group-heading {
   font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 0.3em;
