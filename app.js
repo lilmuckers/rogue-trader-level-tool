@@ -1473,13 +1473,6 @@ function buildStatsPanel(ctx) {
     panel.appendChild(skillList);
   }
 
-  if (!hasCharStats && stats.apGained === 0 && skillEntries.length === 0) {
-    const none = document.createElement('div');
-    none.className = 'stats-none';
-    none.textContent = "No characteristic or skill picks found in this build's data.";
-    panel.appendChild(none);
-  }
-
   return panel;
 }
 function openCatchupSheet(ctx) {
