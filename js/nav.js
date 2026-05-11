@@ -16,7 +16,7 @@ const SECTION_META = {
   tracker:   { title: 'Rogue Trader',    subtitle: 'Level Tracker & Build Companion' },
   colony:    { title: 'Colony Projects', subtitle: 'Track your colonial development' },
   traders:   { title: 'Traders',         subtitle: 'Faction reputations & available items' },
-  resources: { title: 'Resources',       subtitle: 'Star system resources' },
+  reference: { title: 'Reference',       subtitle: 'Lookup tables & reference data' },
   notes:     { title: 'Notes',           subtitle: 'Campaign notes & reminders' },
 };
 
@@ -32,10 +32,10 @@ function showSection(name) {
   const meta = SECTION_META[name] || {};
   $('section-title').textContent  = meta.title    || 'Rogue Trader';
   $('section-subtitle').textContent = meta.subtitle || '';
-  if (name === 'tracker')   renderTracker();
+  if (name === 'tracker')        renderTracker();
   else if (name === 'colony')    renderColonySection();
   else if (name === 'traders')   renderTradersSection();
-  else if (name === 'resources') renderResourcesSection();
+  else if (name === 'reference') renderReferenceSection();
   else if (name === 'notes')     renderNotesSection();
 }
 

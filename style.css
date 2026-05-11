@@ -924,6 +924,26 @@
   font-family: 'Cinzel', serif; font-size: 13px; font-weight: 600;
   color: var(--gold-bright); margin-bottom: 4px;
 }
+/* ── Reference section ── */
+.reference-grid {
+  display: flex; flex-direction: column; gap: 12px; padding: 4px 0;
+}
+.reference-card {
+  background: var(--bg-2); border: 1px solid var(--rule); border-left: 3px solid var(--gold-deep);
+  border-radius: 0 4px 4px 0; padding: 14px 16px; cursor: pointer;
+  display: flex; align-items: center; gap: 14px;
+}
+.reference-card:active { background: var(--bg-3); }
+.reference-card-icon { font-size: 22px; color: var(--gold-deep); flex-shrink: 0; }
+.reference-card-title { font-family: 'Cinzel', serif; font-size: 13px; font-weight: 600; color: var(--ink); letter-spacing: 0.05em; }
+.reference-card-sub { font-size: 13px; color: var(--ink-dim); margin-top: 2px; }
+.reference-back-btn {
+  background: none; border: none; color: var(--gold); font-family: 'Cinzel', serif;
+  font-size: 11px; font-weight: 700; letter-spacing: 0.1em; cursor: pointer;
+  padding: 0 0 14px; display: block;
+}
+.reference-back-btn:active { color: var(--gold-bright); }
+
 .resource-row {
   display: flex; align-items: center; gap: 8px;
   padding: 7px 0; border-bottom: 1px solid var(--rule);
