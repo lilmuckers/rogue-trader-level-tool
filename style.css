@@ -83,6 +83,20 @@
   .char-unavailable { margin-top: 6px; font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 0.2em; color: var(--ink-faint); text-transform: uppercase; }
   .char-unavailable::before { content: '⛓ '; color: var(--blood); }
 
+/* ── DLC badge ── */
+.dlc-badge {
+  display: inline-block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px; font-weight: 700;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  color: #7ecef4; border: 1px solid rgba(126,206,244,0.35);
+  background: rgba(126,206,244,0.08);
+  padding: 1px 5px; border-radius: 3px;
+  margin-top: 3px;
+}
+.dlc-badge-build { font-size: 10px; padding: 2px 8px; margin: 4px 0 0; display: block; width: fit-content; }
+.dlc-badge-gear  { margin-bottom: 8px; }
+
   .char-archetype-callout {
     margin-top: 8px;
     padding: 6px 10px;

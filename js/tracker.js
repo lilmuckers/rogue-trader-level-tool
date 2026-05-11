@@ -424,6 +424,12 @@ function charCard({mc, key, displayName, buildName, arch, pick, available, joinL
     bn.textContent = buildName;
     body.appendChild(bn);
   }
+  if (build && build.dlc) {
+    const dlcEl = document.createElement('div');
+    dlcEl.className = 'dlc-badge';
+    dlcEl.textContent = build.dlc;
+    body.appendChild(dlcEl);
+  }
 
   if (!available) {
     const u = document.createElement('div');

@@ -33,6 +33,12 @@ function buildCatchupContent(ctx) {
     ar.textContent = arch;
     meta.appendChild(ar);
   }
+  if (build && build.dlc) {
+    const dlcEl = document.createElement('div');
+    dlcEl.className = 'dlc-badge dlc-badge-build';
+    dlcEl.textContent = build.dlc;
+    meta.appendChild(dlcEl);
+  }
   wrap.appendChild(meta);
 
   // Party button (companions only)
@@ -216,6 +222,14 @@ function pushGearDetail(gearItem, displayName) {
 
 function buildGearDetailContent(gearItem) {
   const wrap = document.createElement('div');
+
+  if (gearItem.dlc) {
+    const dlcEl = document.createElement('div');
+    dlcEl.className = 'dlc-badge dlc-badge-gear';
+    dlcEl.textContent = gearItem.dlc;
+    wrap.appendChild(dlcEl);
+  }
+
   const detail = document.createElement('div');
   detail.className = 'gear-detail';
 

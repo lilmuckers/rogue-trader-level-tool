@@ -41,7 +41,21 @@ const definitions = {
 
 const gearDir  = path.join(dataDir, 'gear');
 const gear_db  = [];
+// Files where every entry is DLC regardless of location text
+const _gearFileDLC = {
+  'shields.yml':   'Lex Imperialis',
+  'familiars.yml': 'Lex Imperialis',
+};
+function detectGearDLC(item, fileName) {
+  if (item.dlc) return item.dlc;
+  if (_gearFileDLC[fileName]) return _gearFileDLC[fileName];
+  const loc = item.location || '';
+  if (/lex imperialis/i.test(loc)) return 'Lex Imperialis';
+  if (/void shadows/i.test(loc))   return 'Void Shadows';
+  return null;
+}
 for (const filePath of globYaml(gearDir)) {
+  const fileName = path.basename(filePath);
   const items = readYaml(filePath) || [];
   for (const item of items) {
     const entry = { n: item.name, s: item.slot };
@@ -49,6 +63,8 @@ for (const filePath of globYaml(gearDir)) {
     if (item.act != null) entry.a   = item.act;
     if (item.description) entry.d   = item.description;
     if (item.category)    entry.cat = item.category;
+    const dlc = detectGearDLC(item, fileName);
+    if (dlc) entry.dlc = dlc;
     gear_db.push(entry);
   }
 }
@@ -68,12 +84,14 @@ if (fs.existsSync(mcRoot)) {
 
     for (const filePath of globYaml(themePath)) {
       const b = readYaml(filePath);
-      mc_builds.push({
+      const mcBuild = {
         theme:  b.theme,
         name:   b.name,
         origin: b.origin || null,
         levels: b.levels || {},
-      });
+      };
+      if (b.dlc) mcBuild.dlc = b.dlc;
+      mc_builds.push(mcBuild);
       if (b.archetypes) archetypesMC[b.name] = b.archetypes;
       if (b.extras)     extrasMC[b.name]     = b.extras;
     }
@@ -96,10 +114,9 @@ if (fs.existsSync(compRoot)) {
     const variants = [];
     for (const filePath of globYaml(charPath)) {
       const b = readYaml(filePath);
-      variants.push({
-        name:   b.name,
-        levels: b.levels || {},
-      });
+      const variant = { name: b.name, levels: b.levels || {} };
+      if (b.dlc) variant.dlc = b.dlc;
+      variants.push(variant);
       if (b.archetypes) archetypesCOMP[b.name] = b.archetypes;
       if (b.extras)     extrasComp[b.name]     = b.extras;
     }

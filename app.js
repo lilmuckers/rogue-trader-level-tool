@@ -1054,6 +1054,12 @@ function charCard({mc, key, displayName, buildName, arch, pick, available, joinL
     bn.textContent = buildName;
     body.appendChild(bn);
   }
+  if (build && build.dlc) {
+    const dlcEl = document.createElement('div');
+    dlcEl.className = 'dlc-badge';
+    dlcEl.textContent = build.dlc;
+    body.appendChild(dlcEl);
+  }
 
   if (!available) {
     const u = document.createElement('div');
@@ -1298,6 +1304,12 @@ function buildCatchupContent(ctx) {
     ar.textContent = arch;
     meta.appendChild(ar);
   }
+  if (build && build.dlc) {
+    const dlcEl = document.createElement('div');
+    dlcEl.className = 'dlc-badge dlc-badge-build';
+    dlcEl.textContent = build.dlc;
+    meta.appendChild(dlcEl);
+  }
   wrap.appendChild(meta);
 
   // Party button (companions only)
@@ -1481,6 +1493,14 @@ function pushGearDetail(gearItem, displayName) {
 
 function buildGearDetailContent(gearItem) {
   const wrap = document.createElement('div');
+
+  if (gearItem.dlc) {
+    const dlcEl = document.createElement('div');
+    dlcEl.className = 'dlc-badge dlc-badge-gear';
+    dlcEl.textContent = gearItem.dlc;
+    wrap.appendChild(dlcEl);
+  }
+
   const detail = document.createElement('div');
   detail.className = 'gear-detail';
 
