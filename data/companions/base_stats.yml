@@ -1,125 +1,140 @@
 # Companion base characteristic values at level 1 (before any training picks).
-# Source: in-game character sheet / game data.
-# Format: WS, BS, STR, TGH, AGI, PER, FEL, INT, WILL
-# Leave a companion block commented out / absent until values are verified.
+# Source: GameFAQs guide - https://gamefaqs.gamespot.com/ps5/369358-warhammer-40000-rogue-trader/faqs/82192/companions
+# Format: WS, BS, STR, TGH, AGI, PER, FEL, INT, WILL (WP in-game)
 
-# Abelard:
-#   WS: ~
-#   BS: ~
-#   STR: ~
-#   TGH: ~
-#   AGI: ~
-#   PER: ~
-#   FEL: ~
-#   INT: ~
-#   WILL: ~
+Abelard:
+  WS: 40
+  BS: 30
+  STR: 40
+  TGH: 50
+  AGI: 35
+  PER: 30
+  FEL: 35
+  INT: 30
+  WILL: 30
 
-# Argenta:
-#   WS: ~
-#   BS: ~
-#   STR: ~
-#   TGH: ~
-#   AGI: ~
-#   PER: ~
-#   FEL: ~
-#   INT: ~
-#   WILL: ~
+Argenta:
+  WS: 30
+  BS: 45
+  STR: 30
+  TGH: 30
+  AGI: 50
+  PER: 40
+  FEL: 30
+  INT: 30
+  WILL: 35
 
-# Cassia:
-#   WS: ~
-#   BS: ~
-#   STR: ~
-#   TGH: ~
-#   AGI: ~
-#   PER: ~
-#   FEL: ~
-#   INT: ~
-#   WILL: ~
+Cassia:
+  WS: 30
+  BS: 30
+  STR: 25
+  TGH: 30
+  AGI: 30
+  PER: 55
+  FEL: 40
+  INT: 30
+  WILL: 55
 
-# Heinrix:
-#   WS: ~
-#   BS: ~
-#   STR: ~
-#   TGH: ~
-#   AGI: ~
-#   PER: ~
-#   FEL: ~
-#   INT: ~
-#   WILL: ~
+Heinrix:
+  WS: 40
+  BS: 30
+  STR: 40
+  TGH: 35
+  AGI: 40
+  PER: 30
+  FEL: 30
+  INT: 30
+  WILL: 45
 
-# Idira:
-#   WS: ~
-#   BS: ~
-#   STR: ~
-#   TGH: ~
-#   AGI: ~
-#   PER: ~
-#   FEL: ~
-#   INT: ~
-#   WILL: ~
+Idira:
+  WS: 30
+  BS: 30
+  STR: 30
+  TGH: 30
+  AGI: 40
+  PER: 45
+  FEL: 30
+  INT: 30
+  WILL: 60
 
-# Jae:
-#   WS: ~
-#   BS: ~
-#   STR: ~
-#   TGH: ~
-#   AGI: ~
-#   PER: ~
-#   FEL: ~
-#   INT: ~
-#   WILL: ~
+Jae:
+  WS: 35
+  BS: 60
+  STR: 30
+  TGH: 30
+  AGI: 40
+  PER: 30
+  FEL: 70
+  INT: 30
+  WILL: 35
 
-# Kibellah:
-#   WS: ~
-#   BS: ~
-#   STR: ~
-#   TGH: ~
-#   AGI: ~
-#   PER: ~
-#   FEL: ~
-#   INT: ~
-#   WILL: ~
+Kibellah:
+  WS: 40
+  BS: 30
+  STR: 25
+  TGH: 45
+  AGI: 50
+  PER: 30
+  FEL: 30
+  INT: 35
+  WILL: 35
 
-# Marazhai:
-#   WS: ~
-#   BS: ~
-#   STR: ~
-#   TGH: ~
-#   AGI: ~
-#   PER: ~
-#   FEL: ~
-#   INT: ~
-#   WILL: ~
+Marazhai:
+  WS: 65
+  BS: 30
+  STR: 40
+  TGH: 30
+  AGI: 75
+  PER: 35
+  FEL: 30
+  INT: 30
+  WILL: 30
 
-# Pasqal:
-#   WS: ~
-#   BS: ~
-#   STR: ~
-#   TGH: ~
-#   AGI: ~
-#   PER: ~
-#   FEL: ~
-#   INT: ~
-#   WILL: ~
+Pasqal:
+  WS: 45
+  BS: 40
+  STR: 30
+  TGH: 35
+  AGI: 30
+  PER: 30
+  FEL: 25
+  INT: 45
+  WILL: 30
 
-# Ulfar:
-#   WS: ~
-#   BS: ~
-#   STR: ~
-#   TGH: ~
-#   AGI: ~
-#   PER: ~
-#   FEL: ~
-#   INT: ~
-#   WILL: ~
+Solomorne:
+  WS: 30
+  BS: 55
+  STR: 30
+  TGH: 40
+  AGI: 50
+  PER: 40
+  FEL: 55
+  INT: 30
+  WILL: 30
 
-# Yrliet:
-#   WS: ~
-#   BS: ~
-#   STR: ~
-#   TGH: ~
-#   AGI: ~
-#   PER: ~
-#   FEL: ~
-#   INT: ~
-#   WILL: ~
+Ulfar:
+  WS: 70
+  BS: 60
+  STR: 80
+  TGH: 75
+  AGI: 40
+  PER: 50
+  FEL: 35
+  INT: 35
+  WILL: 40
+
+Yrliet:
+  WS: 30
+  BS: 55
+  STR: 30
+  TGH: 25
+  AGI: 45
+  PER: 60
+  FEL: 30
+  INT: 35
+  WILL: 30
+
+# DLC companions — base stats not yet sourced
+# Calligos Winterscale: ~
+# Incendia Chorda: ~
+# Uralon: ~
