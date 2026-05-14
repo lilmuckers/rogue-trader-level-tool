@@ -4276,6 +4276,7 @@ if (window.visualViewport) {
         <ul class="about-sources">
           <li><a class="about-link" href="https://roguetrader.wh40k.wiki/" target="_blank" rel="noopener">roguetrader.wh40k.wiki</a></li>
           <li><a class="about-link" href="https://roguetrader.wiki.fextralife.com/" target="_blank" rel="noopener">Fextralife Rogue Trader Wiki</a></li>
+          <li><a class="about-link" href="https://gamefaqs.gamespot.com/ps5/369358-warhammer-40000-rogue-trader/faqs/82192" target="_blank" rel="noopener">GameFAQs Rogue Trader Guide</a> (companion base stats)</li>
         </ul>
 
         <div class="about-section-heading">Source Code</div>
