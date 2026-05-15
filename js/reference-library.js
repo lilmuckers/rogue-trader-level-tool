@@ -592,19 +592,43 @@ function renderConvictionsSection(el) {
       path.tiers.forEach(tier => {
         const row = document.createElement('div');
         row.className = 'conv-tier-row';
+
+        // Rank number + points badge
+        const numWrap = document.createElement('div');
+        numWrap.className = 'conv-tier-num-wrap';
         const num = document.createElement('span');
         num.className = 'conv-tier-num';
         num.style.borderColor = colours.border || 'var(--gold-deep)';
         num.textContent = tier.rank;
-        const name = document.createElement('span');
-        name.className = 'conv-tier-name';
-        name.textContent = tier.name;
-        const desc = document.createElement('span');
-        desc.className = 'conv-tier-desc';
-        desc.textContent = tier.description;
-        row.appendChild(num);
-        row.appendChild(name);
-        row.appendChild(desc);
+        numWrap.appendChild(num);
+        if (tier.points) {
+          const pts = document.createElement('span');
+          pts.className = 'conv-tier-pts';
+          pts.textContent = tier.points + ' pts';
+          numWrap.appendChild(pts);
+        }
+        row.appendChild(numWrap);
+
+        // Name + ability + bonus
+        const body = document.createElement('div');
+        body.className = 'conv-tier-body';
+        const nameEl = document.createElement('div');
+        nameEl.className = 'conv-tier-name';
+        nameEl.textContent = tier.name;
+        body.appendChild(nameEl);
+        if (tier.ability) {
+          const ab = document.createElement('div');
+          ab.className = 'conv-tier-ability';
+          ab.textContent = tier.ability;
+          body.appendChild(ab);
+        }
+        if (tier.bonus) {
+          const bn = document.createElement('div');
+          bn.className = 'conv-tier-bonus';
+          bn.textContent = tier.bonus;
+          body.appendChild(bn);
+        }
+        row.appendChild(body);
         tiers.appendChild(row);
       });
       card.appendChild(tiers);
