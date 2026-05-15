@@ -10,7 +10,8 @@ const REFERENCE_SECTIONS = [
   { id: 'charcreate',  title: 'Character Creation',      subtitle: 'Homeworlds, origins and stat bonuses',             icon: '♦' },
   { id: 'abilities',   title: 'Abilities',               subtitle: 'All ability descriptions, searchable',             icon: '✺' },
   { id: 'talents',     title: 'Talents',                 subtitle: 'All talent descriptions, searchable',              icon: '✸' },
-  { id: 'skills',      title: 'Skills & Characteristics', subtitle: 'Reference for all stats and skills',             icon: '≡' },
+  { id: 'skills',       title: 'Skills & Characteristics', subtitle: 'Reference for all stats and skills',             icon: '≡' },
+  { id: 'convictions', title: 'Convictions',              subtitle: 'Dogmatic, Iconoclast & Heretic — tiers & effects', icon: '⚖' },
   { id: 'resources',   title: 'Star System Resources',   subtitle: 'Resource deposits by system or type',             icon: '⬡' },
 ];
 
@@ -37,7 +38,8 @@ function renderReferenceSection() {
     else if (_referenceSubSection === 'skills')     renderSkillsSection(subEl);
     else if (_referenceSubSection === 'charcreate') renderCharCreationSection(subEl);
     else if (_referenceSubSection === 'mcbuilds')   renderMCBuildsSection(subEl);
-    else if (_referenceSubSection === 'retinue')    renderRetinueSection(subEl);
+    else if (_referenceSubSection === 'retinue')      renderRetinueSection(subEl);
+    else if (_referenceSubSection === 'convictions')  renderConvictionsSection(subEl);
   } else {
     // Search bar (always visible on landing)
     const searchWrap = document.createElement('div');
@@ -136,6 +138,13 @@ function _renderGlobalSearchResults(el, rawQ) {
     .filter(([k, v]) => match(k, v.description))
     .map(([k, v]) => ({ label: k, sub: v.description || '' }));
   if (origRows.length) groups.push({ sectionId: 'charcreate', title: 'Origins', icon: '♦', rows: origRows });
+
+  // Convictions
+  const convPaths = (DATA.definitions.convictions || {}).paths || {};
+  const convRows = Object.entries(convPaths)
+    .filter(([k, v]) => match(k, v.philosophy, v.approach))
+    .map(([k, v]) => ({ label: k, sub: v.approach || '' }));
+  if (convRows.length) groups.push({ sectionId: 'convictions', title: 'Convictions', icon: '⚖', rows: convRows });
 
   // MC Builds
   const buildRows = (DATA.mc_builds || [])

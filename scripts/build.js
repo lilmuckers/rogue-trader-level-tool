@@ -38,6 +38,7 @@ const definitions = {
   dlcTags:         readYaml(path.join(dataDir, 'definitions', 'dlc-tags.yml'))        || {},
   homeworlds:      readYaml(path.join(dataDir, 'definitions', 'homeworlds.yml'))      || {},
   origins:         readYaml(path.join(dataDir, 'definitions', 'origins.yml'))         || {},
+  convictions:     readYaml(path.join(dataDir, 'definitions', 'convictions.yml'))     || {},
 };
 
 // ─── gear_db ─────────────────────────────────────────────────────────────────
