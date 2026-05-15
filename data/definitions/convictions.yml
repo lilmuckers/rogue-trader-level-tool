@@ -14,7 +14,7 @@ system:
 
 paths:
   Dogmatic:
-    icon: "☩"
+    icon: "✦"
     colour: gold
     philosophy: >
       Unwavering loyalty to the Emperor, the Ecclesiarchy, and Imperial law.
@@ -52,7 +52,7 @@ paths:
         bonus: "Once per battle, all daemons and xenos within 5 cells are unable to attack the Rogue Trader for one round."
 
   Iconoclast:
-    icon: "⚖"
+    icon: "◈"
     colour: silver
     philosophy: >
       The Imperium's methods are often cruel and counterproductive. Humanity
@@ -90,7 +90,7 @@ paths:
         bonus: "Allied attacks and abilities automatically succeed on dodge and resistance checks when targeting other allies."
 
   Heretic:
-    icon: "✶"
+    icon: "✸"
     colour: blood
     philosophy: >
       The old ways are failing. True power lies in forbidden knowledge — the

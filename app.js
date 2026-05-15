@@ -4594,7 +4594,7 @@ const REFERENCE_SECTIONS = [
   { id: 'abilities',   title: 'Abilities',               subtitle: 'All ability descriptions, searchable',             icon: '✺' },
   { id: 'talents',     title: 'Talents',                 subtitle: 'All talent descriptions, searchable',              icon: '✸' },
   { id: 'skills',       title: 'Skills & Characteristics', subtitle: 'Reference for all stats and skills',             icon: '≡' },
-  { id: 'convictions', title: 'Convictions',              subtitle: 'Dogmatic, Iconoclast & Heretic — tiers & effects', icon: '⚖' },
+  { id: 'convictions', title: 'Convictions',              subtitle: 'Dogmatic, Iconoclast & Heretic — tiers & effects', icon: '◉' },
   { id: 'resources',   title: 'Star System Resources',   subtitle: 'Resource deposits by system or type',             icon: '⬡' },
 ];
 
@@ -4727,7 +4727,7 @@ function _renderGlobalSearchResults(el, rawQ) {
   const convRows = Object.entries(convPaths)
     .filter(([k, v]) => match(k, v.philosophy, v.approach))
     .map(([k, v]) => ({ label: k, sub: v.approach || '' }));
-  if (convRows.length) groups.push({ sectionId: 'convictions', title: 'Convictions', icon: '⚖', rows: convRows });
+  if (convRows.length) groups.push({ sectionId: 'convictions', title: 'Convictions', icon: '◉', rows: convRows });
 
   // MC Builds
   const buildRows = (DATA.mc_builds || [])
