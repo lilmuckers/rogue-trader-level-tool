@@ -1,125 +1,128 @@
 # Conviction system — Dogmatic, Iconoclast, Heretic
-# Each major story choice awards points to one path.
-# Your current conviction is the path with the most points.
-# Higher tiers unlock unique talents, dialogue, companion reactions, and endings.
+# Sources: Fextralife Rogue Trader Wiki, GamerGuides.com
+# Thresholds identical across all three paths.
 
 system:
   description: >
     Convictions represent the Rogue Trader's moral and philosophical stance.
     Each significant story choice awards points toward one of three paths.
     Your active conviction is whichever path has the most accumulated points.
-    Higher conviction levels unlock path-specific talents, alter companion
-    approval, open or close certain story outcomes, and determine your ending.
-  note: "You can hold points across multiple paths — only the dominant one determines your tier."
+    Higher conviction levels unlock path-specific passive abilities that apply
+    to the whole party, alter companion approval, and determine your ending.
+  note: "Points accumulate across all paths — only the dominant one determines your tier."
+  thresholds: [15, 75, 150, 300, 600]
 
 paths:
   Dogmatic:
     icon: "☩"
-    colour: "gold"
+    colour: gold
     philosophy: >
       Unwavering loyalty to the Emperor, the Ecclesiarchy, and Imperial law.
       Heresy, xenos, and chaos must be purged without mercy. The Imperium's
       survival demands absolute orthodoxy — any deviation invites damnation.
     approach: "Purge, obey, endure. The Emperor protects those who serve without question."
-    strengths:
-      - "Strong rapport with Argenta, Heinrix, and Abelard"
-      - "Access to Inquisition resources and imperial authority"
-      - "Dogmatic-exclusive talents and abilities"
-      - "Orthodox ending paths — Imperium strengthened"
-    tensions:
-      - "Conflict with Yrliet, Idira, and Marazhai"
-      - "Limits diplomatic options with xenos and renegades"
-      - "May close heretical content and secret companions"
     companion_affinity:
       positive: [Argenta, Heinrix, Abelard]
       negative: [Idira, Yrliet, Marazhai]
     tiers:
       - rank: 1
-        name: Adherent
-        description: "You have begun to align with Imperial orthodoxy."
-      - rank: 2
         name: Follower
-        description: "Your faith in the Emperor's will guides your decisions."
+        points: 15
+        ability: Grim Determination
+        bonus: "+10% chance for the Rogue Trader and allies to survive a killing blow with 1 wound remaining."
+      - rank: 2
+        name: Adherent
+        points: 75
+        ability: Absolution
+        bonus: "Critical hits in the first round of combat inflict Burning. Fire damage dealt to enemies is increased by +1 for each Dogmatic rank."
       - rank: 3
-        name: Devout
-        description: "The Emperor's light burns strong in you. Others take note."
+        name: Votary
+        points: 150
+        ability: Path of Redemption
+        bonus: "Momentum expenditure for all abilities reduced by 20%."
       - rank: 4
-        name: Zealot
-        description: "You are a true servant of the God-Emperor. Heresy cannot stand before you."
+        name: Fanatic
+        points: 300
+        ability: Piercing Resolution
+        bonus: "Once per battle, one ally's weapon attacks ignore enemy armour for one round."
       - rank: 5
-        name: Inquisitor
-        description: "Your conviction rivals that of the Inquisition itself. The Imperium bends to your will."
+        name: Zealot
+        points: 600
+        ability: Instrument of His Will
+        bonus: "Once per battle, all daemons and xenos within 5 cells are unable to attack the Rogue Trader for one round."
 
   Iconoclast:
     icon: "⚖"
-    colour: "silver"
+    colour: silver
     philosophy: >
       The Imperium's methods are often cruel and counterproductive. Humanity
       survives through cooperation, pragmatism, and mercy — not blind dogma.
       Other races and renegades may be allies if approached without prejudice.
     approach: "Question authority. Protect people. Find a better way — even if the Imperium wouldn't approve."
-    strengths:
-      - "Strong rapport with Cassia, Jae, and Yrliet"
-      - "Diplomatic options with xenos factions"
-      - "Iconoclast-exclusive talents and abilities"
-      - "Reform-minded ending paths"
-    tensions:
-      - "Conflict with Argenta and Heinrix"
-      - "Viewed with suspicion by orthodox Imperial forces"
-      - "Some Dogmatic content becomes unavailable"
     companion_affinity:
       positive: [Cassia, Jae, Yrliet, Pasqal]
       negative: [Argenta, Heinrix]
     tiers:
       - rank: 1
-        name: Adherent
-        description: "You question the old ways and seek better solutions."
-      - rank: 2
         name: Follower
-        description: "Your pragmatic outlook shapes how others see you."
+        points: 15
+        ability: Above the Thundering Guns
+        bonus: "At the start of combat, the Rogue Trader gains temporary wounds equal to their Resolve."
+      - rank: 2
+        name: Adherent
+        points: 75
+        ability: Master of Command
+        bonus: "Allies gain +(2 + Iconoclast rank) additional Movement Points in the first round of combat."
       - rank: 3
-        name: Reformist
-        description: "You actively challenge Imperial cruelty and seek humane alternatives."
+        name: Votary
+        points: 150
+        ability: Courage and Steel
+        bonus: "Heroic acts cost 30 less Momentum to activate."
       - rank: 4
-        name: Radical
-        description: "Your iconoclast philosophy puts you at odds with Imperial orthodoxy."
+        name: Fanatic
+        points: 300
+        ability: Transcend the Potential
+        bonus: "Once per battle, one ally can use a heroic act without spending Momentum."
       - rank: 5
-        name: Freethinker
-        description: "You have forged your own path beyond the Imperium's rigid doctrine."
+        name: Zealot
+        points: 600
+        ability: Excellence
+        bonus: "Allied attacks and abilities automatically succeed on dodge and resistance checks when targeting other allies."
 
   Heretic:
     icon: "✶"
-    colour: "blood"
+    colour: blood
     philosophy: >
       The old ways are failing. True power lies in forbidden knowledge — the
       Ruinous Powers, xenos secrets, or pure nihilistic pragmatism. Survival
       at any cost, even if it means embracing what the Imperium fears most.
     approach: "Power is power. The weak cling to rules. The strong take what is needed."
-    strengths:
-      - "Strong rapport with Idira, Marazhai, and certain secret companions"
-      - "Access to chaos-touched and xenos abilities"
-      - "Heretic-exclusive talents — often powerful but dangerous"
-      - "Unique chaos-aligned ending paths"
-    tensions:
-      - "Severe conflict with Argenta, Heinrix, and Abelard — potential loss of companions"
-      - "Imperial forces become increasingly hostile"
-      - "Some companions may leave permanently at high heresy"
     companion_affinity:
       positive: [Idira, Marazhai]
       negative: [Argenta, Heinrix, Abelard, Solomorne]
     tiers:
       - rank: 1
-        name: Adherent
-        description: "You have begun to stray from Imperial orthodoxy."
+        name: Follower
+        points: 15
+        ability: Resource Preservation
+        bonus: "+20% chance to save a combat stimulant or medikit when used (item is not consumed)."
       - rank: 2
-        name: Acolyte
-        description: "Forbidden knowledge tempts you and you have not turned away."
+        name: Adherent
+        points: 75
+        ability: Destroy the Weak
+        bonus: "25% chance to regain 1 Action Point after killing an enemy in the first round of combat."
       - rank: 3
-        name: Heretic
-        description: "You have embraced what the Imperium condemns. There is no easy return."
+        name: Votary
+        points: 150
+        ability: Gifts of the Warp
+        bonus: "Psychic phenomena now increase Momentum by 2–10 instead of decreasing it."
       - rank: 4
-        name: Apostate
-        description: "You have abandoned the Emperor entirely. Power flows from darker sources."
+        name: Fanatic
+        points: 300
+        ability: Daemonopathy
+        bonus: "Grant an ally +20 to all characteristics for 2 rounds. That ally falls prone when the effect ends."
       - rank: 5
-        name: Arch-Heretic
-        description: "The Ruinous Powers take note. You are a force of corruption in the Imperium."
+        name: Zealot
+        points: 600
+        ability: Power From Beyond the Veil
+        bonus: "Once per combat, all equipped weapons gain a warp-imbued bonus to their attacks."
