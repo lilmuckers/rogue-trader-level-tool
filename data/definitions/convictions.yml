@@ -1,0 +1,125 @@
+# Conviction system — Dogmatic, Iconoclast, Heretic
+# Each major story choice awards points to one path.
+# Your current conviction is the path with the most points.
+# Higher tiers unlock unique talents, dialogue, companion reactions, and endings.
+
+system:
+  description: >
+    Convictions represent the Rogue Trader's moral and philosophical stance.
+    Each significant story choice awards points toward one of three paths.
+    Your active conviction is whichever path has the most accumulated points.
+    Higher conviction levels unlock path-specific talents, alter companion
+    approval, open or close certain story outcomes, and determine your ending.
+  note: "You can hold points across multiple paths — only the dominant one determines your tier."
+
+paths:
+  Dogmatic:
+    icon: "☩"
+    colour: "gold"
+    philosophy: >
+      Unwavering loyalty to the Emperor, the Ecclesiarchy, and Imperial law.
+      Heresy, xenos, and chaos must be purged without mercy. The Imperium's
+      survival demands absolute orthodoxy — any deviation invites damnation.
+    approach: "Purge, obey, endure. The Emperor protects those who serve without question."
+    strengths:
+      - "Strong rapport with Argenta, Heinrix, and Abelard"
+      - "Access to Inquisition resources and imperial authority"
+      - "Dogmatic-exclusive talents and abilities"
+      - "Orthodox ending paths — Imperium strengthened"
+    tensions:
+      - "Conflict with Yrliet, Idira, and Marazhai"
+      - "Limits diplomatic options with xenos and renegades"
+      - "May close heretical content and secret companions"
+    companion_affinity:
+      positive: [Argenta, Heinrix, Abelard]
+      negative: [Idira, Yrliet, Marazhai]
+    tiers:
+      - rank: 1
+        name: Adherent
+        description: "You have begun to align with Imperial orthodoxy."
+      - rank: 2
+        name: Follower
+        description: "Your faith in the Emperor's will guides your decisions."
+      - rank: 3
+        name: Devout
+        description: "The Emperor's light burns strong in you. Others take note."
+      - rank: 4
+        name: Zealot
+        description: "You are a true servant of the God-Emperor. Heresy cannot stand before you."
+      - rank: 5
+        name: Inquisitor
+        description: "Your conviction rivals that of the Inquisition itself. The Imperium bends to your will."
+
+  Iconoclast:
+    icon: "⚖"
+    colour: "silver"
+    philosophy: >
+      The Imperium's methods are often cruel and counterproductive. Humanity
+      survives through cooperation, pragmatism, and mercy — not blind dogma.
+      Other races and renegades may be allies if approached without prejudice.
+    approach: "Question authority. Protect people. Find a better way — even if the Imperium wouldn't approve."
+    strengths:
+      - "Strong rapport with Cassia, Jae, and Yrliet"
+      - "Diplomatic options with xenos factions"
+      - "Iconoclast-exclusive talents and abilities"
+      - "Reform-minded ending paths"
+    tensions:
+      - "Conflict with Argenta and Heinrix"
+      - "Viewed with suspicion by orthodox Imperial forces"
+      - "Some Dogmatic content becomes unavailable"
+    companion_affinity:
+      positive: [Cassia, Jae, Yrliet, Pasqal]
+      negative: [Argenta, Heinrix]
+    tiers:
+      - rank: 1
+        name: Adherent
+        description: "You question the old ways and seek better solutions."
+      - rank: 2
+        name: Follower
+        description: "Your pragmatic outlook shapes how others see you."
+      - rank: 3
+        name: Reformist
+        description: "You actively challenge Imperial cruelty and seek humane alternatives."
+      - rank: 4
+        name: Radical
+        description: "Your iconoclast philosophy puts you at odds with Imperial orthodoxy."
+      - rank: 5
+        name: Freethinker
+        description: "You have forged your own path beyond the Imperium's rigid doctrine."
+
+  Heretic:
+    icon: "✶"
+    colour: "blood"
+    philosophy: >
+      The old ways are failing. True power lies in forbidden knowledge — the
+      Ruinous Powers, xenos secrets, or pure nihilistic pragmatism. Survival
+      at any cost, even if it means embracing what the Imperium fears most.
+    approach: "Power is power. The weak cling to rules. The strong take what is needed."
+    strengths:
+      - "Strong rapport with Idira, Marazhai, and certain secret companions"
+      - "Access to chaos-touched and xenos abilities"
+      - "Heretic-exclusive talents — often powerful but dangerous"
+      - "Unique chaos-aligned ending paths"
+    tensions:
+      - "Severe conflict with Argenta, Heinrix, and Abelard — potential loss of companions"
+      - "Imperial forces become increasingly hostile"
+      - "Some companions may leave permanently at high heresy"
+    companion_affinity:
+      positive: [Idira, Marazhai]
+      negative: [Argenta, Heinrix, Abelard, Solomorne]
+    tiers:
+      - rank: 1
+        name: Adherent
+        description: "You have begun to stray from Imperial orthodoxy."
+      - rank: 2
+        name: Acolyte
+        description: "Forbidden knowledge tempts you and you have not turned away."
+      - rank: 3
+        name: Heretic
+        description: "You have embraced what the Imperium condemns. There is no easy return."
+      - rank: 4
+        name: Apostate
+        description: "You have abandoned the Emperor entirely. Power flows from darker sources."
+      - rank: 5
+        name: Arch-Heretic
+        description: "The Ruinous Powers take note. You are a force of corruption in the Imperium."

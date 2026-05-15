@@ -1139,6 +1139,99 @@
 }
 .reference-back-btn:active { color: var(--gold-bright); }
 
+/* === CONVICTIONS === */
+.conv-intro {
+  font-size: 13px;
+  color: var(--ink-dim);
+  line-height: 1.5;
+  margin-bottom: 6px;
+}
+.conv-intro-note {
+  font-size: 11px;
+  color: var(--ink-faint);
+  font-style: italic;
+  margin-bottom: 16px;
+  padding-left: 8px;
+  border-left: 2px solid var(--rule);
+}
+.conv-card {
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  padding: 14px;
+  margin-bottom: 12px;
+}
+.conv-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+.conv-icon { font-size: 16px; }
+.conv-title {
+  font-family: 'Cinzel', serif;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+}
+.conv-approach {
+  font-style: italic;
+  font-size: 13px;
+  color: var(--ink-dim);
+  margin-bottom: 8px;
+  line-height: 1.4;
+}
+.conv-philosophy {
+  font-size: 13px;
+  color: var(--ink-faint);
+  line-height: 1.45;
+  margin-bottom: 10px;
+}
+.conv-affinity-row {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  font-size: 12px;
+  margin-bottom: 10px;
+}
+.conv-affinity-pos { color: var(--gold-deep); }
+.conv-affinity-neg { color: var(--blood-bright); }
+.conv-tiers-heading {
+  font-family: 'Cinzel', serif;
+  font-size: 9px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin-bottom: 6px;
+}
+.conv-tiers { display: flex; flex-direction: column; gap: 4px; }
+.conv-tier-row {
+  display: grid;
+  grid-template-columns: 24px 110px 1fr;
+  align-items: baseline;
+  gap: 8px;
+  font-size: 12px;
+}
+.conv-tier-num {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 1px solid var(--rule);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Cinzel', serif;
+  font-size: 10px;
+  color: var(--ink-faint);
+  flex-shrink: 0;
+}
+.conv-tier-name {
+  font-family: 'Cinzel', serif;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--ink);
+}
+.conv-tier-desc { color: var(--ink-faint); line-height: 1.3; }
+
 /* Global reference search */
 .ref-global-search-wrap {
   position: relative;

@@ -4438,6 +4438,124 @@ function _renderRetinueList(el) {
   });
 }
 
+// ── Convictions ───────────────────────────────────────────────────────────────
+
+const _CONVICTION_COLOURS = {
+  Dogmatic:   { border: 'var(--gold-deep)',    bg: 'rgba(201,164,76,0.06)'  },
+  Iconoclast: { border: 'var(--ink-faint)',    bg: 'rgba(232,220,196,0.04)' },
+  Heretic:    { border: 'var(--blood)',        bg: 'rgba(139,26,26,0.06)'   },
+};
+
+function renderConvictionsSection(el) {
+  el.innerHTML = '';
+  const data = DATA.definitions.convictions || {};
+  const paths = data.paths || {};
+
+  if (data.system) {
+    const intro = document.createElement('div');
+    intro.className = 'conv-intro';
+    intro.textContent = data.system.description;
+    el.appendChild(intro);
+    if (data.system.note) {
+      const note = document.createElement('div');
+      note.className = 'conv-intro-note';
+      note.textContent = data.system.note;
+      el.appendChild(note);
+    }
+  }
+
+  Object.entries(paths).forEach(([pathName, path]) => {
+    const colours = _CONVICTION_COLOURS[pathName] || {};
+
+    const card = document.createElement('div');
+    card.className = 'conv-card';
+    card.style.borderColor = colours.border || 'var(--rule)';
+    card.style.background = colours.bg || 'var(--bg-2)';
+
+    // Header
+    const header = document.createElement('div');
+    header.className = 'conv-header';
+    const icon = document.createElement('span');
+    icon.className = 'conv-icon';
+    icon.style.color = colours.border || 'var(--gold)';
+    icon.textContent = path.icon || '◈';
+    const title = document.createElement('span');
+    title.className = 'conv-title';
+    title.style.color = colours.border || 'var(--gold)';
+    title.textContent = pathName;
+    header.appendChild(icon);
+    header.appendChild(title);
+    card.appendChild(header);
+
+    // Approach
+    if (path.approach) {
+      const appr = document.createElement('div');
+      appr.className = 'conv-approach';
+      appr.textContent = `"${path.approach}"`;
+      card.appendChild(appr);
+    }
+
+    // Philosophy
+    if (path.philosophy) {
+      const phil = document.createElement('div');
+      phil.className = 'conv-philosophy';
+      phil.textContent = path.philosophy;
+      card.appendChild(phil);
+    }
+
+    // Companion affinity
+    if (path.companion_affinity) {
+      const aff = document.createElement('div');
+      aff.className = 'conv-affinity-row';
+      if (path.companion_affinity.positive && path.companion_affinity.positive.length) {
+        const pos = document.createElement('span');
+        pos.className = 'conv-affinity-pos';
+        pos.textContent = '▲ ' + path.companion_affinity.positive.join(', ');
+        aff.appendChild(pos);
+      }
+      if (path.companion_affinity.negative && path.companion_affinity.negative.length) {
+        const neg = document.createElement('span');
+        neg.className = 'conv-affinity-neg';
+        neg.textContent = '▼ ' + path.companion_affinity.negative.join(', ');
+        aff.appendChild(neg);
+      }
+      card.appendChild(aff);
+    }
+
+    // Tiers
+    if (path.tiers && path.tiers.length) {
+      const tiersHeading = document.createElement('div');
+      tiersHeading.className = 'conv-tiers-heading';
+      tiersHeading.textContent = 'Conviction Tiers';
+      card.appendChild(tiersHeading);
+
+      const tiers = document.createElement('div');
+      tiers.className = 'conv-tiers';
+      path.tiers.forEach(tier => {
+        const row = document.createElement('div');
+        row.className = 'conv-tier-row';
+        const num = document.createElement('span');
+        num.className = 'conv-tier-num';
+        num.style.borderColor = colours.border || 'var(--gold-deep)';
+        num.textContent = tier.rank;
+        const name = document.createElement('span');
+        name.className = 'conv-tier-name';
+        name.textContent = tier.name;
+        const desc = document.createElement('span');
+        desc.className = 'conv-tier-desc';
+        desc.textContent = tier.description;
+        row.appendChild(num);
+        row.appendChild(name);
+        row.appendChild(desc);
+        tiers.appendChild(row);
+      });
+      card.appendChild(tiers);
+    }
+
+    el.appendChild(card);
+  });
+}
+
 
 // ============= REFERENCE =============
 
@@ -4451,7 +4569,8 @@ const REFERENCE_SECTIONS = [
   { id: 'charcreate',  title: 'Character Creation',      subtitle: 'Homeworlds, origins and stat bonuses',             icon: '♦' },
   { id: 'abilities',   title: 'Abilities',               subtitle: 'All ability descriptions, searchable',             icon: '✺' },
   { id: 'talents',     title: 'Talents',                 subtitle: 'All talent descriptions, searchable',              icon: '✸' },
-  { id: 'skills',      title: 'Skills & Characteristics', subtitle: 'Reference for all stats and skills',             icon: '≡' },
+  { id: 'skills',       title: 'Skills & Characteristics', subtitle: 'Reference for all stats and skills',             icon: '≡' },
+  { id: 'convictions', title: 'Convictions',              subtitle: 'Dogmatic, Iconoclast & Heretic — tiers & effects', icon: '⚖' },
   { id: 'resources',   title: 'Star System Resources',   subtitle: 'Resource deposits by system or type',             icon: '⬡' },
 ];
 
@@ -4478,7 +4597,8 @@ function renderReferenceSection() {
     else if (_referenceSubSection === 'skills')     renderSkillsSection(subEl);
     else if (_referenceSubSection === 'charcreate') renderCharCreationSection(subEl);
     else if (_referenceSubSection === 'mcbuilds')   renderMCBuildsSection(subEl);
-    else if (_referenceSubSection === 'retinue')    renderRetinueSection(subEl);
+    else if (_referenceSubSection === 'retinue')      renderRetinueSection(subEl);
+    else if (_referenceSubSection === 'convictions')  renderConvictionsSection(subEl);
   } else {
     // Search bar (always visible on landing)
     const searchWrap = document.createElement('div');
@@ -4577,6 +4697,13 @@ function _renderGlobalSearchResults(el, rawQ) {
     .filter(([k, v]) => match(k, v.description))
     .map(([k, v]) => ({ label: k, sub: v.description || '' }));
   if (origRows.length) groups.push({ sectionId: 'charcreate', title: 'Origins', icon: '♦', rows: origRows });
+
+  // Convictions
+  const convPaths = (DATA.definitions.convictions || {}).paths || {};
+  const convRows = Object.entries(convPaths)
+    .filter(([k, v]) => match(k, v.philosophy, v.approach))
+    .map(([k, v]) => ({ label: k, sub: v.approach || '' }));
+  if (convRows.length) groups.push({ sectionId: 'convictions', title: 'Convictions', icon: '⚖', rows: convRows });
 
   // MC Builds
   const buildRows = (DATA.mc_builds || [])
