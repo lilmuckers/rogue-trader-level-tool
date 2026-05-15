@@ -1,0 +1,107 @@
+# Companion biography summaries, homeworlds, origins, and wiki links.
+
+Abelard:
+  homeworld: Imperial World
+  origin: Imperial Navy Officer
+  bio: "Former Naval officer and the Rogue Trader's seneschal. A blunt, loyal warrior who has served the Rogue Trader dynasty for decades. Joins during the prologue."
+  wiki: "https://roguetrader.wiki.fextralife.com/Abelard+Werserian"
+  join: Prologue
+
+Argenta:
+  homeworld: Imperial World
+  origin: Adepta Sororitas
+  bio: "A Battle-Sister of the Adepta Sororitas and guest of the Rogue Trader. Fierce, devout, and utterly committed to the Emperor's light. Joins during the prologue."
+  wiki: "https://roguetrader.wiki.fextralife.com/Sister+Argenta"
+  join: Prologue
+
+Cassia:
+  homeworld: Voidborn
+  origin: Navigator
+  bio: "A Navigator of House Orsellio with a powerful third eye. Recruited from Eurac V after surviving a deadly ambush. Navigates the warp for the fleet."
+  wiki: "https://roguetrader.wiki.fextralife.com/Cassia+Orsellio"
+  join: "Chapter 1"
+
+Heinrix:
+  homeworld: Imperial World
+  origin: Sanctioned Psyker
+  bio: "An Inquisitor of the Ordo Malleus and sanctioned psyker. Tracked down at the Electrodynamic Cenobium on Rykad Minoris. Rigid, principled, and dangerous."
+  wiki: "https://roguetrader.wiki.fextralife.com/Heinrix+van+Calox"
+  join: "Chapter 2"
+
+Idira:
+  homeworld: Forsaken World
+  origin: Unsanctioned Psyker
+  bio: "An unsanctioned psyker from a world long cut off from the Imperium. The Rogue Trader's personal diviner. Chaotic, perceptive, and barely contained. Joins during the prologue."
+  wiki: "https://roguetrader.wiki.fextralife.com/Idira+Tlass"
+  join: Prologue
+
+Jae:
+  homeworld: Imperial World
+  origin: Cold Trader
+  bio: "A charming merchant dealing in proscribed goods across the Koronus Expanse. Met at the Liege of Footfall's palace. Recruited after helping recover stolen cargo."
+  wiki: "https://roguetrader.wiki.fextralife.com/Jae+Heydari"
+  join: "Chapter 1"
+
+Kibellah:
+  homeworld: Voidborn
+  origin: Death Cult Assassin
+  dlc: Lex Imperialis
+  bio: "A Bladespun Web death cult assassin who pledges her service shortly after you become Rogue Trader. Graceful, deadly, and bound by the rituals of her cult."
+  wiki: "https://roguetrader.wiki.fextralife.com/Kibellah"
+  join: "Chapter 1"
+
+Marazhai:
+  homeworld: Voidborn
+  origin: Drukhari
+  bio: "A Drukhari corsair encountered in Commorragh. Can be recruited through careful conversation choices in the Anatomical Opera. Predatory and unpredictable."
+  wiki: "https://roguetrader.wiki.fextralife.com/Marazhai+Aezyrraesh"
+  join: "Chapter 3"
+
+Pasqal:
+  homeworld: Forge World
+  origin: Tech-Priest
+  bio: "A Tech-Priest of the Adeptus Mechanicus. Joins at the Starport during Chapter 1. Devoted to the Omnissiah, insatiably curious about technology, and deeply loyal."
+  wiki: "https://roguetrader.wiki.fextralife.com/Pasqal+Haneumann"
+  join: "Chapter 1"
+
+Solomorne:
+  homeworld: Imperial World
+  origin: Adeptus Arbites
+  bio: "An Arbites agent tracking a stolen tithe shipment. Met on Rykad Minoris and Footfall before joining the crew. Methodical, lawful, and relentless in pursuit of justice."
+  wiki: "https://roguetrader.wiki.fextralife.com/Solomorne+Anthar"
+  join: "Chapter 2"
+
+Ulfar:
+  homeworld: Death World
+  origin: Space Marine
+  bio: "A Space Wolf Marine held captive in the Anatomical Opera. Released after persuading Tervantias. A warrior of staggering physical power and blunt honour."
+  wiki: "https://roguetrader.wiki.fextralife.com/Ulfar+Redmane"
+  join: "Chapter 3"
+
+Yrliet:
+  homeworld: Voidborn
+  origin: Aeldari
+  bio: "An Aeldari ranger who aids the Rogue Trader during a rebel attack on Janus. Aloof, ancient in perspective, and carrying the weight of a dying race."
+  wiki: "https://roguetrader.wiki.fextralife.com/Yrliet+Lanaevyss"
+  join: "Chapter 1"
+
+Calligos Winterscale:
+  homeworld: Imperial World
+  origin: Noble
+  bio: "A legendary Rogue Trader and rival. Encountered throughout the Koronus Expanse. Joins only under specific circumstances — one of the most powerful companions available."
+  wiki: "https://roguetrader.wiki.fextralife.com/Calligos+Winterscale"
+  join: "Chapter 4"
+
+Incendia Chorda:
+  homeworld: Imperial World
+  origin: Ministorum Priest
+  bio: "A Ministorum Priest encountered during the campaign. Fervent, uncompromising, and devoted to purging the unclean wherever they hide."
+  wiki: "https://roguetrader.wiki.fextralife.com/Incendia+Chorda"
+  join: "Chapter 3"
+
+Uralon:
+  homeworld: ~
+  origin: ~
+  bio: "A rare and unusual companion available through specific choices. Little is known before recruitment."
+  wiki: "https://roguetrader.wiki.fextralife.com/Uralon"
+  join: "Chapter 3"

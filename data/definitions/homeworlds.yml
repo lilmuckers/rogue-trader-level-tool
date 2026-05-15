@@ -1,0 +1,63 @@
+# Homeworld characteristic bonuses and descriptions
+# Source: Fextralife Rogue Trader Wiki / Character Creation
+
+Imperial World:
+  description: "The most common world type in the Imperium. Balanced and versatile — citizens are adaptable and resilient."
+  talent: "Humanity's Finest"
+  talent_desc: "Choose one characteristic to gain +5: Toughness, Agility, Fellowship, or Strength."
+  bonuses: {}
+  bonus_note: "Player chooses +5 to one characteristic at creation."
+
+Death World:
+  description: "A lethal environment that breeds exceptional survivors. Inhabitants are physically dominant but socially stunted."
+  talent: "Death World Survivor"
+  talent_desc: "Gain +10 to Athletics and resistance to difficult terrain penalties."
+  bonuses:
+    STR: 5
+    TGH: 5
+    AGI: 5
+    FEL: -5
+    INT: -5
+
+Voidborn:
+  description: "Born aboard voidships or space stations, these individuals have an innate understanding of the void and the warp."
+  talent: "Void Acclimatised"
+  talent_desc: "Resistance to void exposure and warp phenomena. +10 to Navigate Warp."
+  bonuses:
+    WILL: 5
+    INT: 5
+    STR: -5
+
+Hive World:
+  description: "Raised in the teeming depths of a Hive City, these individuals are streetwise, sociable, and fast on their feet."
+  talent: "Hiver"
+  talent_desc: "+10 to Commerce and improved black market access."
+  bonuses:
+    FEL: 5
+    AGI: 5
+    WILL: -5
+
+Forge World:
+  description: "A world dedicated to the Omnissiah and the pursuit of knowledge. Citizens are technically brilliant but socially cold."
+  talent: "Forge World Upbringing"
+  talent_desc: "+10 to Tech-Use and access to Mechanicus-specific interactions."
+  bonuses:
+    INT: 5
+    TGH: 5
+    FEL: -5
+
+Fortress World:
+  description: "A world built for war and garrisoned permanently. Inhabitants are vigilant, disciplined, and hard to surprise."
+  talent: "Fortress World Vigilance"
+  talent_desc: "+10 to Awareness and resistance to ambushes."
+  bonuses:
+    PER: 5
+    WILL: 5
+    FEL: -5
+
+Forsaken World:
+  description: "A world cut off from the Imperium for generations, developing strange customs and unusual talents in isolation."
+  talent: "Humanity's Finest"
+  talent_desc: "Choose one characteristic to gain +5."
+  bonuses: {}
+  bonus_note: "Player chooses +5 to one characteristic at creation."

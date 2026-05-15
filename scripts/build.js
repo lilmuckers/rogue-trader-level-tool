@@ -36,6 +36,8 @@ const definitions = {
   heroic:          readYaml(path.join(dataDir, 'definitions', 'heroic.yml'))          || {},
   characteristics: readYaml(path.join(dataDir, 'definitions', 'characteristics.yml')) || {},
   dlcTags:         readYaml(path.join(dataDir, 'definitions', 'dlc-tags.yml'))        || {},
+  homeworlds:      readYaml(path.join(dataDir, 'definitions', 'homeworlds.yml'))      || {},
+  origins:         readYaml(path.join(dataDir, 'definitions', 'origins.yml'))         || {},
 };
 
 // ─── gear_db ─────────────────────────────────────────────────────────────────
@@ -132,6 +134,13 @@ const companionBaseStats = fs.existsSync(compBaseStatsFile)
   ? (readYaml(compBaseStatsFile) || {})
   : {};
 
+// ─── companion bios ───────────────────────────────────────────────────────────
+
+const compBiosFile = path.join(dataDir, 'companions', 'bios.yml');
+const companionBios = fs.existsSync(compBiosFile)
+  ? (readYaml(compBiosFile) || {})
+  : {};
+
 // ─── colonies ────────────────────────────────────────────────────────────────
 
 const colonies = [];
@@ -188,6 +197,7 @@ const DATA = {
   questRewards,
   resourceSystems,
   companionBaseStats,
+  companionBios,
 };
 
 // ─── write data.js ────────────────────────────────────────────────────────────
@@ -218,6 +228,7 @@ const JS_FILES = [
   'js/traders.js',
   'js/notes.js',
   'js/gear-browser.js',
+  'js/reference-library.js',
   'js/resources.js',
   'js/init.js',
 ];
