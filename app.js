@@ -4441,7 +4441,8 @@ function _renderRetinueList(el) {
 
 // ============= REFERENCE =============
 
-let _referenceSubSection = null; // null = landing, 'resources' = star systems
+let _referenceSubSection = null;
+let _referenceSearch = '';
 
 const REFERENCE_SECTIONS = [
   { id: 'gear',        title: 'Gear Browser',            subtitle: 'Browse all gear by slot, DLC, character, or act', icon: '✦' },
@@ -4479,20 +4480,174 @@ function renderReferenceSection() {
     else if (_referenceSubSection === 'mcbuilds')   renderMCBuildsSection(subEl);
     else if (_referenceSubSection === 'retinue')    renderRetinueSection(subEl);
   } else {
-    // Landing: cards for each sub-section
-    const grid = document.createElement('div');
-    grid.className = 'reference-grid';
-    REFERENCE_SECTIONS.forEach(({ id, title, subtitle, icon }) => {
-      const card = document.createElement('div');
-      card.className = 'reference-card';
-      card.innerHTML = `<div class="reference-card-icon">${icon}</div>
-        <div class="reference-card-title">${title}</div>
-        <div class="reference-card-sub">${subtitle}</div>`;
-      card.addEventListener('click', () => { _referenceSubSection = id; renderReferenceSection(); });
-      grid.appendChild(card);
+    // Search bar (always visible on landing)
+    const searchWrap = document.createElement('div');
+    searchWrap.className = 'ref-global-search-wrap';
+    const searchInp = document.createElement('input');
+    searchInp.type = 'text';
+    searchInp.className = 'ref-global-search';
+    searchInp.placeholder = 'Search all reference…';
+    searchInp.value = _referenceSearch;
+    const clearBtn = document.createElement('button');
+    clearBtn.className = 'lib-search-clear';
+    clearBtn.textContent = '✕';
+    clearBtn.style.display = _referenceSearch ? '' : 'none';
+    const resultsEl = document.createElement('div');
+
+    const doSearch = (q) => {
+      _referenceSearch = q;
+      clearBtn.style.display = q ? '' : 'none';
+      if (q) {
+        resultsEl.innerHTML = '';
+        _renderGlobalSearchResults(resultsEl, q);
+      } else {
+        _renderReferenceLandingGrid(resultsEl);
+      }
+    };
+
+    searchInp.addEventListener('input', () => doSearch(searchInp.value));
+    clearBtn.addEventListener('click', () => {
+      searchInp.value = ''; searchInp.focus(); doSearch('');
     });
-    el.appendChild(grid);
+    searchWrap.appendChild(searchInp);
+    searchWrap.appendChild(clearBtn);
+    el.appendChild(searchWrap);
+    el.appendChild(resultsEl);
+
+    doSearch(_referenceSearch);
   }
+}
+
+function _renderReferenceLandingGrid(el) {
+  el.innerHTML = '';
+  const grid = document.createElement('div');
+  grid.className = 'reference-grid';
+  REFERENCE_SECTIONS.forEach(({ id, title, subtitle, icon }) => {
+    const card = document.createElement('div');
+    card.className = 'reference-card';
+    card.innerHTML = `<div class="reference-card-icon">${icon}</div>
+      <div class="reference-card-title">${title}</div>
+      <div class="reference-card-sub">${subtitle}</div>`;
+    card.addEventListener('click', () => { _referenceSubSection = id; renderReferenceSection(); });
+    grid.appendChild(card);
+  });
+  el.appendChild(grid);
+}
+
+function _renderGlobalSearchResults(el, rawQ) {
+  const q = rawQ.toLowerCase();
+  const MAX = 5;
+
+  const match = (...strs) => strs.some(s => s && s.toLowerCase().includes(q));
+
+  // Each group: { sectionId, title, icon, rows: [{label, sub}] }
+  const groups = [];
+
+  // Gear
+  const gearRows = (DATA.gear_db || []).filter(g => match(g.n, g.d, g.l))
+    .map(g => ({ label: g.n, sub: g.l || g.d || '' }));
+  if (gearRows.length) groups.push({ sectionId: 'gear', title: 'Gear', icon: '✦', rows: gearRows });
+
+  // Abilities
+  const abilityRows = Object.entries(DATA.definitions.abilities || {})
+    .filter(([k, v]) => match(k, typeof v === 'string' ? v : v.desc))
+    .map(([k, v]) => ({ label: k, sub: typeof v === 'string' ? v : v.desc || '' }));
+  if (abilityRows.length) groups.push({ sectionId: 'abilities', title: 'Abilities', icon: '✺', rows: abilityRows });
+
+  // Talents
+  const talentRows = Object.entries(DATA.definitions.talents || {})
+    .filter(([k, v]) => match(k, typeof v === 'string' ? v : v.desc))
+    .map(([k, v]) => ({ label: k, sub: typeof v === 'string' ? v : v.desc || '' }));
+  if (talentRows.length) groups.push({ sectionId: 'talents', title: 'Talents', icon: '✸', rows: talentRows });
+
+  // Skills / Characteristics
+  const skillRows = Object.entries(DATA.definitions.characteristics || {})
+    .filter(([k, v]) => match(k, typeof v === 'string' ? v : ''))
+    .map(([k, v]) => ({ label: k, sub: typeof v === 'string' ? v : '' }));
+  if (skillRows.length) groups.push({ sectionId: 'skills', title: 'Skills & Characteristics', icon: '≡', rows: skillRows });
+
+  // Homeworlds
+  const hwRows = Object.entries(DATA.definitions.homeworlds || {})
+    .filter(([k, v]) => match(k, v.description))
+    .map(([k, v]) => ({ label: k, sub: v.description || '' }));
+  if (hwRows.length) groups.push({ sectionId: 'charcreate', title: 'Homeworlds', icon: '♦', rows: hwRows });
+
+  // Origins
+  const origRows = Object.entries(DATA.definitions.origins || {})
+    .filter(([k, v]) => match(k, v.description))
+    .map(([k, v]) => ({ label: k, sub: v.description || '' }));
+  if (origRows.length) groups.push({ sectionId: 'charcreate', title: 'Origins', icon: '♦', rows: origRows });
+
+  // MC Builds
+  const buildRows = (DATA.mc_builds || [])
+    .filter(b => match(b.name, b.origin, b.theme))
+    .map(b => ({ label: b.name, sub: b.origin || b.theme || '' }));
+  if (buildRows.length) groups.push({ sectionId: 'mcbuilds', title: 'MC Builds', icon: '★', rows: buildRows });
+
+  // Retinue
+  const bios = DATA.companionBios || {};
+  const retinueRows = Object.entries(bios)
+    .filter(([name, b]) => match(name, b.bio, b.origin, b.homeworld))
+    .map(([name, b]) => ({ label: name, sub: b.origin || '' }));
+  if (retinueRows.length) groups.push({ sectionId: 'retinue', title: 'Retinue', icon: '◈', rows: retinueRows });
+
+  // Star Systems
+  const sysRows = (DATA.resourceSystems || [])
+    .filter(s => match(s.name))
+    .map(s => ({ label: s.name, sub: '' }));
+  if (sysRows.length) groups.push({ sectionId: 'resources', title: 'Star Systems', icon: '⬡', rows: sysRows });
+
+  if (!groups.length) {
+    const none = document.createElement('div');
+    none.className = 'gb-empty';
+    none.textContent = 'No results across any section.';
+    el.appendChild(none);
+    return;
+  }
+
+  groups.forEach(({ sectionId, title, icon, rows }) => {
+    const section = document.createElement('div');
+    section.className = 'ref-search-group';
+
+    const heading = document.createElement('div');
+    heading.className = 'ref-search-group-heading';
+    const iconEl = document.createElement('span');
+    iconEl.className = 'ref-search-group-icon';
+    iconEl.textContent = icon;
+    const titleEl = document.createElement('span');
+    titleEl.textContent = title;
+    heading.appendChild(iconEl);
+    heading.appendChild(titleEl);
+    section.appendChild(heading);
+
+    const shown = rows.slice(0, MAX);
+    shown.forEach(({ label, sub }) => {
+      const row = document.createElement('div');
+      row.className = 'ref-search-result-row';
+      row.addEventListener('click', () => { _referenceSubSection = sectionId; _referenceSearch = ''; renderReferenceSection(); });
+      const lbl = document.createElement('div');
+      lbl.className = 'ref-search-result-label';
+      lbl.textContent = label;
+      row.appendChild(lbl);
+      if (sub) {
+        const s = document.createElement('div');
+        s.className = 'ref-search-result-sub';
+        s.textContent = sub.length > 80 ? sub.slice(0, 77) + '…' : sub;
+        row.appendChild(s);
+      }
+      section.appendChild(row);
+    });
+
+    if (rows.length > MAX) {
+      const more = document.createElement('div');
+      more.className = 'ref-search-more';
+      more.textContent = `+${rows.length - MAX} more in ${title} →`;
+      more.addEventListener('click', () => { _referenceSubSection = sectionId; _referenceSearch = ''; renderReferenceSection(); });
+      section.appendChild(more);
+    }
+
+    el.appendChild(section);
+  });
 }
 
 // ── Resources sub-section ─────────────────────────────────────────────────────
