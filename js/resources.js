@@ -3,18 +3,14 @@
 let _referenceSubSection = null; // null = landing, 'resources' = star systems
 
 const REFERENCE_SECTIONS = [
-  {
-    id: 'gear',
-    title: 'Gear Browser',
-    subtitle: 'Browse all gear by slot, DLC, character, or act',
-    icon: '⚔',
-  },
-  {
-    id: 'resources',
-    title: 'Star System Resources',
-    subtitle: 'Resource deposits by system or type',
-    icon: '⬡',
-  },
+  { id: 'gear',        title: 'Gear Browser',          subtitle: 'Browse all gear by slot, DLC, character, or act', icon: '⚔' },
+  { id: 'retinue',     title: 'Retinue',                subtitle: 'Companion profiles, bios, base stats & wiki links', icon: '👥' },
+  { id: 'mcbuilds',    title: 'MC Builds',              subtitle: 'All playable MC builds grouped by theme',          icon: '⚜' },
+  { id: 'charcreate',  title: 'Character Creation',     subtitle: 'Homeworlds, origins and stat bonuses',             icon: '🌍' },
+  { id: 'abilities',   title: 'Abilities',              subtitle: 'All ability descriptions, searchable',             icon: '✦' },
+  { id: 'talents',     title: 'Talents',                subtitle: 'All talent descriptions, searchable',              icon: '◈' },
+  { id: 'skills',      title: 'Skills & Characteristics', subtitle: 'Reference for all stats and skills',            icon: '📊' },
+  { id: 'resources',   title: 'Star System Resources',  subtitle: 'Resource deposits by system or type',             icon: '⬡' },
 ];
 
 function renderReferenceSection() {
@@ -33,8 +29,14 @@ function renderReferenceSection() {
     subEl.className = 'reference-sub-content';
     el.appendChild(subEl);
 
-    if (_referenceSubSection === 'gear')      renderGearBrowser(subEl);
-    else if (_referenceSubSection === 'resources') renderResourcesContent(subEl);
+    if      (_referenceSubSection === 'gear')       renderGearBrowser(subEl);
+    else if (_referenceSubSection === 'resources')  renderResourcesContent(subEl);
+    else if (_referenceSubSection === 'abilities')  renderAbilitiesSection(subEl);
+    else if (_referenceSubSection === 'talents')    renderTalentsSection(subEl);
+    else if (_referenceSubSection === 'skills')     renderSkillsSection(subEl);
+    else if (_referenceSubSection === 'charcreate') renderCharCreationSection(subEl);
+    else if (_referenceSubSection === 'mcbuilds')   renderMCBuildsSection(subEl);
+    else if (_referenceSubSection === 'retinue')    renderRetinueSection(subEl);
   } else {
     // Landing: cards for each sub-section
     const grid = document.createElement('div');

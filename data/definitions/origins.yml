@@ -1,0 +1,152 @@
+# Origin (background) characteristic bonuses, descriptions, and available archetypes
+# Source: Fextralife Rogue Trader Wiki / Character Creation
+# MC-available origins are marked mc: true
+# Companion-exclusive origins have the companion noted
+
+# ── MC Origins ────────────────────────────────────────────────────────────────
+
+Imperial Navy Officer:
+  mc: true
+  description: "A seasoned officer of the Imperial Navy, trained in void warfare, command, and fleet tactics."
+  archetypes: [Officer]
+  bonuses:
+    AGI: 5
+    FEL: 5
+
+Noble:
+  mc: true
+  description: "Born into the noble houses of the Imperium, schooled in politics, culture, and the art of command."
+  archetypes: [Officer]
+  bonuses:
+    INT: 5
+    FEL: 5
+
+Astra Militarum Commander:
+  mc: true
+  description: "A veteran commander of the Imperial Guard, experienced in leading large forces in grinding attrition warfare."
+  archetypes: [Officer, Soldier]
+  bonuses:
+    BS: 5
+    PER: 5
+
+Commissar:
+  mc: true
+  description: "A political officer of the Schola Progenium, feared enforcer of discipline and morale across the Imperial forces."
+  archetypes: [Officer, Warrior]
+  bonuses:
+    WS: 5
+    FEL: 5
+
+Crime Lord:
+  mc: true
+  description: "A master of the criminal underworld — networks of contacts, extortion, and survival by wit and violence."
+  archetypes: [Operative]
+  bonuses:
+    WS: 5
+    PER: 5
+
+Ministorum Priest:
+  mc: true
+  description: "A servant of the Ecclesiarchy who channels the Emperor's faith into righteous fury and inspiring speeches."
+  archetypes: [Warrior, Soldier]
+  bonuses:
+    TGH: 5
+    WILL: 5
+
+Sanctioned Psyker:
+  mc: true
+  description: "A psyker trained and sanctioned by the Adeptus Astra Telepathica. Licensed to use psychic powers in service to the Imperium."
+  archetypes: [Operative]
+  bonuses:
+    TGH: 5
+    WILL: 5
+
+Arbitrator:
+  mc: true
+  description: "An agent of the Adeptus Arbites, the Imperium's law enforcement. Investigators, enforcers, and judges combined."
+  archetypes: [Operative]
+  bonuses: {}
+  bonus_note: "Origin bonuses not confirmed — check in-game character creation screen."
+
+# ── Companion-Exclusive Origins ───────────────────────────────────────────────
+
+Adepta Sororitas:
+  mc: false
+  companion: Argenta
+  description: "A Battle-Sister of the Orders Militant, warrior-monks devoted to the Emperor and the Church."
+  archetypes: [Soldier]
+  bonuses:
+    BS: 5
+    WILL: 5
+
+Tech-Priest:
+  mc: false
+  companion: Pasqal
+  description: "A servant of the Omnissiah and the Adeptus Mechanicus, merging flesh with machine in pursuit of technological truth."
+  archetypes: [Operative]
+  bonuses: {}
+  bonus_note: "Origin bonuses not confirmed."
+
+Navigator:
+  mc: false
+  companion: Cassia
+  description: "A member of the Navis Nobilite, mutant psykers able to navigate through the warp using the third eye of the Astronomican."
+  archetypes: [Officer]
+  bonuses: {}
+  bonus_note: "Origin bonuses not confirmed."
+
+Unsanctioned Psyker:
+  mc: false
+  companion: Idira
+  description: "An untrained, unlicensed psyker from a world cut off from Imperial authority. Raw power with no formal oversight."
+  archetypes: [Operative]
+  bonuses: {}
+  bonus_note: "Origin bonuses not confirmed."
+
+Cold Trader:
+  mc: false
+  companion: Jae
+  description: "A merchant who deals in proscribed and forbidden goods across the edges of Imperial space, charming and dangerous."
+  archetypes: [Officer]
+  bonuses: {}
+  bonus_note: "Origin bonuses not confirmed."
+
+Aeldari:
+  mc: false
+  companion: Yrliet
+  description: "Born of the ancient Aeldari race, with millennia of cultural refinement and psychic sensitivity flowing through alien veins."
+  archetypes: [Operative]
+  bonuses: {}
+  bonus_note: "Non-human origin — bonuses differ from human character creation."
+
+Space Marine:
+  mc: false
+  companion: Ulfar
+  description: "An Adeptus Astartes — genetically engineered super-soldier, one of the Emperor's finest warriors."
+  archetypes: [Warrior]
+  bonuses: {}
+  bonus_note: "Non-human origin — base stats reflect transhuman physiology directly."
+
+Drukhari:
+  mc: false
+  companion: Marazhai
+  description: "From the Dark City of Commorragh, the Drukhari are cruel corsairs who feed on the suffering of others to sustain their souls."
+  archetypes: [Operative]
+  bonuses: {}
+  bonus_note: "Non-human origin."
+
+Death Cult Assassin:
+  mc: false
+  companion: Kibellah
+  description: "A warrior of the Bladespun Web death cult, trained from birth to kill with grace and terrifying precision."
+  archetypes: [Operative]
+  bonuses: {}
+  bonus_note: "Origin bonuses not confirmed."
+
+Adeptus Arbites:
+  mc: false
+  companion: Solomorne
+  description: "A member of the Adeptus Arbites — the Imperium's interplanetary law enforcers, tasked with maintaining order between worlds."
+  archetypes: [Operative]
+  bonuses: {}
+  bonus_note: "Origin bonuses not confirmed."

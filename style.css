@@ -1139,6 +1139,215 @@
 }
 .reference-back-btn:active { color: var(--gold-bright); }
 
+/* === REFERENCE LIBRARY === */
+.lib-search-wrap {
+  position: relative;
+  margin-bottom: 12px;
+}
+.lib-search {
+  width: 100%;
+  background: var(--bg-2);
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  color: var(--ink);
+  font-family: 'EB Garamond', Georgia, serif;
+  font-size: 16px;
+  padding: 8px 32px 8px 10px;
+  outline: none;
+}
+.lib-search:focus { border-color: var(--gold-deep); }
+.lib-search-clear {
+  position: absolute; right: 8px; top: 50%; transform: translateY(-50%);
+  background: none; border: none; color: var(--ink-faint); cursor: pointer;
+  font-size: 13px; padding: 4px;
+}
+.lib-section-heading {
+  font-family: 'Cinzel', serif;
+  font-size: 10px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--ink-dim);
+  padding: 14px 0 6px;
+  border-bottom: 1px solid var(--rule);
+  margin-bottom: 8px;
+}
+.lib-def-list { display: flex; flex-direction: column; gap: 1px; }
+.lib-def-row {
+  padding: 8px 0;
+  border-bottom: 1px solid var(--rule);
+}
+.lib-def-row:last-child { border-bottom: none; }
+.lib-def-header { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+.lib-def-name {
+  font-family: 'Cinzel', serif;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--gold);
+  letter-spacing: 0.03em;
+}
+.lib-def-desc {
+  font-size: 13px;
+  color: var(--ink-dim);
+  line-height: 1.4;
+  margin-top: 3px;
+}
+/* Homeworld / Origin cards */
+.lib-world-card {
+  background: var(--bg-2);
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  padding: 12px 14px;
+  margin-bottom: 8px;
+}
+.lib-world-title-row { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 4px; }
+.lib-world-title {
+  font-family: 'Cinzel', serif;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--gold);
+  letter-spacing: 0.05em;
+}
+.lib-world-desc {
+  font-size: 13px;
+  color: var(--ink-dim);
+  line-height: 1.4;
+  margin-bottom: 6px;
+}
+.lib-bonus-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin: 6px 0;
+}
+.lib-bonus-chip {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 10px;
+  background: rgba(201,164,76,0.12);
+  border: 1px solid var(--gold-deep);
+  color: var(--gold-bright);
+}
+.lib-bonus-chip.neg {
+  background: rgba(139,26,26,0.12);
+  border-color: var(--blood);
+  color: var(--blood-bright);
+}
+.lib-bonus-note {
+  font-size: 11px;
+  font-style: italic;
+  color: var(--ink-faint);
+  margin-top: 4px;
+}
+.lib-talent-row {
+  font-size: 12px;
+  margin-top: 6px;
+  color: var(--ink-dim);
+}
+.lib-talent-label { color: var(--ink-faint); }
+.lib-talent-name { color: var(--ink); font-weight: 600; }
+.lib-origin-companion {
+  font-size: 11px;
+  color: var(--ink-faint);
+  font-style: italic;
+}
+.lib-origin-archetypes {
+  font-size: 11px;
+  color: var(--ink-faint);
+  margin-top: 4px;
+}
+/* MC Build cards */
+.lib-build-card {
+  padding: 8px 0;
+  border-bottom: 1px solid var(--rule);
+}
+.lib-build-card:last-child { border-bottom: none; }
+.lib-build-name-row { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+.lib-build-name {
+  font-family: 'Cinzel', serif;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--gold);
+}
+.lib-build-origin {
+  font-size: 12px;
+  color: var(--ink-faint);
+  font-style: italic;
+  margin-top: 2px;
+}
+.lib-build-archetypes {
+  font-size: 12px;
+  color: var(--ink-dim);
+  margin-top: 2px;
+}
+/* Retinue */
+.lib-retinue-list { display: flex; flex-direction: column; gap: 10px; }
+.lib-retinue-card {
+  background: var(--bg-2);
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  padding: 12px 14px;
+}
+.lib-retinue-name-row { display: flex; align-items: center; gap: 8px; margin-bottom: 3px; }
+.lib-retinue-name {
+  font-family: 'Cinzel', serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--gold-bright);
+}
+.lib-retinue-meta {
+  font-size: 11px;
+  color: var(--ink-faint);
+  font-style: italic;
+  margin-bottom: 6px;
+}
+.lib-retinue-bio {
+  font-size: 13px;
+  color: var(--ink-dim);
+  line-height: 1.45;
+  margin-bottom: 8px;
+}
+.lib-retinue-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-bottom: 8px;
+}
+.lib-stat-chip {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: var(--bg-3);
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  padding: 3px 6px;
+  min-width: 36px;
+}
+.lib-stat-label {
+  font-family: 'Cinzel', serif;
+  font-size: 8px;
+  color: var(--ink-faint);
+  letter-spacing: 0.1em;
+}
+.lib-stat-val {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--gold);
+}
+.lib-retinue-wiki {
+  display: inline-block;
+  font-size: 11px;
+  color: var(--gold-deep);
+  text-decoration: none;
+  border: 1px solid var(--gold-deep);
+  border-radius: 3px;
+  padding: 2px 8px;
+  letter-spacing: 0.05em;
+}
+.lib-retinue-wiki:active { background: var(--bg-3); color: var(--gold); }
+
 .resource-row {
   display: flex; align-items: center; gap: 8px;
   padding: 7px 0; border-bottom: 1px solid var(--rule);
