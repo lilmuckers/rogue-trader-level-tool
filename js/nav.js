@@ -18,6 +18,7 @@ const SECTION_META = {
   traders:   { title: 'Traders',         subtitle: 'Faction reputations & available items' },
   reference: { title: 'Reference',       subtitle: 'Lookup tables & reference data' },
   notes:     { title: 'Notes',           subtitle: 'Campaign notes & reminders' },
+  workshop:  { title: 'Workshop',        subtitle: 'Custom build manager' },
 };
 
 function showSection(name) {
@@ -37,6 +38,7 @@ function showSection(name) {
   else if (name === 'traders')   renderTradersSection();
   else if (name === 'reference') { _referenceSubSection = null; renderReferenceSection(); }
   else if (name === 'notes')     renderNotesSection();
+  else if (name === 'workshop')  { _wsStep = 'manager'; renderWorkshopSection(); }
 }
 
 document.querySelectorAll('.nav-btn').forEach(btn => {
@@ -84,4 +86,5 @@ $('reset-btn').addEventListener('click', () => {
 // Close sheet with ESC (or pop back if drilled in)
 window.addEventListener('keydown', (e) => { if (e.key === 'Escape') popSheet(); });
 
+mergeCustomBuildsIntoData();
 if (!config) showSetup(); else showTracker();
