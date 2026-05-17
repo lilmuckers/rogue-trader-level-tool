@@ -231,6 +231,7 @@ const JS_FILES = [
   'js/gear-browser.js',
   'js/reference-library.js',
   'js/resources.js',
+  'js/workshop.js',
   'js/init.js',
 ];
 const appJs = JS_FILES.map(f => fs.readFileSync(path.join(ROOT, f), 'utf8')).join('\n\n');
