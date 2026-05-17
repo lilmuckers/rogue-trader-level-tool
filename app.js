@@ -4670,8 +4670,10 @@ function _renderReferenceLandingGrid(el) {
     const card = document.createElement('div');
     card.className = 'reference-card';
     card.innerHTML = `<div class="reference-card-icon">${icon}</div>
-      <div class="reference-card-title">${title}</div>
-      <div class="reference-card-sub">${subtitle}</div>`;
+      <div class="reference-card-body">
+        <div class="reference-card-title">${title}</div>
+        <div class="reference-card-sub">${subtitle}</div>
+      </div>`;
     card.addEventListener('click', () => { _referenceSubSection = id; renderReferenceSection(); });
     grid.appendChild(card);
   });
