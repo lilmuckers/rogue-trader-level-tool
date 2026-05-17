@@ -1,3 +1,6 @@
+// Merge any custom builds from localStorage into DATA before first render
+mergeCustomBuildsIntoData();
+
 // ── Google Analytics ──
 const KEY_CLIENT_UUID = 'rt.client-uuid.v1';
 function getOrCreateUUID() {

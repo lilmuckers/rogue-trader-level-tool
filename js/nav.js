@@ -86,5 +86,4 @@ $('reset-btn').addEventListener('click', () => {
 // Close sheet with ESC (or pop back if drilled in)
 window.addEventListener('keydown', (e) => { if (e.key === 'Escape') popSheet(); });
 
-mergeCustomBuildsIntoData();
 if (!config) showSetup(); else showTracker();
