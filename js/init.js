@@ -226,6 +226,31 @@ if (window.visualViewport) {
           checkBtn.disabled = false;
         });
 
+        // Long-press → nuke all caches + unregister SW + hard reload
+        let _forceTimer = null;
+        const _startForce = () => {
+          _forceTimer = setTimeout(async () => {
+            _forceTimer = null;
+            checkBtn.disabled = true;
+            statusEl.textContent = 'Clearing all caches…';
+            statusEl.className = 'about-update-status checking';
+            try {
+              const keys = await caches.keys();
+              await Promise.all(keys.map(k => caches.delete(k)));
+              const reg = await navigator.serviceWorker.getRegistration();
+              if (reg) await reg.unregister();
+            } catch (e) { /* best effort */ }
+            location.reload(true);
+          }, 800);
+        };
+        const _cancelForce = () => { if (_forceTimer) { clearTimeout(_forceTimer); _forceTimer = null; } };
+        checkBtn.addEventListener('touchstart', _startForce, { passive: true });
+        checkBtn.addEventListener('touchend',   _cancelForce);
+        checkBtn.addEventListener('touchmove',  _cancelForce);
+        checkBtn.addEventListener('mousedown',  _startForce);
+        checkBtn.addEventListener('mouseup',    _cancelForce);
+        checkBtn.addEventListener('mouseleave', _cancelForce);
+
         updateRow.appendChild(versionLabel);
         updateRow.appendChild(checkBtn);
         updateRow.appendChild(statusEl);
