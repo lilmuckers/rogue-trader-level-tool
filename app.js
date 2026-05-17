@@ -2127,7 +2127,6 @@ $('reset-btn').addEventListener('click', () => {
 // Close sheet with ESC (or pop back if drilled in)
 window.addEventListener('keydown', (e) => { if (e.key === 'Escape') popSheet(); });
 
-mergeCustomBuildsIntoData();
 if (!config) showSetup(); else showTracker();
 
 
@@ -5700,6 +5699,9 @@ function _wsPickInput(label, value, onChange) {
   return wrap;
 }
 
+
+// Merge any custom builds from localStorage into DATA before first render
+mergeCustomBuildsIntoData();
 
 // ── Google Analytics ──
 const KEY_CLIENT_UUID = 'rt.client-uuid.v1';
