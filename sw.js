@@ -1,7 +1,7 @@
 /* Rogue Trader Tracker — Service Worker
    Cache-first for app shell; network falls back gracefully when offline. */
 
-const CACHE_VERSION = 'rt-tracker-1.10.0';
+const CACHE_VERSION = 'rt-tracker-1.10.1';
 const APP_SHELL = [
   './',
   './index.html',
@@ -53,16 +53,25 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  // For Google Fonts (CSS + woff2), use stale-while-revalidate
+  // For Google Fonts — cache-first with 3s network timeout fallback.
+  // If cached: return immediately (never hits network).
+  // If uncached: race network against 3s timeout; on timeout/fail return null
+  // so browser falls back to system fonts (Georgia etc) rather than hanging.
   if (url.hostname.endsWith('fonts.googleapis.com') || url.hostname.endsWith('fonts.gstatic.com')) {
     event.respondWith(
       caches.open(CACHE_VERSION).then((cache) =>
         cache.match(req).then((cached) => {
-          const network = fetch(req).then((res) => {
-            if (res.ok) cache.put(req, res.clone());
-            return res;
-          }).catch(() => cached);
-          return cached || network;
+          if (cached) return cached;
+          const timeout = new Promise((_, reject) =>
+            setTimeout(() => reject(new Error('font timeout')), 3000)
+          );
+          return Promise.race([
+            fetch(req).then((res) => {
+              if (res.ok) cache.put(req, res.clone());
+              return res;
+            }),
+            timeout,
+          ]).catch(() => null); // null → browser uses fallback fonts, no hang
         })
       )
     );
