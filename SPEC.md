@@ -1,47 +1,45 @@
 # Rogue Trader Build Tracker — Specification
 
+_Current version: 1.10.x · Last updated: 2026-05-29_
+
+---
+
 ## 1. Overview
 
-A single-page, offline-capable web application that displays level-by-level
-build progression for a player's chosen Main Character (MC) build and a
-selected variant for each companion in *Warhammer 40,000: Rogue Trader*
-(Owlcat Games). The intended use is mid-session reference on a phone: the
-player advances a level counter and the app shows what to take for every
-character at that level, with on-demand description text and a per-character
-build timeline.
+A single-page, offline-capable web application for tracking level-by-level build
+progression in *Warhammer 40,000: Rogue Trader* (Owlcat Games). Intended for
+mid-session reference on a phone: the player advances a level counter and the app
+shows what to take for every character at that level, with on-demand descriptions,
+build timelines, gear cross-references, vendor/trader listings, a full reference
+library, and a custom build manager.
 
-The app is built as a static Progressive Web App (PWA) suitable for hosting
-on GitHub Pages and installation to an iOS home screen for fully offline use.
+Built as a static Progressive Web App (PWA) hosted on GitHub Pages, installable
+to an iOS home screen for fully offline use.
 
 ### 1.1 Source Material
 
 Build data is derived from
-[Revan619's Community Rogue Trader Unfair Builds & Resources](https://docs.google.com/spreadsheets/d/1rskX4sYcNm6Wqt4rtm8EQqRR4__yrEuxCEzjwoKlHOY/),
-specifically the `Revan619 1.5 Builds`, `Revan619 1.5 Companion Builds`,
-`Talents`, and `Abilities` sheets (game patch 1.5, including DLC).
+[Revan619's Community Rogue Trader Unfair Builds & Resources](https://docs.google.com/spreadsheets/d/1rskX4sYcNm6Wqt4rtm8EQqRR4__yrEuxCEzjwoKlHOY/)
+(game patch 1.5, including all DLC). Item and gear data additionally sourced from
+[GameFAQs Rogue Trader community](https://gamefaqs.gamespot.com/pc/336075-warhammer-40000-rogue-trader).
 
 ### 1.2 Goals
 
-- Eliminate context-switching to a Google Sheet during play.
+- Eliminate context-switching to a Google Sheet or wiki during play.
 - Work fully offline once installed.
-- Persist user choices across sessions on the device.
+- Persist all user state on-device across sessions.
 - Render legibly on a small phone screen with one-handed use.
-- Reflect party-availability state: only show picks for companions the
-  player has actually recruited at their current level.
-- Surface mechanical descriptions for picks on demand.
-- Allow review of the full level-up plan for a single character (e.g. when
-  catching a freshly-joined companion up multiple levels at once).
+- Surface build timelines, gear cross-references, and game mechanic
+  descriptions on demand.
+- Support custom (non-canonical) builds via in-app editor or JSON/URL import.
 
 ### 1.3 Non-goals
 
-- Editing or contributing builds back to the source spreadsheet.
 - Multi-device sync. Storage is per-device.
-- Coverage of older patch versions (1.2, 1.3, 1.4) or non-Revan619 build
-  authors.
-- *Searchable* talent / ability database. Descriptions are surfaced
-  contextually from picks, not browsable on their own.
-- Bundling official character portrait artwork. Portraits are user-supplied.
+- Coverage of older patch versions (pre-1.5) or non-Revan619 builds (except
+  via the custom Workshop feature).
 - Respec workflow.
+- Community build sharing requiring a backend (scoped to local + Gist export).
 
 ---
 
@@ -49,433 +47,517 @@ specifically the `Revan619 1.5 Builds`, `Revan619 1.5 Companion Builds`,
 
 ### 2.1 Build
 
-A Build represents a complete level 1–55 progression plan for a single
-character.
+A Build represents a complete level 1–55 progression plan for one character.
 
 | Field | Type | Notes |
 |---|---|---|
 | `name` | string | Human-readable build name. |
-| `theme` | string | MC builds only. Groups variants. |
-| `origin` | string | MC builds only. Free-text origin/archetype/stat description. |
+| `theme` | string | MC builds only. Groups variants by playstyle. |
+| `origin` | string | MC builds only. Origin/archetype/stat description. |
 | `levels` | map<int, LevelEntry> | Keyed by level number, 1–55 inclusive. |
+| `dlc` | string \| null | DLC name if build requires DLC content. |
+
+Custom builds (Workshop) additionally carry `_id`, `_custom: true`,
+`_character`, and optional `_source` for URL-sync.
 
 ### 2.2 LevelEntry
 
-The pick(s) the player should take when leveling up to the keyed level.
-
 | Field | Type | Notes |
 |---|---|---|
-| `m` | string \| null | "Main" pick — primary ability, talent, stat, skill, or heroic action. |
-| `e` | string \| null | "Extra" pick — second pick at the same level. May be absent. |
+| `m` | string \| null | "Main" pick. |
+| `e` | string \| null | "Extra" pick. May be absent. |
 
-A pick string may contain multiple alternatives separated by `/`
-(e.g. `"Commerce / Lore Imperium"` — meaning "either of these").
-The lookup logic (§2.7) handles each alternative independently.
+A pick string may contain alternatives separated by `/` (e.g.
+`"Commerce / Lore Imperium"`). The lookup logic handles each alternative
+independently.
 
-### 2.3 Companion
+### 2.3 Companions
 
-A Companion has a fixed identity, 1–N variants (each a Build), and a
-fixed displayed archetype.
+15 supported companions:
 
-The 15 supported companions and archetypes:
-
-| Companion | Archetype | Variants | Default Join Level |
-|---|---|---|---|
-| Abelard | Warrior | 5 | 1 |
-| Idira | Operative | 3 | 1 |
-| Argenta | Soldier | 3 | 3 |
-| Pasqal | Operative | 7 | 6 |
-| Cassia | Officer | 2 | 10 |
-| Heinrix | Warrior | 6 | 12 |
-| Yrliet | Operative | 3 | 14 |
-| Jae | Officer | 3 | 16 |
-| Ulfar | Soldier | 3 | 22 |
-| Marazhai | Warrior | 2 | 31 |
-| Kibellah | Bladedancer | 3 | 33 |
-| Solomorne | Soldier | 1 | 37 |
-| Incendia Chorda (DLC) | Soldier | 1 | 40 |
-| Calligos Winterscale (DLC) | Warrior | 1 | 40 |
-| Uralon (DLC) | Officer | 1 | 40 |
+| Companion | Archetype | Variants | Default Join Level | DLC |
+|---|---|---|---|---|
+| Abelard | Warrior | 5 | 1 | — |
+| Idira | Operative | 3 | 1 | — |
+| Argenta | Soldier | 3 | 3 | — |
+| Pasqal | Operative | 7 | 6 | — |
+| Cassia | Officer | 2 | 10 | — |
+| Heinrix | Warrior | 6 | 12 | — |
+| Yrliet | Operative | 3 | 14 | — |
+| Jae | Officer | 3 | 16 | — |
+| Ulfar | Soldier | 3 | 22 | — |
+| Marazhai | Warrior | 2 | 31 | — |
+| Kibellah | Bladedancer | 3 | 33 | Void Shadows |
+| Solomorne | Soldier | 1 | 37 | Lex Imperialis |
+| Incendia Chorda | Soldier | 1 | 40 | Lex Imperialis |
+| Calligos Winterscale | Warrior | 1 | 40 | Lex Imperialis |
+| Uralon | Officer | 1 | 40 | Lex Imperialis |
 
 Default join levels are user-configurable per-companion in Setup.
 
 ### 2.4 MC Themes
 
-11 themes containing 65 builds total: Commissar, Astra Militarum Commander,
+11 themes, 65 builds total: Commissar, Astra Militarum Commander,
 Imperial Navy Officer, Ministorum Priest, Noble, Crimelord, Arbitrator,
-Sanctioned Psyker (Offensive), Sanctioned Psyker (Support), Mixed/Specialty,
-Navigator/Psyker Hybrid.
+Sanctioned Psyker (Offensive), Sanctioned Psyker (Support),
+Mixed/Specialty, Navigator/Psyker Hybrid.
 
-### 2.5 Configuration
+### 2.5 Configuration & Roster
 
-```
-{
-  mc: { theme: string, buildIndex: int },
-  companions: { [companionName: string]: int },
-  joinLevels: { [companionName: string]: int }
-}
-```
+The **roster** is an ordered array of `{char, build, joinLevel}` records
+(replaces the old flat config object). The active MC build and all companion
+selections are stored here. The player can reorder the roster in Setup.
 
-Indices are zero-based into variants arrays. Join levels clamped to `[1, 55]`.
+Join levels are clamped to `[1, 55]`.
 
 ### 2.6 Level State
 
-Integer in `[1, 55]`, persisted independently of configuration.
+Integer in `[1, 55]`, persisted independently of roster configuration.
 
 ### 2.7 Definitions & Lookup
 
-The bundled data includes three description tables:
+Bundled definition tables:
 
-| Table | Source | Approx. Entries |
+| Table | Notes | Approx. entries |
 |---|---|---|
-| `talents` | `Talents` sheet, name in col A, description in col B | ~659 |
-| `abilities` | `Abilities` sheet (with smart parsing of archetype-headline rows where the *first* ability of an archetype is encoded as `Name: description...` in the description cell) | ~137 |
-| `heroic` | Hardcoded supplement covering Heroic Actions and a few high-frequency picks missing from the source sheet (Charge, Tactical Advantage, Versatility, etc.) | ~33 |
+| `talents` | Name → description from Revan619 Talents sheet | ~659 |
+| `abilities` | Name → description from Abilities sheet; archetype-header rows parsed specially | ~137 |
+| `heroic` | Hardcoded supplement: Heroic Actions and high-frequency unlisted picks | ~33 |
 
-The runtime `lookupPick(rawPick)` resolves a build's pick string to zero
-or more description records:
+`lookupPick(rawPick)` resolves a pick string:
+1. Split on `/` for alternatives.
+2. Normalize (lowercase, collapse whitespace, strip punctuation, fix known
+   typos: `Tacticical`, `Eagar`, `Devestating`, `Versitility`, `Camraderie`, etc.).
+3. Check priority order: heroic → abilities → talents.
+4. Fallback variants: strip trailing roman numeral tier, strip
+   `Characteristic Training:` prefix, strip trailing punctuation.
+5. Skill/stat allocations (Agility, BS, AP +1, etc.) are labelled without
+   DB lookup.
 
-1. Split on `/` to handle alternative picks.
-2. For each part, attempt lookup against a unified normalized index
-   (priority: heroic > abilities > talents). Normalization includes:
-   - Lowercase, whitespace collapse, punctuation strip.
-   - Inline correction of known typos in the source data (`Tacticical`,
-     `Eagar`, `Devestating`, `Versitility`, `Camraderie`, etc.).
-3. If that fails, try variants: trailing roman-numeral upgrade tier
-   stripped (e.g. `Daring Breach IV` → `Daring Breach`), `Characteristic
-   Training:` prefix stripped, trailing punctuation stripped.
-4. Picks classified as **skill or stat allocations** (Agility, Ballistic
-   Skill, AP +1, etc.) are not looked up; they're labelled as such in the
-   description sheet without further detail.
+Coverage ~89% of lookup-eligible picks on real build data.
 
-Coverage on real build data: ~89% of lookup-eligible picks resolve to a
-description. Misses fall through gracefully — the UI shows "No description
-available" rather than failing.
+### 2.8 Gear Database
 
-### 2.8 Portraits
+`gear_db` (~1 049 entries) covers: Helmets, Armour, Cloaks, Necklaces,
+Trinkets, Gloves, Boots, Weapons, Shields, Familiars. Each entry:
 
-Each character has an optional portrait image URL configured in a
-`PORTRAITS` constant in `index.html`. Null or failed loads fall back to
-a gothic two-letter initial badge.
+| Field | Notes |
+|---|---|
+| `n` | Name |
+| `s` | Slot (`armour`, `weapon`, `helm`, etc.) |
+| `l` | Location text (free-text) |
+| `a` | Act number (0–4) |
+| `d` | Effect description |
+| `cat` | Category (weapons only, e.g. `Shield`) |
+| `dlc` | DLC name or null |
+
+Shields are weapons with `cat: Shield` — displayed as a separate group in
+the gear browser.
+
+### 2.9 Archetypes
+
+Each build records three chosen archetypes (tier 1/2/3) extracted from
+the source sheet's header rows. Stored in
+`DATA.archetypes.{mc,comp}[buildName] = {t1, t2, t3}`.
+
+Archetype callout cards appear on character cards and in the catch-up
+timeline when the current level is 16 (tier-2 choice) or 36 (tier-3 choice).
+
+### 2.10 Extras (Skills & Gear Panels)
+
+Each build may have an `extras` block with:
+- `skills` — free-text skill allocation recommendation.
+- `gear` — array of `{slot, options}` where `options` is a `/`-separated
+  list of gear name alternatives.
+
+Rendered in the Catch-Up Timeline's "Gear & Skills" tab. Gear pills that
+match `gear_db` are interactive (tap → gear detail sheet).
+
+### 2.11 Custom Builds (Workshop)
+
+Custom builds are stored in `localStorage` under `rt-custom-builds`.
+They follow the same `{name, theme, origin, levels}` shape as canonical
+builds, augmented with `_id`, `_custom: true`, `_character`, and
+optional `_source: {type: 'url'|'gist'|'json', url?, gistId?}`.
+
+At startup, custom builds are merged into `DATA.mc_builds` and
+`DATA.companions` so the rest of the app treats them identically to
+canonical builds.
+
+### 2.12 Vendors / Traders
+
+`DATA.vendors` — array of vendor objects, each with `name` and either
+`items[]` or (for alignment vendors) `neutral_items[]`,
+`dogmatic_items[]`, `iconoclast_items[]`, `heretic_items[]`.
+
+`DATA.questRewards` — flat item array from quest-rewards source.
 
 ---
 
 ## 3. User Interface
 
-### 3.1 Views
+### 3.1 Navigation
 
-Three views, swapped by visibility (no routing):
-1. **Setup** — initial configuration / editing.
-2. **Tracker** — primary in-play view.
-3. **Bottom Sheet** — contextual overlay, two modes (description /
-   catch-up timeline). Renders over the Tracker.
+Bottom navigation bar with up to 8 sections (icon + label):
 
-### 3.1.1 Setup View
+| Section | Icon | Notes |
+|---|---|---|
+| Tracker | ⚔ | Primary in-play view |
+| Setup | ⚙ | Roster/build configuration |
+| Gear | 🛡 | Gear browser |
+| Reference | 📖 | Reference library |
+| Workshop | 🔧 | Custom build manager |
+| Resources | 🌌 | Star systems / resources |
+| Colonies | 🏛 | Colony tracker |
+| Notes | 📝 | Free-text notes |
+
+The active section's content replaces the main body area. A version/about
+footer renders below the nav bar showing `vX.Y.Z`.
+
+### 3.2 Setup View
 
 - MC theme + build cascading dropdowns.
-- One row per companion: variant dropdown + numeric `Joins @` input.
-- Confirm / Cancel / Reset All Data buttons.
+- Roster table: one row per companion with variant dropdown, `Joins @`
+  numeric input, and drag-handle for reordering.
+- MC name override field.
+- Confirm / Cancel / Reset All Data.
 - Pre-populated with sensible defaults on first launch.
 
-### 3.1.2 Tracker View
+### 3.3 Tracker View
 
 - Header with title.
 - Action row: Edit Roster, Jump ▸ Lvl.
-- Level Pane: large central level number, `−` / `+` buttons, tap-to-jump.
-- Roster: MC card first (red accent), then "Retinue" divider, then
-  companion cards in canonical order.
-- Footer hint: `tap a card for descriptions · long-press for full timeline`.
-- Footer flavour line.
+- Level Pane: large level number, `−` / `+` buttons, tap-to-jump modal.
+- Roster: MC card first (blood-red accent), "Retinue" divider, then
+  companions in roster order.
+- Cards show current-level picks; dimmed/greyscaled when unavailable.
+- Footer flavour text.
 
-### 3.1.3 Character Card
+#### 3.3.1 Character Card
 
-Horizontal layout: portrait (left, 56×56 circle), body (right).
+Horizontal layout: portrait (56×56 circle) | name + archetype + build name
++ pick block (or no-pick / unavailable tag).
 
-Body shows: name, archetype, build name, and either:
-- **Pick block** (available + has pick): `m` in gold, optional `e` below.
-  Pick text gets a subtle ⓘ indicator if a description is available.
-- **No-pick placeholder** (available + no pick): italic "— no pick at
-  this level —", card dimmed to ~60%.
-- **Unavailable tag** (level < join level): `⛓ Joins at level N`,
-  card dimmed to ~42%, portrait greyscaled, pick text hidden.
+Interactions:
+- **Short tap** → Description Sheet for current level's picks.
+- **Long-press** (≥480 ms, cancels on >10 px movement, haptic feedback)
+  → Catch-Up Timeline sheet.
 
-Cards are interactive:
-- **Short tap** → opens Description Sheet for the current level's picks.
-- **Long-press** (≥480 ms, with movement-cancel and haptic feedback if
-  available) → opens Catch-Up Timeline for the character's full build.
+#### 3.3.2 Bottom Sheet
 
-### 3.1.4 Bottom Sheet
+Modal slide-up sheet:
+- Drag-handle, title, close (×).
+- Scrollable body; max height 85 vh.
+- Swipe-down-to-close (>80 px drag from scrolled-to-top position).
+- Backdrop tap or ESC (desktop) dismisses.
+- Back-stack navigation for nested sheets (e.g. gear pill → gear detail
+  → back to timeline).
 
-A modal slide-up sheet from the bottom of the viewport, with:
-- Drag-handle "grabber" at the top.
-- Header: title + close button (×).
-- Scrollable body (`overflow-y: auto`, `-webkit-overflow-scrolling: touch`).
-- Backdrop overlay with blur, dismissable on tap.
-- Swipe-down-to-close gesture: when the body is scrolled to top, dragging
-  down translates the sheet; release with > 80px drag closes it.
-- ESC key dismisses on desktop.
-- Sheet locks body scroll while open.
-- Max height 85vh; respects iOS safe-area inset at the bottom.
+**Description Sheet**: Level N picks, one block per resolved pick (name,
+source label, description). Alternatives rendered as separate blocks.
 
-**Description Sheet content:**
-- Header: `Level N · {Character}`.
-- Context line: `Picks for {Character} at level N`.
-- One block per resolved pick:
-  - Resolved name (Cinzel display) — annotated with `— {raw pick}`
-    if the match was via stripped tier (e.g. `Daring Breach — Daring Breach IV`).
-  - Source label (mono caps): `Talent`, `Ability`, or `Heroic Action`.
-  - Description text (Garamond body).
-- Picks split on `/` are rendered as separate blocks (one per resolved
-  alternative), so `"Commerce / Lore Imperium"` becomes two blocks.
-- Skill/stat allocations show a "Skill / Stat allocation" label with
-  no body text.
-- Unknown picks show "No description available in the source data."
+**Catch-Up Timeline Sheet**: Three tabs:
+1. **Timeline** (default) — levels 1–55, current level highlighted.
+   Each row tap → nested Description Sheet for that pick.
+2. **Stats** — characteristic summary up to current level (training
+   counts + AP gained + origin bonuses; absolute values when companion
+   base stats are available).
+3. **Gear & Skills** — skill note paragraph + gear pills per slot (from
+   build extras). DLC-tagged items show pill badge.
 
-**Catch-Up Timeline content:**
-- Header: `{Character} · Build Timeline`.
-- Meta block: build name (italic) + archetype (mono caps).
-- Timeline list, levels 1–55. Each row with content shows:
-  - Level number badge (left, 38px wide).
-  - Pick text (right): `m` in gold, optional `e` below in italic.
-  - The current level row is highlighted with a gradient stripe and
-    `NOW` tag instead of `LVL`.
-  - Pick text with available descriptions is tappable and opens a
-    nested Description Sheet for that single pick.
-- Levels with no picks are skipped to keep the timeline dense.
+### 3.4 Gear Browser
 
-### 3.2 Visual Design
+Filterable list of `gear_db` entries.
 
-Gothic-imperial: `#0a0908` bg, gold accents (`#c9a44c`, `#e8c468`),
-blood-red (`#8b1a1a`) reserved for the MC.
+Filters (custom dropdown UI):
+- **Slot** — All, Armour, Weapons, Shields, Helms, Cloaks, Gloves, Boots,
+  Necklaces, Trinkets, Familiars.
+- **DLC** — All, Base game, Lex Imperialis, Void Shadows.
+- **Character** — Any, MC, or specific companion (shows only items used
+  by that character's builds).
+- **Act** — Any, Prologue, Act 1–4.
+- **Search** — Name / description / location text.
+
+Results grouped by slot with item count headings. Each row shows name,
+DLC badge, act badge, used-by character abbreviations, and truncated
+description. Tapping a row opens a Gear Detail sheet.
+
+Items can be favourited (star button) for Quick Access.
+
+### 3.5 Reference Library
+
+Tabbed reference sections with cross-section full-text search:
+
+| Section | Content |
+|---|---|
+| Homeworlds | All homeworld options with bonuses |
+| Origins | All origin options with bonuses |
+| Backgrounds | Background choices |
+| Characteristics | All 9 characteristics explained |
+| Abilities | All ability definitions |
+| Talents | All talent definitions |
+| Retinue | Companion bios, base stats, DLC tags |
+| Romances | Per-character romance guides (gender requirements noted) |
+| Convictions | Dogmatic / Iconoclast / Heretic point thresholds and tier bonuses |
+
+**Search bar** at top filters all sections simultaneously. Results show
+the section name as context.
+
+**Quick Access** panel (top of Reference view) shows favourited items.
+Tapping a favourite scrolls directly to that item within its section and
+briefly highlights it with a gold outline.
+
+### 3.6 Workshop
+
+Custom build manager:
+
+- **Build list** — shows all custom builds with character, name, source
+  badge, Edit / Delete / Gist export buttons.
+- **Import** — paste raw JSON or enter a URL (fetched and parsed at import
+  time and on background refresh every 30 minutes).
+- **Build editor** — level-by-level editor (main + extra pick per level,
+  skills, gear slots, archetype paths).
+- **GitHub Gist sync** — store a personal access token (PAT); export
+  builds to Gist as JSON; re-import from Gist URL. No OAuth app required.
+
+### 3.7 Resources (Star Systems)
+
+`DATA.resourceSystems` — array of star systems with resource node data.
+Browseable list with search; each entry shows system name, resources
+available, and notes.
+
+### 3.8 Colonies
+
+`DATA.colonies` — colony data per planet. Shows colony name, level
+indicators, and available upgrades.
+
+### 3.9 Notes
+
+Free-text markdown-lite notes with:
+- Create / edit / delete.
+- Sort by updated or created time.
+- Undo history per note (persisted in `rt.notes-history.v2`).
+- Character-reference tags linking a note to a specific companion/build.
+
+### 3.10 Traders / Vendors
+
+Tabbed view per faction (Kasballica Mission, Explorators, Drusians,
+Imperial Navy, Fellowship of the Void, Curiosity Vendor + Quest Rewards).
+Alignment vendors show Neutral / Dogmatic / Iconoclast / Heretic tabs.
+Item rows show name, description snippet, act badge, and DLC badge.
+
+---
+
+## 4. Visual Design
+
+Gothic-imperial palette: `#0a0908` background, gold accents (`#c9a44c`,
+`#e8c468`), blood-red (`#8b1a1a`) for MC.
 
 Typography:
-- **Cinzel** — headings, level number, character names, archetype labels,
-  fallback initials.
+- **Cinzel** — headings, level number, character names, archetype labels.
 - **EB Garamond** — pick text, description body, italic flavour.
-- **JetBrains Mono** — archetype tags, join-level inputs, source labels.
+- **JetBrains Mono** — archetype tags, source labels, code-like elements.
 
-### 3.3 Touch & Input
+DLC badges: pill-style colour-coded (Lex Imperialis = amber, Void Shadows
+= purple).
 
-- 56×56 px tap targets for level controls.
+---
+
+## 5. Touch & Input
+
+- 56×56 px minimum tap targets for level controls.
 - `touch-action: manipulation` everywhere.
-- Card long-press cancels on > 10px movement.
-- iOS context menu suppressed on cards (`contextmenu` event prevented).
-- Cards animate slightly (`scale(0.99)` + box-shadow) when held.
+- Card long-press cancels on >10 px movement.
+- iOS context menu suppressed on cards.
+- Cards animate `scale(0.99)` + box-shadow on hold.
+- Swipe-down-to-close on bottom sheets.
+- `scrollIntoView({ block: 'center' })` for Quick Access navigation
+  (avoids iOS notch overlap).
 
 ---
 
-## 4. Persistence
+## 6. Persistence
 
-`localStorage` only.
+All state in `localStorage` via the `Store` abstraction (falls back to
+in-memory when `localStorage` is unavailable).
 
-| Key | Notes |
+| Key | Contents |
 |---|---|
-| `rt.config.v2` | Configuration (§2.5) |
+| `rt.config.v2` | Legacy MC + companion config (migrated to roster on first run) |
 | `rt.level.v1` | Current level integer |
-
-One-shot silent migration from v1 to v2 fills `joinLevels` with §2.3
-defaults. `Store` abstraction falls back to in-memory if `localStorage`
-is unavailable (Claude.ai sandbox, Safari Private mode).
+| `rt.choices.v1` | Per-level user pick choices |
+| `rt.mc-name.v1` | Custom MC name override |
+| `rt.roster.v1` | `[{char, build, joinLevel}]` ordered array |
+| `rt.party.v1` | `[charName]` active party (max 5) |
+| `rt.notes.v1` | Notes array |
+| `rt.notes-sort.v1` | Notes sort preference |
+| `rt.notes-history.v2` | Per-note undo history |
+| `rt-custom-builds` | Custom Workshop builds |
+| `rt-gist-pat` | GitHub Gist personal access token |
+| `rt-ref-favourites` | Favourited reference items |
 
 ---
 
-## 5. PWA Behaviour
+## 7. PWA Behaviour
 
-### 5.1 Manifest
+### 7.1 Manifest
 
-`manifest.json`: standalone display, portrait orientation, relative paths
-(`./`), gold-on-dark theme, icons at 192/512 plus 512 maskable.
+`manifest.json`: standalone display, portrait orientation, relative paths,
+gold-on-dark theme, icons at 192/512 plus 512 maskable.
 
-### 5.2 Service Worker
+`<meta name="mobile-web-app-capable">` used (not deprecated
+`apple-mobile-web-app-capable`).
+
+### 7.2 Service Worker
 
 `sw.js` implements:
 - **Install**: pre-caches app shell.
 - **Activate**: deletes stale caches not matching `CACHE_VERSION`.
 - **Fetch**:
-  - HTML / navigations → cache-first, network fallback, `index.html` final.
-  - Google Fonts → stale-while-revalidate.
-  - Other GETs (icons, portrait images) → cache-first, network fallback,
-    cache on success. Portrait URLs are cached opportunistically.
+  - HTML / navigations → cache-first, network fallback, `index.html`
+    final fallback.
+  - Google Fonts → **3-second timeout race** (not stale-while-revalidate).
+    On slow connections, fonts fall back to system serif/mono rather than
+    hanging indefinitely.
+  - Other GETs (icons, portrait images) → cache-first, network fallback.
 
-### 5.3 Update Strategy
+### 7.3 Update Strategy
 
-Bump `CACHE_VERSION` after any change. Reloading once online picks up
-the new version.
+`CACHE_VERSION` is auto-updated by `npm run build` to match `package.json`
+version. An **SW update badge** (`[↑]` in the footer) appears when a new
+service worker is waiting; tapping it triggers `skipWaiting` and reloads.
 
----
-
-## 6. Data Pipeline
-
-Build and definition data is **embedded as a JavaScript constant** in
-`index.html`. No XHR at runtime.
-
-### 6.1 Build Extraction
-
-The source build sheets use a tile layout (24-row blocks vertically,
-13-column variants horizontally). Within a variant, levels 1–15 / 16–35 /
-36–55 sit in three column groups of `(label, main, extra)`. The Python
-extraction script parses level labels (`"Level N :"`) and emits a JSON
-document keyed by level.
-
-Compact LevelEntry shape `{m, e}` minimises payload. URLs in build
-names are stripped.
-
-### 6.2 Definitions Extraction
-
-The `Talents` sheet has a simple `(name, description)` per row.
-The `Abilities` sheet uses the same layout *except* archetype-header
-rows (e.g. `Warrior`, `Officer`) encode the first ability of that
-archetype inside the description cell as `Name: description...`. The
-extractor detects this pattern (regex match for `^[A-Z][A-Za-z...]+:
-\s+`) and stores under the embedded name rather than the section header.
-
-A small **hardcoded supplement** (`heroic`) covers picks that are
-genuinely missing from the source sheet — primarily Heroic Actions
-(Daring Breach, Finest Hour, Firearm Mastery, Dismantling, Death Waltz)
-and a handful of common-action / Master-Tactician picks. These are
-written by hand based on game knowledge to maximize lookup coverage.
-
-### 6.3 Re-extraction Workflow
-
-If the source sheet updates:
-1. Re-download as `.xlsx`.
-2. Run the extraction script to produce new combined JSON
-   (`{mc_builds, companions, definitions: {talents, abilities, heroic}}`).
-3. Replace the `const DATA = {...}` line in `index.html`.
-4. Bump `CACHE_VERSION` in `sw.js`.
-5. Commit and push.
-
-The bundle currently weighs ~420 KB minified (~470 KB after embedding
-in HTML).
+Semantic versioning workflow:
+```
+npm version patch    # bug fixes / data updates → 1.X.Y
+npm version minor    # new features             → 1.X.0
+npm version major    # breaking changes         → X.0.0
+npm run build        # regenerates data.js, app.js, updates sw.js
+git push
+```
 
 ---
 
-## 7. File Layout
+## 8. Data Pipeline
+
+Build and definition data lives in YAML files under `data/` and is
+compiled by `scripts/build.js` into two generated files:
+
+- **`data.js`** — `const DATA = {...}; const PORTRAITS = {...};`
+- **`app.js`** — concatenation of all `js/*.js` source modules
+
+`index.html` loads `data.js` then `app.js` via `<script>` tags. No XHR at
+runtime.
+
+### 8.1 YAML Source Layout
+
+```
+data/
+├── portraits.yml                — Portrait URL map
+├── definitions/
+│   ├── talents.yml              — ~659 talent definitions
+│   ├── abilities.yml            — ~137 ability definitions
+│   ├── heroic.yml               — ~33 heroic/supplement definitions
+│   ├── characteristics.yml      — Characteristic descriptions
+│   ├── convictions.yml          — Conviction tiers and bonuses
+│   ├── homeworlds.yml           — Homeworld options
+│   ├── origins.yml              — Origin options
+│   ├── dlc-tags.yml             — DLC display names
+│   └── romances.yml             — Per-character romance guides
+├── gear/                        — One .yml per slot (armour, helm, etc.)
+├── mc/
+│   └── {theme}/                 — One .yml per build
+├── companions/
+│   ├── base_stats.yml           — Starting characteristics for each companion
+│   ├── bios.yml                 — Companion bios and DLC tags
+│   └── {CompanionName}/         — One .yml per build variant
+├── vendors/                     — One .yml per faction + quest-rewards.yml
+├── colonies/                    — Colony data
+└── resources/
+    └── systems.yml              — Star system / resource data
+```
+
+### 8.2 JS Module Layout
+
+`scripts/build.js` concatenates these files in order to produce `app.js`:
+
+```
+js/core.js          — Constants, version, utility DOM helpers
+js/store.js         — localStorage abstraction with in-memory fallback
+js/choices.js       — Config, roster, level, party state + migrations
+js/lookup.js        — Pick normalization and description lookup
+js/sheet.js         — Bottom-sheet infrastructure + back-stack
+js/tracker.js       — Tracker view render
+js/description.js   — Description sheet content
+js/catchup.js       — Catch-up timeline, stats panel, pick-block renderer
+js/setup.js         — Setup view
+js/nav.js           — Bottom nav + section routing
+js/colonies.js      — Colonies section
+js/traders.js       — Traders/vendors section
+js/notes.js         — Notes section
+js/gear-browser.js  — Gear browser section
+js/reference-library.js — Reference library section
+js/resources.js     — Resources section + favourites infrastructure
+js/workshop.js      — Workshop (custom build manager)
+js/init.js          — App bootstrap (merge custom builds, render initial view)
+```
+
+### 8.3 Build Command
+
+```bash
+npm run build     # reads all YAML, writes data.js + app.js, updates sw.js
+```
+
+Run after editing any YAML file or source JS. The generated `data.js` and
+`app.js` are checked in to the repo for deployment.
+
+---
+
+## 9. File Layout
 
 ```
 /
-├── index.html              — App + embedded data + inline CSS & JS + PORTRAITS map
+├── index.html              — App shell (loads data.js + app.js + style.css)
+├── style.css               — All styles
+├── data.js                 — Generated: DATA + PORTRAITS constants
+├── app.js                  — Generated: concatenated JS modules
 ├── manifest.json           — PWA manifest
-├── sw.js                   — Service worker
+├── sw.js                   — Service worker (CACHE_VERSION auto-updated)
+├── package.json            — Version source of truth
+├── scripts/
+│   └── build.js            — Build pipeline
+├── js/                     — JS source modules (see §8.2)
+├── data/                   — YAML source data (see §8.1)
 ├── icon-{16,32,180,192,512,512-maskable}.png
 ├── README.md               — Deployment instructions
 └── SPEC.md                 — This document
 ```
 
-All paths are relative; works under any GitHub Pages project URL.
+---
+
+## 10. Deployment
+
+GitHub Pages → Settings → Pages → Deploy from branch → main / root.
+HTTPS required for service worker.
+
+iOS install: open in **Safari** → Share → Add to Home Screen → launch once
+online to populate caches.
 
 ---
 
-## 8. Deployment
+## 11. Constraints & Assumptions
 
-GitHub Pages, Settings → Pages → Deploy from branch → main / root. HTTPS
-required for service worker.
-
-iOS install: open URL in **Safari**, Share → Add to Home Screen, launch
-once online to populate caches, then app works offline.
-
----
-
-## 9. Constraints & Assumptions
-
-- Single-user, single-device. No accounts, no sync, no backend.
-- Build data is a **point-in-time snapshot**; updates require redeploy.
+- Single-user, single-device. No accounts, no sync, no backend (except
+  optional GitHub Gist export for Workshop builds).
+- Build data is a point-in-time snapshot; updates require redeploy.
 - Targets modern mobile Safari (iOS 16+) and modern Chromium. ES2020+.
-- Max level 55 (in-game cap with current DLC).
-- Portrait URLs are user-supplied and may break over time. Fallback
-  initial badge ensures graceful degradation.
-- Default join levels are approximations of typical playthrough pacing.
-- Definition lookup coverage is ~89% on real build picks. Misses are
-  handled gracefully but not hidden — the user sees "No description
-  available" rather than no UI feedback.
-- The hardcoded `heroic` supplement table is best-effort game knowledge,
-  not authoritative source data. It can be edited freely in `index.html`.
-- Source spreadsheet structure is assumed stable. Major reorganisation by
-  Revan619 will require updating the extraction script.
-
-
----
-
-## 10. Version 5 Additions
-
-### 10.1 Archetype Callouts (L16 / L36)
-
-Each build records its three chosen archetypes (tier 1 / 2 / 3) directly
-in the source spreadsheet's "Talent" header row, in the columns above
-each level group:
-
-- Column `base_col` → tier-1 archetype (active L1-15)
-- Column `base_col + 3` → tier-2 archetype (chosen at L16, active L16-35)
-- Column `base_col + 6` → tier-3 archetype (chosen at L36, active L36-55)
-
-These are extracted into `DATA.archetypes.{mc,comp}[buildName] = {t1, t2, t3}`
-during build, and looked up by name at runtime via `getBuildArchetypes()`.
-
-When the current level is 16 or 36, character cards, the description sheet,
-and the catch-up timeline all render an inline callout below the pick text:
-
-> ⚜ Tier 2 archetype · Master Tactician
-
-The catch-up header additionally shows the **full archetype path** for the
-build as three pill-bordered tags joined by arrows:
-
-> Officer → Master Tactician → Exemplar
-
-so the player can see the whole arc at a glance.
-
-Coverage is **100% of source builds** (64 MC + 44 companion variants).
-Where the source row has an empty cell (some flavor / unfinished builds
-in the source sheet), no callout appears for that tier.
-
-#### Layout-shift edge case
-
-For a small number of builds (mostly Ministorum Priest variants) the
-source sheet has no separate name row above the origin, so the level
-data starts one row earlier. The extractor detects this by checking
-whether `block_start + 2` contains a tier-1 archetype name (Officer,
-Warrior, Soldier, Operative, Bladedancer); if not, it falls back to
-`block_start + 1`.
-
-### 10.2 Skills & Gear Panels in Catch-Up
-
-Each build's "Skill Options" and "Gear to Consider" sections from the
-source spreadsheet are extracted alongside the level data. They appear at
-the bottom of the catch-up timeline as two visually-distinct panels:
-
-- **Skill Options** — a single Garamond paragraph of the recommended
-  skill allocations.
-- **Gear to Consider** — one row per slot (Helm, Armour, Cloak, Neck,
-  Accessory 1/2, Gloves, Boots, Weapon Set 1/2, Pet for psyker
-  companions). Each slot's options are rendered as gold-bordered "pills".
-
-### 10.3 Gear Cross-Reference
-
-The bundled `gear_db` (~983 entries) merges every item from the source
-spreadsheet's `Helmet`, `Armour`, `Necklaces`, `Trinkets`, `Gloves`,
-`Cloaks`, `Boots`, and `Weapons By Type` tabs. Each entry stores name,
-slot, location text, act number, description, and (for weapons) category.
-
-When a gear pill in the catch-up panel matches a record in `gear_db`:
-- The pill shows a short suffix like `· Act 1` for at-a-glance act timing.
-- Tapping the pill pushes a gear-detail sheet onto the back-stack
-  (back-arrow returns to the timeline). The detail sheet shows Slot/
-  Category, Where (free-text location), When (act), and Effect text.
-
-When a gear pill does **not** match (~30% of options — the source
-spreadsheet's gear tabs are not 100% complete), the pill renders with a
-dashed border in dim ink and is non-interactive. The user still sees the
-recommendation, just without cross-referenced location data.
-
-Match logic uses normalized exact match (lowercase, strip `[Origin]`
-tags and punctuation, trim whitespace) with singular/plural fallbacks
-and a token-set fuzzy match for cases where word order differs.
-
-### 10.4 Bundle Size
-
-With definitions, extras, and gear DB embedded:
-- `full_bundle.json`: ~720 KB minified JSON
-- `index.html`: ~790 KB (bundle + CSS + JS)
-
-Still acceptable for a static PWA. First-paint cost is the parse of
-that JSON (negligible on modern devices); subsequent renders cache the
-indices in module-scope.
+- Max level 55 (current in-game cap).
+- Portrait URLs are user-supplied and may break over time; initial badge
+  is the graceful fallback.
+- Default join levels are approximations; configurable per playthrough.
+- Definition lookup coverage ~89%. Misses are visible to the user
+  ("No description available") rather than silently hidden.
+- The `heroic` supplement is best-effort game knowledge, not authoritative.
+- DLC companions (Kibellah, Solomorne, Incendia Chorda, Calligos
+  Winterscale, Uralon) are tagged; base stats for secret/DLC companions
+  may be incomplete.
