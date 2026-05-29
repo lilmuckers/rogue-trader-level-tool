@@ -16,26 +16,26 @@ const GEAR_SLOT_LABELS = {
 const SLOT_ORDER = ['armour','weapon','shield','helm','cloak','gloves','boots','neck','trinket','familiar'];
 const SLOT_LABEL = { ...GEAR_SLOT_LABELS, shield: 'Shields' };
 
+function _ng(s) {
+  if (!s) return '';
+  return s.toLowerCase()
+    .replace(/\s*\[.*?\]\s*/g, ' ')
+    .replace(/'s\b/g, '')
+    .replace(/-/g, ' ')
+    .replace(/[^a-z0-9 ]/g, '')
+    .replace(/\s+/g, ' ').trim()
+    .replace(/\bbarreled\b/g, 'barrel')
+    .replace(/\bhelmet\b/g, 'helm')
+    .replace(/\bvengeance\b/g, 'vengance')
+    .replace(/\bvengence\b/g, 'vengance');
+}
+
 // ── Build inverted index: normalisedGearName → [{char, buildName, dlc}] ──────
 let _gearUsedByIndex = null;
 
 function _buildGearUsedByIndex() {
   if (_gearUsedByIndex) return _gearUsedByIndex;
   _gearUsedByIndex = new Map();
-
-  function _ng(s) {
-    if (!s) return '';
-    return s.toLowerCase()
-      .replace(/\s*\[.*?\]\s*/g, ' ')
-      .replace(/'s\b/g, '')
-      .replace(/-/g, ' ')
-      .replace(/[^a-z0-9 ]/g, '')
-      .replace(/\s+/g, ' ').trim()
-      .replace(/\bbarreled\b/g, 'barrel')
-      .replace(/\bhelmet\b/g, 'helm')
-      .replace(/\bvengeance\b/g, 'vengance')
-      .replace(/\bvengence\b/g, 'vengance');
-  }
 
   function addEntry(normKey, entry) {
     if (!normKey) return;
@@ -80,19 +80,6 @@ function _buildGearUsedByIndex() {
 
 function _getUsedBy(gearItem) {
   const idx = _buildGearUsedByIndex();
-  function _ng(s) {
-    if (!s) return '';
-    return s.toLowerCase()
-      .replace(/\s*\[.*?\]\s*/g, ' ')
-      .replace(/'s\b/g, '')
-      .replace(/-/g, ' ')
-      .replace(/[^a-z0-9 ]/g, '')
-      .replace(/\s+/g, ' ').trim()
-      .replace(/\bbarreled\b/g, 'barrel')
-      .replace(/\bhelmet\b/g, 'helm')
-      .replace(/\bvengeance\b/g, 'vengance')
-      .replace(/\bvengence\b/g, 'vengance');
-  }
   const k = _ng(gearItem.n);
   return idx.get(k) || idx.get(k + 's') || idx.get(k.endsWith('s') ? k.slice(0,-1) : k) || [];
 }

@@ -145,7 +145,7 @@ function _renderManager(el) {
       editBtn.className = 'ws-btn';
       editBtn.textContent = 'Edit';
       editBtn.addEventListener('click', () => {
-        _wsDraft = JSON.parse(JSON.stringify(b));
+        _wsDraft = structuredClone(b);
         _wsExpandedLvl = null;
         _wsStep = 'setup';
         renderWorkshopSection();
@@ -266,46 +266,46 @@ function _renderSetup(el) {
   const form = document.createElement('div');
   form.className = 'ws-form';
 
-  form.appendChild(_wsField('Build name *', 'text', _wsDraft.name || '', v => { _wsDraft.name = v; }));
+  form.appendChild(_wsInput('Build name *', 'text', _wsDraft.name || '', v => { _wsDraft.name = v; }));
 
   if (_wsDraft._character === 'MC') {
-    form.appendChild(_wsField('Theme (e.g. Noble, Crimelord)', 'text', _wsDraft.theme || '', v => { _wsDraft.theme = v; }));
+    form.appendChild(_wsInput('Theme (e.g. Noble, Crimelord)', 'text', _wsDraft.theme || '', v => { _wsDraft.theme = v; }));
 
     const hwKeys = ['', ...Object.keys(DATA.definitions.homeworlds || {})];
-    form.appendChild(_wsDropdown('Homeworld', hwKeys, _wsDraft._homeworld || '', v => {
+    form.appendChild(_wsInput('Homeworld', 'select', _wsDraft._homeworld || '', v => {
       _wsDraft._homeworld = v;
       // Auto-build origin description
       _updateOriginText();
-    }));
+    }, { options: hwKeys }));
 
     const mcOrigins = ['', ...Object.entries(DATA.definitions.origins || {})
       .filter(([,o]) => o.mc).map(([k]) => k)];
-    form.appendChild(_wsDropdown('Origin', mcOrigins, _wsDraft._origin || '', v => {
+    form.appendChild(_wsInput('Origin', 'select', _wsDraft._origin || '', v => {
       _wsDraft._origin = v;
       _updateOriginText();
-    }));
+    }, { options: mcOrigins }));
 
     // Auto-generated or manual origin description
-    const origField = _wsField('Origin description (auto-filled or override)', 'text', _wsDraft.origin || '', v => { _wsDraft.origin = v; });
+    const origField = _wsInput('Origin description (auto-filled or override)', 'text', _wsDraft.origin || '', v => { _wsDraft.origin = v; });
     origField.dataset.wsOriginField = '1';
     form.appendChild(origField);
   }
 
   // Archetypes
-  form.appendChild(_wsDropdown('Archetype — Tier 1', ['', ...WS_BASIC_ARCHETYPES], _wsDraft.archetypes?.t1 || '', v => {
+  form.appendChild(_wsInput('Archetype — Tier 1', 'select', _wsDraft.archetypes?.t1 || '', v => {
     if (!_wsDraft.archetypes) _wsDraft.archetypes = {};
     _wsDraft.archetypes.t1 = v;
-  }));
-  form.appendChild(_wsDropdown('Archetype — Tier 2', ['', ...WS_ADVANCED_ARCHETYPES], _wsDraft.archetypes?.t2 || '', v => {
+  }, { options: ['', ...WS_BASIC_ARCHETYPES] }));
+  form.appendChild(_wsInput('Archetype — Tier 2', 'select', _wsDraft.archetypes?.t2 || '', v => {
     if (!_wsDraft.archetypes) _wsDraft.archetypes = {};
     _wsDraft.archetypes.t2 = v;
-  }));
-  form.appendChild(_wsDropdown('Archetype — Tier 3 (optional)', ['', ...WS_ADVANCED_ARCHETYPES], _wsDraft.archetypes?.t3 || '', v => {
+  }, { options: ['', ...WS_ADVANCED_ARCHETYPES] }));
+  form.appendChild(_wsInput('Archetype — Tier 3 (optional)', 'select', _wsDraft.archetypes?.t3 || '', v => {
     if (!_wsDraft.archetypes) _wsDraft.archetypes = {};
     _wsDraft.archetypes.t3 = v || undefined;
-  }));
+  }, { options: ['', ...WS_ADVANCED_ARCHETYPES] }));
 
-  form.appendChild(_wsField('Recommended skills (comma-separated)', 'text',
+  form.appendChild(_wsInput('Recommended skills (comma-separated)', 'text',
     _wsDraft.extras?.skills || '', v => {
       if (!_wsDraft.extras) _wsDraft.extras = { gear: [] };
       _wsDraft.extras.skills = v;
@@ -373,13 +373,13 @@ function _renderLevels(el) {
     if (isExpanded) {
       const inputs = document.createElement('div');
       inputs.className = 'ws-level-inputs';
-      inputs.appendChild(_wsPickInput('Main pick', entry.m || '', v => {
+      inputs.appendChild(_wsInput('Main pick', 'pick', entry.m || '', v => {
         if (!_wsDraft.levels) _wsDraft.levels = {};
         if (!_wsDraft.levels[n]) _wsDraft.levels[n] = {};
         _wsDraft.levels[n].m = v;
         if (!v && !_wsDraft.levels[n].e) delete _wsDraft.levels[n];
       }));
-      inputs.appendChild(_wsPickInput('Extra pick', entry.e || '', v => {
+      inputs.appendChild(_wsInput('Extra pick', 'pick', entry.e || '', v => {
         if (!_wsDraft.levels) _wsDraft.levels = {};
         if (!_wsDraft.levels[n]) _wsDraft.levels[n] = {};
         _wsDraft.levels[n].e = v || undefined;
@@ -717,57 +717,43 @@ function _wsBackBtn(el, step, label) {
   el.appendChild(btn);
 }
 
-function _wsField(label, type, value, onChange) {
+function _wsInput(label, type, value, onChange, opts) {
+  // opts: { options: [[val,lbl],...] } for select
+  //       { listId: 'id' } for pick (datalist)
+  //       nothing extra for text/password
   const wrap = document.createElement('div');
-  wrap.className = 'ws-field';
+  wrap.className = type === 'pick' ? 'ws-pick-wrap' : 'ws-field';
   const lbl = document.createElement('label');
   lbl.className = 'ws-field-label';
   lbl.textContent = label;
-  const inp = document.createElement('input');
-  inp.type = type;
-  inp.className = 'ws-field-input';
-  inp.value = value;
-  inp.addEventListener('input', () => onChange(inp.value));
   wrap.appendChild(lbl);
-  wrap.appendChild(inp);
-  return wrap;
-}
 
-function _wsDropdown(label, options, value, onChange) {
-  const wrap = document.createElement('div');
-  wrap.className = 'ws-field';
-  const lbl = document.createElement('label');
-  lbl.className = 'ws-field-label';
-  lbl.textContent = label;
-  const sel = document.createElement('select');
-  sel.className = 'ws-field-select';
-  options.forEach(opt => {
-    const o = document.createElement('option');
-    o.value = opt;
-    o.textContent = opt || '— choose —';
-    if (opt === value) o.selected = true;
-    sel.appendChild(o);
-  });
-  sel.addEventListener('change', () => onChange(sel.value));
-  wrap.appendChild(lbl);
-  wrap.appendChild(sel);
-  return wrap;
-}
+  if (type === 'select') {
+    const sel = document.createElement('select');
+    sel.className = 'ws-field-select';
+    (opts && opts.options || []).forEach(opt => {
+      const o = document.createElement('option');
+      o.value = opt;
+      o.textContent = opt || '— choose —';
+      if (opt === value) o.selected = true;
+      sel.appendChild(o);
+    });
+    sel.addEventListener('change', () => onChange(sel.value));
+    wrap.appendChild(sel);
+  } else {
+    const inp = document.createElement('input');
+    inp.type = type === 'pick' ? 'text' : type;
+    inp.className = 'ws-field-input';
+    inp.value = value;
+    if (type === 'pick') {
+      inp.setAttribute('list', 'ws-pick-dl');
+      inp.addEventListener('change', () => onChange(inp.value));
+      inp.addEventListener('blur',   () => onChange(inp.value));
+    } else {
+      inp.addEventListener('input', () => onChange(inp.value));
+    }
+    wrap.appendChild(inp);
+  }
 
-function _wsPickInput(label, value, onChange) {
-  const wrap = document.createElement('div');
-  wrap.className = 'ws-pick-wrap';
-  const lbl = document.createElement('label');
-  lbl.className = 'ws-field-label';
-  lbl.textContent = label;
-  const inp = document.createElement('input');
-  inp.type = 'text';
-  inp.className = 'ws-field-input';
-  inp.setAttribute('list', 'ws-pick-dl');
-  inp.value = value;
-  inp.addEventListener('change', () => onChange(inp.value));
-  inp.addEventListener('blur',   () => onChange(inp.value));
-  wrap.appendChild(lbl);
-  wrap.appendChild(inp);
   return wrap;
 }
