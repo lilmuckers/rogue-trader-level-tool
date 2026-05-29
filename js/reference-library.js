@@ -58,7 +58,7 @@ function _renderDefList(el, entries, query, sectionId) {
   });
   if (!count) {
     const em = document.createElement('div');
-    em.className = 'gb-empty';
+    em.className = 'ref-empty';
     em.textContent = 'No results.';
     el.appendChild(em);
   }
@@ -183,60 +183,74 @@ function _statBonusRow(bonuses) {
   return wrap;
 }
 
-function _renderHomeworlds(el) {
-  const homeworlds = DATA.definitions.homeworlds || {};
-  Object.entries(homeworlds).forEach(([name, hw]) => {
-    const card = document.createElement('div');
-    card.className = 'lib-world-card';
+function _makeRefCard(name, favOpts) {
+  const card = document.createElement('div');
+  card.className = 'lib-world-card';
+  card.dataset.favKey = name;
 
-    const title = document.createElement('div');
-    title.className = 'lib-world-title';
-    title.textContent = name;
-    const hwTitleRow = document.createElement('div');
-    hwTitleRow.className = 'lib-world-title-row';
-    hwTitleRow.appendChild(title);
-    hwTitleRow.appendChild(_makeFavBtn({ id: 'fav_hw_' + name, label: name, sub: hw.description ? hw.description.slice(0,60) : '', sectionId: 'charcreate', itemKey: name }));
-    card.dataset.favKey = name;
-    card.appendChild(hwTitleRow);
+  const titleRow = document.createElement('div');
+  titleRow.className = 'lib-world-title-row';
+  const titleEl = document.createElement('div');
+  titleEl.className = 'lib-world-title';
+  titleEl.textContent = name;
+  titleRow.appendChild(titleEl);
+  titleRow.appendChild(_makeFavBtn(favOpts));
+  card.appendChild(titleRow);
 
-    if (hw.description) {
-      const desc = document.createElement('div');
-      desc.className = 'lib-world-desc';
-      desc.textContent = hw.description;
-      card.appendChild(desc);
-    }
-
-    const bonusRow = _statBonusRow(hw.bonuses);
-    if (bonusRow) card.appendChild(bonusRow);
-    if (hw.bonus_note) {
-      const note = document.createElement('div');
-      note.className = 'lib-bonus-note';
-      note.textContent = hw.bonus_note;
-      card.appendChild(note);
-    }
-
-    if (hw.talent) {
-      const talentWrap = document.createElement('div');
-      talentWrap.className = 'lib-talent-row';
-      const tLabel = document.createElement('span');
-      tLabel.className = 'lib-talent-label';
-      tLabel.textContent = 'Talent: ';
-      const tName = document.createElement('span');
-      tName.className = 'lib-talent-name';
-      tName.textContent = hw.talent;
-      talentWrap.appendChild(tLabel);
-      talentWrap.appendChild(tName);
-      card.appendChild(talentWrap);
-      if (hw.talent_desc) {
+  return {
+    card,
+    titleRow,
+    addDesc(text) {
+      const d = document.createElement('div');
+      d.className = 'lib-world-desc';
+      d.textContent = text;
+      card.appendChild(d);
+    },
+    addBonuses(bonusObj) {
+      const row = _statBonusRow(bonusObj);
+      if (row) card.appendChild(row);
+    },
+    addNote(text) {
+      const n = document.createElement('div');
+      n.className = 'lib-bonus-note';
+      n.textContent = text;
+      card.appendChild(n);
+    },
+    addTalent(talentName, talentDesc) {
+      const wrap = document.createElement('div');
+      wrap.className = 'lib-talent-row';
+      const lbl = document.createElement('span');
+      lbl.className = 'lib-talent-label';
+      lbl.textContent = 'Talent: ';
+      const nm = document.createElement('span');
+      nm.className = 'lib-talent-name';
+      nm.textContent = talentName;
+      wrap.appendChild(lbl);
+      wrap.appendChild(nm);
+      card.appendChild(wrap);
+      if (talentDesc) {
         const td = document.createElement('div');
         td.className = 'lib-world-desc';
         td.style.marginTop = '2px';
-        td.textContent = hw.talent_desc;
+        td.textContent = talentDesc;
         card.appendChild(td);
       }
-    }
+    },
+    addExtra(el) {
+      card.appendChild(el);
+    },
+  };
+}
 
-    el.appendChild(card);
+function _renderHomeworlds(el) {
+  const homeworlds = DATA.definitions.homeworlds || {};
+  Object.entries(homeworlds).forEach(([name, hw]) => {
+    const ref = _makeRefCard(name, { id: 'fav_hw_' + name, label: name, sub: hw.description ? hw.description.slice(0,60) : '', sectionId: 'charcreate', itemKey: name });
+    if (hw.description) ref.addDesc(hw.description);
+    ref.addBonuses(hw.bonuses);
+    if (hw.bonus_note) ref.addNote(hw.bonus_note);
+    if (hw.talent) ref.addTalent(hw.talent, hw.talent_desc);
+    el.appendChild(ref.card);
   });
 }
 
@@ -252,49 +266,23 @@ function _renderOrigins(el) {
     el.appendChild(h);
 
     items.forEach(([name, origin]) => {
-      const card = document.createElement('div');
-      card.className = 'lib-world-card';
-
-      const header = document.createElement('div');
-      header.className = 'lib-world-title-row';
-      const title = document.createElement('span');
-      title.className = 'lib-world-title';
-      title.textContent = name;
-      header.appendChild(title);
+      const ref = _makeRefCard(name, { id: 'fav_orig_' + name, label: name, sub: origin.description ? origin.description.slice(0,60) : '', sectionId: 'charcreate', itemKey: name });
       if (origin.companion) {
         const ch = document.createElement('span');
         ch.className = 'lib-origin-companion';
         ch.textContent = origin.companion;
-        header.appendChild(ch);
+        ref.titleRow.insertBefore(ch, ref.titleRow.lastChild);
       }
-      header.appendChild(_makeFavBtn({ id: 'fav_orig_' + name, label: name, sub: origin.description ? origin.description.slice(0,60) : '', sectionId: 'charcreate', itemKey: name }));
-      card.dataset.favKey = name;
-      card.appendChild(header);
-
-      if (origin.description) {
-        const desc = document.createElement('div');
-        desc.className = 'lib-world-desc';
-        desc.textContent = origin.description;
-        card.appendChild(desc);
-      }
-
-      const bonusRow = _statBonusRow(origin.bonuses);
-      if (bonusRow) card.appendChild(bonusRow);
-      if (origin.bonus_note) {
-        const note = document.createElement('div');
-        note.className = 'lib-bonus-note';
-        note.textContent = origin.bonus_note;
-        card.appendChild(note);
-      }
-
+      if (origin.description) ref.addDesc(origin.description);
+      ref.addBonuses(origin.bonuses);
+      if (origin.bonus_note) ref.addNote(origin.bonus_note);
       if (origin.archetypes && origin.archetypes.length) {
         const arc = document.createElement('div');
         arc.className = 'lib-origin-archetypes';
         arc.textContent = 'Archetypes: ' + origin.archetypes.join(', ');
-        card.appendChild(arc);
+        ref.addExtra(arc);
       }
-
-      el.appendChild(card);
+      el.appendChild(ref.card);
     });
   };
 
@@ -335,7 +323,7 @@ function _renderMCBuildList(el) {
 
   if (!grouped.size) {
     const em = document.createElement('div');
-    em.className = 'gb-empty';
+    em.className = 'ref-empty';
     em.textContent = 'No builds match.';
     el.appendChild(em);
     return;
@@ -428,7 +416,7 @@ function _renderRetinueList(el) {
 
   if (!order.length) {
     const em = document.createElement('div');
-    em.className = 'gb-empty';
+    em.className = 'ref-empty';
     em.textContent = 'No results.';
     el.appendChild(em);
     return;

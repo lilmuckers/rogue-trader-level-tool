@@ -3554,26 +3554,26 @@ const GEAR_SLOT_LABELS = {
 const SLOT_ORDER = ['armour','weapon','shield','helm','cloak','gloves','boots','neck','trinket','familiar'];
 const SLOT_LABEL = { ...GEAR_SLOT_LABELS, shield: 'Shields' };
 
+function _ng(s) {
+  if (!s) return '';
+  return s.toLowerCase()
+    .replace(/\s*\[.*?\]\s*/g, ' ')
+    .replace(/'s\b/g, '')
+    .replace(/-/g, ' ')
+    .replace(/[^a-z0-9 ]/g, '')
+    .replace(/\s+/g, ' ').trim()
+    .replace(/\bbarreled\b/g, 'barrel')
+    .replace(/\bhelmet\b/g, 'helm')
+    .replace(/\bvengeance\b/g, 'vengance')
+    .replace(/\bvengence\b/g, 'vengance');
+}
+
 // ── Build inverted index: normalisedGearName → [{char, buildName, dlc}] ──────
 let _gearUsedByIndex = null;
 
 function _buildGearUsedByIndex() {
   if (_gearUsedByIndex) return _gearUsedByIndex;
   _gearUsedByIndex = new Map();
-
-  function _ng(s) {
-    if (!s) return '';
-    return s.toLowerCase()
-      .replace(/\s*\[.*?\]\s*/g, ' ')
-      .replace(/'s\b/g, '')
-      .replace(/-/g, ' ')
-      .replace(/[^a-z0-9 ]/g, '')
-      .replace(/\s+/g, ' ').trim()
-      .replace(/\bbarreled\b/g, 'barrel')
-      .replace(/\bhelmet\b/g, 'helm')
-      .replace(/\bvengeance\b/g, 'vengance')
-      .replace(/\bvengence\b/g, 'vengance');
-  }
 
   function addEntry(normKey, entry) {
     if (!normKey) return;
@@ -3618,19 +3618,6 @@ function _buildGearUsedByIndex() {
 
 function _getUsedBy(gearItem) {
   const idx = _buildGearUsedByIndex();
-  function _ng(s) {
-    if (!s) return '';
-    return s.toLowerCase()
-      .replace(/\s*\[.*?\]\s*/g, ' ')
-      .replace(/'s\b/g, '')
-      .replace(/-/g, ' ')
-      .replace(/[^a-z0-9 ]/g, '')
-      .replace(/\s+/g, ' ').trim()
-      .replace(/\bbarreled\b/g, 'barrel')
-      .replace(/\bhelmet\b/g, 'helm')
-      .replace(/\bvengeance\b/g, 'vengance')
-      .replace(/\bvengence\b/g, 'vengance');
-  }
   const k = _ng(gearItem.n);
   return idx.get(k) || idx.get(k + 's') || idx.get(k.endsWith('s') ? k.slice(0,-1) : k) || [];
 }
@@ -4009,7 +3996,7 @@ function _renderDefList(el, entries, query, sectionId) {
   });
   if (!count) {
     const em = document.createElement('div');
-    em.className = 'gb-empty';
+    em.className = 'ref-empty';
     em.textContent = 'No results.';
     el.appendChild(em);
   }
@@ -4134,60 +4121,74 @@ function _statBonusRow(bonuses) {
   return wrap;
 }
 
-function _renderHomeworlds(el) {
-  const homeworlds = DATA.definitions.homeworlds || {};
-  Object.entries(homeworlds).forEach(([name, hw]) => {
-    const card = document.createElement('div');
-    card.className = 'lib-world-card';
+function _makeRefCard(name, favOpts) {
+  const card = document.createElement('div');
+  card.className = 'lib-world-card';
+  card.dataset.favKey = name;
 
-    const title = document.createElement('div');
-    title.className = 'lib-world-title';
-    title.textContent = name;
-    const hwTitleRow = document.createElement('div');
-    hwTitleRow.className = 'lib-world-title-row';
-    hwTitleRow.appendChild(title);
-    hwTitleRow.appendChild(_makeFavBtn({ id: 'fav_hw_' + name, label: name, sub: hw.description ? hw.description.slice(0,60) : '', sectionId: 'charcreate', itemKey: name }));
-    card.dataset.favKey = name;
-    card.appendChild(hwTitleRow);
+  const titleRow = document.createElement('div');
+  titleRow.className = 'lib-world-title-row';
+  const titleEl = document.createElement('div');
+  titleEl.className = 'lib-world-title';
+  titleEl.textContent = name;
+  titleRow.appendChild(titleEl);
+  titleRow.appendChild(_makeFavBtn(favOpts));
+  card.appendChild(titleRow);
 
-    if (hw.description) {
-      const desc = document.createElement('div');
-      desc.className = 'lib-world-desc';
-      desc.textContent = hw.description;
-      card.appendChild(desc);
-    }
-
-    const bonusRow = _statBonusRow(hw.bonuses);
-    if (bonusRow) card.appendChild(bonusRow);
-    if (hw.bonus_note) {
-      const note = document.createElement('div');
-      note.className = 'lib-bonus-note';
-      note.textContent = hw.bonus_note;
-      card.appendChild(note);
-    }
-
-    if (hw.talent) {
-      const talentWrap = document.createElement('div');
-      talentWrap.className = 'lib-talent-row';
-      const tLabel = document.createElement('span');
-      tLabel.className = 'lib-talent-label';
-      tLabel.textContent = 'Talent: ';
-      const tName = document.createElement('span');
-      tName.className = 'lib-talent-name';
-      tName.textContent = hw.talent;
-      talentWrap.appendChild(tLabel);
-      talentWrap.appendChild(tName);
-      card.appendChild(talentWrap);
-      if (hw.talent_desc) {
+  return {
+    card,
+    titleRow,
+    addDesc(text) {
+      const d = document.createElement('div');
+      d.className = 'lib-world-desc';
+      d.textContent = text;
+      card.appendChild(d);
+    },
+    addBonuses(bonusObj) {
+      const row = _statBonusRow(bonusObj);
+      if (row) card.appendChild(row);
+    },
+    addNote(text) {
+      const n = document.createElement('div');
+      n.className = 'lib-bonus-note';
+      n.textContent = text;
+      card.appendChild(n);
+    },
+    addTalent(talentName, talentDesc) {
+      const wrap = document.createElement('div');
+      wrap.className = 'lib-talent-row';
+      const lbl = document.createElement('span');
+      lbl.className = 'lib-talent-label';
+      lbl.textContent = 'Talent: ';
+      const nm = document.createElement('span');
+      nm.className = 'lib-talent-name';
+      nm.textContent = talentName;
+      wrap.appendChild(lbl);
+      wrap.appendChild(nm);
+      card.appendChild(wrap);
+      if (talentDesc) {
         const td = document.createElement('div');
         td.className = 'lib-world-desc';
         td.style.marginTop = '2px';
-        td.textContent = hw.talent_desc;
+        td.textContent = talentDesc;
         card.appendChild(td);
       }
-    }
+    },
+    addExtra(el) {
+      card.appendChild(el);
+    },
+  };
+}
 
-    el.appendChild(card);
+function _renderHomeworlds(el) {
+  const homeworlds = DATA.definitions.homeworlds || {};
+  Object.entries(homeworlds).forEach(([name, hw]) => {
+    const ref = _makeRefCard(name, { id: 'fav_hw_' + name, label: name, sub: hw.description ? hw.description.slice(0,60) : '', sectionId: 'charcreate', itemKey: name });
+    if (hw.description) ref.addDesc(hw.description);
+    ref.addBonuses(hw.bonuses);
+    if (hw.bonus_note) ref.addNote(hw.bonus_note);
+    if (hw.talent) ref.addTalent(hw.talent, hw.talent_desc);
+    el.appendChild(ref.card);
   });
 }
 
@@ -4203,49 +4204,23 @@ function _renderOrigins(el) {
     el.appendChild(h);
 
     items.forEach(([name, origin]) => {
-      const card = document.createElement('div');
-      card.className = 'lib-world-card';
-
-      const header = document.createElement('div');
-      header.className = 'lib-world-title-row';
-      const title = document.createElement('span');
-      title.className = 'lib-world-title';
-      title.textContent = name;
-      header.appendChild(title);
+      const ref = _makeRefCard(name, { id: 'fav_orig_' + name, label: name, sub: origin.description ? origin.description.slice(0,60) : '', sectionId: 'charcreate', itemKey: name });
       if (origin.companion) {
         const ch = document.createElement('span');
         ch.className = 'lib-origin-companion';
         ch.textContent = origin.companion;
-        header.appendChild(ch);
+        ref.titleRow.insertBefore(ch, ref.titleRow.lastChild);
       }
-      header.appendChild(_makeFavBtn({ id: 'fav_orig_' + name, label: name, sub: origin.description ? origin.description.slice(0,60) : '', sectionId: 'charcreate', itemKey: name }));
-      card.dataset.favKey = name;
-      card.appendChild(header);
-
-      if (origin.description) {
-        const desc = document.createElement('div');
-        desc.className = 'lib-world-desc';
-        desc.textContent = origin.description;
-        card.appendChild(desc);
-      }
-
-      const bonusRow = _statBonusRow(origin.bonuses);
-      if (bonusRow) card.appendChild(bonusRow);
-      if (origin.bonus_note) {
-        const note = document.createElement('div');
-        note.className = 'lib-bonus-note';
-        note.textContent = origin.bonus_note;
-        card.appendChild(note);
-      }
-
+      if (origin.description) ref.addDesc(origin.description);
+      ref.addBonuses(origin.bonuses);
+      if (origin.bonus_note) ref.addNote(origin.bonus_note);
       if (origin.archetypes && origin.archetypes.length) {
         const arc = document.createElement('div');
         arc.className = 'lib-origin-archetypes';
         arc.textContent = 'Archetypes: ' + origin.archetypes.join(', ');
-        card.appendChild(arc);
+        ref.addExtra(arc);
       }
-
-      el.appendChild(card);
+      el.appendChild(ref.card);
     });
   };
 
@@ -4286,7 +4261,7 @@ function _renderMCBuildList(el) {
 
   if (!grouped.size) {
     const em = document.createElement('div');
-    em.className = 'gb-empty';
+    em.className = 'ref-empty';
     em.textContent = 'No builds match.';
     el.appendChild(em);
     return;
@@ -4379,7 +4354,7 @@ function _renderRetinueList(el) {
 
   if (!order.length) {
     const em = document.createElement('div');
-    em.className = 'gb-empty';
+    em.className = 'ref-empty';
     em.textContent = 'No results.';
     el.appendChild(em);
     return;
@@ -5336,7 +5311,7 @@ function _renderManager(el) {
       editBtn.className = 'ws-btn';
       editBtn.textContent = 'Edit';
       editBtn.addEventListener('click', () => {
-        _wsDraft = JSON.parse(JSON.stringify(b));
+        _wsDraft = structuredClone(b);
         _wsExpandedLvl = null;
         _wsStep = 'setup';
         renderWorkshopSection();
@@ -5457,46 +5432,46 @@ function _renderSetup(el) {
   const form = document.createElement('div');
   form.className = 'ws-form';
 
-  form.appendChild(_wsField('Build name *', 'text', _wsDraft.name || '', v => { _wsDraft.name = v; }));
+  form.appendChild(_wsInput('Build name *', 'text', _wsDraft.name || '', v => { _wsDraft.name = v; }));
 
   if (_wsDraft._character === 'MC') {
-    form.appendChild(_wsField('Theme (e.g. Noble, Crimelord)', 'text', _wsDraft.theme || '', v => { _wsDraft.theme = v; }));
+    form.appendChild(_wsInput('Theme (e.g. Noble, Crimelord)', 'text', _wsDraft.theme || '', v => { _wsDraft.theme = v; }));
 
     const hwKeys = ['', ...Object.keys(DATA.definitions.homeworlds || {})];
-    form.appendChild(_wsDropdown('Homeworld', hwKeys, _wsDraft._homeworld || '', v => {
+    form.appendChild(_wsInput('Homeworld', 'select', _wsDraft._homeworld || '', v => {
       _wsDraft._homeworld = v;
       // Auto-build origin description
       _updateOriginText();
-    }));
+    }, { options: hwKeys }));
 
     const mcOrigins = ['', ...Object.entries(DATA.definitions.origins || {})
       .filter(([,o]) => o.mc).map(([k]) => k)];
-    form.appendChild(_wsDropdown('Origin', mcOrigins, _wsDraft._origin || '', v => {
+    form.appendChild(_wsInput('Origin', 'select', _wsDraft._origin || '', v => {
       _wsDraft._origin = v;
       _updateOriginText();
-    }));
+    }, { options: mcOrigins }));
 
     // Auto-generated or manual origin description
-    const origField = _wsField('Origin description (auto-filled or override)', 'text', _wsDraft.origin || '', v => { _wsDraft.origin = v; });
+    const origField = _wsInput('Origin description (auto-filled or override)', 'text', _wsDraft.origin || '', v => { _wsDraft.origin = v; });
     origField.dataset.wsOriginField = '1';
     form.appendChild(origField);
   }
 
   // Archetypes
-  form.appendChild(_wsDropdown('Archetype — Tier 1', ['', ...WS_BASIC_ARCHETYPES], _wsDraft.archetypes?.t1 || '', v => {
+  form.appendChild(_wsInput('Archetype — Tier 1', 'select', _wsDraft.archetypes?.t1 || '', v => {
     if (!_wsDraft.archetypes) _wsDraft.archetypes = {};
     _wsDraft.archetypes.t1 = v;
-  }));
-  form.appendChild(_wsDropdown('Archetype — Tier 2', ['', ...WS_ADVANCED_ARCHETYPES], _wsDraft.archetypes?.t2 || '', v => {
+  }, { options: ['', ...WS_BASIC_ARCHETYPES] }));
+  form.appendChild(_wsInput('Archetype — Tier 2', 'select', _wsDraft.archetypes?.t2 || '', v => {
     if (!_wsDraft.archetypes) _wsDraft.archetypes = {};
     _wsDraft.archetypes.t2 = v;
-  }));
-  form.appendChild(_wsDropdown('Archetype — Tier 3 (optional)', ['', ...WS_ADVANCED_ARCHETYPES], _wsDraft.archetypes?.t3 || '', v => {
+  }, { options: ['', ...WS_ADVANCED_ARCHETYPES] }));
+  form.appendChild(_wsInput('Archetype — Tier 3 (optional)', 'select', _wsDraft.archetypes?.t3 || '', v => {
     if (!_wsDraft.archetypes) _wsDraft.archetypes = {};
     _wsDraft.archetypes.t3 = v || undefined;
-  }));
+  }, { options: ['', ...WS_ADVANCED_ARCHETYPES] }));
 
-  form.appendChild(_wsField('Recommended skills (comma-separated)', 'text',
+  form.appendChild(_wsInput('Recommended skills (comma-separated)', 'text',
     _wsDraft.extras?.skills || '', v => {
       if (!_wsDraft.extras) _wsDraft.extras = { gear: [] };
       _wsDraft.extras.skills = v;
@@ -5564,13 +5539,13 @@ function _renderLevels(el) {
     if (isExpanded) {
       const inputs = document.createElement('div');
       inputs.className = 'ws-level-inputs';
-      inputs.appendChild(_wsPickInput('Main pick', entry.m || '', v => {
+      inputs.appendChild(_wsInput('Main pick', 'pick', entry.m || '', v => {
         if (!_wsDraft.levels) _wsDraft.levels = {};
         if (!_wsDraft.levels[n]) _wsDraft.levels[n] = {};
         _wsDraft.levels[n].m = v;
         if (!v && !_wsDraft.levels[n].e) delete _wsDraft.levels[n];
       }));
-      inputs.appendChild(_wsPickInput('Extra pick', entry.e || '', v => {
+      inputs.appendChild(_wsInput('Extra pick', 'pick', entry.e || '', v => {
         if (!_wsDraft.levels) _wsDraft.levels = {};
         if (!_wsDraft.levels[n]) _wsDraft.levels[n] = {};
         _wsDraft.levels[n].e = v || undefined;
@@ -5908,58 +5883,44 @@ function _wsBackBtn(el, step, label) {
   el.appendChild(btn);
 }
 
-function _wsField(label, type, value, onChange) {
+function _wsInput(label, type, value, onChange, opts) {
+  // opts: { options: [[val,lbl],...] } for select
+  //       { listId: 'id' } for pick (datalist)
+  //       nothing extra for text/password
   const wrap = document.createElement('div');
-  wrap.className = 'ws-field';
+  wrap.className = type === 'pick' ? 'ws-pick-wrap' : 'ws-field';
   const lbl = document.createElement('label');
   lbl.className = 'ws-field-label';
   lbl.textContent = label;
-  const inp = document.createElement('input');
-  inp.type = type;
-  inp.className = 'ws-field-input';
-  inp.value = value;
-  inp.addEventListener('input', () => onChange(inp.value));
   wrap.appendChild(lbl);
-  wrap.appendChild(inp);
-  return wrap;
-}
 
-function _wsDropdown(label, options, value, onChange) {
-  const wrap = document.createElement('div');
-  wrap.className = 'ws-field';
-  const lbl = document.createElement('label');
-  lbl.className = 'ws-field-label';
-  lbl.textContent = label;
-  const sel = document.createElement('select');
-  sel.className = 'ws-field-select';
-  options.forEach(opt => {
-    const o = document.createElement('option');
-    o.value = opt;
-    o.textContent = opt || '— choose —';
-    if (opt === value) o.selected = true;
-    sel.appendChild(o);
-  });
-  sel.addEventListener('change', () => onChange(sel.value));
-  wrap.appendChild(lbl);
-  wrap.appendChild(sel);
-  return wrap;
-}
+  if (type === 'select') {
+    const sel = document.createElement('select');
+    sel.className = 'ws-field-select';
+    (opts && opts.options || []).forEach(opt => {
+      const o = document.createElement('option');
+      o.value = opt;
+      o.textContent = opt || '— choose —';
+      if (opt === value) o.selected = true;
+      sel.appendChild(o);
+    });
+    sel.addEventListener('change', () => onChange(sel.value));
+    wrap.appendChild(sel);
+  } else {
+    const inp = document.createElement('input');
+    inp.type = type === 'pick' ? 'text' : type;
+    inp.className = 'ws-field-input';
+    inp.value = value;
+    if (type === 'pick') {
+      inp.setAttribute('list', 'ws-pick-dl');
+      inp.addEventListener('change', () => onChange(inp.value));
+      inp.addEventListener('blur',   () => onChange(inp.value));
+    } else {
+      inp.addEventListener('input', () => onChange(inp.value));
+    }
+    wrap.appendChild(inp);
+  }
 
-function _wsPickInput(label, value, onChange) {
-  const wrap = document.createElement('div');
-  wrap.className = 'ws-pick-wrap';
-  const lbl = document.createElement('label');
-  lbl.className = 'ws-field-label';
-  lbl.textContent = label;
-  const inp = document.createElement('input');
-  inp.type = 'text';
-  inp.className = 'ws-field-input';
-  inp.setAttribute('list', 'ws-pick-dl');
-  inp.value = value;
-  inp.addEventListener('change', () => onChange(inp.value));
-  inp.addEventListener('blur',   () => onChange(inp.value));
-  wrap.appendChild(lbl);
-  wrap.appendChild(inp);
   return wrap;
 }
 

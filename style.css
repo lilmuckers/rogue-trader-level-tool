@@ -1117,7 +1117,7 @@
 }
 .gb-used-by { font-size: 11px; color: var(--ink-faint); font-style: italic; }
 .gb-item-desc { font-size: 13px; color: var(--ink-dim); margin-top: 3px; line-height: 1.4; }
-.gb-empty { text-align: center; color: var(--ink-faint); font-style: italic; padding: 40px 0; font-size: 14px; }
+.gb-empty, .ref-empty { text-align: center; color: var(--ink-faint); font-style: italic; padding: 40px 0; font-size: 14px; }
 
 /* ── Reference section ── */
 .reference-grid {
