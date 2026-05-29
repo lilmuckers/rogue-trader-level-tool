@@ -3933,6 +3933,13 @@ function renderGearList(listEl) {
         row.appendChild(meta);
       }
 
+      const favSub = [item.dlc, item.a != null ? actToText(item.a) : null].filter(Boolean).join(' · ');
+      nameWrap.appendChild(_makeFavBtn({
+        id: 'fav_gear_' + item.n,
+        label: item.n, sub: favSub || '',
+        sectionId: 'gear', action: 'gear-detail', itemKey: item.n,
+      }));
+
       row.classList.add('has-detail');
       row.addEventListener('click', () => pushGearDetail(item, item.n));
 
@@ -3970,7 +3977,7 @@ function _makeLibSearch(placeholder, onInput) {
   return wrap;
 }
 
-function _renderDefList(el, entries, query) {
+function _renderDefList(el, entries, query, sectionId) {
   el.innerHTML = '';
   const q = query ? query.toLowerCase() : '';
   let count = 0;
@@ -3989,6 +3996,7 @@ function _renderDefList(el, entries, query) {
       const badge = makeDlcBadge(dlc);
       if (badge) { badge.className = 'dlc-badge dlc-badge-pill'; header.appendChild(badge); }
     }
+    header.appendChild(_makeFavBtn({ id: 'fav_def_' + name, label: name, sub: typeof desc === 'string' ? desc.slice(0,60) : '', sectionId: sectionId || 'abilities' }));
     row.appendChild(header);
     if (desc) {
       const d = document.createElement('div');
@@ -4018,10 +4026,10 @@ function renderAbilitiesSection(el) {
   const listEl = document.createElement('div');
   listEl.className = 'lib-def-list';
 
-  const search = _makeLibSearch('Search abilities…', q => _renderDefList(listEl, entries, q));
+  const search = _makeLibSearch('Search abilities…', q => _renderDefList(listEl, entries, q, 'abilities'));
   el.appendChild(search);
   el.appendChild(listEl);
-  _renderDefList(listEl, entries, '');
+  _renderDefList(listEl, entries, '', 'abilities');
 }
 
 // ── Talents ───────────────────────────────────────────────────────────────────
@@ -4036,10 +4044,10 @@ function renderTalentsSection(el) {
   const listEl = document.createElement('div');
   listEl.className = 'lib-def-list';
 
-  const search = _makeLibSearch('Search talents…', q => _renderDefList(listEl, entries, q));
+  const search = _makeLibSearch('Search talents…', q => _renderDefList(listEl, entries, q, 'talents'));
   el.appendChild(search);
   el.appendChild(listEl);
-  _renderDefList(listEl, entries, '');
+  _renderDefList(listEl, entries, '', 'talents');
 }
 
 // ── Skills & Characteristics ──────────────────────────────────────────────────
@@ -4078,6 +4086,7 @@ function renderSkillsSection(el) {
       d.className = 'lib-def-desc';
       d.textContent = typeof desc === 'string' ? desc : '';
       row.appendChild(nm);
+      row.appendChild(_makeFavBtn({ id: 'fav_skill_' + name, label: name, sub: '', sectionId: 'skills' }));
       row.appendChild(d);
       el.appendChild(row);
     });
@@ -4132,7 +4141,11 @@ function _renderHomeworlds(el) {
     const title = document.createElement('div');
     title.className = 'lib-world-title';
     title.textContent = name;
-    card.appendChild(title);
+    const hwTitleRow = document.createElement('div');
+    hwTitleRow.className = 'lib-world-title-row';
+    hwTitleRow.appendChild(title);
+    hwTitleRow.appendChild(_makeFavBtn({ id: 'fav_hw_' + name, label: name, sub: hw.description ? hw.description.slice(0,60) : '', sectionId: 'charcreate' }));
+    card.appendChild(hwTitleRow);
 
     if (hw.description) {
       const desc = document.createElement('div');
@@ -4202,6 +4215,7 @@ function _renderOrigins(el) {
         ch.textContent = origin.companion;
         header.appendChild(ch);
       }
+      header.appendChild(_makeFavBtn({ id: 'fav_orig_' + name, label: name, sub: origin.description ? origin.description.slice(0,60) : '', sectionId: 'charcreate' }));
       card.appendChild(header);
 
       if (origin.description) {
@@ -4294,6 +4308,7 @@ function _renderMCBuildList(el) {
         const badge = makeDlcBadge(b.dlc);
         if (badge) { badge.className = 'dlc-badge dlc-badge-pill'; nameRow.appendChild(badge); }
       }
+      nameRow.appendChild(_makeFavBtn({ id: 'fav_mcbuild_' + b.name, label: b.name, sub: b.theme || '', sectionId: 'mcbuilds' }));
       card.appendChild(nameRow);
 
       if (b.origin) {
@@ -4383,6 +4398,7 @@ function _renderRetinueList(el) {
       const badge = makeDlcBadge(bio.dlc);
       if (badge) { badge.className = 'dlc-badge dlc-badge-pill'; nameRow.appendChild(badge); }
     }
+    nameRow.appendChild(_makeFavBtn({ id: 'fav_retinue_' + name, label: name, sub: bio.origin || '', sectionId: 'retinue' }));
     card.appendChild(nameRow);
 
     // Homeworld / Origin / Join
@@ -4487,6 +4503,7 @@ function renderConvictionsSection(el) {
     title.textContent = pathName;
     header.appendChild(icon);
     header.appendChild(title);
+    header.appendChild(_makeFavBtn({ id: 'fav_conv_' + pathName, label: pathName, sub: path.approach ? path.approach.slice(0,60) : '', sectionId: 'convictions' }));
     card.appendChild(header);
 
     // Approach
@@ -4604,6 +4621,7 @@ function renderRomancesSection(el) {
     title.className = 'lib-world-title';
     title.textContent = name;
     titleRow.appendChild(title);
+    titleRow.appendChild(_makeFavBtn({ id: 'fav_romance_' + name, label: name + ' Romance', sub: r.available_to || '', sectionId: 'romances' }));
     if (r.dlc) {
       const badge = makeDlcBadge(r.dlc);
       if (badge) { badge.className = 'dlc-badge dlc-badge-pill'; titleRow.appendChild(badge); }
@@ -4685,6 +4703,103 @@ function renderRomancesSection(el) {
 let _referenceSubSection = null;
 let _referenceSearch = '';
 
+// ── Favourites ────────────────────────────────────────────────────────────────
+const KEY_REF_FAVS = 'rt-ref-favourites';
+function getRefFavs()    { return Store.get(KEY_REF_FAVS) || []; }
+function saveRefFavs(f)  { Store.set(KEY_REF_FAVS, f); }
+
+function toggleRefFav(fav) {
+  const favs = getRefFavs();
+  const idx  = favs.findIndex(f => f.id === fav.id);
+  if (idx >= 0) favs.splice(idx, 1); else favs.push(fav);
+  saveRefFavs(favs);
+}
+function isRefFav(id) { return getRefFavs().some(f => f.id === id); }
+
+// Shared star button — call e.stopPropagation() internally so parent click unaffected
+function _makeFavBtn(fav) {
+  const btn = document.createElement('button');
+  const update = () => {
+    const active = isRefFav(fav.id);
+    btn.className = 'ref-fav-btn' + (active ? ' active' : '');
+    btn.title = active ? 'Remove from Quick Access' : 'Add to Quick Access';
+  };
+  btn.textContent = '★';
+  update();
+  btn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    toggleRefFav(fav);
+    update();
+  });
+  return btn;
+}
+
+function _navigateToFav(fav) {
+  _referenceSubSection = fav.sectionId;
+  _referenceSearch = '';
+  renderReferenceSection();
+  // Deep nav for gear — push detail sheet
+  if (fav.action === 'gear-detail' && fav.itemKey) {
+    const item = (DATA.gear_db || []).find(g => g.n === fav.itemKey);
+    if (item) setTimeout(() => pushGearDetail(item, fav.label), 50);
+  }
+}
+
+function _renderQuickAccess(el) {
+  const favs = getRefFavs();
+  if (!favs.length) return;
+
+  const wrap = document.createElement('div');
+  wrap.className = 'ref-quick-access';
+
+  const heading = document.createElement('div');
+  heading.className = 'ref-quick-heading';
+  heading.textContent = 'Quick Access';
+  wrap.appendChild(heading);
+
+  favs.forEach(fav => {
+    const row = document.createElement('div');
+    row.className = 'ref-quick-row';
+    row.addEventListener('click', () => _navigateToFav(fav));
+
+    const sec = REFERENCE_SECTIONS.find(s => s.id === fav.sectionId);
+    const icon = document.createElement('span');
+    icon.className = 'ref-quick-icon';
+    icon.textContent = sec ? sec.icon : '★';
+
+    const info = document.createElement('div');
+    info.className = 'ref-quick-info';
+    const lbl = document.createElement('div');
+    lbl.className = 'ref-quick-label';
+    lbl.textContent = fav.label;
+    info.appendChild(lbl);
+    if (fav.sub) {
+      const sub = document.createElement('div');
+      sub.className = 'ref-quick-sub';
+      sub.textContent = fav.sub;
+      info.appendChild(sub);
+    }
+
+    const removeBtn = document.createElement('button');
+    removeBtn.className = 'ref-fav-btn active';
+    removeBtn.textContent = '★';
+    removeBtn.title = 'Remove from Quick Access';
+    removeBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      toggleRefFav(fav);
+      row.remove();
+      if (!getRefFavs().length) wrap.remove();
+    });
+
+    row.appendChild(icon);
+    row.appendChild(info);
+    row.appendChild(removeBtn);
+    wrap.appendChild(row);
+  });
+
+  el.appendChild(wrap);
+}
+
 const REFERENCE_SECTIONS = [
   { id: 'gear',        title: 'Gear Browser',            subtitle: 'Browse all gear by slot, DLC, character, or act', icon: '✦' },
   { id: 'retinue',     title: 'Retinue',                 subtitle: 'Companion profiles, bios, base stats & wiki links', icon: '◈' },
@@ -4756,6 +4871,8 @@ function renderReferenceSection() {
     });
     searchWrap.appendChild(searchInp);
     searchWrap.appendChild(clearBtn);
+
+    _renderQuickAccess(el);
     el.appendChild(searchWrap);
     el.appendChild(resultsEl);
 
@@ -4944,7 +5061,11 @@ function renderResourcesBySystem(el) {
     item.className = 'selectable-item' + (isSelected ? ' active' : '');
     const nameEl = document.createElement('div');
     nameEl.className = 'selectable-item-name';
+    const nameRow = document.createElement('div');
+    nameRow.style.cssText = 'display:flex;align-items:center;justify-content:space-between;gap:6px;';
+    nameRow.appendChild(nameEl);
     nameEl.textContent = system.name;
+    nameRow.appendChild(_makeFavBtn({ id: 'fav_sys_' + system.name, label: system.name, sub: 'Star System', sectionId: 'resources' }));
     const resPreview = system.resources
       ? Object.entries(system.resources)
           .sort(([, a], [, b]) => (Array.isArray(b) ? b[0] : b) - (Array.isArray(a) ? a[0] : a))
@@ -4955,9 +5076,9 @@ function renderResourcesBySystem(el) {
       const sub = document.createElement('div');
       sub.className = 'selectable-item-sub';
       sub.textContent = resPreview;
-      item.append(nameEl, sub);
+      item.append(nameRow, sub);
     } else {
-      item.appendChild(nameEl);
+      item.appendChild(nameRow);
     }
     item.addEventListener('click', () => {
       _selectedSystem = isSelected ? null : system.name;
@@ -5005,8 +5126,18 @@ function renderResourcesByType(el) {
     const label = resType[0].toUpperCase() + resType.slice(1);
     const item = document.createElement('div');
     item.className = 'selectable-item' + (isSelected ? ' active' : '');
-    item.innerHTML = `<div class="selectable-item-name">${label}</div>
-      <div class="selectable-item-sub">${entries.length} system${entries.length !== 1 ? 's' : ''} · best: ${entries[0].system} ×${entries[0].qtyNum}</div>`;
+    const resNameRow = document.createElement('div');
+    resNameRow.style.cssText = 'display:flex;align-items:center;justify-content:space-between;gap:6px;';
+    const resNameEl = document.createElement('div');
+    resNameEl.className = 'selectable-item-name';
+    resNameEl.textContent = label;
+    resNameRow.appendChild(resNameEl);
+    resNameRow.appendChild(_makeFavBtn({ id: 'fav_res_' + resType, label, sub: 'Resource', sectionId: 'resources' }));
+    const resSubEl = document.createElement('div');
+    resSubEl.className = 'selectable-item-sub';
+    resSubEl.textContent = `${entries.length} system${entries.length !== 1 ? 's' : ''} · best: ${entries[0].system} ×${entries[0].qtyNum}`;
+    item.appendChild(resNameRow);
+    item.appendChild(resSubEl);
     item.addEventListener('click', () => {
       _selectedResource = isSelected ? null : resType;
       renderReferenceSection();

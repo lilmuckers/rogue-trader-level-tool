@@ -395,6 +395,13 @@ function renderGearList(listEl) {
         row.appendChild(meta);
       }
 
+      const favSub = [item.dlc, item.a != null ? actToText(item.a) : null].filter(Boolean).join(' · ');
+      nameWrap.appendChild(_makeFavBtn({
+        id: 'fav_gear_' + item.n,
+        label: item.n, sub: favSub || '',
+        sectionId: 'gear', action: 'gear-detail', itemKey: item.n,
+      }));
+
       row.classList.add('has-detail');
       row.addEventListener('click', () => pushGearDetail(item, item.n));
 
