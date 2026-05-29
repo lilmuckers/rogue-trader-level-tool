@@ -26,7 +26,7 @@ function _makeLibSearch(placeholder, onInput) {
   return wrap;
 }
 
-function _renderDefList(el, entries, query) {
+function _renderDefList(el, entries, query, sectionId) {
   el.innerHTML = '';
   const q = query ? query.toLowerCase() : '';
   let count = 0;
@@ -45,6 +45,7 @@ function _renderDefList(el, entries, query) {
       const badge = makeDlcBadge(dlc);
       if (badge) { badge.className = 'dlc-badge dlc-badge-pill'; header.appendChild(badge); }
     }
+    header.appendChild(_makeFavBtn({ id: 'fav_def_' + name, label: name, sub: typeof desc === 'string' ? desc.slice(0,60) : '', sectionId: sectionId || 'abilities' }));
     row.appendChild(header);
     if (desc) {
       const d = document.createElement('div');
@@ -74,10 +75,10 @@ function renderAbilitiesSection(el) {
   const listEl = document.createElement('div');
   listEl.className = 'lib-def-list';
 
-  const search = _makeLibSearch('Search abilities…', q => _renderDefList(listEl, entries, q));
+  const search = _makeLibSearch('Search abilities…', q => _renderDefList(listEl, entries, q, 'abilities'));
   el.appendChild(search);
   el.appendChild(listEl);
-  _renderDefList(listEl, entries, '');
+  _renderDefList(listEl, entries, '', 'abilities');
 }
 
 // ── Talents ───────────────────────────────────────────────────────────────────
@@ -92,10 +93,10 @@ function renderTalentsSection(el) {
   const listEl = document.createElement('div');
   listEl.className = 'lib-def-list';
 
-  const search = _makeLibSearch('Search talents…', q => _renderDefList(listEl, entries, q));
+  const search = _makeLibSearch('Search talents…', q => _renderDefList(listEl, entries, q, 'talents'));
   el.appendChild(search);
   el.appendChild(listEl);
-  _renderDefList(listEl, entries, '');
+  _renderDefList(listEl, entries, '', 'talents');
 }
 
 // ── Skills & Characteristics ──────────────────────────────────────────────────
@@ -134,6 +135,7 @@ function renderSkillsSection(el) {
       d.className = 'lib-def-desc';
       d.textContent = typeof desc === 'string' ? desc : '';
       row.appendChild(nm);
+      row.appendChild(_makeFavBtn({ id: 'fav_skill_' + name, label: name, sub: '', sectionId: 'skills' }));
       row.appendChild(d);
       el.appendChild(row);
     });
@@ -188,7 +190,11 @@ function _renderHomeworlds(el) {
     const title = document.createElement('div');
     title.className = 'lib-world-title';
     title.textContent = name;
-    card.appendChild(title);
+    const hwTitleRow = document.createElement('div');
+    hwTitleRow.className = 'lib-world-title-row';
+    hwTitleRow.appendChild(title);
+    hwTitleRow.appendChild(_makeFavBtn({ id: 'fav_hw_' + name, label: name, sub: hw.description ? hw.description.slice(0,60) : '', sectionId: 'charcreate' }));
+    card.appendChild(hwTitleRow);
 
     if (hw.description) {
       const desc = document.createElement('div');
@@ -258,6 +264,7 @@ function _renderOrigins(el) {
         ch.textContent = origin.companion;
         header.appendChild(ch);
       }
+      header.appendChild(_makeFavBtn({ id: 'fav_orig_' + name, label: name, sub: origin.description ? origin.description.slice(0,60) : '', sectionId: 'charcreate' }));
       card.appendChild(header);
 
       if (origin.description) {
@@ -350,6 +357,7 @@ function _renderMCBuildList(el) {
         const badge = makeDlcBadge(b.dlc);
         if (badge) { badge.className = 'dlc-badge dlc-badge-pill'; nameRow.appendChild(badge); }
       }
+      nameRow.appendChild(_makeFavBtn({ id: 'fav_mcbuild_' + b.name, label: b.name, sub: b.theme || '', sectionId: 'mcbuilds' }));
       card.appendChild(nameRow);
 
       if (b.origin) {
@@ -439,6 +447,7 @@ function _renderRetinueList(el) {
       const badge = makeDlcBadge(bio.dlc);
       if (badge) { badge.className = 'dlc-badge dlc-badge-pill'; nameRow.appendChild(badge); }
     }
+    nameRow.appendChild(_makeFavBtn({ id: 'fav_retinue_' + name, label: name, sub: bio.origin || '', sectionId: 'retinue' }));
     card.appendChild(nameRow);
 
     // Homeworld / Origin / Join
@@ -543,6 +552,7 @@ function renderConvictionsSection(el) {
     title.textContent = pathName;
     header.appendChild(icon);
     header.appendChild(title);
+    header.appendChild(_makeFavBtn({ id: 'fav_conv_' + pathName, label: pathName, sub: path.approach ? path.approach.slice(0,60) : '', sectionId: 'convictions' }));
     card.appendChild(header);
 
     // Approach
@@ -660,6 +670,7 @@ function renderRomancesSection(el) {
     title.className = 'lib-world-title';
     title.textContent = name;
     titleRow.appendChild(title);
+    titleRow.appendChild(_makeFavBtn({ id: 'fav_romance_' + name, label: name + ' Romance', sub: r.available_to || '', sectionId: 'romances' }));
     if (r.dlc) {
       const badge = makeDlcBadge(r.dlc);
       if (badge) { badge.className = 'dlc-badge dlc-badge-pill'; titleRow.appendChild(badge); }

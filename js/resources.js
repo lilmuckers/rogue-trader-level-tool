@@ -3,6 +3,103 @@
 let _referenceSubSection = null;
 let _referenceSearch = '';
 
+// ── Favourites ────────────────────────────────────────────────────────────────
+const KEY_REF_FAVS = 'rt-ref-favourites';
+function getRefFavs()    { return Store.get(KEY_REF_FAVS) || []; }
+function saveRefFavs(f)  { Store.set(KEY_REF_FAVS, f); }
+
+function toggleRefFav(fav) {
+  const favs = getRefFavs();
+  const idx  = favs.findIndex(f => f.id === fav.id);
+  if (idx >= 0) favs.splice(idx, 1); else favs.push(fav);
+  saveRefFavs(favs);
+}
+function isRefFav(id) { return getRefFavs().some(f => f.id === id); }
+
+// Shared star button — call e.stopPropagation() internally so parent click unaffected
+function _makeFavBtn(fav) {
+  const btn = document.createElement('button');
+  const update = () => {
+    const active = isRefFav(fav.id);
+    btn.className = 'ref-fav-btn' + (active ? ' active' : '');
+    btn.title = active ? 'Remove from Quick Access' : 'Add to Quick Access';
+  };
+  btn.textContent = '★';
+  update();
+  btn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    toggleRefFav(fav);
+    update();
+  });
+  return btn;
+}
+
+function _navigateToFav(fav) {
+  _referenceSubSection = fav.sectionId;
+  _referenceSearch = '';
+  renderReferenceSection();
+  // Deep nav for gear — push detail sheet
+  if (fav.action === 'gear-detail' && fav.itemKey) {
+    const item = (DATA.gear_db || []).find(g => g.n === fav.itemKey);
+    if (item) setTimeout(() => pushGearDetail(item, fav.label), 50);
+  }
+}
+
+function _renderQuickAccess(el) {
+  const favs = getRefFavs();
+  if (!favs.length) return;
+
+  const wrap = document.createElement('div');
+  wrap.className = 'ref-quick-access';
+
+  const heading = document.createElement('div');
+  heading.className = 'ref-quick-heading';
+  heading.textContent = 'Quick Access';
+  wrap.appendChild(heading);
+
+  favs.forEach(fav => {
+    const row = document.createElement('div');
+    row.className = 'ref-quick-row';
+    row.addEventListener('click', () => _navigateToFav(fav));
+
+    const sec = REFERENCE_SECTIONS.find(s => s.id === fav.sectionId);
+    const icon = document.createElement('span');
+    icon.className = 'ref-quick-icon';
+    icon.textContent = sec ? sec.icon : '★';
+
+    const info = document.createElement('div');
+    info.className = 'ref-quick-info';
+    const lbl = document.createElement('div');
+    lbl.className = 'ref-quick-label';
+    lbl.textContent = fav.label;
+    info.appendChild(lbl);
+    if (fav.sub) {
+      const sub = document.createElement('div');
+      sub.className = 'ref-quick-sub';
+      sub.textContent = fav.sub;
+      info.appendChild(sub);
+    }
+
+    const removeBtn = document.createElement('button');
+    removeBtn.className = 'ref-fav-btn active';
+    removeBtn.textContent = '★';
+    removeBtn.title = 'Remove from Quick Access';
+    removeBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      toggleRefFav(fav);
+      row.remove();
+      if (!getRefFavs().length) wrap.remove();
+    });
+
+    row.appendChild(icon);
+    row.appendChild(info);
+    row.appendChild(removeBtn);
+    wrap.appendChild(row);
+  });
+
+  el.appendChild(wrap);
+}
+
 const REFERENCE_SECTIONS = [
   { id: 'gear',        title: 'Gear Browser',            subtitle: 'Browse all gear by slot, DLC, character, or act', icon: '✦' },
   { id: 'retinue',     title: 'Retinue',                 subtitle: 'Companion profiles, bios, base stats & wiki links', icon: '◈' },
@@ -74,6 +171,8 @@ function renderReferenceSection() {
     });
     searchWrap.appendChild(searchInp);
     searchWrap.appendChild(clearBtn);
+
+    _renderQuickAccess(el);
     el.appendChild(searchWrap);
     el.appendChild(resultsEl);
 
@@ -262,7 +361,11 @@ function renderResourcesBySystem(el) {
     item.className = 'selectable-item' + (isSelected ? ' active' : '');
     const nameEl = document.createElement('div');
     nameEl.className = 'selectable-item-name';
+    const nameRow = document.createElement('div');
+    nameRow.style.cssText = 'display:flex;align-items:center;justify-content:space-between;gap:6px;';
+    nameRow.appendChild(nameEl);
     nameEl.textContent = system.name;
+    nameRow.appendChild(_makeFavBtn({ id: 'fav_sys_' + system.name, label: system.name, sub: 'Star System', sectionId: 'resources' }));
     const resPreview = system.resources
       ? Object.entries(system.resources)
           .sort(([, a], [, b]) => (Array.isArray(b) ? b[0] : b) - (Array.isArray(a) ? a[0] : a))
@@ -273,9 +376,9 @@ function renderResourcesBySystem(el) {
       const sub = document.createElement('div');
       sub.className = 'selectable-item-sub';
       sub.textContent = resPreview;
-      item.append(nameEl, sub);
+      item.append(nameRow, sub);
     } else {
-      item.appendChild(nameEl);
+      item.appendChild(nameRow);
     }
     item.addEventListener('click', () => {
       _selectedSystem = isSelected ? null : system.name;
@@ -323,8 +426,18 @@ function renderResourcesByType(el) {
     const label = resType[0].toUpperCase() + resType.slice(1);
     const item = document.createElement('div');
     item.className = 'selectable-item' + (isSelected ? ' active' : '');
-    item.innerHTML = `<div class="selectable-item-name">${label}</div>
-      <div class="selectable-item-sub">${entries.length} system${entries.length !== 1 ? 's' : ''} · best: ${entries[0].system} ×${entries[0].qtyNum}</div>`;
+    const resNameRow = document.createElement('div');
+    resNameRow.style.cssText = 'display:flex;align-items:center;justify-content:space-between;gap:6px;';
+    const resNameEl = document.createElement('div');
+    resNameEl.className = 'selectable-item-name';
+    resNameEl.textContent = label;
+    resNameRow.appendChild(resNameEl);
+    resNameRow.appendChild(_makeFavBtn({ id: 'fav_res_' + resType, label, sub: 'Resource', sectionId: 'resources' }));
+    const resSubEl = document.createElement('div');
+    resSubEl.className = 'selectable-item-sub';
+    resSubEl.textContent = `${entries.length} system${entries.length !== 1 ? 's' : ''} · best: ${entries[0].system} ×${entries[0].qtyNum}`;
+    item.appendChild(resNameRow);
+    item.appendChild(resSubEl);
     item.addEventListener('click', () => {
       _selectedResource = isSelected ? null : resType;
       renderReferenceSection();
