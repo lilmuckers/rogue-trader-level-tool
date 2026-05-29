@@ -1,0 +1,165 @@
+# Romance guides — key choices, act timing, missable points
+# Source: Fextralife Wiki, Neoseeker, TheGamer, community guides
+
+Cassia:
+  available_to: Male Rogue Trader
+  dlc: null
+  conviction: Any (Dogmatic or Iconoclast recommended)
+  summary: >
+    Slow, courtly romance built on mutual respect for her Navigator status.
+    Keep conversations formal and avoid pushing physical intimacy early.
+  steps:
+    - act: 1
+      step: "Bridge: Ask Cassia about her third eye. Express that you find her beautiful."
+    - act: 2
+      step: "Two private chamber meetings. Do NOT cut conversations short."
+    - act: 2
+      step: "Accept her gift when offered. Refusing ends the romance."
+    - act: 3
+      step: "Continue bridge conversations. Choose courtly, respectful dialogue."
+    - act: 4
+      step: "Discuss her mutations honestly. First intimate encounter."
+    - act: 4
+      step: "Choose courtly dialogue throughout for the best ending."
+  missable:
+    - "Cutting chamber meetings short"
+    - "Refusing her gift"
+    - "Pushing for physical intimacy before Act 4"
+    - "Being too aggressive or dominant in dialogue"
+
+Heinrix:
+  available_to: Female Rogue Trader
+  dlc: null
+  conviction: Any
+  summary: >
+    Political and strategic at first — Heinrix is motivated by ambition as much
+    as genuine feeling. Grows into something more honest over time.
+  steps:
+    - act: 1
+      step: "After 'Gleam of the Final Dawn': reciprocate his interest when he shows it. OR ask if he feels lonely on the bridge."
+    - act: 2
+      step: "Continue building rapport through his companion quests."
+    - act: 3
+      step: "Support him during the Inquisition questline. Show genuine trust."
+    - act: 4
+      step: "Choose dialogue that acknowledges the real connection beyond politics."
+  missable:
+    - "Missing the initial bridge trigger after Gleam of the Final Dawn"
+    - "Undermining him during Inquisition quests"
+
+Jae:
+  available_to: Any gender
+  dlc: null
+  conviction: Any
+  summary: >
+    Jae's romance develops through her personal growth arc. Three possible
+    entry points. The pool encounter in Act 4 is the centrepiece.
+  steps:
+    - act: 1
+      step: "Any of three triggers: (a) ask on the bridge, (b) kiss after Mercantum Tabula Officiale, or (c) during her celebration card game."
+    - act: 2
+      step: "Complete bonus quest 'A Gift for Jae Heydari'. Financial discussions unlock extra dialogue but don't affect romance."
+    - act: 3
+      step: "Reunion party — attend and engage meaningfully."
+    - act: 4
+      step: "Pool encounter — this is the key romance payoff scene."
+  missable:
+    - "Missing 'A Gift for Jae Heydari' in Act 2"
+    - "Skipping the reunion party in Act 3"
+
+Yrliet:
+  available_to: Any gender
+  dlc: null
+  conviction: Iconoclast strongly preferred
+  summary: >
+    A deeply spiritual, slow-burn connection. Crucially: never express desire
+    for physical intimacy — Yrliet's romance is about souls understanding each
+    other, not bodies. Any hint of physical intent permanently ends it.
+  steps:
+    - act: 2
+      step: "Second warp travel event OR bridge conversation about understanding her people."
+    - act: 2
+      step: "Spiritual teaching: learn about Aeldari names and their meaning."
+    - act: 2
+      step: "Meditation session in chambers addressing soul burdens. Listen without judgement."
+    - act: 3
+      step: "Support her during her companion quests. Side with her against Imperial pressure."
+    - act: 4
+      step: "Inner world revelation — she shares her true self."
+  missable:
+    - "Expressing ANY desire for physical intimacy — permanently ends romance"
+    - "Refusing her help or dismissing her guidance"
+    - "Choosing physical punishment options in early Act 4"
+    - "Being too dogmatic — she responds poorly to Imperial orthodoxy"
+
+Marazhai:
+  available_to: Any gender
+  dlc: null
+  conviction: Heretic or Iconoclast
+  summary: >
+    Choose from the start whether YOU dominate or HE dominates — and stay
+    consistent throughout. Mixing the two dynamics ends the romance. Not
+    for the faint-hearted.
+  steps:
+    - act: 3
+      step: "After recruiting in The Chasm: ask why he joined you. Establish the dominant/submissive dynamic here — pick one and stick to it."
+    - act: 3
+      step: "First warp travel after recruitment: do NOT lock him in the cargo hold."
+    - act: 3
+      step: "After Shards of the Tempest: gift selection. Gift must match the established dynamic."
+    - act: 4
+      step: "Maintain consistent dynamic throughout. Show you embrace danger, not avoid it."
+  missable:
+    - "Locking him in cargo hold during first warp travel"
+    - "Switching dominant/submissive roles mid-romance"
+    - "Refusing dangerous situations too often (he respects boldness)"
+    - "Wrong gift at Shards of the Tempest"
+
+Kibellah:
+  available_to: Any gender
+  dlc: Void Shadows
+  conviction: Any (Iconoclast or Dogmatic recommended; Heretic also works)
+  summary: >
+    Built on trust and a literal spiritual connection — the Synchronicity bond.
+    Encourage her to break free of her cult conditioning and follow her own
+    desires. Always choose Synchronicity dialogue options.
+  steps:
+    - act: 2
+      step: "Two warp jumps after leaving Furibundus: she proposes the Ritual of Binding. Agree, then ask what it meant."
+    - act: 2
+      step: "Ask whether she'd like to see your world — starts Rituals of the Upper Decks."
+    - act: 2
+      step: "Ask Janris to organise a social gathering. After the next warp jump, attend."
+    - act: 2
+      step: "At the gathering: ask Kibellah to walk with you. Tell her you wanted to show her life beyond service and duty. Choose: 'The truly priceless gift is Kibellah being honest about what she wants.' (+1 Synchronicity)"
+    - act: 3
+      step: "Continue building Synchronicity — always choose options that encourage her independence."
+    - act: 4
+      step: "Spiritual culmination of the bond."
+  missable:
+    - "Refusing the Ritual of Binding"
+    - "Not attending the social gathering"
+    - "Choosing possessive or duty-focused dialogue over Synchronicity options"
+    - "Missing the Furibundus warp jump trigger (can be easy to miss)"
+
+Jocasta:
+  available_to: Any gender
+  dlc: null
+  conviction: "Heretic: Follower (or Brand of Shame / Darkest Hour)"
+  summary: >
+    Jocasta Sauerback, the Master-at-Arms. Not a companion — a ship NPC.
+    Requires a Heretical conviction or specific dark story outcomes.
+    BDSM-themed encounter.
+  steps:
+    - act: 1
+      step: "Ask her opinion of you on the bridge. Pass an Awareness check to recognise her interest."
+    - act: 1
+      step: "Pursue the darker dialogue path consistent with Heretic conviction."
+  missable:
+    - "Requires Heretic: Follower conviction OR Brand of Shame / Darkest Hour story outcomes"
+    - "Failing the Awareness check"
+
+# Not romanceable:
+# Argenta — Games Workshop explicitly forbade Sororitas romance
+# Idira — storyline reasons (hard-tapped by the Warp)
+# Abelard, Pasqal, Solomorne, Ulfar, Cassia (not in this list intentionally)

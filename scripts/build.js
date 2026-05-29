@@ -39,6 +39,7 @@ const definitions = {
   homeworlds:      readYaml(path.join(dataDir, 'definitions', 'homeworlds.yml'))      || {},
   origins:         readYaml(path.join(dataDir, 'definitions', 'origins.yml'))         || {},
   convictions:     readYaml(path.join(dataDir, 'definitions', 'convictions.yml'))     || {},
+  romances:        readYaml(path.join(dataDir, 'definitions', 'romances.yml'))        || {},
 };
 
 // ─── gear_db ─────────────────────────────────────────────────────────────────
