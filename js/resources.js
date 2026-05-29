@@ -48,7 +48,7 @@ function _navigateToFav(fav) {
       const key = fav.itemKey.replace(/['"\\]/g, '\\$&');
       const anchor = document.querySelector(`.reference-sub-content [data-fav-key="${key}"]`);
       if (!anchor) return;
-      anchor.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      anchor.scrollIntoView({ behavior: 'smooth', block: 'center' });
       anchor.classList.add('fav-highlight');
       setTimeout(() => anchor.classList.remove('fav-highlight'), 1500);
     }, 80);
