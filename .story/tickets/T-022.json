@@ -1,0 +1,12 @@
+{
+  "blockedBy": [],
+  "completedDate": null,
+  "createdDate": "2026-05-11",
+  "description": "Build data has no patch version tagging. When Owlcat changes abilities in a patch (e.g. v1.5 nerfs), the app has no way to surface \"this build was updated for v1.5\" or flag potentially stale data. Should track a data-version and show last-verified date.",
+  "id": "T-022",
+  "order": 160,
+  "phase": "future",
+  "status": "open",
+  "title": "Game patch / data version changelog awareness",
+  "type": "feature"
+}

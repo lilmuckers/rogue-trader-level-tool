@@ -1,0 +1,12 @@
+{
+  "blockedBy": [],
+  "completedDate": null,
+  "createdDate": "2026-05-11",
+  "description": "No team context. Builds are siloed — no indication of which companion combos work well together or what party compositions a build is designed for. Short synergy notes on build/character cards would help newer players form effective parties.",
+  "id": "T-020",
+  "order": 140,
+  "phase": "future",
+  "status": "open",
+  "title": "Cross-character synergy notes on build cards",
+  "type": "feature"
+}

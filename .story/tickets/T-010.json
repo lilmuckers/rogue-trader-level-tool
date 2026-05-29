@@ -2,13 +2,13 @@
   "blockedBy": [
     "T-009"
   ],
-  "completedDate": null,
+  "completedDate": "2026-05-29",
   "createdDate": "2026-05-07",
   "description": "Entry point TBD (pending nav ADR). File picker (input type=file, .json) + paste-JSON textarea. Validate rt_build_version, type, levels shape, character name for companions. Show preview card before confirming. On confirm: push to rt.custom-builds.v1, trigger DATA re-merge, refresh UI.",
   "id": "T-010",
   "order": 40,
   "phase": "future",
-  "status": "open",
+  "status": "complete",
   "title": "Workshop UI: import build via file or JSON paste",
   "type": "task"
 }

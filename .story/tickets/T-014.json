@@ -1,0 +1,12 @@
+{
+  "blockedBy": [],
+  "completedDate": "2026-05-17",
+  "createdDate": "2026-05-11",
+  "description": "No global search exists. Users cannot type \"AP +1\" or \"kinesiostatic\" and find relevant picks, gear, characters, or notes. A search sheet/overlay should index builds, gear_db, definitions, and note content and return ranked results with tap-through to the relevant item or level.",
+  "id": "T-014",
+  "order": 80,
+  "phase": "future",
+  "status": "complete",
+  "title": "Global search across picks, gear, talents, and notes",
+  "type": "feature"
+}

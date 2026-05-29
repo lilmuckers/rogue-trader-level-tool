@@ -1,0 +1,12 @@
+{
+  "blockedBy": [],
+  "completedDate": "2026-05-17",
+  "createdDate": "2026-05-11",
+  "description": "No searchable reference for game terms. New players encounter \"AP\", \"Deflection\", \"Momentum\", \"Veil Degradation\" etc with no explanation. A tappable glossary sheet (or inline term tooltips) would reduce confusion without needing to leave the app.",
+  "id": "T-023",
+  "order": 170,
+  "phase": "future",
+  "status": "complete",
+  "title": "In-app glossary for game mechanics terms",
+  "type": "feature"
+}

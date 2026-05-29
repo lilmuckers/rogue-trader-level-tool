@@ -1,0 +1,12 @@
+{
+  "blockedBy": [],
+  "completedDate": "2026-05-29",
+  "createdDate": "2026-05-11",
+  "description": "Lookup is currently one-directional: pick → description. No way to tap a talent/gear item and see every character and build that takes it, and at what level. Reverse index would make gear and talent pages much richer.",
+  "id": "T-017",
+  "order": 110,
+  "phase": "future",
+  "status": "complete",
+  "title": "Reverse lookup: which builds/characters use a given pick or item",
+  "type": "feature"
+}
