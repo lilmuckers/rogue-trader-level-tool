@@ -1,0 +1,12 @@
+{
+  "blockedBy": [],
+  "completedDate": null,
+  "createdDate": "2026-05-11",
+  "description": "Some high-value gear (e.g. Kinesiostatic Shield, Interrogator's Dagger) is tied to specific quest choices or missable events. Gear detail sheets have no warning that an item is missable or requires a specific dialogue path. Should flag missable items and surface the acquisition condition clearly.",
+  "id": "T-026",
+  "order": 200,
+  "phase": "future",
+  "status": "open",
+  "title": "Quest path guidance for missable gear",
+  "type": "feature"
+}

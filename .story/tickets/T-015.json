@@ -1,0 +1,12 @@
+{
+  "blockedBy": [],
+  "completedDate": null,
+  "createdDate": "2026-05-11",
+  "description": "App tracks one playthrough only. Users cannot maintain separate configs for e.g. a Dogmatic run and an Iconoclast run simultaneously. Should allow named playthroughs each with independent MC build, companion roster, choices, and level.",
+  "id": "T-015",
+  "order": 90,
+  "phase": "future",
+  "status": "open",
+  "title": "Multi-playthrough support (Dogmatic vs Iconoclast runs etc)",
+  "type": "feature"
+}

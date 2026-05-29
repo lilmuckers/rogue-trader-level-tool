@@ -1,0 +1,12 @@
+{
+  "blockedBy": [],
+  "completedDate": null,
+  "createdDate": "2026-05-11",
+  "description": "Level slider shows the target planning level but not actual in-game progress. Users should be able to mark levels as completed so the tracker can distinguish \"I've done levels 1–18\" from \"I'm planning for level 22\". Could highlight catches-up needed.",
+  "id": "T-018",
+  "order": 120,
+  "phase": "future",
+  "status": "open",
+  "title": "Progress marking: track levels actually completed vs target level",
+  "type": "feature"
+}

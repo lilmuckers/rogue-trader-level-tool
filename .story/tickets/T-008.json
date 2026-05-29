@@ -1,12 +1,12 @@
 {
   "blockedBy": [],
-  "completedDate": null,
+  "completedDate": "2026-05-29",
   "createdDate": "2026-05-07",
   "description": "Decision needed before Workshop tab can be placed. See storybloq note N-001 for full options analysis (A: replace Resources, B: 6th tab, C: More overflow, D: Resources into Traders, E: header action, F: drawer). Constraints: one-handed on 375px, Workshop reachable in ≤2 taps, Resources not effectively hidden.",
   "id": "T-008",
   "order": 20,
   "phase": "future",
-  "status": "open",
+  "status": "complete",
   "title": "ADR: Resolve bottom navigation structure for Workshop placement",
   "type": "task"
 }

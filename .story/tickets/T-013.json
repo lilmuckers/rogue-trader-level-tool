@@ -2,13 +2,13 @@
   "blockedBy": [
     "T-011"
   ],
-  "completedDate": null,
+  "completedDate": "2026-05-29",
   "createdDate": "2026-05-07",
   "description": "DEFERRED. In-app editor to create builds without writing JSON: set name/theme/archetype, fill in m+e picks per level, set archetype callouts at L16/L36, optionally add skills/gear extras. Produces same data shape as imported JSON. Save stores to rt.custom-builds.v1. Needs nav placement resolved first.",
   "id": "T-013",
   "order": 70,
   "phase": "future",
-  "status": "open",
+  "status": "complete",
   "title": "Build Builder: in-app level-by-level build editor",
   "type": "feature"
 }

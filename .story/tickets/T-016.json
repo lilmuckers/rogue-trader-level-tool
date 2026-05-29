@@ -1,0 +1,12 @@
+{
+  "blockedBy": [],
+  "completedDate": "2026-05-29",
+  "createdDate": "2026-05-11",
+  "description": "No way to share a build config with another player. Should support exporting current state (MC choice, companion builds, choices made, level, party) as a deep-link URL or JSON file, and importing from either. Enables sharing \"here's my build\" with a link.",
+  "id": "T-016",
+  "order": 100,
+  "phase": "future",
+  "status": "complete",
+  "title": "Export / share config as URL or file",
+  "type": "feature"
+}

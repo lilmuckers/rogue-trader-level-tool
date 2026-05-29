@@ -1,0 +1,12 @@
+{
+  "blockedBy": [],
+  "completedDate": null,
+  "createdDate": "2026-05-11",
+  "description": "No way to discover builds made by other players. Requires a backend (storage + API) which is a significant scope increase for a static PWA. Blocked by architectural decision on whether to add a backend at all. Lower priority until export/share URL (T-016) is proven out.",
+  "id": "T-025",
+  "order": 190,
+  "phase": "future",
+  "status": "open",
+  "title": "Community build sharing (requires backend)",
+  "type": "feature"
+}

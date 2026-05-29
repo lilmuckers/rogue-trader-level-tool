@@ -169,7 +169,7 @@ function _renderManager(el) {
       delBtn.textContent = 'Delete';
       delBtn.addEventListener('click', () => {
         if (!confirm(`Delete "${b.name}"?`)) return;
-        _deleteBuild(b._id);
+        _deleteBuild(b._id, b._character);
         renderWorkshopSection();
       });
       btns.appendChild(delBtn);
@@ -629,12 +629,14 @@ function _saveDraft() {
   mergeCustomBuildsIntoData();
 }
 
-function _deleteBuild(id) {
-  saveCustomBuilds(getCustomBuilds().filter(x => x._id !== id));
-  DATA.mc_builds = DATA.mc_builds.filter(x => x._id !== id);
-  Object.keys(DATA.companions).forEach(c => {
-    DATA.companions[c] = DATA.companions[c].filter(x => x._id !== id);
-  });
+function _deleteBuild(id, character) {
+  saveCustomBuilds(getCustomBuilds().filter(x => !(x._id === id && x._character === character)));
+  if (character === 'MC') {
+    DATA.mc_builds = DATA.mc_builds.filter(x => x._id !== id);
+  } else {
+    const arr = DATA.companions[character];
+    if (arr) DATA.companions[character] = arr.filter(x => x._id !== id);
+  }
 }
 
 // ── URL sync (background) ─────────────────────────────────────────────────────

@@ -1367,7 +1367,7 @@ function calcBuildStats(build, upToLevel) {
   return { originBonuses, training, apGained, skillCounts };
 }
 
-function buildStatsPanel(ctx) {
+function buildStatsPanel(ctx, upToLevel) {
   const { build, buildName, displayName, isCompanion } = ctx;
   const panel = document.createElement('div');
   panel.className = 'stats-panel';
@@ -1377,7 +1377,7 @@ function buildStatsPanel(ctx) {
     return panel;
   }
 
-  const stats = calcBuildStats(build, level);
+  const stats = calcBuildStats(build, upToLevel ?? 55);
 
   // Base stats for companions (when available)
   const baseStats = isCompanion
@@ -1577,7 +1577,7 @@ function buildCatchupContent(ctx) {
 
   const timelinePanel = document.createElement('div');
   timelinePanel.classList.add('tab-panel');
-  const statsPanel = buildStatsPanel(ctx);
+  const statsPanel = buildStatsPanel(ctx, level);
   statsPanel.classList.add('tab-panel', 'hidden');
   let gearPanel = null;
 
@@ -1823,6 +1823,63 @@ function buildGearDetailContent(gearItem) {
   return wrap;
 }
 
+function _renderPickBlock(rawPick, isExtra, wrap, displayName, atLevel) {
+  if (!rawPick) return;
+  if (rawPick.includes('/')) {
+    renderChoiceSection(rawPick, displayName, atLevel, wrap, isExtra);
+    return;
+  }
+  if (isSkillStatPick(rawPick)) {
+    const hit = lookupStatPick(rawPick);
+    const block = document.createElement('div');
+    block.className = 'desc-block';
+    const nm = document.createElement('div');
+    nm.className = 'desc-name';
+    nm.textContent = (isExtra ? '+ ' : '') + rawPick;
+    const src = document.createElement('div');
+    src.className = 'desc-source';
+    src.textContent = hit ? hit.kind : 'Skill / Stat allocation';
+    block.appendChild(nm); block.appendChild(src);
+    const txt = document.createElement('div');
+    txt.className = hit ? 'desc-text' : 'desc-text-missing';
+    txt.textContent = hit ? hit.desc : 'A characteristic, skill, or AP allocation.';
+    block.appendChild(txt);
+    wrap.appendChild(block);
+    return;
+  }
+  const hits = lookupPick(rawPick);
+  if (hits.length === 0) {
+    const block = document.createElement('div');
+    block.className = 'desc-block';
+    const nm = document.createElement('div');
+    nm.className = 'desc-name';
+    nm.textContent = (isExtra ? '+ ' : '') + rawPick;
+    const txt = document.createElement('div');
+    txt.className = 'desc-text-missing';
+    txt.textContent = 'No description available.';
+    block.appendChild(nm); block.appendChild(txt);
+    wrap.appendChild(block);
+    return;
+  }
+  hits.forEach((hit, i) => {
+    const block = document.createElement('div');
+    block.className = 'desc-block';
+    const nm = document.createElement('div');
+    nm.className = 'desc-name';
+    nm.textContent = (isExtra && i === 0 ? '+ ' : '') + hit.name + (hit.tierStripped ? ` - ${rawPick}` : '');
+    const src = document.createElement('div');
+    src.className = 'desc-source';
+    src.textContent = hit.kind;
+    const txt = document.createElement('div');
+    txt.className = 'desc-text';
+    txt.textContent = hit.desc;
+    block.appendChild(nm); block.appendChild(src);
+    const b1 = makeDlcBadge(hit.dlc); if (b1) block.appendChild(b1);
+    block.appendChild(txt);
+    wrap.appendChild(block);
+  });
+}
+
 // Push a combined level description (all picks for one level) — mirrors the
 // main-screen description sheet so clicking a row shows everything at once.
 function pushLevelDescription(entry, displayName, atLevel) {
@@ -1834,65 +1891,8 @@ function pushLevelDescription(entry, displayName, atLevel) {
     meta.textContent = `${displayName} · level ${atLevel}`;
     wrap.appendChild(meta);
 
-    const renderPickBlock = (rawPick, isExtra) => {
-      if (!rawPick) return;
-      if (rawPick.includes('/')) {
-        renderChoiceSection(rawPick, displayName, atLevel, wrap, isExtra);
-        return;
-      }
-      if (isSkillStatPick(rawPick)) {
-        const hit = lookupStatPick(rawPick);
-        const block = document.createElement('div');
-        block.className = 'desc-block';
-        const nm = document.createElement('div');
-        nm.className = 'desc-name';
-        nm.textContent = (isExtra ? '+ ' : '') + rawPick;
-        const src = document.createElement('div');
-        src.className = 'desc-source';
-        src.textContent = hit ? hit.kind : 'Skill / Stat allocation';
-        block.appendChild(nm); block.appendChild(src);
-        const txt = document.createElement('div');
-        txt.className = hit ? 'desc-text' : 'desc-text-missing';
-        txt.textContent = hit ? hit.desc : 'A characteristic, skill, or AP allocation.';
-        block.appendChild(txt);
-        wrap.appendChild(block);
-        return;
-      }
-      const hits = lookupPick(rawPick);
-      if (hits.length === 0) {
-        const block = document.createElement('div');
-        block.className = 'desc-block';
-        const nm = document.createElement('div');
-        nm.className = 'desc-name';
-        nm.textContent = (isExtra ? '+ ' : '') + rawPick;
-        const txt = document.createElement('div');
-        txt.className = 'desc-text-missing';
-        txt.textContent = 'No description available.';
-        block.appendChild(nm); block.appendChild(txt);
-        wrap.appendChild(block);
-        return;
-      }
-      hits.forEach((hit, i) => {
-        const block = document.createElement('div');
-        block.className = 'desc-block';
-        const nm = document.createElement('div');
-        nm.className = 'desc-name';
-        nm.textContent = (isExtra && i === 0 ? '+ ' : '') + hit.name + (hit.tierStripped ? ` - ${rawPick}` : '');
-        const src = document.createElement('div');
-        src.className = 'desc-source';
-        src.textContent = hit.kind;
-        const txt = document.createElement('div');
-        txt.className = 'desc-text';
-        txt.textContent = hit.desc;
-        block.appendChild(nm); block.appendChild(src);
-        const b1 = makeDlcBadge(hit.dlc); if (b1) block.appendChild(b1);
-        block.appendChild(txt);
-        wrap.appendChild(block);
-      });
-    };
-
-    renderPickBlock(entry.m, false);
-    renderPickBlock(entry.e, true);
+    _renderPickBlock(entry.m, false, wrap, displayName, atLevel);
+    _renderPickBlock(entry.e, true, wrap, displayName, atLevel);
     return wrap;
   });
 }
@@ -1911,61 +1911,7 @@ function buildSinglePickContent(rawPick, displayName, atLevel) {
   meta.textContent = `${displayName} · level ${atLevel}`;
   wrap.appendChild(meta);
 
-  // Slash pick → show choice selector (same as description sheet)
-  if (rawPick.includes('/')) {
-    renderChoiceSection(rawPick, displayName, atLevel, wrap, false);
-    return wrap;
-  }
-
-  if (isSkillStatPick(rawPick)) {
-    const hit = lookupStatPick(rawPick);
-    const block = document.createElement('div');
-    block.className = 'desc-block';
-    const nm = document.createElement('div');
-    nm.className = 'desc-name';
-    nm.textContent = rawPick;
-    const src = document.createElement('div');
-    src.className = 'desc-source';
-    src.textContent = hit ? hit.kind : 'Skill / Stat allocation';
-    block.appendChild(nm); block.appendChild(src);
-    const txt = document.createElement('div');
-    txt.className = hit ? 'desc-text' : 'desc-text-missing';
-    txt.textContent = hit ? hit.desc : 'A characteristic, skill, or AP allocation.';
-    block.appendChild(txt);
-    wrap.appendChild(block);
-  } else {
-    const hits = lookupPick(rawPick);
-    if (hits.length === 0) {
-      const block = document.createElement('div');
-      block.className = 'desc-block';
-      const nm = document.createElement('div');
-      nm.className = 'desc-name';
-      nm.textContent = rawPick;
-      const txt = document.createElement('div');
-      txt.className = 'desc-text-missing';
-      txt.textContent = 'No description available.';
-      block.appendChild(nm); block.appendChild(txt);
-      wrap.appendChild(block);
-    } else {
-      hits.forEach(hit => {
-        const block = document.createElement('div');
-        block.className = 'desc-block';
-        const nm = document.createElement('div');
-        nm.className = 'desc-name';
-        nm.textContent = hit.name + (hit.tierStripped ? ` - ${rawPick}` : '');
-        const src = document.createElement('div');
-        src.className = 'desc-source';
-        src.textContent = hit.kind;
-        const txt = document.createElement('div');
-        txt.className = 'desc-text';
-        txt.textContent = hit.desc;
-        block.appendChild(nm); block.appendChild(src);
-        const b2 = makeDlcBadge(hit.dlc); if (b2) block.appendChild(b2);
-        block.appendChild(txt);
-        wrap.appendChild(block);
-      });
-    }
-  }
+  _renderPickBlock(rawPick, false, wrap, displayName, atLevel);
   return wrap;
 }
 
@@ -5335,7 +5281,7 @@ function _renderManager(el) {
       delBtn.textContent = 'Delete';
       delBtn.addEventListener('click', () => {
         if (!confirm(`Delete "${b.name}"?`)) return;
-        _deleteBuild(b._id);
+        _deleteBuild(b._id, b._character);
         renderWorkshopSection();
       });
       btns.appendChild(delBtn);
@@ -5795,12 +5741,14 @@ function _saveDraft() {
   mergeCustomBuildsIntoData();
 }
 
-function _deleteBuild(id) {
-  saveCustomBuilds(getCustomBuilds().filter(x => x._id !== id));
-  DATA.mc_builds = DATA.mc_builds.filter(x => x._id !== id);
-  Object.keys(DATA.companions).forEach(c => {
-    DATA.companions[c] = DATA.companions[c].filter(x => x._id !== id);
-  });
+function _deleteBuild(id, character) {
+  saveCustomBuilds(getCustomBuilds().filter(x => !(x._id === id && x._character === character)));
+  if (character === 'MC') {
+    DATA.mc_builds = DATA.mc_builds.filter(x => x._id !== id);
+  } else {
+    const arr = DATA.companions[character];
+    if (arr) DATA.companions[character] = arr.filter(x => x._id !== id);
+  }
 }
 
 // ── URL sync (background) ─────────────────────────────────────────────────────

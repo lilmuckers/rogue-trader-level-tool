@@ -1,0 +1,12 @@
+{
+  "blockedBy": [],
+  "completedDate": "2026-05-11",
+  "createdDate": "2026-05-11",
+  "description": "No way to compute derived stats. Users picking characteristic training picks cannot see what their BS/WS/etc total will be at level 30. Should parse characteristic picks from a build and sum them to show projected stats at any level.",
+  "id": "T-021",
+  "order": 150,
+  "phase": "future",
+  "status": "complete",
+  "title": "Stat calculator: project final characteristic values at a given level",
+  "type": "feature"
+}

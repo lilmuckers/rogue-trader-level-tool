@@ -1,0 +1,12 @@
+{
+  "blockedBy": [],
+  "completedDate": "2026-05-11",
+  "createdDate": "2026-05-11",
+  "description": "DLC items and builds are scattered through data with no visual indicator. Users without a DLC will see irrelevant content with no explanation. Tag all DLC-gated content with a visual badge so users know what requires which DLC.",
+  "id": "T-019",
+  "order": 130,
+  "phase": "future",
+  "status": "complete",
+  "title": "DLC content flagging (Lex Imperialis, Void Shadows tags)",
+  "type": "feature"
+}
