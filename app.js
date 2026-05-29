@@ -3996,7 +3996,8 @@ function _renderDefList(el, entries, query, sectionId) {
       const badge = makeDlcBadge(dlc);
       if (badge) { badge.className = 'dlc-badge dlc-badge-pill'; header.appendChild(badge); }
     }
-    header.appendChild(_makeFavBtn({ id: 'fav_def_' + name, label: name, sub: typeof desc === 'string' ? desc.slice(0,60) : '', sectionId: sectionId || 'abilities' }));
+    header.appendChild(_makeFavBtn({ id: 'fav_def_' + name, label: name, sub: typeof desc === 'string' ? desc.slice(0,60) : '', sectionId: sectionId || 'abilities', itemKey: name }));
+    row.dataset.favKey = name;
     row.appendChild(header);
     if (desc) {
       const d = document.createElement('div');
@@ -4085,8 +4086,9 @@ function renderSkillsSection(el) {
       const d = document.createElement('div');
       d.className = 'lib-def-desc';
       d.textContent = typeof desc === 'string' ? desc : '';
+      row.dataset.favKey = name;
       row.appendChild(nm);
-      row.appendChild(_makeFavBtn({ id: 'fav_skill_' + name, label: name, sub: '', sectionId: 'skills' }));
+      row.appendChild(_makeFavBtn({ id: 'fav_skill_' + name, label: name, sub: '', sectionId: 'skills', itemKey: name }));
       row.appendChild(d);
       el.appendChild(row);
     });
@@ -4144,7 +4146,8 @@ function _renderHomeworlds(el) {
     const hwTitleRow = document.createElement('div');
     hwTitleRow.className = 'lib-world-title-row';
     hwTitleRow.appendChild(title);
-    hwTitleRow.appendChild(_makeFavBtn({ id: 'fav_hw_' + name, label: name, sub: hw.description ? hw.description.slice(0,60) : '', sectionId: 'charcreate' }));
+    hwTitleRow.appendChild(_makeFavBtn({ id: 'fav_hw_' + name, label: name, sub: hw.description ? hw.description.slice(0,60) : '', sectionId: 'charcreate', itemKey: name }));
+    card.dataset.favKey = name;
     card.appendChild(hwTitleRow);
 
     if (hw.description) {
@@ -4215,7 +4218,8 @@ function _renderOrigins(el) {
         ch.textContent = origin.companion;
         header.appendChild(ch);
       }
-      header.appendChild(_makeFavBtn({ id: 'fav_orig_' + name, label: name, sub: origin.description ? origin.description.slice(0,60) : '', sectionId: 'charcreate' }));
+      header.appendChild(_makeFavBtn({ id: 'fav_orig_' + name, label: name, sub: origin.description ? origin.description.slice(0,60) : '', sectionId: 'charcreate', itemKey: name }));
+      card.dataset.favKey = name;
       card.appendChild(header);
 
       if (origin.description) {
@@ -4308,7 +4312,8 @@ function _renderMCBuildList(el) {
         const badge = makeDlcBadge(b.dlc);
         if (badge) { badge.className = 'dlc-badge dlc-badge-pill'; nameRow.appendChild(badge); }
       }
-      nameRow.appendChild(_makeFavBtn({ id: 'fav_mcbuild_' + b.name, label: b.name, sub: b.theme || '', sectionId: 'mcbuilds' }));
+      nameRow.appendChild(_makeFavBtn({ id: 'fav_mcbuild_' + b.name, label: b.name, sub: b.theme || '', sectionId: 'mcbuilds', itemKey: b.name }));
+      card.dataset.favKey = b.name;
       card.appendChild(nameRow);
 
       if (b.origin) {
@@ -4398,7 +4403,8 @@ function _renderRetinueList(el) {
       const badge = makeDlcBadge(bio.dlc);
       if (badge) { badge.className = 'dlc-badge dlc-badge-pill'; nameRow.appendChild(badge); }
     }
-    nameRow.appendChild(_makeFavBtn({ id: 'fav_retinue_' + name, label: name, sub: bio.origin || '', sectionId: 'retinue' }));
+    nameRow.appendChild(_makeFavBtn({ id: 'fav_retinue_' + name, label: name, sub: bio.origin || '', sectionId: 'retinue', itemKey: name }));
+    card.dataset.favKey = name;
     card.appendChild(nameRow);
 
     // Homeworld / Origin / Join
@@ -4503,7 +4509,8 @@ function renderConvictionsSection(el) {
     title.textContent = pathName;
     header.appendChild(icon);
     header.appendChild(title);
-    header.appendChild(_makeFavBtn({ id: 'fav_conv_' + pathName, label: pathName, sub: path.approach ? path.approach.slice(0,60) : '', sectionId: 'convictions' }));
+    header.appendChild(_makeFavBtn({ id: 'fav_conv_' + pathName, label: pathName, sub: path.approach ? path.approach.slice(0,60) : '', sectionId: 'convictions', itemKey: pathName }));
+    card.dataset.favKey = pathName;
     card.appendChild(header);
 
     // Approach
@@ -4621,7 +4628,8 @@ function renderRomancesSection(el) {
     title.className = 'lib-world-title';
     title.textContent = name;
     titleRow.appendChild(title);
-    titleRow.appendChild(_makeFavBtn({ id: 'fav_romance_' + name, label: name + ' Romance', sub: r.available_to || '', sectionId: 'romances' }));
+    titleRow.appendChild(_makeFavBtn({ id: 'fav_romance_' + name, label: name + ' Romance', sub: r.available_to || '', sectionId: 'romances', itemKey: name }));
+    card.dataset.favKey = name;
     if (r.dlc) {
       const badge = makeDlcBadge(r.dlc);
       if (badge) { badge.className = 'dlc-badge dlc-badge-pill'; titleRow.appendChild(badge); }
@@ -4738,10 +4746,20 @@ function _navigateToFav(fav) {
   _referenceSubSection = fav.sectionId;
   _referenceSearch = '';
   renderReferenceSection();
-  // Deep nav for gear — push detail sheet
   if (fav.action === 'gear-detail' && fav.itemKey) {
+    // Gear — push detail sheet directly
     const item = (DATA.gear_db || []).find(g => g.n === fav.itemKey);
     if (item) setTimeout(() => pushGearDetail(item, fav.label), 50);
+  } else if (fav.itemKey) {
+    // Scroll to and highlight the matching element
+    setTimeout(() => {
+      const key = fav.itemKey.replace(/['"\\]/g, '\\$&');
+      const anchor = document.querySelector(`.reference-sub-content [data-fav-key="${key}"]`);
+      if (!anchor) return;
+      anchor.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      anchor.classList.add('fav-highlight');
+      setTimeout(() => anchor.classList.remove('fav-highlight'), 1500);
+    }, 80);
   }
 }
 
@@ -5065,7 +5083,8 @@ function renderResourcesBySystem(el) {
     nameRow.style.cssText = 'display:flex;align-items:center;justify-content:space-between;gap:6px;';
     nameRow.appendChild(nameEl);
     nameEl.textContent = system.name;
-    nameRow.appendChild(_makeFavBtn({ id: 'fav_sys_' + system.name, label: system.name, sub: 'Star System', sectionId: 'resources' }));
+    nameRow.appendChild(_makeFavBtn({ id: 'fav_sys_' + system.name, label: system.name, sub: 'Star System', sectionId: 'resources', itemKey: system.name }));
+    item.dataset.favKey = system.name;
     const resPreview = system.resources
       ? Object.entries(system.resources)
           .sort(([, a], [, b]) => (Array.isArray(b) ? b[0] : b) - (Array.isArray(a) ? a[0] : a))
@@ -5132,7 +5151,8 @@ function renderResourcesByType(el) {
     resNameEl.className = 'selectable-item-name';
     resNameEl.textContent = label;
     resNameRow.appendChild(resNameEl);
-    resNameRow.appendChild(_makeFavBtn({ id: 'fav_res_' + resType, label, sub: 'Resource', sectionId: 'resources' }));
+    resNameRow.appendChild(_makeFavBtn({ id: 'fav_res_' + resType, label, sub: 'Resource', sectionId: 'resources', itemKey: resType }));
+    item.dataset.favKey = resType;
     const resSubEl = document.createElement('div');
     resSubEl.className = 'selectable-item-sub';
     resSubEl.textContent = `${entries.length} system${entries.length !== 1 ? 's' : ''} · best: ${entries[0].system} ×${entries[0].qtyNum}`;
