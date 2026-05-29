@@ -2153,9 +2153,5 @@
   outline: 2px solid var(--gold);
   outline-offset: 2px;
   border-radius: 3px;
-  animation: fav-flash 1.5s ease-out forwards;
-}
-@keyframes fav-flash {
-  0%   { outline-color: var(--gold-bright); background: rgba(201,164,76,0.12); }
-  100% { outline-color: transparent; background: transparent; }
+  background: rgba(201,164,76,0.08);
 }
