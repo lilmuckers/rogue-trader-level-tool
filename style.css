@@ -2148,3 +2148,14 @@
 .ref-quick-info { flex: 1; min-width: 0; }
 .ref-quick-label { font-size: 13px; color: var(--ink); }
 .ref-quick-sub { font-size: 11px; color: var(--ink-faint); margin-top: 1px; }
+
+.fav-highlight {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+  border-radius: 3px;
+  animation: fav-flash 1.5s ease-out forwards;
+}
+@keyframes fav-flash {
+  0%   { outline-color: var(--gold-bright); background: rgba(201,164,76,0.12); }
+  100% { outline-color: transparent; background: transparent; }
+}

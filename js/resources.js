@@ -38,10 +38,20 @@ function _navigateToFav(fav) {
   _referenceSubSection = fav.sectionId;
   _referenceSearch = '';
   renderReferenceSection();
-  // Deep nav for gear — push detail sheet
   if (fav.action === 'gear-detail' && fav.itemKey) {
+    // Gear — push detail sheet directly
     const item = (DATA.gear_db || []).find(g => g.n === fav.itemKey);
     if (item) setTimeout(() => pushGearDetail(item, fav.label), 50);
+  } else if (fav.itemKey) {
+    // Scroll to and highlight the matching element
+    setTimeout(() => {
+      const key = fav.itemKey.replace(/['"\\]/g, '\\$&');
+      const anchor = document.querySelector(`.reference-sub-content [data-fav-key="${key}"]`);
+      if (!anchor) return;
+      anchor.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      anchor.classList.add('fav-highlight');
+      setTimeout(() => anchor.classList.remove('fav-highlight'), 1500);
+    }, 80);
   }
 }
 
@@ -365,7 +375,8 @@ function renderResourcesBySystem(el) {
     nameRow.style.cssText = 'display:flex;align-items:center;justify-content:space-between;gap:6px;';
     nameRow.appendChild(nameEl);
     nameEl.textContent = system.name;
-    nameRow.appendChild(_makeFavBtn({ id: 'fav_sys_' + system.name, label: system.name, sub: 'Star System', sectionId: 'resources' }));
+    nameRow.appendChild(_makeFavBtn({ id: 'fav_sys_' + system.name, label: system.name, sub: 'Star System', sectionId: 'resources', itemKey: system.name }));
+    item.dataset.favKey = system.name;
     const resPreview = system.resources
       ? Object.entries(system.resources)
           .sort(([, a], [, b]) => (Array.isArray(b) ? b[0] : b) - (Array.isArray(a) ? a[0] : a))
@@ -432,7 +443,8 @@ function renderResourcesByType(el) {
     resNameEl.className = 'selectable-item-name';
     resNameEl.textContent = label;
     resNameRow.appendChild(resNameEl);
-    resNameRow.appendChild(_makeFavBtn({ id: 'fav_res_' + resType, label, sub: 'Resource', sectionId: 'resources' }));
+    resNameRow.appendChild(_makeFavBtn({ id: 'fav_res_' + resType, label, sub: 'Resource', sectionId: 'resources', itemKey: resType }));
+    item.dataset.favKey = resType;
     const resSubEl = document.createElement('div');
     resSubEl.className = 'selectable-item-sub';
     resSubEl.textContent = `${entries.length} system${entries.length !== 1 ? 's' : ''} · best: ${entries[0].system} ×${entries[0].qtyNum}`;

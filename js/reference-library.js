@@ -45,7 +45,8 @@ function _renderDefList(el, entries, query, sectionId) {
       const badge = makeDlcBadge(dlc);
       if (badge) { badge.className = 'dlc-badge dlc-badge-pill'; header.appendChild(badge); }
     }
-    header.appendChild(_makeFavBtn({ id: 'fav_def_' + name, label: name, sub: typeof desc === 'string' ? desc.slice(0,60) : '', sectionId: sectionId || 'abilities' }));
+    header.appendChild(_makeFavBtn({ id: 'fav_def_' + name, label: name, sub: typeof desc === 'string' ? desc.slice(0,60) : '', sectionId: sectionId || 'abilities', itemKey: name }));
+    row.dataset.favKey = name;
     row.appendChild(header);
     if (desc) {
       const d = document.createElement('div');
@@ -134,8 +135,9 @@ function renderSkillsSection(el) {
       const d = document.createElement('div');
       d.className = 'lib-def-desc';
       d.textContent = typeof desc === 'string' ? desc : '';
+      row.dataset.favKey = name;
       row.appendChild(nm);
-      row.appendChild(_makeFavBtn({ id: 'fav_skill_' + name, label: name, sub: '', sectionId: 'skills' }));
+      row.appendChild(_makeFavBtn({ id: 'fav_skill_' + name, label: name, sub: '', sectionId: 'skills', itemKey: name }));
       row.appendChild(d);
       el.appendChild(row);
     });
@@ -193,7 +195,8 @@ function _renderHomeworlds(el) {
     const hwTitleRow = document.createElement('div');
     hwTitleRow.className = 'lib-world-title-row';
     hwTitleRow.appendChild(title);
-    hwTitleRow.appendChild(_makeFavBtn({ id: 'fav_hw_' + name, label: name, sub: hw.description ? hw.description.slice(0,60) : '', sectionId: 'charcreate' }));
+    hwTitleRow.appendChild(_makeFavBtn({ id: 'fav_hw_' + name, label: name, sub: hw.description ? hw.description.slice(0,60) : '', sectionId: 'charcreate', itemKey: name }));
+    card.dataset.favKey = name;
     card.appendChild(hwTitleRow);
 
     if (hw.description) {
@@ -264,7 +267,8 @@ function _renderOrigins(el) {
         ch.textContent = origin.companion;
         header.appendChild(ch);
       }
-      header.appendChild(_makeFavBtn({ id: 'fav_orig_' + name, label: name, sub: origin.description ? origin.description.slice(0,60) : '', sectionId: 'charcreate' }));
+      header.appendChild(_makeFavBtn({ id: 'fav_orig_' + name, label: name, sub: origin.description ? origin.description.slice(0,60) : '', sectionId: 'charcreate', itemKey: name }));
+      card.dataset.favKey = name;
       card.appendChild(header);
 
       if (origin.description) {
@@ -357,7 +361,8 @@ function _renderMCBuildList(el) {
         const badge = makeDlcBadge(b.dlc);
         if (badge) { badge.className = 'dlc-badge dlc-badge-pill'; nameRow.appendChild(badge); }
       }
-      nameRow.appendChild(_makeFavBtn({ id: 'fav_mcbuild_' + b.name, label: b.name, sub: b.theme || '', sectionId: 'mcbuilds' }));
+      nameRow.appendChild(_makeFavBtn({ id: 'fav_mcbuild_' + b.name, label: b.name, sub: b.theme || '', sectionId: 'mcbuilds', itemKey: b.name }));
+      card.dataset.favKey = b.name;
       card.appendChild(nameRow);
 
       if (b.origin) {
@@ -447,7 +452,8 @@ function _renderRetinueList(el) {
       const badge = makeDlcBadge(bio.dlc);
       if (badge) { badge.className = 'dlc-badge dlc-badge-pill'; nameRow.appendChild(badge); }
     }
-    nameRow.appendChild(_makeFavBtn({ id: 'fav_retinue_' + name, label: name, sub: bio.origin || '', sectionId: 'retinue' }));
+    nameRow.appendChild(_makeFavBtn({ id: 'fav_retinue_' + name, label: name, sub: bio.origin || '', sectionId: 'retinue', itemKey: name }));
+    card.dataset.favKey = name;
     card.appendChild(nameRow);
 
     // Homeworld / Origin / Join
@@ -552,7 +558,8 @@ function renderConvictionsSection(el) {
     title.textContent = pathName;
     header.appendChild(icon);
     header.appendChild(title);
-    header.appendChild(_makeFavBtn({ id: 'fav_conv_' + pathName, label: pathName, sub: path.approach ? path.approach.slice(0,60) : '', sectionId: 'convictions' }));
+    header.appendChild(_makeFavBtn({ id: 'fav_conv_' + pathName, label: pathName, sub: path.approach ? path.approach.slice(0,60) : '', sectionId: 'convictions', itemKey: pathName }));
+    card.dataset.favKey = pathName;
     card.appendChild(header);
 
     // Approach
@@ -670,7 +677,8 @@ function renderRomancesSection(el) {
     title.className = 'lib-world-title';
     title.textContent = name;
     titleRow.appendChild(title);
-    titleRow.appendChild(_makeFavBtn({ id: 'fav_romance_' + name, label: name + ' Romance', sub: r.available_to || '', sectionId: 'romances' }));
+    titleRow.appendChild(_makeFavBtn({ id: 'fav_romance_' + name, label: name + ' Romance', sub: r.available_to || '', sectionId: 'romances', itemKey: name }));
+    card.dataset.favKey = name;
     if (r.dlc) {
       const badge = makeDlcBadge(r.dlc);
       if (badge) { badge.className = 'dlc-badge dlc-badge-pill'; titleRow.appendChild(badge); }
