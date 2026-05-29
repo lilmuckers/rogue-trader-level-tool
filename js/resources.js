@@ -54,13 +54,11 @@ function _navigateToFav(fav) {
         anchor.classList.remove('fav-highlight');
         document.removeEventListener('touchstart', _clearHighlight, true);
         document.removeEventListener('click',      _clearHighlight, true);
-        document.removeEventListener('scroll',     _clearHighlight, true);
       };
       setTimeout(() => {
         document.addEventListener('touchstart', _clearHighlight, { capture: true, once: true });
         document.addEventListener('click',      _clearHighlight, { capture: true, once: true });
-        document.addEventListener('scroll',     _clearHighlight, { capture: true, once: true });
-      }, 300); // small delay so the navigation click doesn't immediately clear it
+      }, 400);
     }, 80);
   }
 }
