@@ -2067,3 +2067,42 @@
 .ws-preview-row:last-child { border-bottom: none; }
 .ws-preview-label { color: var(--ink-faint); min-width: 100px; flex-shrink: 0; }
 .ws-preview-val { color: var(--ink); flex: 1; word-break: break-all; }
+
+/* === ROMANCE GUIDES === */
+.romance-meta {
+  display: flex; flex-wrap: wrap; gap: 5px; margin: 6px 0 8px;
+}
+.romance-chip {
+  font-size: 11px; padding: 2px 8px;
+  border-radius: 10px; background: rgba(201,164,76,0.1);
+  border: 1px solid var(--gold-deep); color: var(--gold-deep);
+}
+.romance-chip.conviction {
+  background: rgba(255,255,255,0.05);
+  border-color: var(--ink-faint); color: var(--ink-faint);
+}
+.romance-steps-heading {
+  font-family: 'Cinzel', serif; font-size: 10px;
+  letter-spacing: 0.25em; text-transform: uppercase;
+  color: var(--ink-dim); margin: 10px 0 6px;
+  padding-bottom: 4px; border-bottom: 1px solid var(--rule);
+}
+.romance-steps-heading.missable { color: var(--blood-bright); border-color: var(--blood); }
+.romance-steps { display: flex; flex-direction: column; gap: 6px; }
+.romance-step-row {
+  display: grid; grid-template-columns: 52px 1fr;
+  gap: 8px; align-items: baseline; font-size: 13px;
+}
+.romance-act-badge {
+  font-family: 'Cinzel', serif; font-size: 9px;
+  font-weight: 700; letter-spacing: 0.1em;
+  color: var(--gold-deep); flex-shrink: 0;
+}
+.romance-step-text { color: var(--ink-dim); line-height: 1.4; }
+.romance-missable-list {
+  margin: 4px 0 0 16px; padding: 0;
+  display: flex; flex-direction: column; gap: 4px;
+}
+.romance-missable-list li {
+  font-size: 12px; color: var(--blood-bright); line-height: 1.3;
+}

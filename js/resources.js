@@ -12,6 +12,7 @@ const REFERENCE_SECTIONS = [
   { id: 'talents',     title: 'Talents',                 subtitle: 'All talent descriptions, searchable',              icon: '✸' },
   { id: 'skills',       title: 'Skills & Characteristics', subtitle: 'Reference for all stats and skills',             icon: '≡' },
   { id: 'convictions', title: 'Convictions',              subtitle: 'Dogmatic, Iconoclast & Heretic — tiers & effects', icon: '◉' },
+  { id: 'romances',    title: 'Romance Guides',           subtitle: 'Key choices & steps for each romanceable companion', icon: '♡' },
   { id: 'resources',   title: 'Star System Resources',   subtitle: 'Resource deposits by system or type',             icon: '⬡' },
 ];
 
@@ -40,6 +41,7 @@ function renderReferenceSection() {
     else if (_referenceSubSection === 'mcbuilds')   renderMCBuildsSection(subEl);
     else if (_referenceSubSection === 'retinue')      renderRetinueSection(subEl);
     else if (_referenceSubSection === 'convictions')  renderConvictionsSection(subEl);
+    else if (_referenceSubSection === 'romances')     renderRomancesSection(subEl);
   } else {
     // Search bar (always visible on landing)
     const searchWrap = document.createElement('div');
@@ -147,6 +149,12 @@ function _renderGlobalSearchResults(el, rawQ) {
     .filter(([k, v]) => match(k, v.philosophy, v.approach))
     .map(([k, v]) => ({ label: k, sub: v.approach || '' }));
   if (convRows.length) groups.push({ sectionId: 'convictions', title: 'Convictions', icon: '◉', rows: convRows });
+
+  // Romances
+  const romanceRows = Object.entries(DATA.definitions.romances || {})
+    .filter(([k, v]) => match(k, v.summary, v.conviction, v.available_to))
+    .map(([k, v]) => ({ label: k, sub: v.available_to || '' }));
+  if (romanceRows.length) groups.push({ sectionId: 'romances', title: 'Romances', icon: '♡', rows: romanceRows });
 
   // MC Builds
   const buildRows = (DATA.mc_builds || [])

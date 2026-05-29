@@ -637,3 +637,100 @@ function renderConvictionsSection(el) {
     el.appendChild(card);
   });
 }
+
+// ── Romances ──────────────────────────────────────────────────────────────────
+
+function renderRomancesSection(el) {
+  el.innerHTML = '';
+  const data = DATA.definitions.romances || {};
+
+  const intro = document.createElement('div');
+  intro.className = 'conv-intro';
+  intro.textContent = 'Romance guides for all romanceable companions. Multiple romances can run simultaneously until Act 4 forces a choice. Argenta and Idira are not romanceable.';
+  el.appendChild(intro);
+
+  Object.entries(data).forEach(([name, r]) => {
+    const card = document.createElement('div');
+    card.className = 'lib-world-card romance-card';
+
+    // Header row
+    const titleRow = document.createElement('div');
+    titleRow.className = 'lib-world-title-row';
+    const title = document.createElement('div');
+    title.className = 'lib-world-title';
+    title.textContent = name;
+    titleRow.appendChild(title);
+    if (r.dlc) {
+      const badge = makeDlcBadge(r.dlc);
+      if (badge) { badge.className = 'dlc-badge dlc-badge-pill'; titleRow.appendChild(badge); }
+    }
+    card.appendChild(titleRow);
+
+    // Meta chips
+    const meta = document.createElement('div');
+    meta.className = 'romance-meta';
+    if (r.available_to) {
+      const g = document.createElement('span');
+      g.className = 'romance-chip';
+      g.textContent = r.available_to;
+      meta.appendChild(g);
+    }
+    if (r.conviction) {
+      const c = document.createElement('span');
+      c.className = 'romance-chip conviction';
+      c.textContent = r.conviction;
+      meta.appendChild(c);
+    }
+    card.appendChild(meta);
+
+    // Summary
+    if (r.summary) {
+      const sum = document.createElement('div');
+      sum.className = 'lib-world-desc';
+      sum.textContent = r.summary;
+      card.appendChild(sum);
+    }
+
+    // Steps
+    if (r.steps && r.steps.length) {
+      const sh = document.createElement('div');
+      sh.className = 'romance-steps-heading';
+      sh.textContent = 'Key Steps';
+      card.appendChild(sh);
+      const steps = document.createElement('div');
+      steps.className = 'romance-steps';
+      r.steps.forEach(s => {
+        const row = document.createElement('div');
+        row.className = 'romance-step-row';
+        const act = document.createElement('span');
+        act.className = 'romance-act-badge';
+        act.textContent = s.act != null ? `Act ${s.act}` : '—';
+        const txt = document.createElement('span');
+        txt.className = 'romance-step-text';
+        txt.textContent = s.step;
+        row.appendChild(act);
+        row.appendChild(txt);
+        steps.appendChild(row);
+      });
+      card.appendChild(steps);
+    }
+
+    // Missable
+    if (r.missable && r.missable.length) {
+      const mh = document.createElement('div');
+      mh.className = 'romance-steps-heading missable';
+      mh.textContent = '⚠ Missable / Breaks Romance';
+      card.appendChild(mh);
+      const mlist = document.createElement('ul');
+      mlist.className = 'romance-missable-list';
+      r.missable.forEach(m => {
+        const li = document.createElement('li');
+        li.textContent = m;
+        mlist.appendChild(li);
+      });
+      card.appendChild(mlist);
+    }
+
+    el.appendChild(card);
+  });
+}
