@@ -2103,18 +2103,16 @@ function setColonyLevel(colonyName, newLevel) {
   Store.set(KEY_COLONY_LEVEL, all);
 }
 
-function getVoidshipDone() {
-  return Store.get(KEY_VOIDSHIP_DONE) || {};
-}
-function toggleVoidshipUpgrade(tierLabel, upgradeName) {
-  const all = Store.get(KEY_VOIDSHIP_DONE) || {};
-  const key = tierLabel + '::' + upgradeName;
-  if (all[key]) delete all[key];
-  else all[key] = true;
+// Voidship: stores { rankIndex: chosenOptionName | null }
+function getVoidshipChoices() { return Store.get(KEY_VOIDSHIP_DONE) || {}; }
+function setVoidshipChoice(rankIndex, optionName) {
+  const all = getVoidshipChoices();
+  if (all[rankIndex] === optionName) delete all[rankIndex]; // toggle off
+  else all[rankIndex] = optionName;
   Store.set(KEY_VOIDSHIP_DONE, all);
 }
-function isVoidshipUpgradeDone(tierLabel, upgradeName) {
-  return !!(Store.get(KEY_VOIDSHIP_DONE) || {})[tierLabel + '::' + upgradeName];
+function getVoidshipChoice(rankIndex) {
+  return getVoidshipChoices()[rankIndex] || null;
 }
 
 function getHoldingsTab() { return Store.get(KEY_HOLDINGS_TAB) || 'colonies'; }
@@ -2287,72 +2285,86 @@ function renderVoidshipTab(el) {
     return;
   }
 
-  const ship = ships[0]; // single ship for now
-  const tiers = ship.tiers || [];
+  const ship = ships[0];
+  const ranks = ship.ranks || [];
+  const chosenCount = ranks.filter((_, i) => getVoidshipChoice(i) !== null).length;
 
   // Progress summary
-  const allUpgrades = tiers.flatMap(t => (t.upgrades || []).map(u => ({ tier: t.label, name: u.name })));
-  const doneCount = allUpgrades.filter(u => isVoidshipUpgradeDone(u.tier, u.name)).length;
   const summary = document.createElement('div');
   summary.className = 'voidship-summary';
-  summary.textContent = `${ship.name} · ${doneCount} / ${allUpgrades.length} upgrades installed`;
+  summary.textContent = `${ship.name} · Rank ${chosenCount} / ${ranks.length}`;
   el.appendChild(summary);
 
-  tiers.forEach(tier => {
-    const tierDone = (tier.upgrades || []).filter(u => isVoidshipUpgradeDone(tier.label, u.name)).length;
+  ranks.forEach((rank, rankIndex) => {
+    const chosen = getVoidshipChoice(rankIndex);
+
     const section = document.createElement('div');
     section.className = 'colony-level-section';
 
     const heading = document.createElement('div');
-    heading.className = 'colony-level-heading' + (tierDone === tier.upgrades.length ? ' is-past' : ' is-current');
-    heading.textContent = `${tier.label} (${tierDone}/${tier.upgrades.length})`;
+    heading.className = 'colony-level-heading' +
+      (chosen ? ' is-past' : rankIndex === chosenCount ? ' is-current' : ' is-future');
+    heading.textContent = `Rank ${rank.rank}`;
     section.appendChild(heading);
 
-    (tier.upgrades || []).forEach(upgrade => {
-      const isDone = isVoidshipUpgradeDone(tier.label, upgrade.name);
+    // Two-option pick row
+    const pickRow = document.createElement('div');
+    pickRow.className = 'voidship-pick-row';
+
+    (rank.options || []).forEach(opt => {
+      const isChosen = chosen === opt.name;
+      const isOtherChosen = chosen && chosen !== opt.name;
+
       const card = document.createElement('div');
-      card.className = 'colony-project' + (isDone ? ' is-done' : '');
+      card.className = 'voidship-option' +
+        (isChosen ? ' is-chosen' : '') +
+        (isOtherChosen ? ' is-unchosen' : '');
 
-      const header = document.createElement('div');
-      header.className = 'colony-project-header';
-      const check = document.createElement('div');
-      check.className = 'colony-project-check';
-      check.textContent = isDone ? '✓' : '';
+      const typeEl = document.createElement('div');
+      typeEl.className = 'voidship-option-type';
+      typeEl.textContent = opt.type || '';
+
       const nameEl = document.createElement('div');
-      nameEl.className = 'colony-project-name';
-      nameEl.textContent = upgrade.name;
-      header.append(check, nameEl);
-      card.appendChild(header);
+      nameEl.className = 'voidship-option-name';
+      nameEl.textContent = opt.name;
 
-      check.addEventListener('click', (e) => {
-        e.stopPropagation();
-        toggleVoidshipUpgrade(tier.label, upgrade.name);
+      card.append(typeEl, nameEl);
+
+      // Toggle choice on tap; open detail sheet on long-press / second tap
+      card.addEventListener('click', () => {
+        setVoidshipChoice(rankIndex, opt.name);
         renderColonySection();
       });
 
-      card.addEventListener('click', (e) => {
-        if (check.contains(e.target)) return;
-        openSheet(upgrade.name, () => {
+      // Detail: open sheet on name long-press via a dedicated info button
+      const infoBtn = document.createElement('button');
+      infoBtn.className = 'voidship-option-info';
+      infoBtn.textContent = 'ⓘ';
+      infoBtn.title = 'Details';
+      infoBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        openSheet(opt.name, () => {
           const wrap = document.createElement('div');
           wrap.className = 'colony-project-detail-sheet';
-          if (upgrade.cost) {
-            const row = document.createElement('div');
-            row.className = 'colony-project-row';
-            row.innerHTML = `<strong>Cost:</strong> ${upgrade.cost}`;
-            wrap.appendChild(row);
-          }
-          if (upgrade.benefit) {
-            const row = document.createElement('div');
-            row.className = 'colony-project-row';
-            row.innerHTML = `<strong>Effect:</strong> ${upgrade.benefit}`;
-            wrap.appendChild(row);
+          const typeRow = document.createElement('div');
+          typeRow.className = 'colony-project-row';
+          typeRow.innerHTML = `<strong>Type:</strong> ${opt.type || '—'}`;
+          wrap.appendChild(typeRow);
+          if (opt.description) {
+            const descRow = document.createElement('div');
+            descRow.className = 'colony-project-row';
+            descRow.innerHTML = `<strong>Effect:</strong> ${opt.description}`;
+            wrap.appendChild(descRow);
           }
           return wrap;
         });
       });
+      card.appendChild(infoBtn);
 
-      section.appendChild(card);
+      pickRow.appendChild(card);
     });
+
+    section.appendChild(pickRow);
     el.appendChild(section);
   });
 }
