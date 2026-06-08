@@ -14,7 +14,7 @@ function setReorderMode(on) {
 
 const SECTION_META = {
   tracker:   { title: 'Rogue Trader',    subtitle: 'Level Tracker & Build Companion' },
-  colony:    { title: 'Colony Projects', subtitle: 'Track your colonial development' },
+  colony:    { title: 'Holdings', subtitle: 'Colonies &amp; Voidship upgrades' },
   traders:   { title: 'Traders',         subtitle: 'Faction reputations & available items' },
   reference: { title: 'Reference',       subtitle: 'Lookup tables & reference data' },
   notes:     { title: 'Notes',           subtitle: 'Campaign notes & reminders' },

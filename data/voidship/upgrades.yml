@@ -1,0 +1,72 @@
+# Righteous Fury — Voidship Upgrades
+# Organised by upgrade tier. Each upgrade has: name, cost, benefit, and optional notes.
+# Tracking: checkboxes per upgrade (similar to colony projects).
+
+name: Righteous Fury
+
+tiers:
+  - tier: 1
+    label: "Tier I — Foundation"
+    upgrades:
+      - name: Reinforced Hull Plating
+        cost: Plasteel 3 / Ship Components 2
+        benefit: "+50 Hull Integrity. Reduces damage taken from ship combat."
+      - name: Improved Gellar Field
+        cost: Mechanisms 2 / Ship Components 2
+        benefit: "Reduces Warp travel hazard rolls. Reduces warp-sickness on crew."
+      - name: Enhanced Void Shields
+        cost: Ship Components 3 / Mechanisms 1
+        benefit: "+1 Void Shield layer. Absorbs one additional hit before hull is exposed."
+      - name: Crew Quarters Expansion
+        cost: Plasteel 2 / Provisions 2
+        benefit: "+Crew capacity. Crew morale bonus. Unlocks additional crew actions in ship combat."
+      - name: Prow Lance Battery
+        cost: Ship Components 4 / Adamantine 1
+        benefit: "Installs forward-facing lance weapon. Penetrates armour in ship combat."
+      - name: Dorsal Macrocannons
+        cost: Weapons 3 / Ship Components 2
+        benefit: "Installs broadside macrocannon battery. High damage broadside option."
+
+  - tier: 2
+    label: "Tier II — Expansion"
+    upgrades:
+      - name: Advanced Drive Systems
+        cost: Mechanisms 3 / Ship Components 3 / Flogiston 2
+        benefit: "+Speed rating. Improved manoeuvring in ship combat encounters."
+      - name: Servitor Repair Gangs
+        cost: Mechanisms 4 / Ship Components 2
+        benefit: "Passive hull repair between encounters. Reduces repair costs."
+      - name: Teleportarium
+        cost: Mechanisms 3 / Ship Components 4 / Adamantine 2
+        benefit: "Enables boarding action abilities in ship combat. Unlocks special crew actions."
+      - name: Augur Array Upgrade
+        cost: Mechanisms 3 / Ship Components 3
+        benefit: "Improved enemy detection. Bonus to first-strike actions in ship combat."
+      - name: Medicae Bay
+        cost: Provisions 3 / Mechanisms 2 / Ship Components 2
+        benefit: "Crew healing between missions. Reduces morale loss from difficult missions."
+      - name: Warp Drive Calibration
+        cost: Ship Components 3 / Mechanisms 2
+        benefit: "Reduces travel time. Lowers chance of Warp encounter on short routes."
+
+  - tier: 3
+    label: "Tier III — Supremacy"
+    upgrades:
+      - name: Nova Cannon
+        cost: Adamantine 4 / Ship Components 6 / Weapons 4
+        benefit: "Installs Nova Cannon. Devastating area-effect ship weapon. One-shot per encounter."
+      - name: Archeotech Drive
+        cost: Xenotech 3 / Mechanisms 4 / Ship Components 5
+        benefit: "Maximum speed upgrade. Allows emergency warp micro-jumps in combat."
+      - name: Combat Bridge Refits
+        cost: Mechanisms 4 / Ship Components 4 / Adamantine 2
+        benefit: "Bonus to all command rolls in ship combat. Unlocks additional command actions."
+      - name: Adeptus Mechanicus Systems
+        cost: Xenotech 2 / Mechanisms 5 / Ship Components 4
+        benefit: "Archeotech systems grant passive bonuses. Reduces maintenance costs."
+      - name: Armoured Prow
+        cost: Adamantine 5 / Plasteel 4 / Ship Components 3
+        benefit: "Bonus armour on prow facing. Ram actions deal increased damage."
+      - name: Mark of the Expanse
+        cost: Profit Factor 5 / Ship Components 5
+        benefit: "Unique hull marking. +Reputation with Fellowship of the Void. Flavour bonus."

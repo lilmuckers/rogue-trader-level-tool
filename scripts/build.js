@@ -178,6 +178,15 @@ for (const filePath of globYaml(vendorsDir)) {
   }
 }
 
+// ─── voidship ────────────────────────────────────────────────────────────────
+
+const voidshipDir = path.join(dataDir, 'voidship');
+const voidshipUpgrades = globYaml(voidshipDir).reduce((acc, filePath) => {
+  const v = readYaml(filePath);
+  if (v && v.name) acc.push(v);
+  return acc;
+}, []);
+
 // ─── resources ───────────────────────────────────────────────────────────────
 
 const resourcesDir = path.join(dataDir, 'resources');
@@ -195,6 +204,7 @@ const DATA = {
   archetypes: { mc: archetypesMC, comp: archetypesCOMP },
   extras:     { mc_extras: extrasMC, comp_extras: extrasComp },
   colonies,
+  voidshipUpgrades,
   vendors,
   questRewards,
   resourceSystems,
@@ -254,6 +264,7 @@ console.log(`  talents:      ${Object.keys(definitions.talents).length}`);
 console.log(`  abilities:    ${Object.keys(definitions.abilities).length}`);
 console.log(`  heroic:       ${Object.keys(definitions.heroic).length}`);
 console.log(`  colonies:     ${colonies.length}`);
+console.log(`  voidship:     ${voidshipUpgrades.reduce((s, v) => s + (v.tiers || []).reduce((ts, t) => ts + (t.upgrades || []).length, 0), 0)} upgrades across ${voidshipUpgrades.length} ships`);
 console.log(`  vendors:      ${vendors.reduce((s, v) => s + (v.items ? v.items.length : (v.neutral_items||[]).length + (v.dogmatic_items||[]).length + (v.iconoclast_items||[]).length + (v.heretic_items||[]).length), 0)} items across ${vendors.length} factions`);
 console.log(`  questRewards: ${questRewards.length}`);
 console.log(`  resources:    ${resourceSystems.length} systems`);
