@@ -810,7 +810,26 @@
 .section-view { }
 .section-view.hidden { display: none; }
 
-/* ── Colony Projects section ────────────────────────────────────────────────── */
+/* ── Holdings section (Colonies + Voidship) ─────────────────────────────────── */
+.holdings-tab-bar {
+  display: flex; gap: 6px; margin-bottom: 18px;
+}
+.holdings-tab-btn {
+  flex: 1; padding: 8px 0; border: 1px solid #3a3020; border-radius: 6px;
+  background: #1a1610; color: #a09060; font-family: 'EB Garamond', serif;
+  font-size: 0.95rem; cursor: pointer; transition: background 0.15s, color 0.15s;
+}
+.holdings-tab-btn.active {
+  background: #2a2010; color: #e8c468; border-color: #c9a44c;
+}
+.holdings-tab-btn:hover:not(.active) { background: #221c10; color: #c9a44c; }
+
+.voidship-summary {
+  font-family: 'JetBrains Mono', monospace; font-size: 0.8rem;
+  color: #a09060; margin-bottom: 16px; padding: 8px 12px;
+  background: #1a1610; border-radius: 6px; border: 1px solid #2a2010;
+}
+
 .colony-selector-wrap {
   display: flex; align-items: center; gap: 10px; margin-bottom: 18px;
   flex-wrap: wrap;

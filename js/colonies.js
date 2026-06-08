@@ -1,7 +1,10 @@
-// ============= COLONY PROJECTS =============
+// ============= HOLDINGS: COLONIES + VOIDSHIP =============
 
-const KEY_COLONY_DONE  = 'rt.colony-done.v1';
-const KEY_COLONY_LEVEL = 'rt.colony-level.v1';
+// ── Persistence ────────────────────────────────────────────────────────────────
+const KEY_COLONY_DONE    = 'rt.colony-done.v1';
+const KEY_COLONY_LEVEL   = 'rt.colony-level.v1';
+const KEY_VOIDSHIP_DONE  = 'rt.voidship-done.v1';
+const KEY_HOLDINGS_TAB   = 'rt.holdings-tab.v1';
 
 function getColonyDone(colonyName) {
   return (Store.get(KEY_COLONY_DONE) || {})[colonyName] || {};
@@ -22,13 +25,65 @@ function setColonyLevel(colonyName, newLevel) {
   Store.set(KEY_COLONY_LEVEL, all);
 }
 
+function getVoidshipDone() {
+  return Store.get(KEY_VOIDSHIP_DONE) || {};
+}
+function toggleVoidshipUpgrade(tierLabel, upgradeName) {
+  const all = Store.get(KEY_VOIDSHIP_DONE) || {};
+  const key = tierLabel + '::' + upgradeName;
+  if (all[key]) delete all[key];
+  else all[key] = true;
+  Store.set(KEY_VOIDSHIP_DONE, all);
+}
+function isVoidshipUpgradeDone(tierLabel, upgradeName) {
+  return !!(Store.get(KEY_VOIDSHIP_DONE) || {})[tierLabel + '::' + upgradeName];
+}
+
+function getHoldingsTab() { return Store.get(KEY_HOLDINGS_TAB) || 'colonies'; }
+function setHoldingsTab(t) { Store.set(KEY_HOLDINGS_TAB, t); }
+
 let _selectedColony = 0;
 
+// ── Main render ────────────────────────────────────────────────────────────────
 function renderColonySection() {
   const el = $('colony-content');
   el.innerHTML = '';
+
+  // Tab bar
+  const tabBar = document.createElement('div');
+  tabBar.className = 'holdings-tab-bar';
+  const activeTab = getHoldingsTab();
+
+  const tabs = [
+    { id: 'colonies', label: 'Colonies' },
+    { id: 'voidship', label: 'Voidship' },
+  ];
+  tabs.forEach(({ id, label }) => {
+    const btn = document.createElement('button');
+    btn.className = 'holdings-tab-btn' + (activeTab === id ? ' active' : '');
+    btn.textContent = label;
+    btn.addEventListener('click', () => {
+      setHoldingsTab(id);
+      renderColonySection();
+    });
+    tabBar.appendChild(btn);
+  });
+  el.appendChild(tabBar);
+
+  if (activeTab === 'colonies') {
+    renderColoniesTab(el);
+  } else {
+    renderVoidshipTab(el);
+  }
+}
+
+// ── Colonies tab ───────────────────────────────────────────────────────────────
+function renderColoniesTab(el) {
   if (!DATA.colonies || !DATA.colonies.length) {
-    el.textContent = 'No colony data available.';
+    const em = document.createElement('div');
+    em.className = 'gb-empty';
+    em.textContent = 'No colony data available.';
+    el.appendChild(em);
     return;
   }
   const colony = DATA.colonies[_selectedColony];
@@ -112,7 +167,6 @@ function renderColonySection() {
         nameEl.style.cursor = 'pointer';
         card.addEventListener('click', (e) => {
           if (check.contains(e.target)) return;
-          // Open modal sheet with project details
           openSheet(project.name, () => {
             const wrap = document.createElement('div');
             wrap.className = 'colony-project-detail-sheet';
@@ -142,4 +196,85 @@ function renderColonySection() {
     }
     el.appendChild(section);
   }
+}
+
+// ── Voidship tab ───────────────────────────────────────────────────────────────
+function renderVoidshipTab(el) {
+  const ships = DATA.voidshipUpgrades || [];
+  if (!ships.length) {
+    const em = document.createElement('div');
+    em.className = 'gb-empty';
+    em.textContent = 'No voidship data available.';
+    el.appendChild(em);
+    return;
+  }
+
+  const ship = ships[0]; // single ship for now
+  const tiers = ship.tiers || [];
+
+  // Progress summary
+  const allUpgrades = tiers.flatMap(t => (t.upgrades || []).map(u => ({ tier: t.label, name: u.name })));
+  const doneCount = allUpgrades.filter(u => isVoidshipUpgradeDone(u.tier, u.name)).length;
+  const summary = document.createElement('div');
+  summary.className = 'voidship-summary';
+  summary.textContent = `${ship.name} · ${doneCount} / ${allUpgrades.length} upgrades installed`;
+  el.appendChild(summary);
+
+  tiers.forEach(tier => {
+    const tierDone = (tier.upgrades || []).filter(u => isVoidshipUpgradeDone(tier.label, u.name)).length;
+    const section = document.createElement('div');
+    section.className = 'colony-level-section';
+
+    const heading = document.createElement('div');
+    heading.className = 'colony-level-heading' + (tierDone === tier.upgrades.length ? ' is-past' : ' is-current');
+    heading.textContent = `${tier.label} (${tierDone}/${tier.upgrades.length})`;
+    section.appendChild(heading);
+
+    (tier.upgrades || []).forEach(upgrade => {
+      const isDone = isVoidshipUpgradeDone(tier.label, upgrade.name);
+      const card = document.createElement('div');
+      card.className = 'colony-project' + (isDone ? ' is-done' : '');
+
+      const header = document.createElement('div');
+      header.className = 'colony-project-header';
+      const check = document.createElement('div');
+      check.className = 'colony-project-check';
+      check.textContent = isDone ? '✓' : '';
+      const nameEl = document.createElement('div');
+      nameEl.className = 'colony-project-name';
+      nameEl.textContent = upgrade.name;
+      header.append(check, nameEl);
+      card.appendChild(header);
+
+      check.addEventListener('click', (e) => {
+        e.stopPropagation();
+        toggleVoidshipUpgrade(tier.label, upgrade.name);
+        renderColonySection();
+      });
+
+      card.addEventListener('click', (e) => {
+        if (check.contains(e.target)) return;
+        openSheet(upgrade.name, () => {
+          const wrap = document.createElement('div');
+          wrap.className = 'colony-project-detail-sheet';
+          if (upgrade.cost) {
+            const row = document.createElement('div');
+            row.className = 'colony-project-row';
+            row.innerHTML = `<strong>Cost:</strong> ${upgrade.cost}`;
+            wrap.appendChild(row);
+          }
+          if (upgrade.benefit) {
+            const row = document.createElement('div');
+            row.className = 'colony-project-row';
+            row.innerHTML = `<strong>Effect:</strong> ${upgrade.benefit}`;
+            wrap.appendChild(row);
+          }
+          return wrap;
+        });
+      });
+
+      section.appendChild(card);
+    });
+    el.appendChild(section);
+  });
 }
