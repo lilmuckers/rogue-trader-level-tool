@@ -6185,8 +6185,28 @@ if (window.visualViewport) {
         <ul class="about-sources">
           <li><a class="about-link" href="https://roguetrader.wh40k.wiki/" target="_blank" rel="noopener">roguetrader.wh40k.wiki</a></li>
           <li><a class="about-link" href="https://roguetrader.wiki.fextralife.com/" target="_blank" rel="noopener">Fextralife Rogue Trader Wiki</a></li>
-          <li><a class="about-link" href="https://gamefaqs.gamespot.com/ps5/369358-warhammer-40000-rogue-trader/faqs/82192" target="_blank" rel="noopener">GameFAQs Rogue Trader Guide</a> (companion base stats)</li>
+          <li><a class="about-link" href="https://gamefaqs.gamespot.com/ps5/369358-warhammer-40000-rogue-trader/faqs/82192" target="_blank" rel="noopener">GameFAQs Rogue Trader Guide</a> — companion base starting stats</li>
         </ul>
+
+        <div class="about-section-heading">Voidship Upgrade Data</div>
+        <p class="about-blurb">
+          Voidship rank upgrade options and descriptions were sourced from:
+        </p>
+        <ul class="about-sources">
+          <li><a class="about-link" href="https://www.gamerguides.com/warhammer-40k-rogue-trader/guide/voidship/gameplay/best-ship-upgrades-build" target="_blank" rel="noopener">Gamer Guides — Best Ship Upgrades Build</a></li>
+          <li><a class="about-link" href="https://www.gameskinny.com/tips/warhammer-40k-rogue-trader-best-voidship-upgrades/" target="_blank" rel="noopener">GamesKinny — Best Voidship Upgrades</a></li>
+          <li><a class="about-link" href="https://gamefaqs.gamespot.com/ps5/369358-warhammer-40000-rogue-trader/faqs/82192/voidship-management" target="_blank" rel="noopener">GameFAQs — Voidship Management Guide</a></li>
+        </ul>
+
+        <div class="about-section-heading">Colony &amp; Game Reference Data</div>
+        <p class="about-blurb">
+          Colony project data, conviction thresholds, vendor listings, and star system
+          resources were sourced from community guides and the
+          <a class="about-link" href="https://roguetrader.wiki.fextralife.com/" target="_blank" rel="noopener">Fextralife Wiki</a>,
+          with reference to the
+          <a class="about-link" href="https://docs.google.com/spreadsheets/d/1rskX4sYcNm6Wqt4rtm8EQqRR4__yrEuxCEzjwoKlHOY/" target="_blank" rel="noopener">Revan619 community sheet</a>
+          for vendor item recommendations.
+        </p>
 
         <div class="about-section-heading">Source Code</div>
         <p class="about-blurb">
