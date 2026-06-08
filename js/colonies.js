@@ -4,6 +4,7 @@
 const KEY_COLONY_DONE    = 'rt.colony-done.v1';
 const KEY_COLONY_LEVEL   = 'rt.colony-level.v1';
 const KEY_VOIDSHIP_DONE  = 'rt.voidship-done.v1';
+const KEY_VOIDSHIP_NAME  = 'rt.voidship-name.v1';
 const KEY_HOLDINGS_TAB   = 'rt.holdings-tab.v1';
 
 function getColonyDone(colonyName) {
@@ -36,6 +37,9 @@ function setVoidshipChoice(rankIndex, optionName) {
 function getVoidshipChoice(rankIndex) {
   return getVoidshipChoices()[rankIndex] || null;
 }
+
+function getVoidshipName(defaultName) { return Store.get(KEY_VOIDSHIP_NAME) || defaultName || 'Righteous Fury'; }
+function setVoidshipName(n) { n.trim() ? Store.set(KEY_VOIDSHIP_NAME, n.trim()) : Store.remove(KEY_VOIDSHIP_NAME); }
 
 function getHoldingsTab() { return Store.get(KEY_HOLDINGS_TAB) || 'colonies'; }
 function setHoldingsTab(t) { Store.set(KEY_HOLDINGS_TAB, t); }
@@ -210,12 +214,29 @@ function renderVoidshipTab(el) {
   const ship = ships[0];
   const ranks = ship.ranks || [];
   const chosenCount = ranks.filter((_, i) => getVoidshipChoice(i) !== null).length;
+  const shipName = getVoidshipName(ship.name);
 
-  // Progress summary
-  const summary = document.createElement('div');
-  summary.className = 'voidship-summary';
-  summary.textContent = `${ship.name} · Rank ${chosenCount} / ${ranks.length}`;
-  el.appendChild(summary);
+  // Editable ship name + progress
+  const nameRow = document.createElement('div');
+  nameRow.className = 'voidship-name-row';
+
+  const nameInput = document.createElement('input');
+  nameInput.type = 'text';
+  nameInput.className = 'voidship-name-input';
+  nameInput.value = shipName;
+  nameInput.maxLength = 48;
+  nameInput.placeholder = ship.name;
+  nameInput.setAttribute('autocorrect', 'off');
+  nameInput.setAttribute('spellcheck', 'false');
+  nameInput.addEventListener('change', () => { setVoidshipName(nameInput.value); });
+  nameInput.addEventListener('blur',   () => { setVoidshipName(nameInput.value); });
+
+  const progress = document.createElement('span');
+  progress.className = 'voidship-progress';
+  progress.textContent = `Rank ${chosenCount} / ${ranks.length}`;
+
+  nameRow.append(nameInput, progress);
+  el.appendChild(nameRow);
 
   ranks.forEach((rank, rankIndex) => {
     const chosen = getVoidshipChoice(rankIndex);
