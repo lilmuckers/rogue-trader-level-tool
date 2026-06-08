@@ -829,6 +829,38 @@
   color: #a09060; margin-bottom: 16px; padding: 8px 12px;
   background: #1a1610; border-radius: 6px; border: 1px solid #2a2010;
 }
+.voidship-pick-row {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 4px;
+}
+.voidship-option {
+  position: relative; padding: 10px 28px 10px 10px;
+  border: 1px solid #2a2010; border-radius: 6px; background: #1a1610;
+  cursor: pointer; transition: border-color 0.15s, background 0.15s;
+}
+.voidship-option:hover { border-color: #5a4820; background: #221c10; }
+.voidship-option.is-chosen {
+  border-color: #c9a44c; background: #2a2010;
+  box-shadow: 0 0 0 1px #c9a44c33;
+}
+.voidship-option.is-unchosen { opacity: 0.38; }
+.voidship-option-type {
+  font-family: 'JetBrains Mono', monospace; font-size: 0.65rem;
+  color: #7a6040; text-transform: uppercase; letter-spacing: 0.04em;
+  margin-bottom: 3px;
+}
+.voidship-option.is-chosen .voidship-option-type { color: #c9a44c; }
+.voidship-option-name {
+  font-family: 'EB Garamond', serif; font-size: 0.95rem; color: #c8b880;
+  line-height: 1.2;
+}
+.voidship-option.is-chosen .voidship-option-name { color: #e8c468; }
+.voidship-option-info {
+  position: absolute; top: 6px; right: 6px;
+  background: none; border: none; color: #5a4820; font-size: 0.85rem;
+  cursor: pointer; padding: 2px 4px; line-height: 1;
+}
+.voidship-option:hover .voidship-option-info,
+.voidship-option.is-chosen .voidship-option-info { color: #a09060; }
 
 .colony-selector-wrap {
   display: flex; align-items: center; gap: 10px; margin-bottom: 18px;

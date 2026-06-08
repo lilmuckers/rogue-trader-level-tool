@@ -1,72 +1,114 @@
 # Righteous Fury — Voidship Upgrades
-# Organised by upgrade tier. Each upgrade has: name, cost, benefit, and optional notes.
-# Tracking: checkboxes per upgrade (similar to colony projects).
+# 12 ranks. At each rank, choose ONE of two options (ability or flagship development).
+# Tracking: which option was chosen per rank (or none if not yet reached).
 
 name: Righteous Fury
 
-tiers:
-  - tier: 1
-    label: "Tier I — Foundation"
-    upgrades:
-      - name: Reinforced Hull Plating
-        cost: Plasteel 3 / Ship Components 2
-        benefit: "+50 Hull Integrity. Reduces damage taken from ship combat."
-      - name: Improved Gellar Field
-        cost: Mechanisms 2 / Ship Components 2
-        benefit: "Reduces Warp travel hazard rolls. Reduces warp-sickness on crew."
-      - name: Enhanced Void Shields
-        cost: Ship Components 3 / Mechanisms 1
-        benefit: "+1 Void Shield layer. Absorbs one additional hit before hull is exposed."
-      - name: Crew Quarters Expansion
-        cost: Plasteel 2 / Provisions 2
-        benefit: "+Crew capacity. Crew morale bonus. Unlocks additional crew actions in ship combat."
-      - name: Prow Lance Battery
-        cost: Ship Components 4 / Adamantine 1
-        benefit: "Installs forward-facing lance weapon. Penetrates armour in ship combat."
-      - name: Dorsal Macrocannons
-        cost: Weapons 3 / Ship Components 2
-        benefit: "Installs broadside macrocannon battery. High damage broadside option."
+ranks:
+  - rank: 1
+    options:
+      - name: Torpedo Control
+        type: Ability
+        description: "Gives control of the nearest torpedo salvo, granting it 5 VMP. Allows redirecting torpedoes on subsequent turns."
+      - name: Reinforce Shields
+        type: Ability
+        description: "Select a sector of your shields and reinforce it until it takes damage, reducing strength loss by half when hit. The single most useful ship upgrade."
 
-  - tier: 2
-    label: "Tier II — Expansion"
-    upgrades:
-      - name: Advanced Drive Systems
-        cost: Mechanisms 3 / Ship Components 3 / Flogiston 2
-        benefit: "+Speed rating. Improved manoeuvring in ship combat encounters."
-      - name: Servitor Repair Gangs
-        cost: Mechanisms 4 / Ship Components 2
-        benefit: "Passive hull repair between encounters. Reduces repair costs."
-      - name: Teleportarium
-        cost: Mechanisms 3 / Ship Components 4 / Adamantine 2
-        benefit: "Enables boarding action abilities in ship combat. Unlocks special crew actions."
-      - name: Augur Array Upgrade
-        cost: Mechanisms 3 / Ship Components 3
-        benefit: "Improved enemy detection. Bonus to first-strike actions in ship combat."
-      - name: Medicae Bay
-        cost: Provisions 3 / Mechanisms 2 / Ship Components 2
-        benefit: "Crew healing between missions. Reduces morale loss from difficult missions."
-      - name: Warp Drive Calibration
-        cost: Ship Components 3 / Mechanisms 2
-        benefit: "Reduces travel time. Lowers chance of Warp encounter on short routes."
+  - rank: 2
+    options:
+      - name: Warp Wave
+        type: Ability
+        description: "Forces enemy ships to turn 45–90 degrees. Deals damage based on their missing hull if already damaged."
+      - name: Arc Augury
+        type: Ability
+        description: "Your next shot gains +2 extra range, allowing safer attacks from greater distances. Affects port and starboard armaments."
 
-  - tier: 3
-    label: "Tier III — Supremacy"
-    upgrades:
-      - name: Nova Cannon
-        cost: Adamantine 4 / Ship Components 6 / Weapons 4
-        benefit: "Installs Nova Cannon. Devastating area-effect ship weapon. One-shot per encounter."
-      - name: Archeotech Drive
-        cost: Xenotech 3 / Mechanisms 4 / Ship Components 5
-        benefit: "Maximum speed upgrade. Allows emergency warp micro-jumps in combat."
-      - name: Combat Bridge Refits
-        cost: Mechanisms 4 / Ship Components 4 / Adamantine 2
-        benefit: "Bonus to all command rolls in ship combat. Unlocks additional command actions."
-      - name: Adeptus Mechanicus Systems
-        cost: Xenotech 2 / Mechanisms 5 / Ship Components 4
-        benefit: "Archeotech systems grant passive bonuses. Reduces maintenance costs."
-      - name: Armoured Prow
-        cost: Adamantine 5 / Plasteel 4 / Ship Components 3
-        benefit: "Bonus armour on prow facing. Ram actions deal increased damage."
-      - name: Mark of the Expanse
-        cost: Profit Factor 5 / Ship Components 5
-        benefit: "Unique hull marking. +Reputation with Fellowship of the Void. Flavour bonus."
+  - rank: 3
+    options:
+      - name: Shallow Jump
+        type: Ability
+        description: "The flagship makes a shallow warp jump forward. Range: 5 cells. Excellent for closing distance or escaping dangerous situations."
+      - name: Expeditious Reload
+        type: Ability
+        description: "Reloads all macro-cannons fired during the acceleration phase, enabling additional attacks outside that phase."
+
+  - rank: 4
+    options:
+      - name: Focused Efforts
+        type: Ability
+        description: "Permits both post abilities to be used in one turn. If abilities are unavailable, reduces their cooldowns by 1 turn."
+      - name: Corpuscarii Chant
+        type: Ultimate Ability
+        description: "At the end of the turn, restores the most damaged shield sector by up to 50%. Extremely strong defensive ultimate."
+
+  - rank: 5
+    options:
+      - name: Swing Run
+        type: Ability
+        description: "The flagship flies in a straight line and makes a full U-turn at the end of its movement. Useful for repositioning to face enemies at wide angles."
+      - name: Rugged Repair
+        type: Flagship Development
+        description: "Reduces voidship repair costs by 50%. Significant resource efficiency over the course of the campaign. Considered a must-have."
+
+  - rank: 6
+    options:
+      - name: Premonition
+        type: Ultimate Ability
+        description: "Increases evasion by +35% when positioned favourably, making enemy attacks significantly less accurate."
+      - name: Empyrean Storm
+        type: Ultimate Ability
+        description: "The flagship makes 7 attacks targeting random enemies within an 8-cell range, each dealing warp damage. AoE damage ultimate."
+
+  - rank: 7
+    options:
+      - name: Silent Running II
+        type: Flagship Development
+        description: "Silent Running now makes the flagship act before all enemies in most encounters. Prerequisite: Silent Running I development. Guarantees first-turn advantage."
+      - name: Steady Hand
+        type: Flagship Development
+        description: "20% chance that a post ability's cooldown is reduced by 1 round when used."
+
+  - rank: 8
+    options:
+      - name: Maximum Overdrive
+        type: Ultimate Ability
+        description: "+2 Speed and +1 Maneuverability. Doubles the ram damage bonus."
+      - name: Shield Pulse
+        type: Ability
+        description: "Disrupts enemy defences by shifting their shields. Costs 25% of your own shield strength to activate."
+
+  - rank: 9
+    options:
+      - name: Take it All!
+        type: Flagship Development
+        description: "The flagship collects +10% more scrap from destroyed ships."
+      - name: Steady Hand II
+        type: Flagship Development
+        description: "Improves Steady Hand: 50% chance to reduce a post ability's cooldown by 1 round when used. Upgrade of Steady Hand."
+
+  - rank: 10
+    options:
+      - name: Strafe
+        type: Ability
+        description: "Allows horizontal movement for fine-tuning weapon targeting and positioning adjustments."
+      - name: New Heading
+        type: Ability
+        description: "Enables 90-degree turns instead of the standard 45-degree turns during movement."
+
+  - rank: 11
+    options:
+      - name: Vulnerability Scan
+        type: Ability
+        description: "All damage dealt to an enemy's weak point is increased by +30%. Highlights weak points for concentrated fire."
+      - name: Sanctified Restart
+        type: Flagship Development
+        description: "Reduces penalties from Restart Shields action — imposes only -2 speed with no firing range penalty."
+
+  - rank: 12
+    options:
+      - name: All Hands on Deck
+        type: Ultimate Ability
+        description: "Loads torpedo tubes with 3 salvos instead of 1, multiplying torpedo firepower dramatically."
+      - name: Improved Ram
+        type: Flagship Development
+        description: "Doubles the additional damage bonus for ramming based on distance traveled before impact."
