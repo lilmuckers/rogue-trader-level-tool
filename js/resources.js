@@ -3,6 +3,13 @@
 let _referenceSubSection = null;
 let _referenceSearch = '';
 
+function _setRefSub(id) {
+  _referenceSubSection = id;
+  _referenceSearch = '';
+  _pushHash('reference', id);
+  renderReferenceSection();
+}
+
 // ── Favourites ────────────────────────────────────────────────────────────────
 // KEY_ constants are in store.js
 function getRefFavs()    { return Store.get(KEY_REF_FAVS) || []; }
@@ -35,9 +42,7 @@ function _makeFavBtn(fav) {
 }
 
 function _navigateToFav(fav) {
-  _referenceSubSection = fav.sectionId;
-  _referenceSearch = '';
-  renderReferenceSection();
+  _setRefSub(fav.sectionId);
   if (fav.action === 'gear-detail' && fav.itemKey) {
     // Gear — push detail sheet directly
     const item = (DATA.gear_db || []).find(g => g.n === fav.itemKey);
@@ -140,7 +145,7 @@ function renderReferenceSection() {
     const backBtn = document.createElement('button');
     backBtn.className = 'reference-back-btn';
     backBtn.innerHTML = '← Reference';
-    backBtn.addEventListener('click', () => { _referenceSubSection = null; renderReferenceSection(); });
+    backBtn.addEventListener('click', () => _setRefSub(null));
     el.appendChild(backBtn);
 
     const subEl = document.createElement('div');
@@ -192,7 +197,7 @@ function _renderReferenceLandingGrid(el) {
         <div class="reference-card-title">${title}</div>
         <div class="reference-card-sub">${subtitle}</div>
       </div>`;
-    card.addEventListener('click', () => { _referenceSubSection = id; renderReferenceSection(); });
+    card.addEventListener('click', () => _setRefSub(id));
     grid.appendChild(card);
   });
   el.appendChild(grid);
@@ -298,7 +303,7 @@ function _renderGlobalSearchResults(el, rawQ) {
     shown.forEach(({ label, sub }) => {
       const row = document.createElement('div');
       row.className = 'ref-search-result-row';
-      row.addEventListener('click', () => { _referenceSubSection = sectionId; _referenceSearch = ''; renderReferenceSection(); });
+      row.addEventListener('click', () => _setRefSub(sectionId));
       const lbl = document.createElement('div');
       lbl.className = 'ref-search-result-label';
       lbl.textContent = label;
@@ -316,7 +321,7 @@ function _renderGlobalSearchResults(el, rawQ) {
       const more = document.createElement('div');
       more.className = 'ref-search-more';
       more.textContent = `+${rows.length - MAX} more in ${title} →`;
-      more.addEventListener('click', () => { _referenceSubSection = sectionId; _referenceSearch = ''; renderReferenceSection(); });
+      more.addEventListener('click', () => _setRefSub(sectionId));
       section.appendChild(more);
     }
 

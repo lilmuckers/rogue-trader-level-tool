@@ -50,7 +50,7 @@ function renderColonySection() {
   const tabBar = _makeTabBar(
     [{ id: 'colonies', label: 'Colonies' }, { id: 'voidship', label: 'Voidship' }],
     getHoldingsTab(),
-    id => { setHoldingsTab(id); renderColonySection(); },
+    id => { setHoldingsTab(id); _pushHash('colony', id); renderColonySection(); },
     'holdings-tab-bar', 'holdings-tab-btn'
   );
   el.appendChild(tabBar);
