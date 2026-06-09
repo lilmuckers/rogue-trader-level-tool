@@ -2210,7 +2210,7 @@ function renderColonySection() {
   );
   el.appendChild(tabBar);
 
-  if (activeTab === 'colonies') {
+  if (getHoldingsTab() === 'colonies') {
     renderColoniesTab(el);
   } else {
     renderVoidshipTab(el);

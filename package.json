@@ -1,6 +1,6 @@
 {
   "name": "rogue-trader-characters",
-  "version": "1.12.0",
+  "version": "1.12.1",
   "private": true,
   "scripts": {
     "extract": "node scripts/extract.js",
