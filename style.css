@@ -241,7 +241,7 @@
   .setup-label { font-family: 'Cinzel', serif; font-size: 12px; color: var(--ink-dim); letter-spacing: 0.15em; text-transform: uppercase; }
   .setup-row.mc-row { border-left-color: var(--blood-bright); }
   .setup-row.mc-row .setup-label { color: var(--gold-bright); }
-  select, input[type="number"] { background: var(--bg); color: var(--ink); border: 1px solid var(--rule); border-radius: 3px; padding: 10px 12px; font-family: 'EB Garamond', serif; font-size: 16px; width: 100%; -webkit-appearance: none; appearance: none; }
+  select, input[type="number"], input[type="text"], input[type="password"] { background: var(--bg); color: var(--ink); border: 1px solid var(--rule); border-radius: 3px; padding: 10px 12px; font-family: 'EB Garamond', serif; font-size: 16px; width: 100%; -webkit-appearance: none; appearance: none; }
   select { background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'><path fill='%23c9a44c' d='M6 8L0 0h12z'/></svg>"); background-repeat: no-repeat; background-position: right 12px center; padding-right: 32px; }
   select:focus, input:focus { outline: none; border-color: var(--gold); }
   select option { background: var(--bg); color: var(--ink); }
@@ -829,9 +829,8 @@
   display: flex; align-items: center; gap: 10px; margin-bottom: 16px;
 }
 .voidship-name-input {
-  flex: 1; background: var(--bg); border: 1px solid var(--rule); border-radius: 3px;
-  color: var(--gold-bright); font-family: 'Cinzel', serif; font-size: 1rem;
-  padding: 8px 10px; min-width: 0;
+  flex: 1; color: var(--gold-bright); font-family: 'Cinzel', serif;
+  font-size: 1rem; padding: 8px 10px; min-width: 0;
 }
 .voidship-name-input:focus { outline: none; border-color: var(--gold); }
 .voidship-name-input::placeholder { color: var(--ink-faint); }
@@ -916,6 +915,10 @@
 }
 .colony-level-heading.is-past { color: var(--ink-faint); }
 .colony-level-heading.is-future { color: var(--rule); }
+
+/* Shared card background — all item-list cards use bg-2 */
+.char-card, .colony-project, .vendor-item, .lib-retinue-card,
+.lib-build-card, .note-card { background: var(--bg-2); }
 
 .colony-project {
   background: var(--bg-2); border-left: 2px solid var(--rule);
@@ -1652,9 +1655,6 @@
 
 /* === MC NAME INPUT === */
 .mc-name-input {
-  background: var(--bg); color: var(--ink); border: 1px solid var(--rule);
-  border-radius: 3px; padding: 10px 12px; font-family: 'EB Garamond', serif;
-  font-size: 16px; width: 100%;
   user-select: text; -webkit-user-select: text;
 }
 .mc-name-input:focus { outline: none; border-color: var(--gold); }
@@ -1716,9 +1716,9 @@
 .add-comp-arch { font-size: 12px; color: var(--ink-dim); }
 .add-comp-section-label { font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--ink-dim); margin-bottom: 6px; }
 .add-comp-build-section, .add-comp-join-section { margin-bottom: 14px; }
-.add-comp-join-input { background: var(--bg); color: var(--gold); border: 1px solid var(--rule); border-radius: 3px; padding: 10px 12px; font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 20px; width: 100%; text-align: center; -webkit-appearance: none; }
+.add-comp-join-input { color: var(--gold); font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 20px; text-align: center; }
 .add-comp-join-input:focus { outline: none; border-color: var(--gold); }
-.setup-select { background: var(--bg); color: var(--ink); border: 1px solid var(--rule); border-radius: 3px; padding: 10px 12px; font-family: 'EB Garamond', serif; font-size: 16px; width: 100%; -webkit-appearance: none; appearance: none; }
+/* .setup-select inherits from the base select rule */
 
 /* === COMPANION REMOVE BTN (setup) === */
 .companion-remove-btn {

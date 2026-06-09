@@ -101,23 +101,9 @@ function renderGearBrowser(container) {
   const filterBar = document.createElement('div');
   filterBar.className = 'gb-filter-bar';
 
-  // Search row with clear button
-  const searchRow = document.createElement('div');
-  searchRow.className = 'gb-search-row';
-  const searchInput = document.createElement('input');
-  searchInput.type = 'text';
-  searchInput.className = 'gb-search';
-  searchInput.placeholder = 'Search gear…';
-  searchInput.value = _gb.search;
-  searchInput.addEventListener('input', () => { _gb.search = searchInput.value; clearBtn.style.display = _gb.search ? '' : 'none'; renderGearList(listEl); });
-  const clearBtn = document.createElement('button');
-  clearBtn.className = 'gb-search-clear';
-  clearBtn.textContent = '✕';
-  clearBtn.title = 'Clear search';
-  clearBtn.style.display = _gb.search ? '' : 'none';
-  clearBtn.addEventListener('click', () => { _gb.search = ''; searchInput.value = ''; clearBtn.style.display = 'none'; searchInput.focus(); renderGearList(listEl); });
-  searchRow.appendChild(searchInput);
-  searchRow.appendChild(clearBtn);
+  const { wrap: searchRow } = _makeSearchBar('Search gear…',
+    val => { _gb.search = val; renderGearList(listEl); },
+    { wrapClass: 'gb-search-row', inputClass: 'gb-search', clearClass: 'gb-search-clear', initValue: _gb.search });
   filterBar.appendChild(searchRow);
 
   // All four filter dropdowns in one row
@@ -293,10 +279,7 @@ function renderGearList(listEl) {
   const filtered = (DATA.gear_db || []).filter(_matchesFilters);
 
   if (!filtered.length) {
-    const empty = document.createElement('div');
-    empty.className = 'gb-empty';
-    empty.textContent = 'No gear matches these filters.';
-    listEl.appendChild(empty);
+    listEl.appendChild(_makeEmptyState('No gear matches these filters.'));
     return;
   }
 

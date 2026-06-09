@@ -1,7 +1,6 @@
 // ============= WORKSHOP — Custom Build Manager =============
 
-const KEY_CUSTOM_BUILDS = 'rt-custom-builds';
-const KEY_GIST_PAT      = 'rt-gist-pat';
+// KEY_ constants are in store.js
 
 const WS_BASIC_ARCHETYPES    = ['Warrior','Officer','Operative','Soldier','Bladedancer'];
 const WS_ADVANCED_ARCHETYPES = ['Assassin','Vanguard','Bounty Hunter','Master Tactician','Grand Strategist','Arch-Militant','Executioner','Overseer','Exemplar'];
@@ -93,10 +92,7 @@ function _renderManager(el) {
   // Build list
   const builds = getCustomBuilds();
   if (!builds.length) {
-    const empty = document.createElement('div');
-    empty.className = 'ws-empty';
-    empty.textContent = 'No custom builds yet. Create one or import from a file, URL, or Gist.';
-    el.appendChild(empty);
+    el.appendChild(_makeEmptyState('No custom builds yet. Create one or import from a file, URL, or Gist.', 'ws-empty'));
   } else {
     const list = document.createElement('div');
     list.className = 'ws-build-list';

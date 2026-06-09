@@ -1,7 +1,6 @@
 // ============= TRADERS =============
 
-const KEY_TRADERS_ACT = 'rt.traders-act.v1';
-const KEY_TRADERS_REP = 'rt.traders-rep.v1';
+// KEY_ constants are in store.js
 
 function getTradersAct() { return Store.get(KEY_TRADERS_ACT) || 1; }
 function setTradersAct(act) { Store.set(KEY_TRADERS_ACT, act); }
@@ -9,11 +8,8 @@ function getFactionRep(factionName) {
   return (Store.get(KEY_TRADERS_REP) || {})[factionName] || 0;
 }
 function setFactionRep(factionName, rep) {
-  const all = Store.get(KEY_TRADERS_REP) || {};
-  all[factionName] = Math.max(0, rep);
-  Store.set(KEY_TRADERS_REP, all);
+  Store.mutate(KEY_TRADERS_REP, all => { all[factionName] = Math.max(0, rep); });
 }
-const KEY_PROFIT_FACTOR = 'rt.profit-factor.v1';
 function getProfitFactor() { return Store.get(KEY_PROFIT_FACTOR) || 0; }
 function setProfitFactor(pf) { Store.set(KEY_PROFIT_FACTOR, Math.max(0, pf)); }
 
@@ -30,11 +26,10 @@ function vendorItemLockReason(item, rep, act) {
   return null;
 }
 // Alignment vendor helpers
-const KEY_ALIGN_RANKS = 'rt.align-ranks.v1';
 const ALIGNMENTS = ['Dogmatic', 'Iconoclast', 'Heretic'];
 function getAlignRanks() { return Store.get(KEY_ALIGN_RANKS) || { Dogmatic: 0, Iconoclast: 0, Heretic: 0 }; }
 function setAlignRank(alignment, rank) {
-  const all = getAlignRanks(); all[alignment] = Math.max(0, rank); Store.set(KEY_ALIGN_RANKS, all);
+  Store.mutate(KEY_ALIGN_RANKS, all => { all[alignment] = Math.max(0, rank); });
 }
 function alignItemAvailable(item, rank, act) {
   if (act < item.act) return false;

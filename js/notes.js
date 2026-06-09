@@ -1,5 +1,5 @@
 // ============= NOTES =============
-const KEY_NOTES = 'rt.notes.v1';
+// KEY_ constants are in store.js
 
 function getNotes() { return Store.get(KEY_NOTES) || []; }
 function setNotes(notes) { Store.set(KEY_NOTES, notes); }
@@ -80,14 +80,12 @@ function renderMarkdown(text, onToggleTodo) {
   return s;
 }
 
-const KEY_NOTES_SORT = 'rt.notes-sort.v1';
 function getNotesSort() { return Store.get(KEY_NOTES_SORT) || 'updated'; }
 function setNotesSort(v) { Store.set(KEY_NOTES_SORT, v); }
 
 // Persistent undo history (localStorage + in-memory write-through)
 // ── Undo / Redo history (persistent, per-note) ──
 // Storage format: { noteId: { u: [undoStack], r: [redoStack] } }
-const KEY_NOTES_HISTORY = 'rt.notes-history.v2';
 const MAX_UNDO = 20;
 const _historyCache = new Map(); // noteId → { u: [], r: [] }
 let _historyCacheLoaded = false;
