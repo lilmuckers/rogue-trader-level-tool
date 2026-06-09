@@ -1,5 +1,63 @@
 document.addEventListener('contextmenu', e => e.preventDefault());
 
+// ── Shared DOM helpers ─────────────────────────────────────────────────────────
+
+// Search input + clear button.
+// opts: { wrapClass, inputClass, clearClass, initValue }
+// Returns { wrap, inp }.
+function _makeSearchBar(placeholder, onInput, {
+  wrapClass  = 'lib-search-wrap',
+  inputClass = 'lib-search',
+  clearClass = 'lib-search-clear',
+  initValue  = '',
+} = {}) {
+  const wrap = document.createElement('div');
+  wrap.className = wrapClass;
+  const inp = document.createElement('input');
+  inp.type = 'text'; inp.className = inputClass;
+  inp.placeholder = placeholder; inp.value = initValue;
+  inp.setAttribute('autocorrect', 'off'); inp.setAttribute('spellcheck', 'false');
+  const clear = document.createElement('button');
+  clear.className = clearClass; clear.textContent = '✕'; clear.title = 'Clear search';
+  clear.style.display = initValue ? '' : 'none';
+  inp.addEventListener('input', () => {
+    clear.style.display = inp.value ? '' : 'none';
+    onInput(inp.value);
+  });
+  clear.addEventListener('click', () => {
+    inp.value = ''; clear.style.display = 'none'; inp.focus(); onInput('');
+  });
+  wrap.append(inp, clear);
+  return { wrap, inp };
+}
+
+// Empty-state placeholder div.
+function _makeEmptyState(text, className = 'gb-empty') {
+  const el = document.createElement('div');
+  el.className = className;
+  el.textContent = text;
+  return el;
+}
+
+// Generic tab bar. tabs = [{id, label}]. Returns bar element.
+function _makeTabBar(tabs, activeId, onChange, barClass = 'tab-bar', btnClass = 'tab-btn') {
+  const bar = document.createElement('div');
+  bar.className = barClass;
+  tabs.forEach(({ id, label }) => {
+    const btn = document.createElement('button');
+    btn.className = btnClass + (id === activeId ? ' active' : '');
+    btn.setAttribute('type', 'button');
+    btn.textContent = label;
+    btn.addEventListener('click', () => {
+      bar.querySelectorAll('.' + btnClass).forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      onChange(id);
+    });
+    bar.appendChild(btn);
+  });
+  return bar;
+}
+
 const DEFAULT_JOIN_LEVELS = {"Abelard": 1, "Idira": 1, "Argenta": 3, "Pasqal": 6, "Cassia": 10, "Heinrix": 12, "Yrliet": 14, "Jae": 16, "Ulfar": 22, "Marazhai": 31, "Kibellah": 33, "Solomorne": 37, "Incendia Chorda": 40, "Calligos Winterscale": 40, "Uralon": 40};
 
 const $ = (id) => document.getElementById(id);
@@ -25,15 +83,34 @@ const Store = (() => {
     get(k) { if (useLS) { const v = localStorage.getItem(k); return v == null ? null : JSON.parse(v); } return k in memory ? memory[k] : null; },
     set(k, v) { if (useLS) localStorage.setItem(k, JSON.stringify(v)); else memory[k] = v; },
     remove(k) { if (useLS) localStorage.removeItem(k); else delete memory[k]; },
+    // Mutate a stored object in-place: fn(obj) → save back.
+    mutate(k, fn) { const obj = this.get(k) || {}; fn(obj); this.set(k, obj); },
   };
 })();
 
-const KEY_CONFIG  = 'rt.config.v2';
-const KEY_LEVEL   = 'rt.level.v1';
-const KEY_CHOICES = 'rt.choices.v1';
-const KEY_MC_NAME = 'rt.mc-name.v1';
-const KEY_ROSTER  = 'rt.roster.v1';   // [{char, build, joinLevel}] ordered
-const KEY_PARTY   = 'rt.party.v1';    // [charName] ordered, max 5
+// ── All localStorage keys (single source of truth) ────────────────────────────
+const KEY_CONFIG        = 'rt.config.v2';
+const KEY_LEVEL         = 'rt.level.v1';
+const KEY_CHOICES       = 'rt.choices.v1';
+const KEY_MC_NAME       = 'rt.mc-name.v1';
+const KEY_ROSTER        = 'rt.roster.v1';
+const KEY_PARTY         = 'rt.party.v1';
+const KEY_NOTES         = 'rt.notes.v1';
+const KEY_NOTES_SORT    = 'rt.notes-sort.v1';
+const KEY_NOTES_HISTORY = 'rt.notes-history.v2';
+const KEY_TRADERS_ACT   = 'rt.traders-act.v1';
+const KEY_TRADERS_REP   = 'rt.traders-rep.v1';
+const KEY_PROFIT_FACTOR = 'rt.profit-factor.v1';
+const KEY_ALIGN_RANKS   = 'rt.align-ranks.v1';
+const KEY_COLONY_DONE   = 'rt.colony-done.v1';
+const KEY_COLONY_LEVEL  = 'rt.colony-level.v1';
+const KEY_VOIDSHIP_DONE = 'rt.voidship-done.v1';
+const KEY_VOIDSHIP_NAME = 'rt.voidship-name.v1';
+const KEY_HOLDINGS_TAB  = 'rt.holdings-tab.v1';
+const KEY_CUSTOM_BUILDS = 'rt-custom-builds';
+const KEY_GIST_PAT      = 'rt-gist-pat';
+const KEY_REF_FAVS      = 'rt-ref-favourites';
+
 const MIN_LVL = 1, MAX_LVL = 55;
 const MAX_PARTY = 5;
 
@@ -2079,38 +2156,34 @@ if (!config) showSetup(); else showTracker();
 // ============= HOLDINGS: COLONIES + VOIDSHIP =============
 
 // ── Persistence ────────────────────────────────────────────────────────────────
-const KEY_COLONY_DONE    = 'rt.colony-done.v1';
-const KEY_COLONY_LEVEL   = 'rt.colony-level.v1';
-const KEY_VOIDSHIP_DONE  = 'rt.voidship-done.v1';
-const KEY_VOIDSHIP_NAME  = 'rt.voidship-name.v1';
-const KEY_HOLDINGS_TAB   = 'rt.holdings-tab.v1';
+// KEY_ constants are in store.js
 
 function getColonyDone(colonyName) {
   return (Store.get(KEY_COLONY_DONE) || {})[colonyName] || {};
 }
 function toggleColonyProject(colonyName, projectName) {
-  const all = Store.get(KEY_COLONY_DONE) || {};
-  if (!all[colonyName]) all[colonyName] = {};
-  if (all[colonyName][projectName]) delete all[colonyName][projectName];
-  else all[colonyName][projectName] = true;
-  Store.set(KEY_COLONY_DONE, all);
+  Store.mutate(KEY_COLONY_DONE, all => {
+    if (!all[colonyName]) all[colonyName] = {};
+    if (all[colonyName][projectName]) delete all[colonyName][projectName];
+    else all[colonyName][projectName] = true;
+  });
 }
 function getColonyLevel(colonyName) {
   return (Store.get(KEY_COLONY_LEVEL) || {})[colonyName] || 1;
 }
 function setColonyLevel(colonyName, newLevel) {
-  const all = Store.get(KEY_COLONY_LEVEL) || {};
-  all[colonyName] = Math.max(1, Math.min(5, newLevel));
-  Store.set(KEY_COLONY_LEVEL, all);
+  Store.mutate(KEY_COLONY_LEVEL, all => {
+    all[colonyName] = Math.max(1, Math.min(5, newLevel));
+  });
 }
 
 // Voidship: stores { rankIndex: chosenOptionName | null }
 function getVoidshipChoices() { return Store.get(KEY_VOIDSHIP_DONE) || {}; }
 function setVoidshipChoice(rankIndex, optionName) {
-  const all = getVoidshipChoices();
-  if (all[rankIndex] === optionName) delete all[rankIndex]; // toggle off
-  else all[rankIndex] = optionName;
-  Store.set(KEY_VOIDSHIP_DONE, all);
+  Store.mutate(KEY_VOIDSHIP_DONE, all => {
+    if (all[rankIndex] === optionName) delete all[rankIndex];
+    else all[rankIndex] = optionName;
+  });
 }
 function getVoidshipChoice(rankIndex) {
   return getVoidshipChoices()[rankIndex] || null;
@@ -2129,25 +2202,12 @@ function renderColonySection() {
   const el = $('colony-content');
   el.innerHTML = '';
 
-  // Tab bar
-  const tabBar = document.createElement('div');
-  tabBar.className = 'holdings-tab-bar';
-  const activeTab = getHoldingsTab();
-
-  const tabs = [
-    { id: 'colonies', label: 'Colonies' },
-    { id: 'voidship', label: 'Voidship' },
-  ];
-  tabs.forEach(({ id, label }) => {
-    const btn = document.createElement('button');
-    btn.className = 'holdings-tab-btn' + (activeTab === id ? ' active' : '');
-    btn.textContent = label;
-    btn.addEventListener('click', () => {
-      setHoldingsTab(id);
-      renderColonySection();
-    });
-    tabBar.appendChild(btn);
-  });
+  const tabBar = _makeTabBar(
+    [{ id: 'colonies', label: 'Colonies' }, { id: 'voidship', label: 'Voidship' }],
+    getHoldingsTab(),
+    id => { setHoldingsTab(id); renderColonySection(); },
+    'holdings-tab-bar', 'holdings-tab-btn'
+  );
   el.appendChild(tabBar);
 
   if (activeTab === 'colonies') {
@@ -2160,10 +2220,7 @@ function renderColonySection() {
 // ── Colonies tab ───────────────────────────────────────────────────────────────
 function renderColoniesTab(el) {
   if (!DATA.colonies || !DATA.colonies.length) {
-    const em = document.createElement('div');
-    em.className = 'gb-empty';
-    em.textContent = 'No colony data available.';
-    el.appendChild(em);
+    el.appendChild(_makeEmptyState('No colony data available.'));
     return;
   }
   const colony = DATA.colonies[_selectedColony];
@@ -2282,10 +2339,7 @@ function renderColoniesTab(el) {
 function renderVoidshipTab(el) {
   const ships = DATA.voidshipUpgrades || [];
   if (!ships.length) {
-    const em = document.createElement('div');
-    em.className = 'gb-empty';
-    em.textContent = 'No voidship data available.';
-    el.appendChild(em);
+    el.appendChild(_makeEmptyState('No voidship data available.'));
     return;
   }
 
@@ -2393,8 +2447,7 @@ function renderVoidshipTab(el) {
 
 // ============= TRADERS =============
 
-const KEY_TRADERS_ACT = 'rt.traders-act.v1';
-const KEY_TRADERS_REP = 'rt.traders-rep.v1';
+// KEY_ constants are in store.js
 
 function getTradersAct() { return Store.get(KEY_TRADERS_ACT) || 1; }
 function setTradersAct(act) { Store.set(KEY_TRADERS_ACT, act); }
@@ -2402,11 +2455,8 @@ function getFactionRep(factionName) {
   return (Store.get(KEY_TRADERS_REP) || {})[factionName] || 0;
 }
 function setFactionRep(factionName, rep) {
-  const all = Store.get(KEY_TRADERS_REP) || {};
-  all[factionName] = Math.max(0, rep);
-  Store.set(KEY_TRADERS_REP, all);
+  Store.mutate(KEY_TRADERS_REP, all => { all[factionName] = Math.max(0, rep); });
 }
-const KEY_PROFIT_FACTOR = 'rt.profit-factor.v1';
 function getProfitFactor() { return Store.get(KEY_PROFIT_FACTOR) || 0; }
 function setProfitFactor(pf) { Store.set(KEY_PROFIT_FACTOR, Math.max(0, pf)); }
 
@@ -2423,11 +2473,10 @@ function vendorItemLockReason(item, rep, act) {
   return null;
 }
 // Alignment vendor helpers
-const KEY_ALIGN_RANKS = 'rt.align-ranks.v1';
 const ALIGNMENTS = ['Dogmatic', 'Iconoclast', 'Heretic'];
 function getAlignRanks() { return Store.get(KEY_ALIGN_RANKS) || { Dogmatic: 0, Iconoclast: 0, Heretic: 0 }; }
 function setAlignRank(alignment, rank) {
-  const all = getAlignRanks(); all[alignment] = Math.max(0, rank); Store.set(KEY_ALIGN_RANKS, all);
+  Store.mutate(KEY_ALIGN_RANKS, all => { all[alignment] = Math.max(0, rank); });
 }
 function alignItemAvailable(item, rank, act) {
   if (act < item.act) return false;
@@ -2841,7 +2890,7 @@ function buildVendorItemEl(item, available, factionName) {
 
 
 // ============= NOTES =============
-const KEY_NOTES = 'rt.notes.v1';
+// KEY_ constants are in store.js
 
 function getNotes() { return Store.get(KEY_NOTES) || []; }
 function setNotes(notes) { Store.set(KEY_NOTES, notes); }
@@ -2922,14 +2971,12 @@ function renderMarkdown(text, onToggleTodo) {
   return s;
 }
 
-const KEY_NOTES_SORT = 'rt.notes-sort.v1';
 function getNotesSort() { return Store.get(KEY_NOTES_SORT) || 'updated'; }
 function setNotesSort(v) { Store.set(KEY_NOTES_SORT, v); }
 
 // Persistent undo history (localStorage + in-memory write-through)
 // ── Undo / Redo history (persistent, per-note) ──
 // Storage format: { noteId: { u: [undoStack], r: [redoStack] } }
-const KEY_NOTES_HISTORY = 'rt.notes-history.v2';
 const MAX_UNDO = 20;
 const _historyCache = new Map(); // noteId → { u: [], r: [] }
 let _historyCacheLoaded = false;
@@ -3753,23 +3800,9 @@ function renderGearBrowser(container) {
   const filterBar = document.createElement('div');
   filterBar.className = 'gb-filter-bar';
 
-  // Search row with clear button
-  const searchRow = document.createElement('div');
-  searchRow.className = 'gb-search-row';
-  const searchInput = document.createElement('input');
-  searchInput.type = 'text';
-  searchInput.className = 'gb-search';
-  searchInput.placeholder = 'Search gear…';
-  searchInput.value = _gb.search;
-  searchInput.addEventListener('input', () => { _gb.search = searchInput.value; clearBtn.style.display = _gb.search ? '' : 'none'; renderGearList(listEl); });
-  const clearBtn = document.createElement('button');
-  clearBtn.className = 'gb-search-clear';
-  clearBtn.textContent = '✕';
-  clearBtn.title = 'Clear search';
-  clearBtn.style.display = _gb.search ? '' : 'none';
-  clearBtn.addEventListener('click', () => { _gb.search = ''; searchInput.value = ''; clearBtn.style.display = 'none'; searchInput.focus(); renderGearList(listEl); });
-  searchRow.appendChild(searchInput);
-  searchRow.appendChild(clearBtn);
+  const { wrap: searchRow } = _makeSearchBar('Search gear…',
+    val => { _gb.search = val; renderGearList(listEl); },
+    { wrapClass: 'gb-search-row', inputClass: 'gb-search', clearClass: 'gb-search-clear', initValue: _gb.search });
   filterBar.appendChild(searchRow);
 
   // All four filter dropdowns in one row
@@ -3945,10 +3978,7 @@ function renderGearList(listEl) {
   const filtered = (DATA.gear_db || []).filter(_matchesFilters);
 
   if (!filtered.length) {
-    const empty = document.createElement('div');
-    empty.className = 'gb-empty';
-    empty.textContent = 'No gear matches these filters.';
-    listEl.appendChild(empty);
+    listEl.appendChild(_makeEmptyState('No gear matches these filters.'));
     return;
   }
 
@@ -4055,28 +4085,7 @@ function renderGearList(listEl) {
 
 // ── Shared helpers ────────────────────────────────────────────────────────────
 
-function _makeLibSearch(placeholder, onInput) {
-  const wrap = document.createElement('div');
-  wrap.className = 'lib-search-wrap';
-  const inp = document.createElement('input');
-  inp.type = 'text';
-  inp.className = 'lib-search';
-  inp.placeholder = placeholder;
-  const clear = document.createElement('button');
-  clear.className = 'lib-search-clear';
-  clear.textContent = '✕';
-  clear.style.display = 'none';
-  inp.addEventListener('input', () => {
-    clear.style.display = inp.value ? '' : 'none';
-    onInput(inp.value);
-  });
-  clear.addEventListener('click', () => {
-    inp.value = ''; clear.style.display = 'none'; inp.focus(); onInput('');
-  });
-  wrap.appendChild(inp);
-  wrap.appendChild(clear);
-  return wrap;
-}
+// _makeSearchBar, _makeEmptyState, _makeTabBar are in core.js
 
 function _renderDefList(el, entries, query, sectionId) {
   el.innerHTML = '';
@@ -4108,12 +4117,7 @@ function _renderDefList(el, entries, query, sectionId) {
     }
     el.appendChild(row);
   });
-  if (!count) {
-    const em = document.createElement('div');
-    em.className = 'ref-empty';
-    em.textContent = 'No results.';
-    el.appendChild(em);
-  }
+  if (!count) el.appendChild(_makeEmptyState('No results.', 'ref-empty'));
 }
 
 // ── Abilities ─────────────────────────────────────────────────────────────────
@@ -4128,7 +4132,7 @@ function renderAbilitiesSection(el) {
   const listEl = document.createElement('div');
   listEl.className = 'lib-def-list';
 
-  const search = _makeLibSearch('Search abilities…', q => _renderDefList(listEl, entries, q, 'abilities'));
+  const { wrap: search } = _makeSearchBar('Search abilities…', q => _renderDefList(listEl, entries, q, 'abilities'));
   el.appendChild(search);
   el.appendChild(listEl);
   _renderDefList(listEl, entries, '', 'abilities');
@@ -4146,7 +4150,7 @@ function renderTalentsSection(el) {
   const listEl = document.createElement('div');
   listEl.className = 'lib-def-list';
 
-  const search = _makeLibSearch('Search talents…', q => _renderDefList(listEl, entries, q, 'talents'));
+  const { wrap: search } = _makeSearchBar('Search talents…', q => _renderDefList(listEl, entries, q, 'talents'));
   el.appendChild(search);
   el.appendChild(listEl);
   _renderDefList(listEl, entries, '', 'talents');
@@ -4206,16 +4210,11 @@ let _ccTab = 'homeworlds'; // 'homeworlds' | 'origins'
 function renderCharCreationSection(el) {
   el.innerHTML = '';
 
-  const tabBar = document.createElement('div');
-  tabBar.className = 'tab-bar';
-  ['homeworlds', 'origins'].forEach(tab => {
-    const btn = document.createElement('button');
-    btn.className = 'tab-btn' + (_ccTab === tab ? ' active' : '');
-    btn.textContent = tab === 'homeworlds' ? 'Homeworlds' : 'Origins';
-    btn.addEventListener('click', () => { _ccTab = tab; renderCharCreationSection(el); });
-    tabBar.appendChild(btn);
-  });
-  el.appendChild(tabBar);
+  el.appendChild(_makeTabBar(
+    [{ id: 'homeworlds', label: 'Homeworlds' }, { id: 'origins', label: 'Origins' }],
+    _ccTab,
+    id => { _ccTab = id; renderCharCreationSection(el); }
+  ));
 
   if (_ccTab === 'homeworlds') _renderHomeworlds(el);
   else _renderOrigins(el);
@@ -4351,7 +4350,7 @@ function renderMCBuildsSection(el) {
 
   const listEl = document.createElement('div');
 
-  const search = _makeLibSearch('Search builds…', q => {
+  const { wrap: search } = _makeSearchBar('Search builds…', q => {
     _mcBuildSearch = q;
     _renderMCBuildList(listEl);
   });
@@ -4374,10 +4373,7 @@ function _renderMCBuildList(el) {
   });
 
   if (!grouped.size) {
-    const em = document.createElement('div');
-    em.className = 'ref-empty';
-    em.textContent = 'No builds match.';
-    el.appendChild(em);
+    el.appendChild(_makeEmptyState('No builds match.', 'ref-empty'));
     return;
   }
 
@@ -4443,7 +4439,7 @@ function renderRetinueSection(el) {
   const listEl = document.createElement('div');
   listEl.className = 'lib-retinue-list';
 
-  const search = _makeLibSearch('Search retinue…', q => {
+  const { wrap: search } = _makeSearchBar('Search retinue…', q => {
     _retinueSearch = q;
     _renderRetinueList(listEl);
   });
@@ -4467,10 +4463,7 @@ function _renderRetinueList(el) {
   });
 
   if (!order.length) {
-    const em = document.createElement('div');
-    em.className = 'ref-empty';
-    em.textContent = 'No results.';
-    el.appendChild(em);
+    el.appendChild(_makeEmptyState('No results.', 'ref-empty'));
     return;
   }
 
@@ -4801,7 +4794,7 @@ let _referenceSubSection = null;
 let _referenceSearch = '';
 
 // ── Favourites ────────────────────────────────────────────────────────────────
-const KEY_REF_FAVS = 'rt-ref-favourites';
+// KEY_ constants are in store.js
 function getRefFavs()    { return Store.get(KEY_REF_FAVS) || []; }
 function saveRefFavs(f)  { Store.set(KEY_REF_FAVS, f); }
 
@@ -4956,36 +4949,18 @@ function renderReferenceSection() {
     else if (_referenceSubSection === 'romances')     renderRomancesSection(subEl);
   } else {
     // Search bar (always visible on landing)
-    const searchWrap = document.createElement('div');
-    searchWrap.className = 'ref-global-search-wrap';
-    const searchInp = document.createElement('input');
-    searchInp.type = 'text';
-    searchInp.className = 'ref-global-search';
-    searchInp.placeholder = 'Search all reference…';
-    searchInp.value = _referenceSearch;
-    const clearBtn = document.createElement('button');
-    clearBtn.className = 'lib-search-clear';
-    clearBtn.textContent = '✕';
-    clearBtn.style.display = _referenceSearch ? '' : 'none';
     const resultsEl = document.createElement('div');
-
     const doSearch = (q) => {
       _referenceSearch = q;
-      clearBtn.style.display = q ? '' : 'none';
-      if (q) {
-        resultsEl.innerHTML = '';
-        _renderGlobalSearchResults(resultsEl, q);
-      } else {
-        _renderReferenceLandingGrid(resultsEl);
-      }
+      if (q) { resultsEl.innerHTML = ''; _renderGlobalSearchResults(resultsEl, q); }
+      else _renderReferenceLandingGrid(resultsEl);
     };
-
-    searchInp.addEventListener('input', () => doSearch(searchInp.value));
-    clearBtn.addEventListener('click', () => {
-      searchInp.value = ''; searchInp.focus(); doSearch('');
+    const { wrap: searchWrap } = _makeSearchBar('Search all reference…', doSearch, {
+      wrapClass: 'ref-global-search-wrap',
+      inputClass: 'ref-global-search',
+      clearClass: 'lib-search-clear',
+      initValue: _referenceSearch,
     });
-    searchWrap.appendChild(searchInp);
-    searchWrap.appendChild(clearBtn);
 
     _renderQuickAccess(el);
     el.appendChild(searchWrap);
@@ -5090,10 +5065,7 @@ function _renderGlobalSearchResults(el, rawQ) {
   if (sysRows.length) groups.push({ sectionId: 'resources', title: 'Star Systems', icon: '⬡', rows: sysRows });
 
   if (!groups.length) {
-    const none = document.createElement('div');
-    none.className = 'gb-empty';
-    none.textContent = 'No results across any section.';
-    el.appendChild(none);
+    el.appendChild(_makeEmptyState('No results across any section.'));
     return;
   }
 
@@ -5153,17 +5125,11 @@ let _selectedResource = null;
 function renderResourcesContent(el) {
   if (!DATA.resourceSystems || !DATA.resourceSystems.length) { el.textContent = 'No resource data.'; return; }
 
-  // Tab bar
-  const tabBar = document.createElement('div');
-  tabBar.className = 'tab-bar';
-  ['system', 'resource'].forEach(tab => {
-    const btn = document.createElement('button');
-    btn.className = 'tab-btn' + (_resourceTab === tab ? ' active' : '');
-    btn.textContent = tab === 'system' ? 'By System' : 'By Resource';
-    btn.addEventListener('click', () => { _resourceTab = tab; renderReferenceSection(); });
-    tabBar.appendChild(btn);
-  });
-  el.appendChild(tabBar);
+  el.appendChild(_makeTabBar(
+    [{ id: 'system', label: 'By System' }, { id: 'resource', label: 'By Resource' }],
+    _resourceTab,
+    id => { _resourceTab = id; renderReferenceSection(); }
+  ));
 
   if (_resourceTab === 'system') renderResourcesBySystem(el);
   else renderResourcesByType(el);
@@ -5280,8 +5246,7 @@ function renderResourcesByType(el) {
 
 // ============= WORKSHOP — Custom Build Manager =============
 
-const KEY_CUSTOM_BUILDS = 'rt-custom-builds';
-const KEY_GIST_PAT      = 'rt-gist-pat';
+// KEY_ constants are in store.js
 
 const WS_BASIC_ARCHETYPES    = ['Warrior','Officer','Operative','Soldier','Bladedancer'];
 const WS_ADVANCED_ARCHETYPES = ['Assassin','Vanguard','Bounty Hunter','Master Tactician','Grand Strategist','Arch-Militant','Executioner','Overseer','Exemplar'];
@@ -5373,10 +5338,7 @@ function _renderManager(el) {
   // Build list
   const builds = getCustomBuilds();
   if (!builds.length) {
-    const empty = document.createElement('div');
-    empty.className = 'ws-empty';
-    empty.textContent = 'No custom builds yet. Create one or import from a file, URL, or Gist.';
-    el.appendChild(empty);
+    el.appendChild(_makeEmptyState('No custom builds yet. Create one or import from a file, URL, or Gist.', 'ws-empty'));
   } else {
     const list = document.createElement('div');
     list.className = 'ws-build-list';

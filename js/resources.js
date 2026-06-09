@@ -4,7 +4,7 @@ let _referenceSubSection = null;
 let _referenceSearch = '';
 
 // ── Favourites ────────────────────────────────────────────────────────────────
-const KEY_REF_FAVS = 'rt-ref-favourites';
+// KEY_ constants are in store.js
 function getRefFavs()    { return Store.get(KEY_REF_FAVS) || []; }
 function saveRefFavs(f)  { Store.set(KEY_REF_FAVS, f); }
 
@@ -159,36 +159,18 @@ function renderReferenceSection() {
     else if (_referenceSubSection === 'romances')     renderRomancesSection(subEl);
   } else {
     // Search bar (always visible on landing)
-    const searchWrap = document.createElement('div');
-    searchWrap.className = 'ref-global-search-wrap';
-    const searchInp = document.createElement('input');
-    searchInp.type = 'text';
-    searchInp.className = 'ref-global-search';
-    searchInp.placeholder = 'Search all reference…';
-    searchInp.value = _referenceSearch;
-    const clearBtn = document.createElement('button');
-    clearBtn.className = 'lib-search-clear';
-    clearBtn.textContent = '✕';
-    clearBtn.style.display = _referenceSearch ? '' : 'none';
     const resultsEl = document.createElement('div');
-
     const doSearch = (q) => {
       _referenceSearch = q;
-      clearBtn.style.display = q ? '' : 'none';
-      if (q) {
-        resultsEl.innerHTML = '';
-        _renderGlobalSearchResults(resultsEl, q);
-      } else {
-        _renderReferenceLandingGrid(resultsEl);
-      }
+      if (q) { resultsEl.innerHTML = ''; _renderGlobalSearchResults(resultsEl, q); }
+      else _renderReferenceLandingGrid(resultsEl);
     };
-
-    searchInp.addEventListener('input', () => doSearch(searchInp.value));
-    clearBtn.addEventListener('click', () => {
-      searchInp.value = ''; searchInp.focus(); doSearch('');
+    const { wrap: searchWrap } = _makeSearchBar('Search all reference…', doSearch, {
+      wrapClass: 'ref-global-search-wrap',
+      inputClass: 'ref-global-search',
+      clearClass: 'lib-search-clear',
+      initValue: _referenceSearch,
     });
-    searchWrap.appendChild(searchInp);
-    searchWrap.appendChild(clearBtn);
 
     _renderQuickAccess(el);
     el.appendChild(searchWrap);
@@ -293,10 +275,7 @@ function _renderGlobalSearchResults(el, rawQ) {
   if (sysRows.length) groups.push({ sectionId: 'resources', title: 'Star Systems', icon: '⬡', rows: sysRows });
 
   if (!groups.length) {
-    const none = document.createElement('div');
-    none.className = 'gb-empty';
-    none.textContent = 'No results across any section.';
-    el.appendChild(none);
+    el.appendChild(_makeEmptyState('No results across any section.'));
     return;
   }
 
@@ -356,17 +335,11 @@ let _selectedResource = null;
 function renderResourcesContent(el) {
   if (!DATA.resourceSystems || !DATA.resourceSystems.length) { el.textContent = 'No resource data.'; return; }
 
-  // Tab bar
-  const tabBar = document.createElement('div');
-  tabBar.className = 'tab-bar';
-  ['system', 'resource'].forEach(tab => {
-    const btn = document.createElement('button');
-    btn.className = 'tab-btn' + (_resourceTab === tab ? ' active' : '');
-    btn.textContent = tab === 'system' ? 'By System' : 'By Resource';
-    btn.addEventListener('click', () => { _resourceTab = tab; renderReferenceSection(); });
-    tabBar.appendChild(btn);
-  });
-  el.appendChild(tabBar);
+  el.appendChild(_makeTabBar(
+    [{ id: 'system', label: 'By System' }, { id: 'resource', label: 'By Resource' }],
+    _resourceTab,
+    id => { _resourceTab = id; renderReferenceSection(); }
+  ));
 
   if (_resourceTab === 'system') renderResourcesBySystem(el);
   else renderResourcesByType(el);

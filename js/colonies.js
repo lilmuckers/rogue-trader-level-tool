@@ -1,38 +1,34 @@
 // ============= HOLDINGS: COLONIES + VOIDSHIP =============
 
 // ── Persistence ────────────────────────────────────────────────────────────────
-const KEY_COLONY_DONE    = 'rt.colony-done.v1';
-const KEY_COLONY_LEVEL   = 'rt.colony-level.v1';
-const KEY_VOIDSHIP_DONE  = 'rt.voidship-done.v1';
-const KEY_VOIDSHIP_NAME  = 'rt.voidship-name.v1';
-const KEY_HOLDINGS_TAB   = 'rt.holdings-tab.v1';
+// KEY_ constants are in store.js
 
 function getColonyDone(colonyName) {
   return (Store.get(KEY_COLONY_DONE) || {})[colonyName] || {};
 }
 function toggleColonyProject(colonyName, projectName) {
-  const all = Store.get(KEY_COLONY_DONE) || {};
-  if (!all[colonyName]) all[colonyName] = {};
-  if (all[colonyName][projectName]) delete all[colonyName][projectName];
-  else all[colonyName][projectName] = true;
-  Store.set(KEY_COLONY_DONE, all);
+  Store.mutate(KEY_COLONY_DONE, all => {
+    if (!all[colonyName]) all[colonyName] = {};
+    if (all[colonyName][projectName]) delete all[colonyName][projectName];
+    else all[colonyName][projectName] = true;
+  });
 }
 function getColonyLevel(colonyName) {
   return (Store.get(KEY_COLONY_LEVEL) || {})[colonyName] || 1;
 }
 function setColonyLevel(colonyName, newLevel) {
-  const all = Store.get(KEY_COLONY_LEVEL) || {};
-  all[colonyName] = Math.max(1, Math.min(5, newLevel));
-  Store.set(KEY_COLONY_LEVEL, all);
+  Store.mutate(KEY_COLONY_LEVEL, all => {
+    all[colonyName] = Math.max(1, Math.min(5, newLevel));
+  });
 }
 
 // Voidship: stores { rankIndex: chosenOptionName | null }
 function getVoidshipChoices() { return Store.get(KEY_VOIDSHIP_DONE) || {}; }
 function setVoidshipChoice(rankIndex, optionName) {
-  const all = getVoidshipChoices();
-  if (all[rankIndex] === optionName) delete all[rankIndex]; // toggle off
-  else all[rankIndex] = optionName;
-  Store.set(KEY_VOIDSHIP_DONE, all);
+  Store.mutate(KEY_VOIDSHIP_DONE, all => {
+    if (all[rankIndex] === optionName) delete all[rankIndex];
+    else all[rankIndex] = optionName;
+  });
 }
 function getVoidshipChoice(rankIndex) {
   return getVoidshipChoices()[rankIndex] || null;
@@ -51,25 +47,12 @@ function renderColonySection() {
   const el = $('colony-content');
   el.innerHTML = '';
 
-  // Tab bar
-  const tabBar = document.createElement('div');
-  tabBar.className = 'holdings-tab-bar';
-  const activeTab = getHoldingsTab();
-
-  const tabs = [
-    { id: 'colonies', label: 'Colonies' },
-    { id: 'voidship', label: 'Voidship' },
-  ];
-  tabs.forEach(({ id, label }) => {
-    const btn = document.createElement('button');
-    btn.className = 'holdings-tab-btn' + (activeTab === id ? ' active' : '');
-    btn.textContent = label;
-    btn.addEventListener('click', () => {
-      setHoldingsTab(id);
-      renderColonySection();
-    });
-    tabBar.appendChild(btn);
-  });
+  const tabBar = _makeTabBar(
+    [{ id: 'colonies', label: 'Colonies' }, { id: 'voidship', label: 'Voidship' }],
+    getHoldingsTab(),
+    id => { setHoldingsTab(id); renderColonySection(); },
+    'holdings-tab-bar', 'holdings-tab-btn'
+  );
   el.appendChild(tabBar);
 
   if (activeTab === 'colonies') {
@@ -82,10 +65,7 @@ function renderColonySection() {
 // ── Colonies tab ───────────────────────────────────────────────────────────────
 function renderColoniesTab(el) {
   if (!DATA.colonies || !DATA.colonies.length) {
-    const em = document.createElement('div');
-    em.className = 'gb-empty';
-    em.textContent = 'No colony data available.';
-    el.appendChild(em);
+    el.appendChild(_makeEmptyState('No colony data available.'));
     return;
   }
   const colony = DATA.colonies[_selectedColony];
@@ -204,10 +184,7 @@ function renderColoniesTab(el) {
 function renderVoidshipTab(el) {
   const ships = DATA.voidshipUpgrades || [];
   if (!ships.length) {
-    const em = document.createElement('div');
-    em.className = 'gb-empty';
-    em.textContent = 'No voidship data available.';
-    el.appendChild(em);
+    el.appendChild(_makeEmptyState('No voidship data available.'));
     return;
   }
 

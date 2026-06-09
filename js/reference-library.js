@@ -3,28 +3,7 @@
 
 // ── Shared helpers ────────────────────────────────────────────────────────────
 
-function _makeLibSearch(placeholder, onInput) {
-  const wrap = document.createElement('div');
-  wrap.className = 'lib-search-wrap';
-  const inp = document.createElement('input');
-  inp.type = 'text';
-  inp.className = 'lib-search';
-  inp.placeholder = placeholder;
-  const clear = document.createElement('button');
-  clear.className = 'lib-search-clear';
-  clear.textContent = '✕';
-  clear.style.display = 'none';
-  inp.addEventListener('input', () => {
-    clear.style.display = inp.value ? '' : 'none';
-    onInput(inp.value);
-  });
-  clear.addEventListener('click', () => {
-    inp.value = ''; clear.style.display = 'none'; inp.focus(); onInput('');
-  });
-  wrap.appendChild(inp);
-  wrap.appendChild(clear);
-  return wrap;
-}
+// _makeSearchBar, _makeEmptyState, _makeTabBar are in core.js
 
 function _renderDefList(el, entries, query, sectionId) {
   el.innerHTML = '';
@@ -56,12 +35,7 @@ function _renderDefList(el, entries, query, sectionId) {
     }
     el.appendChild(row);
   });
-  if (!count) {
-    const em = document.createElement('div');
-    em.className = 'ref-empty';
-    em.textContent = 'No results.';
-    el.appendChild(em);
-  }
+  if (!count) el.appendChild(_makeEmptyState('No results.', 'ref-empty'));
 }
 
 // ── Abilities ─────────────────────────────────────────────────────────────────
@@ -76,7 +50,7 @@ function renderAbilitiesSection(el) {
   const listEl = document.createElement('div');
   listEl.className = 'lib-def-list';
 
-  const search = _makeLibSearch('Search abilities…', q => _renderDefList(listEl, entries, q, 'abilities'));
+  const { wrap: search } = _makeSearchBar('Search abilities…', q => _renderDefList(listEl, entries, q, 'abilities'));
   el.appendChild(search);
   el.appendChild(listEl);
   _renderDefList(listEl, entries, '', 'abilities');
@@ -94,7 +68,7 @@ function renderTalentsSection(el) {
   const listEl = document.createElement('div');
   listEl.className = 'lib-def-list';
 
-  const search = _makeLibSearch('Search talents…', q => _renderDefList(listEl, entries, q, 'talents'));
+  const { wrap: search } = _makeSearchBar('Search talents…', q => _renderDefList(listEl, entries, q, 'talents'));
   el.appendChild(search);
   el.appendChild(listEl);
   _renderDefList(listEl, entries, '', 'talents');
@@ -154,16 +128,11 @@ let _ccTab = 'homeworlds'; // 'homeworlds' | 'origins'
 function renderCharCreationSection(el) {
   el.innerHTML = '';
 
-  const tabBar = document.createElement('div');
-  tabBar.className = 'tab-bar';
-  ['homeworlds', 'origins'].forEach(tab => {
-    const btn = document.createElement('button');
-    btn.className = 'tab-btn' + (_ccTab === tab ? ' active' : '');
-    btn.textContent = tab === 'homeworlds' ? 'Homeworlds' : 'Origins';
-    btn.addEventListener('click', () => { _ccTab = tab; renderCharCreationSection(el); });
-    tabBar.appendChild(btn);
-  });
-  el.appendChild(tabBar);
+  el.appendChild(_makeTabBar(
+    [{ id: 'homeworlds', label: 'Homeworlds' }, { id: 'origins', label: 'Origins' }],
+    _ccTab,
+    id => { _ccTab = id; renderCharCreationSection(el); }
+  ));
 
   if (_ccTab === 'homeworlds') _renderHomeworlds(el);
   else _renderOrigins(el);
@@ -299,7 +268,7 @@ function renderMCBuildsSection(el) {
 
   const listEl = document.createElement('div');
 
-  const search = _makeLibSearch('Search builds…', q => {
+  const { wrap: search } = _makeSearchBar('Search builds…', q => {
     _mcBuildSearch = q;
     _renderMCBuildList(listEl);
   });
@@ -322,10 +291,7 @@ function _renderMCBuildList(el) {
   });
 
   if (!grouped.size) {
-    const em = document.createElement('div');
-    em.className = 'ref-empty';
-    em.textContent = 'No builds match.';
-    el.appendChild(em);
+    el.appendChild(_makeEmptyState('No builds match.', 'ref-empty'));
     return;
   }
 
@@ -391,7 +357,7 @@ function renderRetinueSection(el) {
   const listEl = document.createElement('div');
   listEl.className = 'lib-retinue-list';
 
-  const search = _makeLibSearch('Search retinue…', q => {
+  const { wrap: search } = _makeSearchBar('Search retinue…', q => {
     _retinueSearch = q;
     _renderRetinueList(listEl);
   });
@@ -415,10 +381,7 @@ function _renderRetinueList(el) {
   });
 
   if (!order.length) {
-    const em = document.createElement('div');
-    em.className = 'ref-empty';
-    em.textContent = 'No results.';
-    el.appendChild(em);
+    el.appendChild(_makeEmptyState('No results.', 'ref-empty'));
     return;
   }
 
