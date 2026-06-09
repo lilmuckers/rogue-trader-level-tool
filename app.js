@@ -2066,6 +2066,43 @@ function populateBuildSelect(theme) {
 let _activeSection = 'tracker';
 let _reorderMode = false;
 
+// ── Deep-link hash routing ─────────────────────────────────────────────────────
+let _settingHash = false;
+
+function _pushHash(section, sub) {
+  _settingHash = true;
+  const hash = sub ? `#${section}/${sub}` : `#${section}`;
+  history.replaceState(null, '', hash);
+  _settingHash = false;
+}
+
+function _parseHash() {
+  const raw = location.hash.replace(/^#/, '');
+  if (!raw) return { section: 'tracker', sub: null };
+  const parts = raw.split('/');
+  return { section: parts[0] || 'tracker', sub: parts[1] || null };
+}
+
+function _hashSubFor(sectionName) {
+  if (sectionName === 'reference') return _referenceSubSection || null;
+  if (sectionName === 'colony')    return getHoldingsTab();
+  return null;
+}
+
+window.addEventListener('hashchange', () => {
+  if (_settingHash) return;
+  const { section, sub } = _parseHash();
+  if (!SECTION_META[section]) return; // unknown section — ignore
+  if (sub) {
+    if (section === 'reference') { _referenceSubSection = sub; showSection('reference'); }
+    else if (section === 'colony') { setHoldingsTab(sub); showSection('colony'); }
+    else showSection(section);
+  } else {
+    if (section === 'reference') _referenceSubSection = null;
+    showSection(section);
+  }
+});
+
 function setReorderMode(on) {
   _reorderMode = on;
   $('roster').classList.toggle('reorder-active', on);
@@ -2100,13 +2137,18 @@ function showSection(name) {
   if (name === 'tracker')        renderTracker();
   else if (name === 'colony')    renderColonySection();
   else if (name === 'traders')   renderTradersSection();
-  else if (name === 'reference') { _referenceSubSection = null; renderReferenceSection(); }
+  else if (name === 'reference') renderReferenceSection();
   else if (name === 'notes')     renderNotesSection();
   else if (name === 'workshop')  { _wsStep = 'manager'; renderWorkshopSection(); }
+  _pushHash(name, _hashSubFor(name));
 }
 
 document.querySelectorAll('.nav-btn').forEach(btn => {
-  btn.addEventListener('click', () => showSection(btn.dataset.section));
+  btn.addEventListener('click', () => {
+    // Reset sub-section state when user explicitly clicks a nav button
+    if (btn.dataset.section === 'reference') _referenceSubSection = null;
+    showSection(btn.dataset.section);
+  });
 });
 
 function showTracker() { showSection('tracker'); }
@@ -2150,7 +2192,17 @@ $('reset-btn').addEventListener('click', () => {
 // Close sheet with ESC (or pop back if drilled in)
 window.addEventListener('keydown', (e) => { if (e.key === 'Escape') popSheet(); });
 
-if (!config) showSetup(); else showTracker();
+function _initFromHash() {
+  const { section, sub } = _parseHash();
+  if (!SECTION_META[section]) { showSection('tracker'); return; }
+  if (sub) {
+    if (section === 'reference') _referenceSubSection = sub;
+    else if (section === 'colony') setHoldingsTab(sub);
+  }
+  showSection(section);
+}
+
+if (!config) showSetup(); else _initFromHash();
 
 
 // ============= HOLDINGS: COLONIES + VOIDSHIP =============
@@ -2205,7 +2257,7 @@ function renderColonySection() {
   const tabBar = _makeTabBar(
     [{ id: 'colonies', label: 'Colonies' }, { id: 'voidship', label: 'Voidship' }],
     getHoldingsTab(),
-    id => { setHoldingsTab(id); renderColonySection(); },
+    id => { setHoldingsTab(id); _pushHash('colony', id); renderColonySection(); },
     'holdings-tab-bar', 'holdings-tab-btn'
   );
   el.appendChild(tabBar);
@@ -4793,6 +4845,13 @@ function renderRomancesSection(el) {
 let _referenceSubSection = null;
 let _referenceSearch = '';
 
+function _setRefSub(id) {
+  _referenceSubSection = id;
+  _referenceSearch = '';
+  _pushHash('reference', id);
+  renderReferenceSection();
+}
+
 // ── Favourites ────────────────────────────────────────────────────────────────
 // KEY_ constants are in store.js
 function getRefFavs()    { return Store.get(KEY_REF_FAVS) || []; }
@@ -4825,9 +4884,7 @@ function _makeFavBtn(fav) {
 }
 
 function _navigateToFav(fav) {
-  _referenceSubSection = fav.sectionId;
-  _referenceSearch = '';
-  renderReferenceSection();
+  _setRefSub(fav.sectionId);
   if (fav.action === 'gear-detail' && fav.itemKey) {
     // Gear — push detail sheet directly
     const item = (DATA.gear_db || []).find(g => g.n === fav.itemKey);
@@ -4930,7 +4987,7 @@ function renderReferenceSection() {
     const backBtn = document.createElement('button');
     backBtn.className = 'reference-back-btn';
     backBtn.innerHTML = '← Reference';
-    backBtn.addEventListener('click', () => { _referenceSubSection = null; renderReferenceSection(); });
+    backBtn.addEventListener('click', () => _setRefSub(null));
     el.appendChild(backBtn);
 
     const subEl = document.createElement('div');
@@ -4982,7 +5039,7 @@ function _renderReferenceLandingGrid(el) {
         <div class="reference-card-title">${title}</div>
         <div class="reference-card-sub">${subtitle}</div>
       </div>`;
-    card.addEventListener('click', () => { _referenceSubSection = id; renderReferenceSection(); });
+    card.addEventListener('click', () => _setRefSub(id));
     grid.appendChild(card);
   });
   el.appendChild(grid);
@@ -5088,7 +5145,7 @@ function _renderGlobalSearchResults(el, rawQ) {
     shown.forEach(({ label, sub }) => {
       const row = document.createElement('div');
       row.className = 'ref-search-result-row';
-      row.addEventListener('click', () => { _referenceSubSection = sectionId; _referenceSearch = ''; renderReferenceSection(); });
+      row.addEventListener('click', () => _setRefSub(sectionId));
       const lbl = document.createElement('div');
       lbl.className = 'ref-search-result-label';
       lbl.textContent = label;
@@ -5106,7 +5163,7 @@ function _renderGlobalSearchResults(el, rawQ) {
       const more = document.createElement('div');
       more.className = 'ref-search-more';
       more.textContent = `+${rows.length - MAX} more in ${title} →`;
-      more.addEventListener('click', () => { _referenceSubSection = sectionId; _referenceSearch = ''; renderReferenceSection(); });
+      more.addEventListener('click', () => _setRefSub(sectionId));
       section.appendChild(more);
     }
 

@@ -2,6 +2,43 @@
 let _activeSection = 'tracker';
 let _reorderMode = false;
 
+// ── Deep-link hash routing ─────────────────────────────────────────────────────
+let _settingHash = false;
+
+function _pushHash(section, sub) {
+  _settingHash = true;
+  const hash = sub ? `#${section}/${sub}` : `#${section}`;
+  history.replaceState(null, '', hash);
+  _settingHash = false;
+}
+
+function _parseHash() {
+  const raw = location.hash.replace(/^#/, '');
+  if (!raw) return { section: 'tracker', sub: null };
+  const parts = raw.split('/');
+  return { section: parts[0] || 'tracker', sub: parts[1] || null };
+}
+
+function _hashSubFor(sectionName) {
+  if (sectionName === 'reference') return _referenceSubSection || null;
+  if (sectionName === 'colony')    return getHoldingsTab();
+  return null;
+}
+
+window.addEventListener('hashchange', () => {
+  if (_settingHash) return;
+  const { section, sub } = _parseHash();
+  if (!SECTION_META[section]) return; // unknown section — ignore
+  if (sub) {
+    if (section === 'reference') { _referenceSubSection = sub; showSection('reference'); }
+    else if (section === 'colony') { setHoldingsTab(sub); showSection('colony'); }
+    else showSection(section);
+  } else {
+    if (section === 'reference') _referenceSubSection = null;
+    showSection(section);
+  }
+});
+
 function setReorderMode(on) {
   _reorderMode = on;
   $('roster').classList.toggle('reorder-active', on);
@@ -36,13 +73,18 @@ function showSection(name) {
   if (name === 'tracker')        renderTracker();
   else if (name === 'colony')    renderColonySection();
   else if (name === 'traders')   renderTradersSection();
-  else if (name === 'reference') { _referenceSubSection = null; renderReferenceSection(); }
+  else if (name === 'reference') renderReferenceSection();
   else if (name === 'notes')     renderNotesSection();
   else if (name === 'workshop')  { _wsStep = 'manager'; renderWorkshopSection(); }
+  _pushHash(name, _hashSubFor(name));
 }
 
 document.querySelectorAll('.nav-btn').forEach(btn => {
-  btn.addEventListener('click', () => showSection(btn.dataset.section));
+  btn.addEventListener('click', () => {
+    // Reset sub-section state when user explicitly clicks a nav button
+    if (btn.dataset.section === 'reference') _referenceSubSection = null;
+    showSection(btn.dataset.section);
+  });
 });
 
 function showTracker() { showSection('tracker'); }
@@ -86,4 +128,14 @@ $('reset-btn').addEventListener('click', () => {
 // Close sheet with ESC (or pop back if drilled in)
 window.addEventListener('keydown', (e) => { if (e.key === 'Escape') popSheet(); });
 
-if (!config) showSetup(); else showTracker();
+function _initFromHash() {
+  const { section, sub } = _parseHash();
+  if (!SECTION_META[section]) { showSection('tracker'); return; }
+  if (sub) {
+    if (section === 'reference') _referenceSubSection = sub;
+    else if (section === 'colony') setHoldingsTab(sub);
+  }
+  showSection(section);
+}
+
+if (!config) showSetup(); else _initFromHash();
