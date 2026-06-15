@@ -22,16 +22,19 @@ function setColonyLevel(colonyName, newLevel) {
   });
 }
 
-// Voidship: stores { rankIndex: chosenOptionName | null }
+// Voidship: stores { rankIndex: { optionName: true } } — both options per rank can be taken
 function getVoidshipChoices() { return Store.get(KEY_VOIDSHIP_DONE) || {}; }
-function setVoidshipChoice(rankIndex, optionName) {
-  Store.mutate(KEY_VOIDSHIP_DONE, all => {
-    if (all[rankIndex] === optionName) delete all[rankIndex];
-    else all[rankIndex] = optionName;
-  });
+function isVoidshipOptionChosen(rankIndex, optionName) {
+  const rank = getVoidshipChoices()[rankIndex];
+  return !!(rank && rank[optionName]);
 }
-function getVoidshipChoice(rankIndex) {
-  return getVoidshipChoices()[rankIndex] || null;
+function toggleVoidshipOption(rankIndex, optionName) {
+  Store.mutate(KEY_VOIDSHIP_DONE, all => {
+    if (!all[rankIndex]) all[rankIndex] = {};
+    if (all[rankIndex][optionName]) delete all[rankIndex][optionName];
+    else all[rankIndex][optionName] = true;
+    if (!Object.keys(all[rankIndex]).length) delete all[rankIndex];
+  });
 }
 
 function getVoidshipName(defaultName) { return Store.get(KEY_VOIDSHIP_NAME) || defaultName || 'Righteous Fury'; }
@@ -190,7 +193,9 @@ function renderVoidshipTab(el) {
 
   const ship = ships[0];
   const ranks = ship.ranks || [];
-  const chosenCount = ranks.filter((_, i) => getVoidshipChoice(i) !== null).length;
+  const totalOptions = ranks.reduce((sum, r) => sum + (r.options || []).length, 0);
+  const chosenCount = ranks.reduce((sum, r, i) =>
+    sum + (r.options || []).filter(opt => isVoidshipOptionChosen(i, opt.name)).length, 0);
   const shipName = getVoidshipName(ship.name);
 
   // Editable ship name + progress
@@ -210,35 +215,34 @@ function renderVoidshipTab(el) {
 
   const progress = document.createElement('span');
   progress.className = 'voidship-progress';
-  progress.textContent = `Rank ${chosenCount} / ${ranks.length}`;
+  progress.textContent = `Upgrades ${chosenCount} / ${totalOptions}`;
 
   nameRow.append(nameInput, progress);
   el.appendChild(nameRow);
 
   ranks.forEach((rank, rankIndex) => {
-    const chosen = getVoidshipChoice(rankIndex);
+    const options = rank.options || [];
+    const anyChosen = options.some(opt => isVoidshipOptionChosen(rankIndex, opt.name));
+    const allChosen = options.length > 0 && options.every(opt => isVoidshipOptionChosen(rankIndex, opt.name));
 
     const section = document.createElement('div');
     section.className = 'colony-level-section';
 
     const heading = document.createElement('div');
     heading.className = 'colony-level-heading' +
-      (chosen ? ' is-past' : rankIndex === chosenCount ? ' is-current' : ' is-future');
+      (allChosen ? ' is-past' : anyChosen ? ' is-current' : ' is-future');
     heading.textContent = `Rank ${rank.rank}`;
     section.appendChild(heading);
 
-    // Two-option pick row
+    // Two-option pick row — both options can be taken independently
     const pickRow = document.createElement('div');
     pickRow.className = 'voidship-pick-row';
 
-    (rank.options || []).forEach(opt => {
-      const isChosen = chosen === opt.name;
-      const isOtherChosen = chosen && chosen !== opt.name;
+    options.forEach(opt => {
+      const isChosen = isVoidshipOptionChosen(rankIndex, opt.name);
 
       const card = document.createElement('div');
-      card.className = 'voidship-option' +
-        (isChosen ? ' is-chosen' : '') +
-        (isOtherChosen ? ' is-unchosen' : '');
+      card.className = 'voidship-option' + (isChosen ? ' is-chosen' : '');
 
       const typeEl = document.createElement('div');
       typeEl.className = 'voidship-option-type';
@@ -250,9 +254,9 @@ function renderVoidshipTab(el) {
 
       card.append(typeEl, nameEl);
 
-      // Toggle choice on tap; open detail sheet on long-press / second tap
+      // Toggle this option independently; open detail sheet via the info button
       card.addEventListener('click', () => {
-        setVoidshipChoice(rankIndex, opt.name);
+        toggleVoidshipOption(rankIndex, opt.name);
         renderColonySection();
       });
 

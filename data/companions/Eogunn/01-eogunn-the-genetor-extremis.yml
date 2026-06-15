@@ -1,0 +1,26 @@
+name: Eogunn the Genetor Extremis
+dlc: The Infinite Museion
+archetypes:
+  t1: Officer
+  # Tier 2 options: Master Tactician / Grand Strategist / Vanguard / Overseer — not yet confirmed which is optimal
+extras:
+  skills: Tech-Use / Logic / Medicae
+  gear:
+    - slot: Weapon Set 1
+      options: Plasma Gun
+    - slot: Weapon Set 2
+      options: Omnissian Axe
+    - slot: Armour
+      options: Enforcer Carapace Armour
+    - slot: Augment (Torso — Vertebral)
+      options: Kinetic Force Conduit
+    - slot: Augment (Character — Eogunn)
+      options: Galvanic Oubliette Minoris / Displacement Simulacra / Grav-Core Circuit / Line-Support Augur Array
+    - slot: Augment (Other)
+      options: Miasma-Purification Conduit / Analytics System / Magnarail Lance
+# Level-by-level build TBD — DLC released 2026-06-11, no verified full progression
+# guide exists yet. Known abilities/talents: Galvanic Field, Magnarail Blast,
+# Air of Authority, Take Aim!, Lasting Impression, Decisive Response,
+# Steel Resolve, Inspiring Speech, Focus!, Finest Hour upgrades.
+# Recruited at level 15 via the "Broken Relic" quest (Acts 2-4).
+levels: {}

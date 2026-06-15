@@ -50,6 +50,7 @@ const gear_db  = [];
 const _gearFileDLC = {
   'shields.yml':   'Lex Imperialis',
   'familiars.yml': 'Lex Imperialis',
+  'augments.yml':  'The Infinite Museion',
 };
 function detectGearDLC(item, fileName) {
   if (item.dlc) return item.dlc;
