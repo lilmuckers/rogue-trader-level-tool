@@ -10,10 +10,11 @@ const GEAR_SLOT_LABELS = {
   neck:    'Necklaces',
   trinket: 'Trinkets',
   familiar:'Familiars',
+  augment: 'Augments',
 };
 
 // Shields are weapons with category: Shield — separate group
-const SLOT_ORDER = ['armour','weapon','shield','helm','cloak','gloves','boots','neck','trinket','familiar'];
+const SLOT_ORDER = ['armour','weapon','shield','helm','cloak','gloves','boots','neck','trinket','familiar','augment'];
 const SLOT_LABEL = { ...GEAR_SLOT_LABELS, shield: 'Shields' };
 
 function _ng(s) {
@@ -123,6 +124,7 @@ function renderGearBrowser(container) {
     ['base', 'Base game'],
     ['Lex Imperialis', 'Lex Imperialis'],
     ['Void Shadows', 'Void Shadows'],
+    ['The Infinite Museion', 'The Infinite Museion'],
   ], _gb.dlc, v => { _gb.dlc = v; renderGearList(listEl); });
   filterRow.appendChild(dlcSel);
 

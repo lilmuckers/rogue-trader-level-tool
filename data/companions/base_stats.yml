@@ -134,6 +134,17 @@ Yrliet:
   INT: 35
   WILL: 30
 
+Eogunn:
+  WS: 45
+  BS: 30
+  STR: 30
+  TGH: 35
+  AGI: 30
+  PER: 40
+  FEL: 35
+  INT: 55
+  WILL: 15
+
 # DLC companions — base stats not yet sourced
 # Calligos Winterscale: ~
 # Incendia Chorda: ~

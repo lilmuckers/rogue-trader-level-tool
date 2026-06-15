@@ -1,0 +1,123 @@
+# Bionic Augments — The Infinite Museion DLC
+# Installed via the Sector Bionica voidship compartment. Once implanted, an
+# augment cannot be removed — only replaced. Most augments grant a major
+# positive effect alongside a negative drawback and/or tradeoff.
+# Slot categories: head, torso, hand, leg (6 base slots: 2x head, 1x torso, 2x hand, 1x leg)
+# Some augments are character-specific (Pasqal, Eogunn).
+
+- name: Bionic Eye Implant
+  slot: augment
+  category: Head — Optical
+  description: "+3 Perception. Drawback: -3 Ballistic Skill, -3 Intelligence."
+- name: Cerebral Holo-Ocular (MK-I)
+  slot: augment
+  category: Head — Optical
+  description: "Creates tactical decoys when moving. Drawback: Fellowship -10%."
+- name: Focal Emitter (MK-I)
+  slot: augment
+  category: Head — Optical
+  description: "Automatic follow-up shots after attacks. Drawback: Intelligence -10%."
+- name: Ballistic Calculator
+  slot: augment
+  category: Head — Optical
+  description: "Replaces overpenetration with ricochet. Drawback: cannot use burst attacks."
+- name: Cerebral Inverter (MK-I)
+  slot: augment
+  category: Head — Cortical/Synaptic
+  description: "Uses Intelligence instead of Strength for damage. Drawback: Toughness -10%."
+- name: Grey Hood
+  slot: augment
+  category: Head — Cortical/Synaptic
+  description: "Unsanctioned Psyker only. Reduces peril triggers. Drawback: removes Horrors effect."
+- name: Adaptive Hemo-Filter (MK-I)
+  slot: augment
+  category: Torso — Somatic
+  description: "Combat stimulants no longer cause negative effects, and grant healing when self-targeted."
+- name: Neural System Graft (MK-I)
+  slot: augment
+  category: Torso — Somatic
+  description: "+30% melee damage based on traumas suffered. Drawback: Toughness -10%."
+- name: Weapon Optimiser (MK-I)
+  slot: augment
+  category: Torso — Somatic
+  description: "Weapon-type-specific bonuses. Tradeoff: user gains +3 Ferrum Sanctum."
+- name: Regenerative Matrix
+  slot: augment
+  category: Torso — Somatic
+  description: "Wearer cannot suffer traumas. Drawback: stunned for 1 round when injured."
+- name: Kinetic Force Conduit
+  slot: augment
+  category: Torso — Vertebral
+  description: "Grants the Galvanic Field ability. Drawback: cannot equip cloaks or boots."
+- name: Biomechanical Skeletal Link
+  slot: augment
+  category: Torso — Vertebral
+  description: "Tech-Priest only. Grants Machine Spirit Communion. Drawback: takes double shock damage the first time hit."
+- name: Bionic Arm Implant [Right]
+  slot: augment
+  category: Hand — Dextral
+  description: "+3 Strength. Drawback: -3 Weapon Skill and -3 Ballistic Skill."
+- name: Chymist Combat Infuser
+  slot: augment
+  category: Hand — Dextral
+  description: "Attacks inflict toxin stacks. Drawback: Ballistic Skill -10%."
+- name: Galvanic Inductor
+  slot: augment
+  category: Hand — Dextral
+  description: "Applies galvanic resonance on hit. Drawback: user is permanently under the galvanic resonance effect."
+- name: Hand of the Righteous
+  slot: augment
+  category: Hand — Dextral
+  description: "Dogmatic only. Inflicts a penance brand on hit. Drawback: maximum hit chance -10%."
+- name: Bionic Arm Implant [Left]
+  slot: augment
+  category: Hand — Sinistral
+  description: "+3 Strength. Drawback: -3 Weapon Skill and -3 Ballistic Skill."
+- name: Pneumatic Assault Grapple (MK-I)
+  slot: augment
+  category: Hand — Sinistral
+  description: "Grants pulling abilities with follow-up attacks. Drawback: Weapon Skill -10%."
+- name: Remote Revitaliser (MK-I)
+  slot: augment
+  category: Hand — Sinistral
+  description: "Extends medikit/stimulant range. Drawback: Weapon Skill and Ballistic Skill -5%."
+- name: Adaptive Servo-Struts
+  slot: augment
+  category: Leg — Musculoskeletal
+  description: "Partial cover provides full cover efficiency. Drawback: -15% dodge and parry."
+- name: Phase Oscillator (MK-I)
+  slot: augment
+  category: Leg — Musculoskeletal
+  description: "Move through occupied cells, dealing damage. Drawback: -25% parry."
+- name: Kinetic Reflector
+  slot: augment
+  category: Leg — Musculoskeletal
+  description: "Counter-kick when dodging melee attacks. Drawback: -15% dodge and parry."
+- name: Inertial Lubricator (MK-I)
+  slot: augment
+  category: Leg — Musculoskeletal
+  description: "Creates oiled areas that trip enemies. Drawback: -25% dodge."
+- name: Hydraulic Booster
+  slot: augment
+  category: Leg — Musculoskeletal
+  description: "Grants a jump ability. Drawback: landing may cause prone status and shock damage."
+- name: Accumulator Node
+  slot: augment
+  category: Character — Pasqal
+  description: "Tech-Priest only. Grants Machine Spirit Banishment. Drawback: user suffers +25% energy damage."
+- name: Axial Fortification
+  slot: augment
+  category: Character — Pasqal
+  description: "Tech-Priest only. Enables mechadendrites. Tradeoff: critical hit chance +10% per mechadendrite."
+- name: Displacement Simulacra
+  slot: augment
+  category: Character — Eogunn
+  description: "Manipulus only. Teleports the wearer to a random nearby cell. Drawback: may become immobilised or slowed after teleporting."
+- name: Grav-Core Circuit
+  slot: augment
+  category: Character — Eogunn
+  description: "Manipulus only. Gains antigrav charges that convert to potential energy. Drawback: Maximum MP -2."
+- name: Line-Support Augur Array
+  slot: augment
+  category: Character — Eogunn
+  description: "Manipulus only. Provides tactical benefits for allies in line formation. Drawback: takes 30% of ally damage as mental damage."
