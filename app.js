@@ -107,6 +107,7 @@ const KEY_COLONY_DONE   = 'rt.colony-done.v1';
 const KEY_COLONY_LEVEL  = 'rt.colony-level.v1';
 const KEY_VOIDSHIP_DONE = 'rt.voidship-done.v1';
 const KEY_VOIDSHIP_NAME = 'rt.voidship-name.v1';
+const KEY_VOIDSHIP_RANK = 'rt.voidship-rank.v1';
 const KEY_HOLDINGS_TAB  = 'rt.holdings-tab.v1';
 const KEY_CUSTOM_BUILDS = 'rt-custom-builds';
 const KEY_GIST_PAT      = 'rt-gist-pat';
@@ -2221,14 +2222,8 @@ function toggleColonyProject(colonyName, projectName) {
     else all[colonyName][projectName] = true;
   });
 }
-function getColonyLevel(colonyName) {
-  return (Store.get(KEY_COLONY_LEVEL) || {})[colonyName] || 1;
-}
-function setColonyLevel(colonyName, newLevel) {
-  Store.mutate(KEY_COLONY_LEVEL, all => {
-    all[colonyName] = Math.max(1, Math.min(5, newLevel));
-  });
-}
+function getVoidshipRank() { return Store.get(KEY_VOIDSHIP_RANK) || 0; }
+function setVoidshipRank(n) { Store.set(KEY_VOIDSHIP_RANK, Math.max(0, Math.min(12, n))); }
 
 // Voidship: stores { rankIndex: { optionName: true } } — both options per rank can be taken
 function getVoidshipChoices() { return Store.get(KEY_VOIDSHIP_DONE) || {}; }
@@ -2280,13 +2275,11 @@ function renderColoniesTab(el) {
     return;
   }
   const colony = DATA.colonies[_selectedColony];
-  const colonyLevel = getColonyLevel(colony.name);
   const done = getColonyDone(colony.name);
 
-  // Colony selector + level stepper
+  // Colony selector
   const selectorWrap = document.createElement('div');
   selectorWrap.className = 'colony-selector-wrap';
-
   const sel = document.createElement('select');
   sel.className = 'colony-select';
   DATA.colonies.forEach((c, i) => {
@@ -2296,49 +2289,36 @@ function renderColoniesTab(el) {
   });
   sel.addEventListener('change', () => { _selectedColony = parseInt(sel.value, 10); renderColonySection(); });
   selectorWrap.appendChild(sel);
-
-  const levelWrap = document.createElement('div');
-  levelWrap.className = 'colony-level-wrap';
-  const levelLabel = document.createElement('span');
-  levelLabel.className = 'colony-level-label';
-  levelLabel.textContent = 'Level';
-  const btnDown = document.createElement('button');
-  btnDown.className = 'colony-level-btn'; btnDown.textContent = '−';
-  btnDown.addEventListener('click', () => { setColonyLevel(colony.name, colonyLevel - 1); renderColonySection(); });
-  const levelNum = document.createElement('span');
-  levelNum.className = 'colony-level-num'; levelNum.textContent = colonyLevel;
-  const btnUp = document.createElement('button');
-  btnUp.className = 'colony-level-btn'; btnUp.textContent = '+';
-  btnUp.addEventListener('click', () => { setColonyLevel(colony.name, colonyLevel + 1); renderColonySection(); });
-  levelWrap.append(levelLabel, btnDown, levelNum, btnUp);
-  selectorWrap.appendChild(levelWrap);
   el.appendChild(selectorWrap);
 
-  // Project levels
+  // Project levels — all selectable regardless of level
   const levels = colony.levels || {};
   for (const lvlStr of Object.keys(levels).sort((a, b) => a - b)) {
-    const lvl = parseInt(lvlStr, 10);
     const projects = levels[lvlStr];
-    const isCurrent = lvl === colonyLevel;
-    const isFuture  = lvl > colonyLevel;
-    const isPast    = lvl < colonyLevel;
+    const doneCount = (projects || []).filter(p => done[p.name]).length;
+    const allDone = doneCount === (projects || []).length && (projects || []).length > 0;
+    const someDone = doneCount > 0;
 
     const section = document.createElement('div');
     section.className = 'colony-level-section';
 
     const heading = document.createElement('div');
     heading.className = 'colony-level-heading' +
-      (isCurrent ? ' is-current' : isPast ? ' is-past' : ' is-future');
-    heading.textContent = `Level ${lvl}`;
+      (allDone ? ' is-past' : someDone ? ' is-current' : '');
+    heading.textContent = `Level ${lvlStr}`;
     section.appendChild(heading);
 
     for (const project of (projects || [])) {
       const isDone = !!done[project.name];
+      // Grey out if another project in the same exclusive_group is already done
+      const isExcluded = !isDone && !!project.exclusive_group &&
+        (projects || []).some(p => p.name !== project.name &&
+          p.exclusive_group === project.exclusive_group && !!done[p.name]);
+
       const card = document.createElement('div');
       card.className = 'colony-project' +
         (isDone ? ' is-done' : '') +
-        (isFuture ? ' is-future' : '') +
-        (isPast && !isDone ? ' is-past-uncomplete' : '');
+        (isExcluded ? ' is-future' : '');
 
       const header = document.createElement('div');
       header.className = 'colony-project-header';
@@ -2351,7 +2331,7 @@ function renderColoniesTab(el) {
       header.append(check, nameEl);
       card.appendChild(header);
 
-      if (!isFuture) {
+      if (!isExcluded) {
         check.addEventListener('click', (e) => {
           e.stopPropagation();
           toggleColonyProject(colony.name, project.name);
@@ -2405,8 +2385,9 @@ function renderVoidshipTab(el) {
   const chosenCount = ranks.reduce((sum, r, i) =>
     sum + (r.options || []).filter(opt => isVoidshipOptionChosen(i, opt.name)).length, 0);
   const shipName = getVoidshipName(ship.name);
+  const currentRank = getVoidshipRank();
 
-  // Editable ship name + progress
+  // Editable ship name + rank stepper + progress
   const nameRow = document.createElement('div');
   nameRow.className = 'voidship-name-row';
 
@@ -2421,15 +2402,31 @@ function renderVoidshipTab(el) {
   nameInput.addEventListener('change', () => { setVoidshipName(nameInput.value); });
   nameInput.addEventListener('blur',   () => { setVoidshipName(nameInput.value); });
 
+  const rankStepper = document.createElement('div');
+  rankStepper.className = 'voidship-rank-stepper';
+  const rankBtnDown = document.createElement('button');
+  rankBtnDown.className = 'colony-level-btn'; rankBtnDown.textContent = '−';
+  rankBtnDown.disabled = currentRank <= 0;
+  rankBtnDown.addEventListener('click', () => { setVoidshipRank(currentRank - 1); renderColonySection(); });
+  const rankLabel = document.createElement('span');
+  rankLabel.className = 'voidship-rank-label';
+  rankLabel.textContent = currentRank > 0 ? `Rank ${currentRank}` : 'Not started';
+  const rankBtnUp = document.createElement('button');
+  rankBtnUp.className = 'colony-level-btn'; rankBtnUp.textContent = '+';
+  rankBtnUp.disabled = currentRank >= 12;
+  rankBtnUp.addEventListener('click', () => { setVoidshipRank(currentRank + 1); renderColonySection(); });
+  rankStepper.append(rankBtnDown, rankLabel, rankBtnUp);
+
   const progress = document.createElement('span');
   progress.className = 'voidship-progress';
   progress.textContent = `Upgrades ${chosenCount} / ${totalOptions}`;
 
-  nameRow.append(nameInput, progress);
+  nameRow.append(nameInput, rankStepper, progress);
   el.appendChild(nameRow);
 
   ranks.forEach((rank, rankIndex) => {
     const options = rank.options || [];
+    const isFutureRank = rank.rank > currentRank;
     const anyChosen = options.some(opt => isVoidshipOptionChosen(rankIndex, opt.name));
     const allChosen = options.length > 0 && options.every(opt => isVoidshipOptionChosen(rankIndex, opt.name));
 
@@ -2438,7 +2435,7 @@ function renderVoidshipTab(el) {
 
     const heading = document.createElement('div');
     heading.className = 'colony-level-heading' +
-      (allChosen ? ' is-past' : anyChosen ? ' is-current' : ' is-future');
+      (isFutureRank ? ' is-future' : allChosen ? ' is-past' : anyChosen ? ' is-current' : '');
     heading.textContent = `Rank ${rank.rank}`;
     section.appendChild(heading);
 
@@ -2450,7 +2447,11 @@ function renderVoidshipTab(el) {
       const isChosen = isVoidshipOptionChosen(rankIndex, opt.name);
 
       const card = document.createElement('div');
-      card.className = 'voidship-option' + (isChosen ? ' is-chosen' : '');
+      card.className = 'voidship-option' + (isChosen ? ' is-chosen' : '') + (isFutureRank ? ' is-future' : '');
+
+      const checkEl = document.createElement('div');
+      checkEl.className = 'voidship-opt-check';
+      checkEl.textContent = isChosen ? '☑' : '☐';
 
       const typeEl = document.createElement('div');
       typeEl.className = 'voidship-option-type';
@@ -2460,7 +2461,7 @@ function renderVoidshipTab(el) {
       nameEl.className = 'voidship-option-name';
       nameEl.textContent = opt.name;
 
-      card.append(typeEl, nameEl);
+      card.append(checkEl, typeEl, nameEl);
 
       // Toggle this option independently; open detail sheet via the info button
       card.addEventListener('click', () => {
@@ -3174,7 +3175,24 @@ function buildNoteCard(note, isArchived) {
   const date = document.createElement('div');
   date.className = 'note-card-date';
   date.textContent = note.updatedAt ? new Date(note.updatedAt).toLocaleDateString() : '';
-  card.append(title, snippet, date);
+  card.append(title, snippet);
+
+  if (note.ref) {
+    const refChip = document.createElement('div');
+    refChip.className = 'note-ref-chip';
+    refChip.textContent = '📌 ' + note.ref.label;
+    refChip.title = 'Go to reference: ' + note.ref.label;
+    refChip.addEventListener('click', (e) => {
+      e.stopPropagation();
+      closeSheet();
+      _referenceSubSection = null;
+      showSection('reference');
+      setTimeout(() => _navigateToFav(note.ref), 80);
+    });
+    card.appendChild(refChip);
+  }
+
+  card.appendChild(date);
 
   const progress = noteChecklistProgress(note.content);
   if (progress) {
@@ -4917,6 +4935,29 @@ function _navigateToFav(fav) {
   }
 }
 
+function getNotesByRefId(refId) {
+  return getNotes().filter(n => n.ref && n.ref.id === refId);
+}
+
+function _openNoteForRef(fav) {
+  const existing = getNotesByRefId(fav.id);
+  if (existing.length) {
+    openNoteEditor(existing[0]);
+  } else {
+    const note = {
+      id: Date.now() + Math.random(),
+      content: `# ${fav.label}\n\n`,
+      updatedAt: Date.now(),
+      createdAt: Date.now(),
+      ref: { id: fav.id, label: fav.label, sub: fav.sub || '', sectionId: fav.sectionId, action: fav.action || null, itemKey: fav.itemKey || null },
+    };
+    const all = getNotes();
+    all.unshift(note);
+    setNotes(all);
+    openNoteEditor(note);
+  }
+}
+
 function _renderQuickAccess(el) {
   const favs = getRefFavs();
   if (!favs.length) return;
@@ -4952,6 +4993,17 @@ function _renderQuickAccess(el) {
       info.appendChild(sub);
     }
 
+    const noteBtn = document.createElement('button');
+    noteBtn.className = 'ref-note-btn';
+    const hasNote = getNotesByRefId(fav.id).length > 0;
+    noteBtn.textContent = '📝';
+    noteBtn.classList.toggle('has-note', hasNote);
+    noteBtn.title = hasNote ? 'View attached note' : 'Attach a note';
+    noteBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      _openNoteForRef(fav);
+    });
+
     const removeBtn = document.createElement('button');
     removeBtn.className = 'ref-fav-btn active';
     removeBtn.textContent = '★';
@@ -4965,6 +5017,7 @@ function _renderQuickAccess(el) {
 
     row.appendChild(icon);
     row.appendChild(info);
+    row.appendChild(noteBtn);
     row.appendChild(removeBtn);
     wrap.appendChild(row);
   });

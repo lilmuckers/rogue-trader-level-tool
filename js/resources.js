@@ -68,6 +68,29 @@ function _navigateToFav(fav) {
   }
 }
 
+function getNotesByRefId(refId) {
+  return getNotes().filter(n => n.ref && n.ref.id === refId);
+}
+
+function _openNoteForRef(fav) {
+  const existing = getNotesByRefId(fav.id);
+  if (existing.length) {
+    openNoteEditor(existing[0]);
+  } else {
+    const note = {
+      id: Date.now() + Math.random(),
+      content: `# ${fav.label}\n\n`,
+      updatedAt: Date.now(),
+      createdAt: Date.now(),
+      ref: { id: fav.id, label: fav.label, sub: fav.sub || '', sectionId: fav.sectionId, action: fav.action || null, itemKey: fav.itemKey || null },
+    };
+    const all = getNotes();
+    all.unshift(note);
+    setNotes(all);
+    openNoteEditor(note);
+  }
+}
+
 function _renderQuickAccess(el) {
   const favs = getRefFavs();
   if (!favs.length) return;
@@ -103,6 +126,17 @@ function _renderQuickAccess(el) {
       info.appendChild(sub);
     }
 
+    const noteBtn = document.createElement('button');
+    noteBtn.className = 'ref-note-btn';
+    const hasNote = getNotesByRefId(fav.id).length > 0;
+    noteBtn.textContent = '📝';
+    noteBtn.classList.toggle('has-note', hasNote);
+    noteBtn.title = hasNote ? 'View attached note' : 'Attach a note';
+    noteBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      _openNoteForRef(fav);
+    });
+
     const removeBtn = document.createElement('button');
     removeBtn.className = 'ref-fav-btn active';
     removeBtn.textContent = '★';
@@ -116,6 +150,7 @@ function _renderQuickAccess(el) {
 
     row.appendChild(icon);
     row.appendChild(info);
+    row.appendChild(noteBtn);
     row.appendChild(removeBtn);
     wrap.appendChild(row);
   });

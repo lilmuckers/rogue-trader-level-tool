@@ -226,7 +226,24 @@ function buildNoteCard(note, isArchived) {
   const date = document.createElement('div');
   date.className = 'note-card-date';
   date.textContent = note.updatedAt ? new Date(note.updatedAt).toLocaleDateString() : '';
-  card.append(title, snippet, date);
+  card.append(title, snippet);
+
+  if (note.ref) {
+    const refChip = document.createElement('div');
+    refChip.className = 'note-ref-chip';
+    refChip.textContent = '📌 ' + note.ref.label;
+    refChip.title = 'Go to reference: ' + note.ref.label;
+    refChip.addEventListener('click', (e) => {
+      e.stopPropagation();
+      closeSheet();
+      _referenceSubSection = null;
+      showSection('reference');
+      setTimeout(() => _navigateToFav(note.ref), 80);
+    });
+    card.appendChild(refChip);
+  }
+
+  card.appendChild(date);
 
   const progress = noteChecklistProgress(note.content);
   if (progress) {

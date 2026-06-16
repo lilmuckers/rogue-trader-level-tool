@@ -29,6 +29,7 @@ const KEY_COLONY_DONE   = 'rt.colony-done.v1';
 const KEY_COLONY_LEVEL  = 'rt.colony-level.v1';
 const KEY_VOIDSHIP_DONE = 'rt.voidship-done.v1';
 const KEY_VOIDSHIP_NAME = 'rt.voidship-name.v1';
+const KEY_VOIDSHIP_RANK = 'rt.voidship-rank.v1';
 const KEY_HOLDINGS_TAB  = 'rt.holdings-tab.v1';
 const KEY_CUSTOM_BUILDS = 'rt-custom-builds';
 const KEY_GIST_PAT      = 'rt-gist-pat';
