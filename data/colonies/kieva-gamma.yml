@@ -4,12 +4,15 @@ levels:
     - name: Restoration
       cost: None
       benefit: 'Item: Cursed Boots / Efficiency +2 / Profit Factor +2'
+      exclusive_group: 1
     - name: Blessed are the weaponsmiths
       cost: None
       benefit: 'Weapon: Dark Marchesa / Security +1 (global) / Mechanisms 1 / Weapon +3'
+      exclusive_group: 1
     - name: Calculating Holiness
       cost: None
       benefit: 'Weapon: Hand of Xenocide / Complacency +2 / Mechanisms +3 / Weapons +1'
+      exclusive_group: 1
   2:
     - name: Chapel of Enumeration
       cost: Flogiston 1 / Flogiston 1 / Promethium 2
@@ -29,9 +32,11 @@ levels:
     - name: Flawless Servitors
       cost: Efficiency ≥ 5 / Mechanisms 1 / People 1 / Plasteel 2
       benefit: Efficiency +2 (for all colonies) / Profit factor +2
+      exclusive_group: 2
     - name: Vigil of the Tech-Guard
       cost: Reputation Explorators ≥ 16075 / Plastal 3 / Weapon 2
       benefit: 'Retinue Trait: Wisdom of the Tech-Guardians / Reputation Exporters +2500 / Security 2 (all colonies) / Profit Factor 2'
+      exclusive_group: 2
     - name: Decree on Diligence
       cost: People 2
       benefit: Complacency -1 / Effciency 2 / Provisions 2 / Mechanisms 2 / Weapons 2
@@ -39,12 +44,15 @@ levels:
     - name: Inferno
       cost: Chemicals 3 / Promethium 3
       benefit: 'Ship Trait: Armored prow / Profit factor +5 / Plasteel +6 / Adamantine +2 / Complacency -1'
+      exclusive_group: 3
     - name: Armoured Rage
       cost: Adamantine 2 / Mechanisms 1 / Plasteel 3
       benefit: 'Ship Weapon: Fangs of Janus / Profit factor +2 / Security +2 / (all colonies) / Weapon +3'
+      exclusive_group: 3
     - name: Unwelcome Guests
       cost: Provisions 3 / People 1 / Flogiston 2
       benefit: 'Item: Instability Detonator / Heretic Trophies 5 / Xeno Artefacts 5 / Xenotech 3'
+      exclusive_group: 3
   4:
     - name: Brand of the motive force
       cost: Any level 3 project / Adamantine 3 / Plasteel 4 / Flogiston 3
@@ -61,9 +69,11 @@ levels:
     - name: Dark Experiments
       cost: Any level 3 project / Reputation Kasballica Mission ≥ 35880 / Weapons 3 / Xenotech 3
       benefit: 'Ship Trait: Vulnerabilities of xenos / Ship Weapon: Titanforge lance weapon / Kasballica 2500'
+      exclusive_group: 4
     - name: A Mechanical Trade
       cost: Any level 3 project / Reputation Imperial Navy ≥ 22500 / People 3
       benefit: 'Ship Item: Memory of Daring / Imperial Navy Reputation +2500 / Profit Factor 3'
+      exclusive_group: 4
     - name: Sacrilege Creation
       cost: Adamantine 3 / Chemicals 3
       benefit: 'Subject: Hungering Mind / Heretic: +40 points / Mechanisms 6 / Weapons 3 / Security -2 (global)'
@@ -74,9 +84,12 @@ levels:
     - name: Sky Barrier
       cost: Project "Archive of Space" / Project "Sacred Projectiles" (Foulstone) / Plasteel 6 / Chemicals 3 / Adamantine 3
       benefit: 'Character Trait: Exalted Instruments of War / Ship''s weapon: Battery "Triumph and Fury" / Mechanisms 3 / Weapons 6'
+      exclusive_group: 5
     - name: The Power of Plasma
       cost: Project "Archive of the expanse" / Explorator 29000 / Plasteel 6 / Promethium 3 / Flogiston 3
       benefit: 'Ship Item: Sacrament of Light / Profit Factor 5 / Mechanisms +12 / Complacency 3 / Effeciency 3'
+      exclusive_group: 5
     - name: Warp Revelations
       cost: Project "Archive of the expanse" / Mechanisms 3 / Provisions 3 / Plasteel 6 / Reputation Explorators ≥ 16075
       benefit: 'Item: Ethereal Visor / Profit Factor 3 / Explorators 5000 / Effeciency +3 (global) / Security 2'
+      exclusive_group: 5

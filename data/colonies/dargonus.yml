@@ -4,12 +4,15 @@ levels:
     - name: Restoration
       cost: Provisions 1 / Plasteel 3
       benefit: Profit Factor +2 / Valancius Restoration / People +4
+      exclusive_group: 1
     - name: Ecstasiums for the Nobility
       cost: People 1 / Plasteel 1 / Flogiston 2
       benefit: Profit Factor +2 / Complacency +2 / Effeciency +2
+      exclusive_group: 1
     - name: Emporium
       cost: None
       benefit: Jewellery 5 / Ship Components 5 / Profit Factor 3 / Effeciency 2 / Adamantine 1 / Mechanisms 1 / Plasteel 2
+      exclusive_group: 1
   2:
     - name: Genetic Mercy
       cost: None
@@ -23,28 +26,35 @@ levels:
     - name: Sordid Good
       cost: People 3 / Reputation Void Brotherhood ≥ 8500
       benefit: Fellowship of the void 2500 / Mechanisms 2 / Weapons 2 / Xenotech 2
+      exclusive_group: 2
     - name: Kasballican Auction
       cost: Adamantine 1 / Plasteel 1 / Weapons 2 / Reputation Mission Kasballika ≥ 16410 (level 8)
       benefit: 'Weapon: Ash Breath / Reputation Mission Kasballika +3500 / Profit factor +3'
+      exclusive_group: 2
     - name: Hallucinatory Chem-Thermae
       cost: Chemicals 2 / Provisions 1 / People 1
       benefit: 'Refillable item: Crimson Haze / Profit factor +2 / Complacency 2 / Heretic: +30 points'
     - name: Shield of the Emperor
       cost: Profit Factor 3 / Reputation with Imperial Navy 10500
       benefit: 'Additional: Escort ship / Ship Trait: Pirate bane Security +1 (for all colonies) / Imperial Navy Reputation +2500'
+      exclusive_group: 3
     - name: The Scourge of Expanse
       cost: Provisions 4
       benefit: 'Additional: Escort ship / Ship Trait: Master Raider / Fellowship of the void 2500 / Effeciency +1 (global)'
+      exclusive_group: 3
   3:
     - name: Guilds
       cost: One of the projects "Shield of the Emperor" / "The Scourge of Expanse" / Complacency >=4 / Effeciency >=4
       benefit: 'Refillable Item: MkXVi Frag Grenade / Profit Factor 5 / Efficiency +3 / Complacency -1'
+      exclusive_group: 4
     - name: Adeptus Arbites
       cost: Reputation with Imperial Navy 10500 / Complacency >=4
       benefit: Item Zealot Profit Factor 3 / Imperial Navy Reputation / +5000 / Security +3
+      exclusive_group: 4
     - name: Season of wars
       cost: Project "The Filth of Expanse" / Complacency >=4 / Effeciency >=4
       benefit: 'Character Trait: Bloody Underhive Leader / Weapon: Karkalla''s Honour / Security 3 / Complacency 3'
+      exclusive_group: 4
   4:
     - name: Holy Profit
       cost: Any level 3 project / Effeciency >=5
@@ -71,12 +81,15 @@ levels:
     - name: Schola Progenium
       cost: Project "Bastion" Project "Pure Blood" (Vheabos-6) / Provisions 3 / Plasteel 6 / Weapons 3
       benefit: 'Armor: Loyalist garb Profit Factor 3 People 6 Security +3 (for all colonies)'
+      exclusive_group: 5
     - name: Librarium
       cost: Project "Bastion" Project "Secret Lodge" (Janus) / Xenotech 3
       benefit: 'Item: Echo of Victory / Profit factor +5 / Kasballica +5000 / Effeciency +2 (Global)'
+      exclusive_group: 5
     - name: Society of Cartographers
       cost: Project "Bastion" Promethium 6 Mechanisms 3 Provisions 3
       benefit: 'Weapon: Woebringer / Profit Factor 4 / Imperial Navy 5000 / Complacency 2 / Security 2'
+      exclusive_group: 5
     - name: The Fate of the Tithe
       cost: Adamantium 10 / Chemicals 10 / Promethium 10 / Provisions 25 / Plasteel 25 (needs double checking for 1.5)
       benefit: 'Contracts Available: Strengthen Relations: Drusians / Strengthen Relations: Explorators / Strengthen Relations: Kasballika Mission / Strengthen Relations: fellowship of the void / Strengthen Relations: Imperial Fleet Colony / Trait: Capital of the Expanse / Complacency +2 (for all colonies)'

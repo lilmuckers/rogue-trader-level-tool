@@ -4,12 +4,15 @@ levels:
     - name: Punishment of the Thinkers
       cost: People 4
       benefit: 'Character Trait: Enemy of Knowledge / Complacency +1 (global) / Adamantine 4 / Chemicals 2'
+      exclusive_group: 1
     - name: Punishment of Outsiders
       cost: Reputation Imperial Navy ≥ 10500 / Mechanisms 2 / Weapons 2
       benefit: Imperial Navy +2500 / Adamantine 3 / Chemicals 1 / Effeciency 1
+      exclusive_group: 1
     - name: Punishment by calculation
       cost: Reputation Imperial Navy ≥ 10500 / Profit Factor >=40 / Profit factor 2
       benefit: Fellowship of the void 2500 / Security +1 global / Adamantine 3 / Security -2
+      exclusive_group: 1
   2:
     - name: Underground workers
       cost: Complacency >= 3 / Compelted project Giants
@@ -23,28 +26,36 @@ levels:
     - name: Lair in the Void
       cost: Provisions 1 / Plasteel 3 / Weapons 1 / Reputation Void Brotherhood ≥ 8500
       benefit: 'Refillable item: Ironeye Grenade / Profit factor +2 / Fellowship of the void 2500 / Security +1 global'
+      exclusive_group: 2
     - name: Holy Servitude
       cost: People 1 / Drusian Reputation ≥ 18980
       benefit: 'Itemt: Vigilance / Drusian Reputation +2500 / complacency 1 /Profit factor +2'
+      exclusive_group: 2
     - name: Extraction Metallica
       cost: Promethium 2 / Chemicals 2 / Promethium 2 / Complete secret of the winterscales Reputation Explorators ≥ 5650
       benefit: Adamantine 4 / Plasteel 4 / Flogiston 2 / Effeciency 2 / Security -1
+      exclusive_group: 2
     - name: Enviro-dome
       cost: Flogiston 2 / Mechanisms 1 / Adamantine 1
       benefit: 'Character Trait: I will not fear poison / Security +2 / Complacency 2'
+      exclusive_group: 3
     - name: Ergonomics
       cost: Chemicals 2 / Plasteel 2
       benefit: Profit Factor 2 / Efficiency +2
+      exclusive_group: 3
   3:
     - name: Test of will
       cost: One of the projects of "Enviro-Dome"/ "Ergonomics" / Weapon 1 / Provisions 1
       benefit: 'Ship Trait: Unerring Shots / Navy +5000 / People 4 / Security 2'
+      exclusive_group: 4
     - name: Blood Sports
       cost: One of the projects of "Enviro-Dome"/ "Ergonomics" / Plasteel 2 / People 2 / Promethium 1
       benefit: 'Weapon: Wrath of the Vile Rabble / Feature Cutthroat / Profit factor +3 / Complacency 2 (for all colonies)'
+      exclusive_group: 4
     - name: Killing Fields
       cost: One of the projects of "Enviro-Dome"/ "Ergonomics" / People 3 / Provisions 2
       benefit: 'Character Trait: Superior Munitions / Profit Factor 2 / Promethium +6 / Chemicals +2'
+      exclusive_group: 4
   4:
     - name: Earthbreaker
       cost: Any level 3 project / Mechanisms 5 Promethium 3
@@ -71,9 +82,12 @@ levels:
     - name: Raider base
       cost: Project "Penal Battalion" / Project "Instruments of Murder" (Kieva Gamma) / Reputation Void Brotherhood ≥ 35500 / Promethium 3 / Provisions 3 / Weapons 6
       benefit: 'Item: Freedom and Vengence / Profit Factor 3 / Reputation Brotherhood of the void +5000 / Security 3 (global)'
+      exclusive_group: 5
     - name: Palaces of the Outcasts
       cost: Project "Penal Battalion" / Project "Inhuman Dope" (Janus) / Plasteel 6 / People 3 / Flogiston 3
       benefit: 'Character Trait: Master of the Shadowy expanse / Profit Factor 5 / Provisions 6 / Weapons 3 /Complacency 3'
+      exclusive_group: 5
     - name: Repentance of the Lost
       cost: Project "Penal Battalion" / Drusian Reputation ≥ 45230
       benefit: 'Weapon: Voice of Paduvian / Profit Factor 3 / Security 3 / Effeciency 3'
+      exclusive_group: 5

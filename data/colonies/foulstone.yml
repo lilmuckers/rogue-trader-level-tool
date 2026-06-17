@@ -4,12 +4,15 @@ levels:
     - name: Dominion of the Hammer
       cost: None
       benefit: 'Weapon: Hammer of Epiphany / Security +2 / Drusian Reputation +2500'
+      exclusive_group: 1
     - name: High Throne
       cost: None
       benefit: 'Ship Trait: Emperor''s Retribution / Holy Gifts: x5 / Effeciency: +2'
+      exclusive_group: 1
     - name: A Celestial Protector
       cost: None
       benefit: 'Trait: Benevolent Protection / Profit factor: +2 / Complacency: +2'
+      exclusive_group: 1
   2:
     - name: Touched by Holiness
       cost: 'Profit factor: ≥ 20'
@@ -23,9 +26,11 @@ levels:
     - name: Hallowed Railway
       cost: 'Explorator Reputation: ≥11675 (level 8) / Plasteel: 1 / Mechanisms: 1 / Adamantium: 1'
       benefit: 'Item: Requiemator / Reputation Explorators: +2500 / Complacency: +2'
+      exclusive_group: 2
     - name: Cemetery of the Faithful
       cost: 'Drusian Reputation: ≥22060 (Level 6)'
       benefit: 'Ship Trait: Blessing of the Fallen / Drusian Reputation: +2500 / Complacency: +1 (for all colonies)'
+      exclusive_group: 2
     - name: Thousand-faced relic
       cost: Chemicals 1 / People 3 / Promethium 1
       benefit: Drusians +2500 / Complacency +2 / Efficiency +2 / Drusians +2500
@@ -39,12 +44,15 @@ levels:
     - name: In Drusus' Footsteps
       cost: 'One of the projects: "Bonfires of Righteousness"/ "Good News" / Imperial Navy Reputation: ≥6500 (Level 3) / Promethium: 2 / Plasteel: 6 / Provisions: 2 / People: 9 / Mechanisms: 2 / Adamantium: 2'
       benefit: 'Subject: Accuser of Sin / Profit factor: +5 / Complacency: +2 (for all colonies)'
+      exclusive_group: 3
     - name: Crusade
       cost: 'Project "Bonfires of Righteousness" / Provisions: 3 / Weapons: 3 / People: 9'
       benefit: 'Trait of the Retinue: Accusation of Heresy / Character Trait: Accusation of Heresy / Profit factor: +5 / Security: +2 (for all colonies)'
+      exclusive_group: 3
     - name: Shrine
       cost: 'Project "Good News" / Profit factor: ≥ 50 / Adamantium: 4 / Flogiston: 4'
       benefit: 'Weapon: Epiphany / Drusians +5000 / Complacency: +3 / Efficiency: +3'
+      exclusive_group: 3
   4:
     - name: False Wonders
       cost: Any level 3 project
@@ -71,9 +79,12 @@ levels:
     - name: Holy Defenders
       cost: Project "Crucible" / Project "Praise of the Muses" (Dargonus) / Plasteel 6 / People 3
       benefit: 'Armor: Arbiter Solomon Vir''s Armor / Profit factor: +5 / Drusians +5000 Security 2 / Adamantine 3'
+      exclusive_group: 4
     - name: Sacred Comet
       cost: Project "Crucible" / Project "Orbital Shipyard" (Keiva Gamma) / Flogiston 6 / Weapons 3 / Mechanisms
       benefit: 'Profit factor 5 / Drusians 2500 / Explorators 2500 / Security: +2 (for all colonies) / Complacency: +4 (for all colonies)'
+      exclusive_group: 4
     - name: Reliquary
       cost: 'Project "Crucible" / Adamantium: 5'
       benefit: 'Character Trait: Blessing of Saint Cognatius / Profit factor: +5'
+      exclusive_group: 4
