@@ -870,6 +870,7 @@
 .voidship-option:hover .voidship-option-info,
 .voidship-option.is-chosen .voidship-option-info { color: var(--ink-dim); }
 .voidship-option.is-future { opacity: 0.38; }
+.voidship-option.is-future.is-chosen { opacity: 1; }
 .voidship-opt-check {
   font-size: 1.1rem; color: var(--ink-faint); margin-bottom: 4px; line-height: 1;
 }
