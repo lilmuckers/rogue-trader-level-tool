@@ -786,7 +786,10 @@
 
 /* ── Bottom navigation bar ─────────────────────────────────────────────────── */
 .bottom-nav {
-  flex-shrink: 0; width: 100%; z-index: 200;
+  /* No z-index: nav is a flex item, and z-index on a flex item creates a
+     stacking context even at position:static — a stray value here would
+     out-rank the fixed-position sheet (z-index 101) and paint on top of it. */
+  flex-shrink: 0; width: 100%;
   display: flex;
   background: var(--bg-2);
   border-top: 1px solid var(--gold-deep);
