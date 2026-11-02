@@ -1,4 +1,9 @@
 name: Uralon
+# PATCH 1.6 REWORK (June 2026): Base stats boosted up to +40 across all characteristics.
+# New abilities added: Charge, Kick, Combat Master, Dark Pact, Infernal Call.
+# New talents added: Pleasure in Slaughter, Blessing of the Dark Gods, The Dark Apostle's Patronage.
+# Daemon summons (Pink Horror / Daemonette / Plaguebearer / Bloodletter) now scale 50% from FEL.
+# Level progression below reflects Revan619 v1.5 guide — no full 1.6 level guide published yet.
 archetypes:
   t1: Officer
   t2: Master Tactician
