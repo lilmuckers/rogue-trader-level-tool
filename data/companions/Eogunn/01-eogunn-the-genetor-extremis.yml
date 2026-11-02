@@ -1,13 +1,16 @@
 name: Eogunn the Genetor Extremis
 dlc: The Infinite Museion
+# Overseer path requires Lex Imperialis DLC. See 02-eogunn-the-grand-strategist.yml for base-game T2 path.
+# Source: Revan619 v1.6 guide (neoseeker.com/warhammer-40000-rogue-trader/builds/Eogunn_Ferbus_Revan619)
 archetypes:
   t1: Officer
-  # Tier 2 options: Master Tactician / Grand Strategist / Vanguard / Overseer — not yet confirmed which is optimal
+  t2: Overseer
+  t3: Exemplar
 extras:
-  skills: Tech-Use / Logic / Medicae
+  skills: Fellowship / Intelligence / Tech-Use / Logic
   gear:
     - slot: Weapon Set 1
-      options: Plasma Gun
+      options: Plasma Gun / Arc Rifle
     - slot: Weapon Set 2
       options: Omnissian Axe
     - slot: Armour
@@ -18,9 +21,151 @@ extras:
       options: Galvanic Oubliette Minoris / Displacement Simulacra / Grav-Core Circuit / Line-Support Augur Array
     - slot: Augment (Other)
       options: Miasma-Purification Conduit / Analytics System / Magnarail Lance
-# Level-by-level build TBD — DLC released 2026-06-11, no verified full progression
-# guide exists yet. Known abilities/talents: Galvanic Field, Magnarail Blast,
-# Air of Authority, Take Aim!, Lasting Impression, Decisive Response,
-# Steel Resolve, Inspiring Speech, Focus!, Finest Hour upgrades.
-# Recruited at level 15 via the "Broken Relic" quest (Acts 2-4).
-levels: {}
+levels:
+  '1':
+    m: Voice of Command
+  '2':
+    m: Tech-Use
+  '3':
+    m: Bring It Down!
+  '4':
+    m: Finest Hour
+    e: Lasting Impression
+  '5':
+    m: Intelligence
+    e: Logic
+  '6':
+    m: Decisive Response
+    e: Intelligence
+  '7':
+    m: Air of Authority
+    e: Tech-Use
+  '8':
+    m: Steel Resolve
+    e: Tech-Use
+  '9':
+    m: Finest Hour I
+  '10':
+    m: Logic
+    e: Ballistic Skill
+  '11':
+    m: Inspiring Speech
+    e: Ballistic Skill
+  '12':
+    m: Take Aim!
+    e: Medicae
+  '13':
+    m: Focus!
+    e: Logic
+  '14':
+    m: Fellowship
+    e: Calculated Relations
+  '15':
+    m: Finest Hour IV
+  '16':
+    m: Servo-Skull Swarm
+  '17':
+    m: Charge Distribution
+  '18':
+    m: Symbiosis
+  '19':
+    m: Overcharge
+  '20':
+    m: AP +1
+    e: Intelligence
+  '21':
+    m: Galvanic Module
+    e: Intelligence
+  '22':
+    m: Defend the Divine Work
+    e: Logic
+  '23':
+    m: The Machine God's Protection
+  '24':
+    m: Fellowship
+    e: Liturgy of Insulation
+  '25':
+    m: Conduction
+  '26':
+    m: Fellowship
+    e: Logic
+  '27':
+    m: Overcharge II
+  '28':
+    m: Galvanic Reaction
+    e: Residual Charge
+  '29':
+    m: Ballistic Skill
+    e: Persuasion / Tech-Use
+  '30':
+    m: Strategic Adaptation
+  '31':
+    m: Reserve Optimisation
+    e: Overclocking Module
+  '32':
+    m: Ballistic Skill
+    e: Persuasion / Tech-Use
+  '33':
+    m: Rite of Calibration
+  '34':
+    m: Staggering Jolt
+  '35':
+    m: Overcharge I
+  '36':
+    m: Firebrand
+    e: Personal Oversight
+  '37':
+    m: Logic
+    e: Kinetic Module
+  '38':
+    m: Ballistic Skill
+    e: Echopulse
+  '39':
+    m: Galvanic Gate Mechadendrite
+    e: Logic
+  '40':
+    m: Degraded Defence
+    e: High Voltage
+  '41':
+    m: Ballistic Skill
+    e: Leader's Assault
+  '42':
+    m: Medicae Signal / Repair Mechadendrite
+    e: Intelligence
+  '43':
+    m: Unseen Support
+    e: Lethal Precision
+  '44':
+    m: Persuasion / Tech-Use
+    e: Eager Subordinates
+  '45':
+    m: AP +1
+  '46':
+    m: Seize the Initiative
+    e: Persuasion / Tech-Use
+  '47':
+    m: Potential Difference
+    e: Persuasion / Tech-Use
+  '48':
+    m: Lost Energy
+    e: Intelligence
+  '49':
+    m: Fellowship
+    e: Lore Xenos
+  '50':
+    m: Eager for Battle
+    e: Steady!
+  '51':
+    m: Brother-in-Arms
+    e: Lore Xenos
+  '52':
+    m: No Respite
+    e: Motive-Force Overload
+  '53':
+    m: Repair Mechadendrite
+    e: Fellowship
+  '54':
+    m: Attention!
+    e: At the Speed of Thought
+  '55':
+    m: AP +1
